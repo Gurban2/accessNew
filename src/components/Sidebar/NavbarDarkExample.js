@@ -1,13 +1,14 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import "./NavbarDarkExample.css"; // Ensure styles are loaded
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./NavbarDarkExample.css"; // Ensure styles are loaded
 
 function NavbarDarkExample() {
   return (
     <Navbar variant="dark" bg="dark" expand="lg" className="NavbarDarkExample">
       <Container fluid>
-        <Navbar.Collapse id="navbar-dark-example">
+        <Navbar appear id="navbar-dark-example">
           <Nav className="flex-column">
             <Navbar.Brand href="#home" className="navbar-brand">
               Dashboard
@@ -134,7 +135,7 @@ function NavbarDarkExample() {
               </NavDropdown>
             </div>
           </Nav>
-        </Navbar.Collapse>
+        </Navbar>
       </Container>
     </Navbar>
   );

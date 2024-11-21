@@ -6,7 +6,7 @@
 
 .main {
   flex-grow: 1; /* Main content will take up remaining space */
-  margin-left: 200px; /* Sidebar width */
+  margin-left: 250px; /* Sidebar width */
   overflow-y: auto; /* Allow scroll if content overflows */
 }
 
@@ -15,47 +15,3 @@
 }
 
 /* Navbar/Sidebar styles */
-.NavbarDarkExample {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 200px;
-  background-color: #343a40; /* Dark background for sidebar */
-  z-index: 100; /* Make sure it's on top of other content */
-  color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.NavbarDarkExample .section-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffffff;
-  margin-top: 10px;
-}
-
-.NavbarDarkExample .nav-link {
-  color: #ffffff;
-}
-
-.NavbarDarkExample .nav-link:hover {
-  background-color: #6c757d;
-}
-
-.NavbarDarkExample .nav-dropdown-menu {
-  background-color: #495057; /* Darker background for dropdown */
-}
-
-.NavbarDarkExample .nav-dropdown-item {
-  color: #ffffff;
-}
-
-.NavbarDarkExample .nav-dropdown-item:hover {
-  background-color: #6c757d;
-  color: #ffffff;
-}
-
-.NavbarDarkExample .nav-item {
-  margin-bottom: 10px;
-}
