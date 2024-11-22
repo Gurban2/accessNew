@@ -31,18 +31,20 @@
 .NavbarDarkExample .section-title {
   font-size: 1rem;
   font-weight: 400;
-  color: #cecccc;
-  padding: 10px 20px;
+  color: #1f1e1e;
+  padding: 3px 20px;
   border-top: 1px solid #ffffff;
-  margin-top: 10px;
-  background-color: #53538b;
+  background-color: #686767;
+  text-align: left;
+
 }
 
 .NavbarDarkExample .nav-link {
   color: #ffffff;
   font-size: 0.9rem;
-  padding: 8px 15px;
+  padding: 5px 10px;
   letter-spacing: 1px;
+
 }
 
 .NavbarDarkExample .nav-link:hover {
@@ -74,7 +76,7 @@
 }
 
 .NavbarDarkExample .container-fluid {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   height: 100vh;
   display: flex;
   flex-direction: column;
