@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-
+import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavbarDarkExample.css"; // Ensure styles are loaded
 
@@ -21,8 +21,12 @@ function NavbarDarkExample() {
                 id="nav-dropdown-offices"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#offices/list">List</NavDropdown.Item>
-                <NavDropdown.Item href="#offices/add">Add</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/offices/list">
+                  List
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/offices/add">
+                  Add
+                </NavDropdown.Item>
               </NavDropdown>
 
               <NavDropdown
@@ -30,10 +34,13 @@ function NavbarDarkExample() {
                 id="nav-dropdown-departments"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#departments/list">
-                  List
+                <NavDropdown.Item href="#departments/All">
+                  All
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#departments/add">Add</NavDropdown.Item>
+                
+                <NavDropdown.Item as={NavLink} to="/departments/add">
+                  Add
+                </NavDropdown.Item>
               </NavDropdown>
 
               <NavDropdown
@@ -41,8 +48,12 @@ function NavbarDarkExample() {
                 id="nav-dropdown-rooms"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#rooms/list">List</NavDropdown.Item>
-                <NavDropdown.Item href="#rooms/add">Add</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/rooms/list">
+                  List
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/rooms/add">
+                  Add
+                </NavDropdown.Item>
               </NavDropdown>
             </div>
 
@@ -54,12 +65,18 @@ function NavbarDarkExample() {
                 id="nav-dropdown-meets"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#meets/all">All</NavDropdown.Item>
-                <NavDropdown.Item href="#meets/upcoming">
+                <NavDropdown.Item as={NavLink} to="/meets/all">
+                  All
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/meets/upcoming">
                   Upcoming
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#meets/report">Report</NavDropdown.Item>
-                <NavDropdown.Item href="#meets/add">Add</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/meets/report">
+                  Report
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/meets/add">
+                  Add
+                </NavDropdown.Item>
               </NavDropdown>
             </div>
 
