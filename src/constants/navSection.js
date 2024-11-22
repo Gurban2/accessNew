@@ -1,65 +1,77 @@
+import { AppPaths } from "./appPaths";
+
 const sections = [
-    {
-      title: "Offices",
-      items: [
-        { label: "List", path: "/offices/list" },
-        { label: "Add", path: "/offices/add" },
-      ],
-    },
-    {
-      title: "Departments",
-      items: [
-        { label: "List", path: "/departments/list" },
-        { label: "Add", path: "/departments/add" },
-      ],
-    },
-    {
-      title: "Rooms",
-      items: [
-        { label: "List", path: "/rooms/list" },
-        { label: "Add", path: "/rooms/add" },
-      ],
-    },
-    {
-      title: "Meets",
-      items: [
-        { label: "All", path: "/meet/all" },
-        { label: "Upcoming", path: "/meet/upcoming" },
-        { label: "Report", path: "/meet/report" },
-        { label: "Add", path: "/meet/add" },
-      ],
-    },
-    {
-      title: "Visitors",
-      items: [
-        { label: "All", path: "/visitors/all" },
-        { label: "Add", path: "/visitors/add" },
-        { label: "Report", path: "/visitors/report" },
-        { label: "Persona", path: "/visitors/persona" },
-      ],
-    },
-    {
-      title: "Site",
-      items: [
-        { label: "Settings", path: "/site/settings" },
-        { label: "Translations", path: "/site/translations" },
-      ],
-    },
-    {
-      title: "Users",
-      items: [
-        { label: "List", path: "/users/list" },
-        { label: "Add", path: "/users/add" },
-      ],
-    },
-    {
-      title: "Permissions",
-      items: [
-        { label: "All", path: "/permissions/all" },
-        { label: "Add", path: "/permissions/add" },
-      ],
-    },
-  ];
-  
-  export default sections;
-  
+  {
+    title: "Offices and Departments",
+    departments: [
+      {
+        title: "Offices",
+        items: [
+          { label: "All", path: AppPaths.offices.all },
+          { label: "Add", path: AppPaths.offices.add },
+        ],
+      },
+      {
+        title: "Departments",
+        items: [
+          { label: "All", path: AppPaths.departments.all },
+          { label: "Add", path: AppPaths.departments.add },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Visitors",
+    departments: [
+      {
+        title: "Visitors",
+        items: [
+          { label: "All", path: AppPaths.visitors.all },
+          { label: "Add", path: AppPaths.visitors.add },
+        ],
+      },
+      {
+        title: "Person Non Grata",
+        items: [
+          { label: "All", path: AppPaths.visitors.persona.all },
+          { label: "Add", path: AppPaths.visitors.persona.add },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Site",
+    departments: [
+      {
+        title: "Settings",
+        items: [{ label: "Site Settings", path: AppPaths.site.settings }],
+      },
+      {
+        title: "Translations",
+        items: [{ label: "Translations", path: AppPaths.site.translations }],
+      },
+    ],
+  },
+  {
+    title: "Users & Permissions",
+    departments: [
+      {
+        title: "Users",
+        items: [
+          { label: "List", path: AppPaths.users.permissions.list },
+          { label: "Add User", path: AppPaths.users.permissions.addUser },
+        ],
+      },
+      {
+        title: "Permissions",
+        items: [
+          { label: "All", path: AppPaths.users.permissions.all },
+          { label: "Add Permission", path: AppPaths.users.permissions.add },
+        ],
+      },
+    ],
+  },
+];
+
+export default sections;
+

@@ -2,18 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
-
-// Import all pages
 import DepartmentsAdd from "./components/Pages/Departments/Add";
 import DepartmentsList from "./components/Pages/Departments/All";
-import MeetAdd from "./components/Pages/Meet/Add";
-import MeetAll from "./components/Pages/Meet/All";
-import MeetReport from "./components/Pages/Meet/Report";
-import MeetUpcoming from "./components/Pages/Meet/Upcoming";
 import OfficesAdd from "./components/Pages/Offices/Add";
 import OfficesAll from "./components/Pages/Offices/All";
-import RoomsAdd from "./components/Pages/Rooms/Add";
-import RoomsList from "./components/Pages/Rooms/List";
 import SiteSet from "./components/Pages/Site/SiteSet";
 import Translations from "./components/Pages/Site/Translations";
 import AddPer from "./components/Pages/User&Permissions/AddPer";
@@ -25,6 +17,7 @@ import VisitorAll from "./components/Pages/Visitors/All";
 import VisitorReport from "./components/Pages/Visitors/Report";
 import PersonaAdd from "./components/Pages/Visitors/Persona/Add";
 import PersonaAll from "./components/Pages/Visitors/Persona/All";
+import { AppPaths } from "./constants/appPaths";
 
 import "./App.css";
 
@@ -32,45 +25,65 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <NavbarDarkExample /> {/* Sidebar on the left */}
+        <NavbarDarkExample /> {/* Сайдбар */}
         <div className="main">
-          <Header /> {/* Header at the top */}
+          <Header /> {/* Хедер */}
           <div className="content">
             <Routes>
-              {/* Offices Routes */}
-              <Route path="/offices/add" element={<OfficesAdd />} />
-              <Route path="/offices/all" element={<OfficesAll />} />
+              {/* Offices */}
+              <Route path={AppPaths.offices.add} element={<OfficesAdd />} />
+              <Route path={AppPaths.offices.all} element={<OfficesAll />} />
 
-              {/* Departments Routes */}
-              <Route path="/departments/add" element={<DepartmentsAdd />} />
-              <Route path="/departments/list" element={<DepartmentsList />} />
+              {/* Departments */}
+              <Route
+                path={AppPaths.departments.add}
+                element={<DepartmentsAdd />}
+              />
+              <Route
+                path={AppPaths.departments.all}
+                element={<DepartmentsList />}
+              />
 
-              {/* Rooms Routes */}
-              <Route path="/rooms/add" element={<RoomsAdd />} />
-              <Route path="/rooms/list" element={<RoomsList />} />
+              {/* Site */}
+              <Route path={AppPaths.site.settings} element={<SiteSet />} />
+              <Route
+                path={AppPaths.site.translations}
+                element={<Translations />}
+              />
 
-              {/* Meet Routes */}
-              <Route path="/meets/add" element={<MeetAdd />} />
-              <Route path="/meets/all" element={<MeetAll />} />
-              <Route path="/meets/report" element={<MeetReport />} />
-              <Route path="/meets/upcoming" element={<MeetUpcoming />} />
+              {/* Users & Permissions */}
+              <Route
+                path={AppPaths.users.permissions.add}
+                element={<AddPer />}
+              />
+              <Route
+                path={AppPaths.users.permissions.addUser}
+                element={<AddUser />}
+              />
+              <Route
+                path={AppPaths.users.permissions.all}
+                element={<AllPer />}
+              />
+              <Route
+                path={AppPaths.users.permissions.list}
+                element={<ListUsers />}
+              />
 
-              {/* Site Routes */}
-              <Route path="/site/settings" element={<SiteSet />} />
-              <Route path="/site/translations" element={<Translations />} />
-
-              {/* Users & Permissions Routes */}
-              <Route path="/users/permissions/add" element={<AddPer />} />
-              <Route path="/users/permissions/add-user" element={<AddUser />} />
-              <Route path="/users/permissions/all" element={<AllPer />} />
-              <Route path="/users/permissions/list" element={<ListUsers />} />
-
-              {/* Visitors Routes */}
-              <Route path="/visitors/add" element={<VisitorAdd />} />
-              <Route path="/visitors/all" element={<VisitorAll />} />
-              <Route path="/visitors/report" element={<VisitorReport />} />
-              <Route path="/visitors/persona/add" element={<PersonaAdd />} />
-              <Route path="/visitors/persona/all" element={<PersonaAll />} />
+              {/* Visitors */}
+              <Route path={AppPaths.visitors.add} element={<VisitorAdd />} />
+              <Route path={AppPaths.visitors.all} element={<VisitorAll />} />
+              <Route
+                path={AppPaths.visitors.report}
+                element={<VisitorReport />}
+              />
+              <Route
+                path={AppPaths.visitors.persona.add}
+                element={<PersonaAdd />}
+              />
+              <Route
+                path={AppPaths.visitors.persona.all}
+                element={<PersonaAll />}
+              />
             </Routes>
           </div>
         </div>
