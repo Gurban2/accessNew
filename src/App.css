@@ -7,11 +7,8 @@
 .main {
   flex-grow: 1; /* Main content will take up remaining space */
   margin-left: 250px; /* Sidebar width */
-  overflow-y: auto; /* Allow scroll if content overflows */
-}
-
-.content {
-  padding: 20px;
+  background-color: #f0f0f0;
+  overflow-y: hidden; /* Allow scroll if content overflows */
 }
 
 /* Navbar/Sidebar styles */
