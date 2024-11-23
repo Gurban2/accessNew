@@ -20,7 +20,7 @@ const Add = ({ entity, onAdd }) => {
   };
 
   const validateForm = () => {
-    setError(null); // Сброс ошибки, если форма валидна
+    setError(null);
     return true;
   };
 
@@ -29,15 +29,19 @@ const Add = ({ entity, onAdd }) => {
     if (!validateForm()) return;
 
     setLoading(true);
-    onAdd(formData); // Отправка данных родительскому компоненту
+    if (typeof onAdd === "function") {
+      onAdd(formData); // Передача данных
+      setFormData({ firstName: "", lastName: "", username: "" }); // Очистка формы
+    } else {
+      console.error("onAdd is not a function or not provided.");
+    }
     setLoading(false);
-    setFormData({ firstName: "", lastName: "", username: "" }); // Очистка формы
   };
 
   return (
     <div className="offices-add-container">
       <h1 className="offices-add">{entity} - Add</h1>
-      <form className="offices-add-form" onSubmit={ handleSubmit}>
+      <form className="offices-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
