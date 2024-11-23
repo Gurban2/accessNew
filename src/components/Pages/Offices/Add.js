@@ -1,48 +1,82 @@
-import React from "react";
-import './style.scss';  
+import React, { useState } from "react";
+import "./style.scss";
 
-const Add = () => {
+const Add = ({ entity, onAdd }) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+  });
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const validateForm = () => {
+    setError(null); // Сброс ошибки, если форма валидна
+    return true;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Form submitted");
+    if (!validateForm()) return;
+
+    setLoading(true);
+    onAdd(formData); // Отправка данных родительскому компоненту
+    setLoading(false);
+    setFormData({ firstName: "", lastName: "", username: "" }); // Очистка формы
   };
 
   return (
     <div className="offices-add-container">
-      <h1 className="offices-add">Offices - Add</h1>
-      <form className="offices-add-form" onSubmit={handleSubmit}>
+      <h1 className="offices-add">{entity} - Add</h1>
+      <form className="offices-add-form" onSubmit={ handleSubmit}>
+        {error && <div className="error">{error}</div>}
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Enter name"
+            id="firstName"
+            name="firstName"
+            placeholder="Enter first name"
+            value={formData.firstName}
+            onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="address">Address</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
-            id="address"
-            name="address"
-            placeholder="Enter address"
+            id="lastName"
+            name="lastName"
+            placeholder="Enter last name"
+            value={formData.lastName}
+            onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="username">Username</label>
           <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter phone number"
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter username"
+            value={formData.username}
+            onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="submit-button">
-          Submit
+        <button type="submit" className="submit-button" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>
