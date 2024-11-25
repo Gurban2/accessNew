@@ -1,5 +1,5 @@
 /* Стили для компонента Add */
-
+@import "../../../variables";
 
 .offices-add-container {
   display: flex;
@@ -8,17 +8,16 @@
   justify-content: center;
   height: 100vh;
   overflow: hidden;
-
 }
 
 .offices-add {
   margin-bottom: 20px;
-  font-size: 2rem;
-  color: #333;
+  font-size: $font-size-lg;
+  color: $text-color;
 }
 
 .offices-add-form {
-  background-color: #fff;
+  background-color: $card-bg;
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -33,39 +32,39 @@
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
+  font-weight: $font-weight-bold;
+  color: $text-color;
 }
 
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid $input-border;
   border-radius: 4px;
-  font-size: 1rem;
-  background-color: #f9f9f9;
+  font-size: $font-size-base;
+  background-color: $background-color;
 }
 
 input:focus {
-  border-color: #007bff;
+  border-color: $primary-color;
   outline: none;
   background-color: #fff;
 }
 
 .submit-button {
-  background-color: #007bff;
+  background-color: $primary-color;
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: $font-size-base;
   cursor: pointer;
   width: 100%;
   text-align: center;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: $button-hover;
 }
 
 /* Стили для компонента All */
@@ -75,22 +74,22 @@ input:focus {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f0f0f0; // Серый фон для всей страницы
+  background-color: $background-color;
 }
 
 .offices-all-list {
   margin-bottom: 20px;
-  font-size: 2rem;
-  color: #333;
+  font-size: $font-size-lg;
+  color: $text-color;
 }
 
 .offices-all-table {
-  background-color: #fff;
+  background-color: $card-bg;
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px; // Ограничение ширины таблицы
+  max-width: 800px;
 }
 
 .table {
@@ -102,18 +101,18 @@ input:focus {
 .table td {
   padding: 10px;
   text-align: left;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
 }
 
 .table th {
-  background-color: #007bff;
-  color: #fff;
+  background-color: $primary-color;
+  color: $card-bg;
 }
 
 .table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: $breadcrumb-bg;
 }
 
 .table tr:hover {
-  background-color: #f1f1f1;
+  background-color: $table-hover;
 }

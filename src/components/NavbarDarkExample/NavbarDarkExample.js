@@ -2,8 +2,9 @@ import React from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./NavbarDarkExample.css";
+import "./NavbarDarkExample.scss";
 import navSections from "../../constants/navSection";
+import 'boxicons'
 
 function NavbarDarkExample() {
   return (

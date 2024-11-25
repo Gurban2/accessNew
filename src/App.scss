@@ -1,4 +1,4 @@
-/* App.css */
+@import "/src/variables.scss";
 .app {
   display: flex;
   height: 100vh; /* Full height */
@@ -9,6 +9,12 @@
   margin-left: 250px; /* Sidebar width */
   background-color: #f0f0f0;
   overflow-y: hidden; /* Allow scroll if content overflows */
+  background-color: $background-color;
+
 }
 
 /* Navbar/Sidebar styles */
+.content {
+  padding: 0 20px;
+  
+}

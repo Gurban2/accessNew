@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TableAllOffice from "./TableAllOffice";
+
 import { useNavigate } from "react-router-dom"; // For navigation
+import Table from "react-bootstrap/Table";
+
 
 // Array of initial office data
 const initialOffices = [
@@ -26,9 +28,26 @@ const All = () => {
   return (
     <div className="offices-all-container">
       <h1 className="offices-all-list">Offices - All</h1>
-      {/* Pass data to TableAllOffice */}
-      <TableAllOffice offices={offices} />
-      {/* Add button */}
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {offices.map((office, index) => (
+          <tr key={office.id}>
+            <td>{index + 1}</td>
+            <td>{office.firstName}</td>
+            <td>{office.lastName}</td>
+            <td>{office.username}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
       <Link to="/offices/add" className="add-button">
         Add Office
       </Link>

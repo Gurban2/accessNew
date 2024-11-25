@@ -19,7 +19,7 @@ import PersonaAdd from "./components/Pages/Visitors/Persona/Add";
 import PersonaAll from "./components/Pages/Visitors/Persona/All";
 import { AppPaths } from "./constants/appPaths";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
