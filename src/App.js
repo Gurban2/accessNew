@@ -7,6 +7,8 @@ import DepartmentsAdd from "./components/Pages/Departments/Add";
 import DepartmentsList from "./components/Pages/Departments/All";
 import OfficesAdd from "./components/Pages/Offices/OfficeAdd";
 import OfficesAll from "./components/Pages/Offices/OfficeAll";
+import OfficeEdit from "./components/Pages/Offices/OfficeEdit";
+
 import SiteSet from "./components/Pages/Site/SiteSet";
 import Translations from "./components/Pages/Site/Translations";
 import AddPer from "./components/Pages/UserPermissions/AddPer";
@@ -20,13 +22,13 @@ import PersonaAdd from "./components/Pages/Visitors/Persona/Add";
 import PersonaAll from "./components/Pages/Visitors/Persona/All";
 import { AppPaths } from "./constants/appPaths";
 import "./App.scss";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Provider store={store}>
-      <ToastContainer position="top-right"/>
+      <ToastContainer position="top-right" />
       <Router>
         <div className="app">
           <NavbarDarkExample /> {/* Сайдбар */}
@@ -36,6 +38,7 @@ function App() {
                 {/* Offices */}
                 <Route path={AppPaths.offices.add} element={<OfficesAdd />} />
                 <Route path={AppPaths.offices.all} element={<OfficesAll />} />
+                <Route path={AppPaths.offices.edit} element={<OfficeEdit />} />
 
                 {/* Departments */}
                 <Route
@@ -93,7 +96,6 @@ function App() {
         </div>
       </Router>
     </Provider>
-
   );
 }
 

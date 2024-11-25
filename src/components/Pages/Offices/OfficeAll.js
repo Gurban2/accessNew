@@ -1,16 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"; // For navigation
 import Table from "react-bootstrap/Table";
+import { deleteOffice } from "../../../store/reducers/officeReducer";
 
-
-const OfficeAll = () => {  
-  const offices = useSelector((state)=> state.offices)
+const OfficeAll = () => {
+  const offices = useSelector((state) => state.offices);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("Offices массив:", offices);
 
-  
- 
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this office?")) {
+      dispatch(deleteOffice({ id }));
+    }
+  };
+
+  const handleEdit = (id) => {
+    console.log("ID перед навигацией:", id);
+
+    navigate(`/offices/edit/${id}`); // Передаем office.id в URL
+  };
 
   return (
     <div className="offices-all-container">
@@ -22,6 +33,7 @@ const OfficeAll = () => {
             <th>Office Name</th>
             <th>Address</th>
             <th>Phone Number</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -31,11 +43,25 @@ const OfficeAll = () => {
               <td>{office.name}</td>
               <td>{office.address}</td>
               <td>{office.phone}</td>
+              <td>
+                <button
+                  onClick={() => handleEdit(office.id)} // Pass `office.id` here
+                  className="btn btn-warning btn-sm"
+                >
+                  Edit
+                </button>{" "}
+                <button
+                  onClick={() => handleDelete(office.id)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
-      <Link to="/offices/add" className="add-button">
+      <Link to="/offices/add" className="btn btn-primary">
         Add Office
       </Link>
     </div>

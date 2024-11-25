@@ -5,16 +5,25 @@ const officeSlice = createSlice({
   initialState: [],
   reducers: {
     addOffice: (state, action) => {
-      const existingOffice = state.find((office) => (
-        office.name === action.payload.name
-      ));
+      const existingOffice = state.find(
+        (office) => office.name === action.payload.name
+      );
       if (existingOffice) {
         alert("Alredy exist");
       }
       return [...state, action.payload];
     },
-    deleteOffice: (state, action) => {},
-    editOffice: (state, action) => {},
+    deleteOffice: (state, action) => {
+      return state.filter((office) => office.id !== action.payload.id);
+    },
+    editOffice: (state, action) => {
+      return state.map((office) =>
+        office.id === action.payload.id
+          ? { ...office, ...action.payload.data }
+          : office
+      );
+    },
+
     filterOffice: (state, action) => {},
   },
 });
