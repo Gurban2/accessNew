@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "./style.scss";
+import { useDispatch } from "react-redux";
+import { addOffice } from "../../../store/reducers/officeReducer";
+import { toast } from 'react-toastify';
 
-const Add = ({ entity, onAdd }) => {
+const OfficeAdd = ({ entity }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
+    name: "",
+    address: "",
+    phone: "",
   });
-
+  const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,15 +30,11 @@ const Add = ({ entity, onAdd }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
-
     setLoading(true);
-    if (typeof onAdd === "function") {
-      onAdd(formData); // Передача данных
-      setFormData({ firstName: "", lastName: "", username: "" }); // Очистка формы
-    } else {
-      console.error("onAdd is not a function or not provided.");
-    }
+    dispatch(addOffice(formData));
+    setFormData({ name: "", address: "", phone: "" }); // Очистка формы
     setLoading(false);
+    toast.success("Office Successfully Added")
   };
 
   return (
@@ -44,37 +43,37 @@ const Add = ({ entity, onAdd }) => {
       <form className="offices-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="name">Office Name</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="Enter first name"
-            value={formData.firstName}
+            id="name"
+            name="name"
+            placeholder="Enter Office Name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="address">Address</label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            placeholder="Enter last name"
-            value={formData.lastName}
+            id="address"
+            name="address"
+            placeholder="Enter Address"
+            value={formData.address}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="phone">Phone</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter username"
-            value={formData.username}
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Enter Phone Number"
+            value={formData.phone}
             onChange={handleChange}
             required
           />
@@ -87,4 +86,4 @@ const Add = ({ entity, onAdd }) => {
   );
 };
 
-export default Add;
+export default OfficeAdd;
