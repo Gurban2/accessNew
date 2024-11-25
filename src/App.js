@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header/Header";
+
 import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
 import DepartmentsAdd from "./components/Pages/Departments/Add";
 import DepartmentsList from "./components/Pages/Departments/All";
@@ -27,7 +27,6 @@ function App() {
       <div className="app">
         <NavbarDarkExample /> {/* Сайдбар */}
         <div className="main">
-          <Header /> {/* Хедер */}
           <div className="content">
             <Routes>
               {/* Offices */}

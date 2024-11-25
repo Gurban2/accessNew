@@ -7,7 +7,16 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  // padding-top: 20px;
+}
+.navbar-nav {
+  width: 100%;
+  margin-top: 20%;
+
+  gap: 20px;
+}
+.navbar-expand {
+  width: 100%;
 }
 
 .dropdown-menu a,
@@ -41,7 +50,7 @@
   font-size: $font-size-sm;
   font-weight: $font-weight-normal;
   color: $text-color;
-  padding: 3px 0;
+  // padding: 3px 0;
   text-align: left;
   text-transform: uppercase;
   border-bottom: 1px solid $border-color;
@@ -50,8 +59,10 @@
 .NavbarDarkExample .nav-link {
   color: $text-color;
   font-size: $font-size-base;
+  font-family: $font-family;
   padding: 5px 10px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  font-weight: $font-weight-normal-bold;
 }
 
 .NavbarDarkExample .nav-link:hover {
@@ -78,8 +89,8 @@
 .NavbarDarkExample .navbar-brand {
   color: $text-color;
   font-size: $font-size-lg;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 5px;
+  margin-bottom: 0px;
 }
 
 .NavbarDarkExample .nav-dropdown {
@@ -98,10 +109,6 @@
 .NavbarDarkExample .section-title:first-of-type {
   margin-top: 0;
   border-top: none;
-}
-
-.NavbarDarkExample .section-title + .nav-dropdown {
-  margin-top: -10px;
 }
 
 ::after {
