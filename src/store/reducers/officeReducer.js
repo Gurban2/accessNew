@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const officeSlice = createSlice({
   name: "offices",
-  initialState: [],
+  initialState: [
+    { id: 1, name: "Sales", phone: "555 555 555", address: "A" },
+    { id: 2, name: "Marketing", phone: "555 555 555", address: "B" },
+    { id: 3, name: "HR", phone: "555 555 555", address: "C" },
+    { id: 4, name: "IT", phone: "555 555 555", address: "D" }
+  ],
   reducers: {
     addOffice: (state, action) => {
       const existingOffice = state.find(

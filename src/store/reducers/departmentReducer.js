@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const departmentSlice = createSlice({
   name: "departments",
-  initialState: [],
+  initialState: [
+    { id: 1, name: "Sales", phone: "555 555 555", office: "A" },
+    { id: 2, name: "Marketing", phone: "555 555 555", office: "B" },
+    { id: 3, name: "HR", phone: "555 555 555", office: "C" },
+    { id: 4, name: "IT", phone: "555 555 555", office: "D" }
+  ],
   reducers: {
     addDepartment: (state, action) => {
       const existingDepartment = state.find(

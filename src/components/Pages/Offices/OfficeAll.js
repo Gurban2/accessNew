@@ -9,7 +9,7 @@ const OfficeAll = () => {
   const offices = useSelector((state) => state.offices);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("Offices массив:", offices);
+  
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this office?")) {
