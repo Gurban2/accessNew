@@ -1,21 +1,21 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { editOffice } from "../../../store/reducers/officeReducer";
+import { editDepartment } from "../../../store/reducers/departmentReducer";
 
-const OfficeEdit = () => {
+const DepartmentEdit = () => {
   const { id } = useParams();
   console.log(id);
 
   const dispatch = useDispatch();
-  const office = useSelector((state) =>
-    state.offices.find((office) => office.id === id)
+  const department = useSelector((state) =>
+    state.departments.find((department) => department.id === id)
   );
 
   const [formData, setFormData] = React.useState({
-    name: office?.name || "",
-    address: office?.address || "",
-    phone: office?.phone || "",
+    name: department?.name || "",
+    address: department?.address || "",
+    phone: department?.phone || "",
   });
 
   const handleChange = (e) => {
@@ -24,19 +24,19 @@ const OfficeEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editOffice({ id, data: formData })); // Обновляем данные офиса
+    dispatch(editDepartment({ id, data: formData })); // Обновляем данные офиса
   };
 
-  if (!office) {
-    return <p>Office not found</p>; // Если офиса с таким id нет
+  if (!department) {
+    return <p>department not found</p>; // Если офиса с таким id нет
   }
 
   return (
     <div>
-      <h1>Edit Office</h1>
+      <h1>Edit Department</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Office Name</label>
+          <label>Department Name</label>
           <input
             type="text"
             name="name"
@@ -45,10 +45,10 @@ const OfficeEdit = () => {
           />
         </div>
         <div>
-          <label>Address</label>
+          <label>Office</label>
           <input
-            type="text"
-            name="address"
+            type="select"
+            name="Office"
             value={formData.address}
             onChange={handleChange}
           />
@@ -56,7 +56,7 @@ const OfficeEdit = () => {
         <div>
           <label>Phone</label>
           <input
-            type="text"
+            type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -68,4 +68,4 @@ const OfficeEdit = () => {
   );
 };
 
-export default OfficeEdit;
+export default DepartmentEdit;

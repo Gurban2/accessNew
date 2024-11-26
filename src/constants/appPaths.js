@@ -7,6 +7,7 @@ export const AppPaths = {
   departments: {
     all: "/departments/list",
     add: "/departments/add",
+    edit: "/departments/edit/:id",
   },
   site: {
     settings: "/site/settings",

@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Table from "react-bootstrap/Table";
-// Массив начальных данных для Departments
-const initialDepartments = [
-  { id: 1, name: "HR", phone: "123-456-7890", office: "Office A" },
-  { id: 2, name: "IT", phone: "987-654-3210", office: "Office B" },
-  { id: 3, name: "Finance", phone: "456-789-1230", office: "Office C" },
-];
 
-const All = () => {
-  const [departments, setDepartments] = useState(initialDepartments);
+const DepartmentsAll = () => {
+  const departments = useSelector((state) => state.departments);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Функция для удаления департамента
   const handleDelete = (id) => {
-    setDepartments((prevDepartments) =>
-      prevDepartments.filter((department) => department.id !== id)
-    );
+    if (window.confirm("Are you sure you want to delete this department?")) {
+      dispatch(deleteDepartment({ id }));
+    }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/departments/edit/${id}`);
   };
 
   return (
@@ -40,7 +41,13 @@ const All = () => {
               <td>{department.office}</td>
               <td>
                 <button
-                  className="delete-button"
+                  className="btn btn-warning btn-sm"
+                  onClick={() => handleEdit(department.id)}
+                >
+                  Edit
+                </button>{" "}
+                <button
+                  className="btn btn-danger btn-sm"
                   onClick={() => handleDelete(department.id)}
                 >
                   Delete
@@ -50,11 +57,11 @@ const All = () => {
           ))}
         </tbody>
       </Table>
-      <Link to="/departments/add" className="add-button">
+      <Link to="/departments/add" className="btn btn-primary">
         Add Department
       </Link>
     </div>
   );
 };
 
-export default All;
+export default DepartmentsAll;

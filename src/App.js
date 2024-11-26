@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
-import DepartmentsAdd from "./components/Pages/Departments/Add";
-import DepartmentsList from "./components/Pages/Departments/All";
+import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
+import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
+import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";
 import OfficesAdd from "./components/Pages/Offices/OfficeAdd";
 import OfficesAll from "./components/Pages/Offices/OfficeAll";
 import OfficeEdit from "./components/Pages/Offices/OfficeEdit";
@@ -47,7 +48,11 @@ function App() {
                 />
                 <Route
                   path={AppPaths.departments.all}
-                  element={<DepartmentsList />}
+                  element={<DepartmentsAll />}
+                />
+                <Route
+                  path={AppPaths.departments.edit}
+                  element={<DepartmentEdit />}
                 />
 
                 {/* Site */}
