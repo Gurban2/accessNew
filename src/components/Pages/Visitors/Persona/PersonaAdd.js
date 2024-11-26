@@ -1,38 +1,50 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {addPersona} from "../../../../store/reducers/pngReducer";
-// import "./Add.scss";
+import { addPersona } from "../../../../store/reducers/pngReducer";
 
 const PersonaAdd = () => {
-
   const [inputValue, setInputValue] = useState("");
+  const [matchedVisitor, setMatchedVisitor] = useState(null); // Для хранения найденного посетителя
   const dispatch = useDispatch();
-  const personas = useSelector((state) => state.personas.list || []);
+
+  // Список всех посетителей (например, приходит из Redux или другого источника)
+  const visitors = useSelector((state) => state.visitors || []); // Предположим, что visitors — это отдельный slice
+  const personas = useSelector((state) => state.personas || []);
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    const value = e.target.value;
+    setInputValue(value);
+
+    // Поиск соответствия в списке visitors
+    const match = visitors.find(
+      (visitor) => visitor.name.toLowerCase() === value.toLowerCase()
+    );
+    setMatchedVisitor(match || null); // Устанавливаем найденного посетителя или null
   };
 
   const handleAdd = () => {
-    if (inputValue.trim() === "") {
-      alert("Name cannot be empty!");
+    if (!matchedVisitor) {
+      alert("No matching visitor found!");
       return;
     }
 
+    // Проверка на существование в списке персон
     const isExisting = personas.some(
-      (persona) => persona.name.toLowerCase() === inputValue.toLowerCase()
+      (persona) =>
+        persona.name.toLowerCase() === matchedVisitor.name.toLowerCase()
     );
 
     if (isExisting) {
-      alert("This name already exists!");
+      alert("This persona already exists!");
     } else {
       dispatch(
         addPersona({
-          id: Date.now(),
-          name: inputValue.trim(),
+          id: matchedVisitor.id,
+          name: matchedVisitor.name,
         })
       );
       setInputValue("");
+      setMatchedVisitor(null); // Сбросить найденного посетителя
     }
   };
 
@@ -44,13 +56,23 @@ const PersonaAdd = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Enter name to add"
+          placeholder="Search for a visitor"
           className="search-input"
         />
-        <button onClick={handleAdd} className="btn btn-primary">
+        <button
+          onClick={handleAdd}
+          className="btn btn-primary"
+          disabled={!matchedVisitor} // Кнопка активна только если найден посетитель
+        >
           Add
         </button>
       </div>
+      {/* Отображение результата поиска */}
+      {matchedVisitor && (
+        <div className="search-result">
+          <p>Found visitor: {matchedVisitor.name}</p>
+        </div>
+      )}
     </div>
   );
 };
