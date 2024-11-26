@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { useDispatch } from "react-redux";
-import { addDepartment } from "../../../store/reducers/departmentReducer"; // Путь к вашему редьюсеру
+import { useSelector, useDispatch } from "react-redux";
+import { addDepartment } from "../../../store/reducers/departmentReducer";
+
+// import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
-const DepartmentsAdd = ({entity}) => {
+const DepartmentsAdd = ({ entity }) => {
+  const offices = useSelector((state) => state.offices);
+  console.log("Offices массив:", offices);
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -25,7 +32,7 @@ const DepartmentsAdd = ({entity}) => {
 
   const validateForm = () => {
     setError(null);
-   
+
     if (
       !formData.name ||
       !formData.phone ||
@@ -106,9 +113,11 @@ const DepartmentsAdd = ({entity}) => {
             <option value="" disabled>
               Select office
             </option>
-            <option value="A">Office A</option>
-            <option value="B">Office B</option>
-            <option value="C">Office C</option>
+            {offices.map((office) => (
+              <option key={office.id} value={office.name}>
+                {office.name}
+              </option>
+            ))}
           </select>
         </div>
         <button type="submit" className="submit-button" disabled={loading}>

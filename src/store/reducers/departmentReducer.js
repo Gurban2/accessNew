@@ -2,30 +2,42 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const departmentSlice = createSlice({
   name: "departments",
-  initialState: [],
+  initialState: {
+    departmentsData: [], // начальное состояние
+  },
   reducers: {
+    setDepartmentsData(state, action) {
+      state.departmentsData = action.payload; // обновление данных
+    },
     addDepartment: (state, action) => {
-      const existingDepartment = state.find(
+      const existingDepartment = state.departmentsData.find(
         (department) => department.name === action.payload.name
       );
       if (existingDepartment) {
         alert("Already exists");
-        return state;
+        return;
       }
-      state.push(action.payload); // Используем мутацию, так как Redux Toolkit это позволяет
+      state.departmentsData.push(action.payload); // Добавление нового департамента
     },
     deleteDepartment: (state, action) => {
-      return state.filter((department) => department.id !== action.payload.id);
-    },
-    editDepartment: (state, action) => {
-      return state.map((department) =>
-        department.id === action.payload.id
-          ? { ...department, ...action.payload.data }
-          : department
+      state.departmentsData = state.departmentsData.filter(
+        (department) => department.id !== action.payload.id
       );
     },
+    editDepartment: (state, action) => {
+      const index = state.departmentsData.findIndex(
+        (department) => department.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.departmentsData[index] = {
+          ...state.departmentsData[index],
+          ...action.payload.data,
+        };
+      }
+    },
     filterDepartment: (state, action) => {
-      return state.filter((department) =>
+      // Фильтрация данных на основе имени
+      state.filteredDepartments = state.departmentsData.filter((department) =>
         department.name.toLowerCase().includes(action.payload.toLowerCase())
       );
     },
@@ -37,6 +49,7 @@ export const {
   deleteDepartment,
   editDepartment,
   filterDepartment,
+  setDepartmentsData,
 } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

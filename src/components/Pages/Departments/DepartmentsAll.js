@@ -5,7 +5,9 @@ import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Table from "react-bootstrap/Table";
 
 const DepartmentsAll = () => {
-  const departments = useSelector((state) => state.departments);
+  const departments = useSelector((state) => state.departments.departmentsData || []);
+
+  console.log(departments)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
