@@ -1,6 +1,6 @@
 @import "../../../variables";
 
-.department-add-container {
+.visitor-add-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,13 +9,13 @@
   overflow: hidden;
 }
 
-.department-add {
+.visitor-add {
   margin-bottom: 20px;
   font-size: $font-size-lg;
   color: $text-color;
 }
 
-.department-add-form {
+.visitor-add-form {
   background-color: $card-bg;
   padding: 20px 30px;
   border-radius: 8px;
@@ -68,8 +68,8 @@ select:focus {
   background-color: $button-hover;
 }
 
-/* Стили для компонента AllDepartments */
-.departments-all-container {
+/* Стили для компонента Allvisitors */
+.visitors-all-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,13 +78,13 @@ select:focus {
   background-color: $background-color;
 }
 
-.department-all-list {
+.visitor-all-list {
   margin-bottom: 20px;
   font-size: $font-size-lg;
   color: $text-color;
 }
 
-.department-all-table {
+.visitor-all-table {
   background-color: $card-bg;
   padding: 20px 30px;
   border-radius: 8px;

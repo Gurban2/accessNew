@@ -1,4 +1,3 @@
-/* Стили для компонента Add */
 @import "../../../variables";
 
 .offices-add-container {
@@ -36,7 +35,8 @@ label {
   color: $text-color;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 10px;
   border: 1px solid $input-border;
@@ -45,7 +45,8 @@ input {
   background-color: $background-color;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: $primary-color;
   outline: none;
   background-color: #fff;
@@ -79,7 +80,8 @@ input:focus {
 
 .offices-all-list {
   margin-bottom: 20px;
-  font-size: $font-size-lg;
+  // font-size: $font-size-lg;
+  font-weight: 500;
   color: $text-color;
 }
 
