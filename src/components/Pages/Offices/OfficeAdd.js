@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { addOffice } from "../../../store/reducers/officeReducer";
 import { toast } from 'react-toastify';
 
-
 const OfficeAdd = ({ entity }) => {
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     address: "",
     phone: "",
@@ -30,10 +30,12 @@ const OfficeAdd = ({ entity }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) return;  
+    const uniqueId = Date.now().toString();
+    const newFormData = { ...formData, id: uniqueId };
     setLoading(true);
-    dispatch(addOffice(formData));
-    setFormData({ name: "", address: "", phone: "" }); // Очистка формы
+    dispatch(addOffice(newFormData));
+    setFormData({ id: "",name: "", address: "", phone: "" });
     setLoading(false);
     toast.success("Office Successfully Added")
   };

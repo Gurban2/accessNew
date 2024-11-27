@@ -6,8 +6,7 @@ import Table from "react-bootstrap/Table";
 
 const DepartmentsAll = () => {
   const departments = useSelector((state) => state.departments.departmentsData || []);
-
-  console.log(departments)
+  // console.log(departments);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +23,9 @@ const DepartmentsAll = () => {
   return (
     <div className="departments-all-container">
       <h1 className="departments-all-list">Departments - All</h1>
+      <Link to="/departments/add" className="btn btn-primary">
+        Add Department
+      </Link>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -59,9 +61,7 @@ const DepartmentsAll = () => {
           ))}
         </tbody>
       </Table>
-      <Link to="/departments/add" className="btn btn-primary">
-        Add Department
-      </Link>
+      
     </div>
   );
 };

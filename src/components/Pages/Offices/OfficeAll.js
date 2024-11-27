@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { deleteOffice } from "../../../store/reducers/officeReducer";
 
@@ -24,6 +24,9 @@ const OfficeAll = () => {
   return (
     <div className="offices-all-container">
       <h1 className="offices-all-list">Offices - All</h1>
+      <Link to="/offices/add" className="btn btn-primary">
+        Add Office
+      </Link>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -43,7 +46,7 @@ const OfficeAll = () => {
               <td>{office.phone}</td>
               <td>
                 <button
-                  onClick={() => handleEdit(office.id)} // Pass `office.id` here
+                  onClick={() => handleEdit(office.id)}
                   className="btn btn-warning btn-sm"
                 >
                   Edit
@@ -59,9 +62,6 @@ const OfficeAll = () => {
           ))}
         </tbody>
       </Table>
-      <Link to="/offices/add" className="btn btn-primary">
-        Add Office
-      </Link>
     </div>
   );
 };

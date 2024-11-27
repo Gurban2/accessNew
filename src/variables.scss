@@ -1,20 +1,24 @@
-$primary-color: #007bff;
+$primary-color: #5cbd79;
 $success-color: #28a745;
+$success-color-hover: #1b5a29;
 $danger-color: #dc3545;
-$text-color: #646f7c;
-$background-color: #edf0f7;
+$text-color: black;
+$text-color-secondary: #718096;
+$background-color: #f7f3f2;
 $border-color: #babec2;
 $breadcrumb-bg: #ffffff;
 $card-bg: #ffffff;
 $table-hover: #f1f3f5;
 $input-border: #ced4da;
 $button-hover: darken($primary-color, 10%);
+$secondary-color: #dacc0d;
+$secondary-color-hover: #877f0a;
 
 $font-family: Rubik, Helvetica, Arial, serif;
 $font-size-base: 14px;
 $font-size-sm: 12px;
 $font-size-lg: 18px;
 $font-weight-normal: 400;
-$font-weight-normal-bold: 00;
+$font-weight-normal-bold: 500;
 $font-weight-bold: 700;
 $line-height-base: 1.5;
