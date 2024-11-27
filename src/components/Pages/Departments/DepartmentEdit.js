@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "./style.scss";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editDepartment } from "../../../store/reducers/departmentReducer";
+import { toast } from "react-toastify";
 
 const DepartmentEdit = () => {
   const { id } = useParams();
-  console.log(id);
-
   const dispatch = useDispatch();
+  const offices = useSelector((state) => state.offices);
   const department = useSelector((state) =>
-    state.departments.find((department) => department.id === id)
+    state.departments.departmentsData.find((department) => department.id === Number(id))
   );
 
   const [formData, setFormData] = React.useState({
-    name: department?.name || "",
-    address: department?.address || "",
-    phone: department?.phone || "",
+    name: "",
+    address: "",
+    phone: "",
   });
+
+  useEffect(() => {
+    if (department) {
+      setFormData({
+        name: department.name,
+        office: department.office,
+        phone: department.phone,
+      });
+    }
+  }, [department]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +35,8 @@ const DepartmentEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editDepartment({ id, data: formData })); // Обновляем данные офиса
+    dispatch(editDepartment({ id: department.id, data: formData })); // Обновляем данные офиса
+    toast.success("Department successfully edited");
   };
 
   if (!department) {
@@ -32,29 +44,20 @@ const DepartmentEdit = () => {
   }
 
   return (
-    <div>
-      <h1>Edit Department</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Department Name</label>
+    <div className="department-add-container">
+      <h1 className="department-add">Edit Department</h1>
+      <form className="department-add-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Department Name</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <label>Office</label>
-          <input
-            type="select"
-            name="Office"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Phone</label>
+        </div>        
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
           <input
             type="tel"
             name="phone"
@@ -62,7 +65,26 @@ const DepartmentEdit = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Save Changes</button>
+        <div className="form-group">
+          <label>Office</label>
+          <select
+            type="select"
+            id="office"
+            name="office"
+            value={formData.office}
+            onChange={handleChange}
+          >
+          <option value="" disabled>
+            Select office
+          </option>
+          {offices.map((office) => (
+            <option key={office.id} value={office.name}>
+              {office.name}
+            </option>
+          ))}
+          </select>
+        </div>
+        <button type="submit" className="submit-button">Save Changes</button>
       </form>
     </div>
   );

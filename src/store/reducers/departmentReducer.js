@@ -3,10 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const departmentSlice = createSlice({
   name: "departments",
   initialState: {
-    departmentsData: [], // начальное состояние
+    departmentsData: [
+      { id: 1, name: "Sales", phone: "555 555 555", office: "A" },
+      { id: 2, name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: 3, name: "HR", phone: "555 555 555", office: "C" },
+      { id: 4, name: "IT", phone: "555 555 555", office: "D" }
+    ], // начальное состояние
   },
   reducers: {
-    setDepartmentsData(state, action) {
+    setDepartment(state, action) {
       state.departmentsData = action.payload; // обновление данных
     },
     addDepartment: (state, action) => {
@@ -35,6 +40,7 @@ const departmentSlice = createSlice({
         };
       }
     },
+    
     filterDepartment: (state, action) => {
       // Фильтрация данных на основе имени
       state.filteredDepartments = state.departmentsData.filter((department) =>
@@ -49,7 +55,7 @@ export const {
   deleteDepartment,
   editDepartment,
   filterDepartment,
-  setDepartmentsData,
+  setDepartment,
 } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

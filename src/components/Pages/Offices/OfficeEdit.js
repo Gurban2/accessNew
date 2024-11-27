@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "./style.scss";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editOffice } from "../../../store/reducers/officeReducer";
+import { toast } from "react-toastify";
 
 const OfficeEdit = () => {
   const { id } = useParams();
-  console.log(id);
-
   const dispatch = useDispatch();
   const office = useSelector((state) =>
-    state.offices.find((office) => office.id === id)
+    state.offices.find((office) => office.id === Number(id)) // Ensure type match
   );
 
   const [formData, setFormData] = React.useState({
-    name: office?.name || "",
-    address: office?.address || "",
-    phone: office?.phone || "",
+    name: "",
+    address: "",
+    phone: "",
   });
+
+  useEffect(() => {
+    if (office) {
+      setFormData({
+        name: office.name,
+        address: office.address,
+        phone: office.phone,
+      });
+    }
+  }, [office]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +34,8 @@ const OfficeEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editOffice({ id, data: formData })); // Обновляем данные офиса
+    dispatch(editOffice({ id: office.id, data: formData })); // Обновляем данные офиса
+    toast.success("Office successfully edited");
   };
 
   if (!office) {
@@ -32,11 +43,11 @@ const OfficeEdit = () => {
   }
 
   return (
-    <div>
-      <h1>Edit Office</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Office Name</label>
+    <div className="offices-add-container">
+      <h1 className="offices-add">Edit Office</h1>
+      <form className="offices-add-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Office Name</label>
           <input
             type="text"
             name="name"
@@ -44,8 +55,8 @@ const OfficeEdit = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label>Address</label>
+        <div className="form-group">
+          <label htmlFor="address">Address</label>
           <input
             type="text"
             name="address"
@@ -53,8 +64,8 @@ const OfficeEdit = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label>Phone</label>
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
           <input
             type="text"
             name="phone"
@@ -62,7 +73,7 @@ const OfficeEdit = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Save Changes</button>
+        <button type="submit" className="submit-button">Save Changes</button>
       </form>
     </div>
   );
