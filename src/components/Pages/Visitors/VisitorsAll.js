@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
@@ -6,15 +6,16 @@ import Table from "react-bootstrap/Table";
 
 const VisitorsAll = () => {
   const visitors = useSelector((state) => state.visitors);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this Visitor?")) {
-      setIsLoading(true); // Set loading state
+      setIsLoading(true);
       dispatch(deleteVisitor({ id }));
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
@@ -58,7 +59,6 @@ const VisitorsAll = () => {
                 >
                   Delete
                 </button>
-                
               </td>
             </tr>
           ))}

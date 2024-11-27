@@ -9,11 +9,10 @@ const VisitorsEdit = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const visitor = useSelector((state) => {
-    console.log("Redux visitors:", state.visitors); // Log the entire visitors list
+
+  const visitor = useSelector((state) =>
     state.visitors.find((visitor) => visitor.id === id)
-  });
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,7 +31,7 @@ const VisitorsEdit = () => {
         fin: visitor.fin,
         email: visitor.email,
         address: visitor.address,
-        description: visitor.description
+        description: visitor.description,
       });
     }
   }, [visitor]);
@@ -49,7 +48,7 @@ const VisitorsEdit = () => {
     }
     dispatch(editVisitor({ id: visitor.id, data: formData }));
     toast.success("Visitor successfully edited");
-    navigate("/visitors/all"); // After saving, navigate back to visitors list
+    navigate("/visitors/all");
   };
 
   if (!visitor) {
@@ -68,7 +67,7 @@ const VisitorsEdit = () => {
             value={formData.name}
             onChange={handleChange}
           />
-        </div>        
+        </div>
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
@@ -104,8 +103,10 @@ const VisitorsEdit = () => {
             value={formData.address}
             onChange={handleChange}
           />
-        </div>        
-        <button type="submit" className="submit-button">Save Changes</button>
+        </div>
+        <button type="submit" className="submit-button">
+          Save Changes
+        </button>
       </form>
     </div>
   );

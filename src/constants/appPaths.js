@@ -25,6 +25,7 @@ export const AppPaths = {
     add: "/visitors/add",
     all: "/visitors/all",
     report: "/visitors/report",
+    edit: "/visitors/edit/:id",
     persona: {
       add: "/persona/add",
       all: "/persona/all",
