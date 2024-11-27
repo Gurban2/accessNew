@@ -12,7 +12,7 @@ const VisitorsEdit = () => {
   
   const visitor = useSelector((state) => {
     console.log("Redux visitors:", state.visitors); // Log the entire visitors list
-    state.visitors.find((visitor) => visitor.id === Number(id))
+    state.visitors.find((visitor) => visitor.id === id)
   });
 
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ const VisitorsEdit = () => {
     }
     dispatch(editVisitor({ id: visitor.id, data: formData }));
     toast.success("Visitor successfully edited");
-    navigate("/visitors"); // After saving, navigate back to visitors list
+    navigate("/visitors/all"); // After saving, navigate back to visitors list
   };
 
   if (!visitor) {

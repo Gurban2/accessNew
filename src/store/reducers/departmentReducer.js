@@ -4,10 +4,10 @@ const departmentSlice = createSlice({
   name: "departments",
   initialState: {
     departmentsData: [
-      { id: 1, name: "Sales", phone: "555 555 555", office: "A" },
-      { id: 2, name: "Marketing", phone: "555 555 555", office: "B" },
-      { id: 3, name: "HR", phone: "555 555 555", office: "C" },
-      { id: 4, name: "IT", phone: "555 555 555", office: "D" }
+      { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" }
     ], // начальное состояние
   },
   reducers: {
