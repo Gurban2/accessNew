@@ -1,5 +1,5 @@
 import { AppPaths } from "./appPaths";
-import "boxicons";
+
 
 const sections = [
   {

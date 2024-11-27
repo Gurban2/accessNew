@@ -8,11 +8,11 @@ const departmentSlice = createSlice({
       { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
       { id: "3", name: "HR", phone: "555 555 555", office: "C" },
       { id: "4", name: "IT", phone: "555 555 555", office: "D" }
-    ], // начальное состояние
+    ],
   },
   reducers: {
     setDepartment(state, action) {
-      state.departmentsData = action.payload; // обновление данных
+      state.departmentsData = action.payload;
     },
     addDepartment: (state, action) => {
       const existingDepartment = state.departmentsData.find(
@@ -22,7 +22,7 @@ const departmentSlice = createSlice({
         alert("Already exists");
         return;
       }
-      state.departmentsData.push(action.payload); // Добавление нового департамента
+      state.departmentsData.push(action.payload);
     },
     deleteDepartment: (state, action) => {
       state.departmentsData = state.departmentsData.filter(
@@ -42,7 +42,6 @@ const departmentSlice = createSlice({
     },
     
     filterDepartment: (state, action) => {
-      // Фильтрация данных на основе имени
       state.filteredDepartments = state.departmentsData.filter((department) =>
         department.name.toLowerCase().includes(action.payload.toLowerCase())
       );

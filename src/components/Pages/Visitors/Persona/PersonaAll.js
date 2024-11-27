@@ -56,7 +56,7 @@ const PersonaAll = () => {
             </tbody>
           </Table>
           <button
-            onClick={() => navigate("/personas/add")}
+            onClick={() => navigate("/persona/add")}
             className="btn btn-primary"
           >
             Add Persona

@@ -6,7 +6,7 @@ import "./style.scss";
 
 const DepartmentsAdd = () => {
   const offices = useSelector((state) => state.offices);
-  console.log("Offices массив:", offices);
+  // console.log("Offices массив:", offices);
 
   const [formData, setFormData] = useState({
     id: "",
@@ -45,15 +45,12 @@ const DepartmentsAdd = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validateForm()) return;
-
-    // Generate a unique ID for the department (could use Date.now() or a UUID)
-    const uniqueId = Date.now().toString();  // or use 'uuid' library for a more robust solution
-    const newFormData = { ...formData, id: uniqueId }; // Add the unique ID to form data
-
+    if (!validateForm()) return;    
+    const uniqueId = Date.now().toString();
+    const newFormData = { ...formData, id: uniqueId };
     setLoading(true);
     dispatch(addDepartment(newFormData));
-    setFormData({ id: "",name: "", phone: "", parent: "", office: "" }); // Очистка формы
+    setFormData({ id: "",name: "", phone: "", parent: "", office: "" });
     setLoading(false);
     toast.success("Department successfully added");
   };
