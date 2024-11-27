@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Header from "./components/header/Header";
+// import Header from "./components/header/Header";
 import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
@@ -16,8 +16,8 @@ import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
 
-import SiteSet from "./components/Pages/Site/SiteSet";
-import Translations from "./components/Pages/Site/Translations";
+// import SiteSet from "./components/Pages/Site/SiteSet";
+// import Translations from "./components/Pages/Site/Translations";
 import AddPer from "./components/Pages/UserPermissions/AddPer";
 import AddUser from "./components/Pages/UserPermissions/AddUser";
 import AllPer from "./components/Pages/UserPermissions/AllPer";
@@ -38,7 +38,7 @@ function App() {
         <div className="app">
           <NavbarDarkExample /> {/* Сайдбар */}
           <div className="main">
-            <Header />
+            {/* <Header /> */}
 
             <div className="content">
               <Routes>
@@ -77,12 +77,12 @@ function App() {
                   element={<PersonaAdd />}
                 />
 
-                {/* Site */}
+                {/* Site
                 <Route path={AppPaths.site.settings} element={<SiteSet />} />
                 <Route
                   path={AppPaths.site.translations}
                   element={<Translations />}
-                />
+                /> */}
 
                 {/* Users & Permissions */}
                 <Route

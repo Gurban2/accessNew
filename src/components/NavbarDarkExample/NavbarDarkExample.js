@@ -8,38 +8,49 @@ import navSections from "../../constants/navSection";
 
 function NavbarDarkExample() {
   return (
-    <Navbar variant="dark" bg="dark" expand="lg" className="NavbarDarkExample">
+    <Navbar variant="dark" bg="white" expand="lg" className="NavbarDarkExample">
       <Container fluid>
-        <Navbar id="navbar-dark-example">
-          <Nav className="flex-column">
-            <Navbar.Brand as={NavLink} to="/" className="navbar-brand">
-              Dashboard
-            </Navbar.Brand>
-
-            {navSections.map((section, index) => (
-              <div key={`nav-${index}`} className={`${section.title}-section`}>
-                <div className="section-title">{section.title}</div>
-                {section.departments.map((dp, index) => (
-                  <NavDropdown
-                    key={`dp-${index}`}
-                    title={dp.title}
-                    menuVariant="dark"
-                  >
-                    {dp.items.map((item, index) => (
-                      <NavDropdown.Item
-                        key={`nav-item-${index}`}
-                        as={NavLink}
-                        to={item.path}
-                      >
-                        {item.label}
-                      </NavDropdown.Item>
-                    ))}
-                  </NavDropdown>
-                ))}
-              </div>
-            ))}
-          </Nav>
-        </Navbar>
+        <Navbar.Brand as={NavLink} to="/" className="navbar-brand">
+          Dashboard
+        </Navbar.Brand>
+        <Nav className="flex-column">
+          {navSections.map((section, sectionIndex) => (
+            <div
+              key={`section-${sectionIndex}`}
+              className={`section-wrapper ${section.title.toLowerCase()}-section`}
+            >
+              <div className="section-title">{section.title}</div>
+              {section.departments.map((dp, depIndex) => (
+                <NavDropdown
+                  key={`department-${sectionIndex}-${depIndex}`}
+                  title={
+                    <>
+                      {dp.icon && (
+                        <img
+                          src={dp.icon}
+                          alt={`${dp.title} icon`}
+                          className="dropdown-icon"
+                        />
+                      )}
+                      {dp.title}
+                    </>
+                  }
+                  menuVariant="dark"
+                >
+                  {dp.items.map((item, itemIndex) => (
+                    <NavDropdown.Item
+                      key={`item-${sectionIndex}-${depIndex}-${itemIndex}`}
+                      as={NavLink}
+                      to={item.path}
+                    >
+                      {item.label}
+                    </NavDropdown.Item>
+                  ))}
+                </NavDropdown>
+              ))}
+            </div>
+          ))}
+        </Nav>
       </Container>
     </Navbar>
   );
