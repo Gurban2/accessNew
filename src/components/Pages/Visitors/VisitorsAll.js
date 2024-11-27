@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
+import { FaEye } from "react-icons/fa";
 
 const VisitorsAll = () => {
   const visitors = useSelector((state) => state.visitors);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +23,10 @@ const VisitorsAll = () => {
     navigate(`/visitors/edit/${id}`);
   };
 
+  const handleView = (id) => {
+    navigate(`/visitors/view/${id}`);
+  };
+  
   return (
     <div className="visitors-all-container">
       <h1 className="visitors-all-list">Visitors - All</h1>
@@ -33,6 +37,7 @@ const VisitorsAll = () => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Photo</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Fin</th>
@@ -43,10 +48,45 @@ const VisitorsAll = () => {
           {visitors.map((visitor, index) => (
             <tr key={visitor.id}>
               <td>{index + 1}</td>
+              <td>
+                {visitor.photo ? (
+                  typeof visitor.photo === "string" ? (
+                    <img
+                      src={visitor.photo}
+                      alt={`${visitor.name}`}
+                      className="visitor-photo"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={URL.createObjectURL(visitor.photo)}
+                      alt={`${visitor.name}`}
+                      className="visitor-photo"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  )
+                ) : (
+                  "No photo"
+                )}
+              </td>
               <td>{visitor.name}</td>
               <td>{visitor.phone}</td>
               <td>{visitor.fin}</td>
               <td>
+              <button
+                  className="btn btn-info btn-sm"
+                  onClick={() => handleView(visitor.id)}
+                >
+                  <FaEye /> View
+                </button>{" "}
                 <button
                   className="btn btn-warning btn-sm"
                   onClick={() => handleEdit(visitor.id)}
@@ -56,17 +96,15 @@ const VisitorsAll = () => {
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() => handleDelete(visitor.id)}
+                  disabled={isLoading}
                 >
-                  Delete
-                </button>
+                  {isLoading ? "Deleting..." : "Delete"} {/* Show loading text */}
+                </button>                
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
-      {/* <Link to="/visitors/add" className="btn btn-primary">
-        Add Visitor
-      </Link> */}
+      </Table>      
     </div>
   );
 };

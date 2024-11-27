@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { deleteOffice } from "../../../store/reducers/officeReducer";
 
@@ -19,8 +19,7 @@ const OfficeAll = () => {
 
   const handleEdit = (id) => {
     // console.log("ID перед навигацией:", id);
-
-    navigate(`/offices/edit/${id}`); // Передаем office.id в URL
+    navigate(`/offices/edit/${id}`);
   };
 
   return (
@@ -48,7 +47,7 @@ const OfficeAll = () => {
               <td>{office.phone}</td>
               <td>
                 <button
-                  onClick={() => handleEdit(office.id)} // Pass `office.id` here
+                  onClick={() => handleEdit(office.id)}
                   className="btn btn-warning btn-sm"
                 >
                   Edit

@@ -19,11 +19,8 @@ const officeSlice = createSlice({
       }
       // return [...state, action.payload];
       const updatedState = [...state, action.payload];
-      
-      // Log the state after adding the new office
-      console.log("State after adding office:", updatedState);
-      
-      return updatedState; // Return the updated state
+      console.log("State after adding office:", updatedState);      
+      return updatedState;
     },
     deleteOffice: (state, action) => {
       return state.filter((office) => office.id !== action.payload.id);

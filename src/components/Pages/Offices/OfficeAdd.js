@@ -30,15 +30,12 @@ const OfficeAdd = ({ entity }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validateForm()) return;
-
-    // Generate a unique ID (can use Date.now() or a UUID)
-    const uniqueId = Date.now().toString();  // You can also use a library like 'uuid' for better uniqueness
-    const newFormData = { ...formData, id: uniqueId };  // Add unique ID to form data 
-
+    if (!validateForm()) return;  
+    const uniqueId = Date.now().toString();
+    const newFormData = { ...formData, id: uniqueId };
     setLoading(true);
     dispatch(addOffice(newFormData));
-    setFormData({ id: "",name: "", address: "", phone: "" }); // Очистка формы
+    setFormData({ id: "",name: "", address: "", phone: "" });
     setLoading(false);
     toast.success("Office Successfully Added")
   };

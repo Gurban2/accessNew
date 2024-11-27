@@ -11,7 +11,7 @@ const OfficeEdit = () => {
   const navigate = useNavigate();
 
   const office = useSelector((state) =>
-    state.offices.find((office) => office.id === id) // Ensure type match
+    state.offices.find((office) => office.id === id)
   );
 
   const [formData, setFormData] = React.useState({
@@ -36,13 +36,13 @@ const OfficeEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editOffice({ id: office.id, data: formData })); // Обновляем данные офиса
+    dispatch(editOffice({ id: office.id, data: formData }));
     toast.success("Office successfully edited");
     navigate("/offices/all");
   };
 
   if (!office) {
-    return <p>Office not found</p>; // Если офиса с таким id нет
+    return <p>Office not found</p>;
   }
 
   return (
