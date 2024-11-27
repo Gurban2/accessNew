@@ -4,12 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
 
-const ActionButton = ({ onClick, label, className }) => (
-  <button className={`btn btn-sm ${className}`} onClick={onClick}>
-    {label}
-  </button>
-);
-
 const VisitorsAll = () => {
   const visitors = useSelector((state) => state.visitors);
   const dispatch = useDispatch();
@@ -52,7 +46,7 @@ const VisitorsAll = () => {
               <td>{visitor.phone}</td>
               <td>{visitor.fin}</td>
               <td>
-                {/* <button
+                <button
                   className="btn btn-warning btn-sm"
                   onClick={() => handleEdit(visitor.id)}
                 >
@@ -63,17 +57,8 @@ const VisitorsAll = () => {
                   onClick={() => handleDelete(visitor.id)}
                 >
                   Delete
-                </button> */}
-                <ActionButton
-                  onClick={() => handleEdit(visitor.id)}
-                  label={isLoading ? "Editing..." : "Edit"}
-                  className="btn-warning"
-                />
-                <ActionButton
-                  onClick={() => handleDelete(visitor.id)}
-                  label={isLoading ? "Deleting..." : "Delete"}
-                  className="btn-danger"
-                />
+                </button>
+                
               </td>
             </tr>
           ))}

@@ -6,12 +6,14 @@ import "./style.scss";
 
 const VisitorsAdd = () => {
   const [formData, setFormData] = useState({
+    id: "", 
     name: "",
     phone: "",
     fin: "",
     email: "",
     address: "",
   });
+
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -43,9 +45,14 @@ const VisitorsAdd = () => {
     event.preventDefault();
     if (!validateForm()) return;
 
+    // Generate a unique ID for the visitor
+    const uniqueId = Date.now().toString();  // You can also use 'uuid' for more robust uniqueness
+    const newFormData = { ...formData, id: uniqueId };  // Add the unique ID to the form data
+
     setLoading(true); // Set loading to true when submitting
-    dispatch(addVisitor(formData)); // Dispatch addVisitor action
+    dispatch(addVisitor(newFormData)); // Dispatch addVisitor action
     setFormData({
+      id: "",
       name: "",
       phone: "",
       fin: "",

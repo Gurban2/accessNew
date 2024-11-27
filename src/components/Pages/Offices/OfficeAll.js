@@ -26,6 +26,9 @@ const OfficeAll = () => {
   return (
     <div className="offices-all-container">
       <h1 className="offices-all-list">Offices - All</h1>
+      <Link to="/offices/add" className="btn btn-primary">
+        Add Office
+      </Link>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -61,9 +64,7 @@ const OfficeAll = () => {
           ))}
         </tbody>
       </Table>
-      <Link to="/offices/add" className="btn btn-primary">
-        Add Office
-      </Link>
+      
     </div>
   );
 };

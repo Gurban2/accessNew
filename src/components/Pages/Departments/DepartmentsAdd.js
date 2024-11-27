@@ -1,23 +1,21 @@
 import React, { useState } from "react";
-import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { addDepartment } from "../../../store/reducers/departmentReducer";
-
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
-
 import { toast } from "react-toastify";
+import "./style.scss";
 
-const DepartmentsAdd = ({ entity }) => {
+const DepartmentsAdd = () => {
   const offices = useSelector((state) => state.offices);
   console.log("Offices массив:", offices);
 
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     phone: "",
     parent: "",
     office: "",
   });
+
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,9 +46,14 @@ const DepartmentsAdd = ({ entity }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
+
+    // Generate a unique ID for the department (could use Date.now() or a UUID)
+    const uniqueId = Date.now().toString();  // or use 'uuid' library for a more robust solution
+    const newFormData = { ...formData, id: uniqueId }; // Add the unique ID to form data
+
     setLoading(true);
-    dispatch(addDepartment(formData));
-    setFormData({ name: "", phone: "", parent: "", office: "" }); // Очистка формы
+    dispatch(addDepartment(newFormData));
+    setFormData({ id: "",name: "", phone: "", parent: "", office: "" }); // Очистка формы
     setLoading(false);
     toast.success("Department successfully added");
   };

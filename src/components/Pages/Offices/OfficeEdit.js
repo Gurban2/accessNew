@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
-import "./style.scss";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editOffice } from "../../../store/reducers/officeReducer";
 import { toast } from "react-toastify";
+import "./style.scss";
 
 const OfficeEdit = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const office = useSelector((state) =>
-    state.offices.find((office) => office.id === Number(id)) // Ensure type match
+    state.offices.find((office) => office.id === id) // Ensure type match
   );
 
   const [formData, setFormData] = React.useState({
@@ -36,6 +38,7 @@ const OfficeEdit = () => {
     e.preventDefault();
     dispatch(editOffice({ id: office.id, data: formData })); // Обновляем данные офиса
     toast.success("Office successfully edited");
+    navigate("/offices/all");
   };
 
   if (!office) {

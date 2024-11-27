@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import "./style.scss";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
+import "./style.scss";
 
 const DepartmentEdit = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const offices = useSelector((state) => state.offices);
+
   const department = useSelector((state) =>
-    state.departments.departmentsData.find((department) => department.id === Number(id))
+    state.departments.departmentsData.find((department) => department.id === id)
   );
 
   const [formData, setFormData] = React.useState({
@@ -37,6 +39,7 @@ const DepartmentEdit = () => {
     e.preventDefault();
     dispatch(editDepartment({ id: department.id, data: formData })); // Обновляем данные офиса
     toast.success("Department successfully edited");
+    navigate("/departments/all");
   };
 
   if (!department) {
