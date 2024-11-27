@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-
-// import Header from "./components/header/Header";
+// import Header from "./components/Header/Header";
 import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
@@ -14,6 +13,7 @@ import OfficeEdit from "./components/Pages/Offices/OfficeEdit";
 import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
+import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
@@ -64,10 +64,8 @@ function App() {
                 {/* Visitors */}
                 <Route path={AppPaths.visitors.add} element={<VisitorAdd />} />
                 <Route path={AppPaths.visitors.all} element={<VisitorAll />} />
-                <Route
-                  path={AppPaths.visitors.edit}
-                  element={<VisitorEdit />}
-                />
+                <Route path={AppPaths.visitors.edit} element={<VisitorEdit />} />
+                <Route path={AppPaths.visitors.view} element={<VisitorView />} />
                 <Route
                   path={AppPaths.visitors.persona.PersonaAll}
                   element={<PersonaAll />}

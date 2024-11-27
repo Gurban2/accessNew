@@ -37,13 +37,13 @@ const DepartmentEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editDepartment({ id: department.id, data: formData })); // Обновляем данные офиса
+    dispatch(editDepartment({ id: department.id, data: formData }));
     toast.success("Department successfully edited");
     navigate("/departments/all");
   };
 
   if (!department) {
-    return <p>department not found</p>; // Если офиса с таким id нет
+    return <p>department not found</p>;
   }
 
   return (
