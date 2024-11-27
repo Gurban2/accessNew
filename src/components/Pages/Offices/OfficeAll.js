@@ -18,7 +18,7 @@ const OfficeAll = () => {
   };
 
   const handleEdit = (id) => {
-    console.log("ID перед навигацией:", id);
+    // console.log("ID перед навигацией:", id);
 
     navigate(`/offices/edit/${id}`); // Передаем office.id в URL
   };

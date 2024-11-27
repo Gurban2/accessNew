@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import "./style.scss";
 import { useDispatch } from "react-redux";
 import { addVisitor } from "../../../store/reducers/visitorReducer"; // Путь к вашему редьюсеру
 import { toast } from "react-toastify";
+import "./style.scss";
 
-
-const VisitorsAdd = ({entity}) => {
+const VisitorsAdd = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -26,8 +25,7 @@ const VisitorsAdd = ({entity}) => {
   };
 
   const validateForm = () => {
-    setError(null);
-   
+    setError(null);   
     if (
       !formData.name ||
       !formData.phone ||
@@ -40,17 +38,24 @@ const VisitorsAdd = ({entity}) => {
     }
     return true;
   };
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
-    setLoading(true);
-    dispatch(addVisitor(formData));
-    setFormData({ name: "", phone: "", fin: "", email: "", address: "" }); // Очистка формы
-    setLoading(false);
+
+    setLoading(true); // Set loading to true when submitting
+    dispatch(addVisitor(formData)); // Dispatch addVisitor action
+    setFormData({
+      name: "",
+      phone: "",
+      fin: "",
+      email: "",
+      address: "",
+    }); // Clear form after submission
+    setLoading(false); // Reset loading state
     toast.success("Visitor successfully added");
   };
-
+  
   return (
     <div className="visitor-add-container">
       <h1 className="visitor-add">Visitors - Add</h1>
