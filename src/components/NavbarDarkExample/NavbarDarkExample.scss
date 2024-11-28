@@ -1,109 +1,112 @@
 @import "../../variables.scss";
 
 .NavbarDarkExample .container-fluid {
-  background-color: rgb(248, 247, 245);
-  width: 250px;
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-  height: 100vh;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: 0;
 }
+.bg-white {
+  --bs-bg-opacity: 1;
+  background-color: $background-color !important;
+}
+.NavbarDarkExample .navbar-brand {
+  display: flex;
+  flex-direction: column-reverse;
+  color: rgb(26, 26, 26);
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0 10px 0 40px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  height: 50px;
+  width: 100%;
+}
+
 .navbar-nav {
-  width: 100%;
-  margin-top: 10%;
-  gap: 10px;
-}
-.navbar-expand {
-  width: 100%;
+  gap: 15px;
 }
 
 .dropdown-menu a,
 .dropdown-menu button {
   display: block;
-  padding: 5px 10px;
-  color: $text-color;
-  text-decoration: none;
-  background-color: $background-color;
+  padding: 8px 10px; /* Увеличено для улучшенной читаемости */
+  color: $text-color; /* Цвет текста для активных элементов */
+  background-color: white; /* Белый фон для кнопок */
   border: none;
-  width: 100%;
+  border-bottom: 1px solid grey;
   text-align: left;
   font-size: $font-size-base;
+  text-decoration: none; /* Убираем подчеркивание */
 }
-.navbar-expand .navbar-nav .dropdown-menu {
-  position: unset;
-  padding: 0;
-  border-radius: 1px;
-}
+
 .NavbarDarkExample {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-
-  background-color: $background-color;
+  // filter: drop-shadow(3px 0px 2px rgba(51, 51, 51, 0.3));
+  background-color: white;
+  padding: 0;
   z-index: 100;
   color: $text-color-secondary;
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
 }
 
 .NavbarDarkExample .section-title {
   font-size: $font-size-base;
-  font-weight: $font-weight-normal;
-  color: $text-color-secondary;
+  font-weight: $font-weight-normal-bold;
+  color: rgb(255, 255, 255);
   text-align: left;
-  text-transform: uppercase;
-  padding: 5px 15px;
+  padding: 5px 20px;
   cursor: default;
-  background-color: white;
+  background-color: $background-color;
+  background: linear-gradient(to right, #d0dad3, #a7d4b5);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.2));
 }
 
 .NavbarDarkExample .nav-link {
   color: $text-color-secondary;
   font-size: $font-size-base;
+  filter: drop-shadow(3px 0px 2px rgba(51, 51, 51, 0.3));
+
   font-family: $font-family;
-  // padding: 5px px;
-  letter-spacing: 0.5px;
-  font-weight: $font-weight-normal-bold;
+  letter-spacing: 1px;
+  font-weight: 300;
   display: flex;
-  padding: 10px 50px;
+  padding: 0 40px;
   align-items: baseline;
   justify-content: flex-start;
+  width: 250px;
   gap: 10px;
+  text-transform: uppercase;
+  background-color: lightcyan;
+  margin-bottom: 3px;
 }
 
 .NavbarDarkExample .nav-link:hover {
-  background-color: $primary-color;
-  color: #fff;
-}
-
-.NavbarDarkExample .nav-dropdown-menu {
-  background-color: $background-color;
-  padding: 5px 0;
+  color: #070707;
+  font-weight: 500;
 }
 
 .NavbarDarkExample .nav-dropdown-item {
-  color: $text-color;
-  padding: 10px 15px;
+  color: $text-color-secondary; /* Цвет текста для неактивных элементов */
   font-size: $font-size-sm;
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: $background-color;
 }
 
-.NavbarDarkExample .nav-dropdown-item:hover {
-  background-color: $button-hover;
-  color: #fff;
-}
-
-.NavbarDarkExample .navbar-brand {
-  color: $text-color;
-  font-size: $font-size-lg;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  padding: 0 15px;
+.dropdown-item.active {
+  padding: 2px 20px;
+  font-weight: $font-weight-bold;
+  color: white;
+  border: 0;
+  background-color: darkgray; /* Фон для активного элемента */
 }
 
 .NavbarDarkExample .nav-dropdown {
@@ -124,30 +127,26 @@
   border-top: none;
 }
 
-.dropdown-menu a:hover,
-.dropdown-menu button:hover .dropdown-item:focus {
-  background-color: white;
+.dropdown-menu a:hover {
   cursor: pointer;
-  color: $text-color-secondary;
+  color: black;
+  font-weight: $font-weight-bold;
 }
+
 .navbar-expand .navbar-nav .nav-link .dropdown-toggle {
-  padding-right: var(--bs-navbar-nav-link-padding-x);
-  padding-left: var(--bs-navbar-nav-link-padding-x);
-  padding-left: 25px;
+  padding: 10px 50px;
   align-items: baseline;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  padding-right: var(--bs-navbar-nav-link-padding-x);
-  padding-left: var(--bs-navbar-nav-link-padding-x);
-  padding-left: 25px;
-  padding-bottom: 5px;
+  padding: 5px 30px;
   align-items: baseline;
 }
 
 .dropdown-icon {
-  width: 20px;
-  filter: opacity(0.6);
+  width: 22px;
+  padding: 0;
+  filter: opacity(0.7);
 }
 
 .dropdown-toggle::after {
@@ -168,8 +167,12 @@
 
 .dropdown-menu.show {
   display: block;
-  background-color: $background-color;
+  background-color: white;
+  border-radius: 0;
+  border: 0px;
+  padding: 0 30px;
 }
+
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;

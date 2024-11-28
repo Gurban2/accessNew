@@ -15,6 +15,7 @@ import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
+import MySidebar from "./components/NavbarDarkExample/sidebar";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
 // import Translations from "./components/Pages/Site/Translations";
@@ -36,7 +37,8 @@ function App() {
       <ToastContainer position="top-right" />
       <Router>
         <div className="app">
-          <NavbarDarkExample /> {/* Сайдбар */}
+          {/* <MySidebar /> */}
+          <NavbarDarkExample /> 
           <div className="main">
             {/* <Header /> */}
 
@@ -64,8 +66,14 @@ function App() {
                 {/* Visitors */}
                 <Route path={AppPaths.visitors.add} element={<VisitorAdd />} />
                 <Route path={AppPaths.visitors.all} element={<VisitorAll />} />
-                <Route path={AppPaths.visitors.edit} element={<VisitorEdit />} />
-                <Route path={AppPaths.visitors.view} element={<VisitorView />} />
+                <Route
+                  path={AppPaths.visitors.edit}
+                  element={<VisitorEdit />}
+                />
+                <Route
+                  path={AppPaths.visitors.view}
+                  element={<VisitorView />}
+                />
                 <Route
                   path={AppPaths.visitors.persona.PersonaAll}
                   element={<PersonaAll />}

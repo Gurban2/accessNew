@@ -8,7 +8,7 @@ import navSections from "../../constants/navSection";
 
 function NavbarDarkExample() {
   return (
-    <Navbar variant="dark" bg="white" expand="lg" className="NavbarDarkExample">
+    <Navbar variant="dark" bg="white" expand="lg" className="NavbarDarkExample bg-base">
       <Container fluid>
         <Navbar.Brand as={NavLink} to="/" className="navbar-brand">
           Dashboard

@@ -50,7 +50,7 @@ const PersonaAdd = () => {
 
   return (
     <div className="persona-add-container">
-      <h1 className="persona-add-title">Add Persona</h1>
+      <h1 className="persona-add-title">add Persona</h1>
       <div className="search-bar">
         <input
           type="text"
@@ -64,7 +64,7 @@ const PersonaAdd = () => {
           className="btn btn-primary"
           disabled={!matchedVisitor} // Кнопка активна только если найден посетитель
         >
-          Add
+          add
         </button>
       </div>
       {/* Отображение результата поиска */}

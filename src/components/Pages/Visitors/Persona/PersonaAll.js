@@ -21,7 +21,7 @@ const PersonaAll = () => {
 
   return (
     <div className="persona-all-container">
-      <h1 className="persona-all-title">All Personas</h1>
+      <h1 className="persona-all-title">all Personas</h1>
       {personas && personas.length > 0 ? (
         <>
           <Table striped bordered hover>
@@ -59,7 +59,7 @@ const PersonaAll = () => {
             onClick={() => navigate("/persona/add")}
             className="btn btn-primary"
           >
-            Add Persona
+            add Persona
           </button>
         </>
       ) : (

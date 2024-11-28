@@ -51,7 +51,7 @@ const VisitorsView = () => {
                     <p><strong>Description:</strong> {visitor.description}</p>
                 </div>
                 <Link to="/visitors/all" className="btn-view-visitor btn-view-visitor-secondary">
-                    Back to All Visitors
+                    Back to all Visitors
                 </Link>
             </div>
         </div>

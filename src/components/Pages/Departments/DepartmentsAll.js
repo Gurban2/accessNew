@@ -22,9 +22,9 @@ const DepartmentsAll = () => {
 
   return (
     <div className="departments-all-container">
-      <h1 className="departments-all-list">Departments - All</h1>
+      <h1 className="departments-all-list">Departments - all</h1>
       <Link to="/departments/add" className="btn btn-primary">
-        Add Department
+        add Department
       </Link>
       <Table striped bordered hover>
         <thead>
