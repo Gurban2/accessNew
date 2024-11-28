@@ -14,16 +14,16 @@ const sections = [
         title: "Offices",
         icon: officeIcon,
         items: [
-          { label: "all", path: AppPaths.offices.all },
-          { label: "add", path: AppPaths.offices.add },
+          { label: "All", path: AppPaths.offices.all },
+          { label: "Add", path: AppPaths.offices.add },
         ],
       },
       {
         title: "Departments",
         icon: departmentIcon,
         items: [
-          { label: "all", path: AppPaths.departments.all },
-          { label: "add", path: AppPaths.departments.add },
+          { label: "All", path: AppPaths.departments.all },
+          { label: "Add", path: AppPaths.departments.add },
         ],
       },
     ],
@@ -35,16 +35,16 @@ const sections = [
         title: "Visitors",
         icon: visitorsIcon,
         items: [
-          { label: "all", path: AppPaths.visitors.all },
-          { label: "add", path: AppPaths.visitors.add },
+          { label: "All", path: AppPaths.visitors.all },
+          { label: "Add", path: AppPaths.visitors.add },
         ],
       },
       {
         title: "Persona Non Grata",
         icon: personaIcon,
         items: [
-          { label: "all", path: AppPaths.visitors.persona.all },
-          { label: "add", path: AppPaths.visitors.persona.add },
+          { label: "All", path: AppPaths.visitors.persona.all },
+          { label: "Add", path: AppPaths.visitors.persona.add },
         ],
       },
     ],
@@ -57,15 +57,15 @@ const sections = [
         icon: usersIcon,
         items: [
           { label: "List", path: AppPaths.users.permissions.list },
-          { label: "add User", path: AppPaths.users.permissions.addUser },
+          { label: "Add User", path: AppPaths.users.permissions.addUser },
         ],
       },
       {
         title: "Permissions",
         icon: permissionsIcon,
         items: [
-          { label: "all", path: AppPaths.users.permissions.all },
-          { label: "add Permission", path: AppPaths.users.permissions.add },
+          { label: "All", path: AppPaths.users.permissions.all },
+          { label: "Add Permission", path: AppPaths.users.permissions.add },
         ],
       },
     ],

@@ -1,181 +1,48 @@
 @import "../../variables.scss";
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgb(48, 20, 77) !important;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  border-right: 8px solid wheat;
+}
 
-.NavbarDarkExample .container-fluid {
-  border-radius: 0;
-  padding: 0;
+.ms-4 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: 0;
 }
-.bg-white {
-  --bs-bg-opacity: 1;
-  background-color: $background-color !important;
+.text-white-50 {
+  --bs-text-opacity: 1;
+  color: rgb(255, 255, 255) !important;
 }
-.NavbarDarkExample .navbar-brand {
-  display: flex;
-  flex-direction: column-reverse;
-  color: rgb(26, 26, 26);
-  font-size: 18px;
-  margin: 0;
-  margin-bottom: 20px;
-  padding: 0 10px 0 40px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  height: 50px;
-  width: 100%;
-}
-
-.navbar-nav {
-  gap: 15px;
-}
-
-.dropdown-menu a,
-.dropdown-menu button {
-  display: block;
-  padding: 8px 10px; /* Увеличено для улучшенной читаемости */
-  color: $text-color; /* Цвет текста для активных элементов */
-  background-color: white; /* Белый фон для кнопок */
-  border: none;
-  border-bottom: 1px solid grey;
-  text-align: left;
-  font-size: $font-size-base;
-  text-decoration: none; /* Убираем подчеркивание */
-}
-
-.NavbarDarkExample {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  // filter: drop-shadow(3px 0px 2px rgba(51, 51, 51, 0.3));
-  background-color: white;
-  padding: 0;
-  z-index: 100;
-  color: $text-color-secondary;
-}
-
-.NavbarDarkExample .section-title {
-  font-size: $font-size-base;
-  font-weight: $font-weight-normal-bold;
-  color: rgb(255, 255, 255);
-  text-align: left;
-  padding: 5px 20px;
-  cursor: default;
-  background-color: $background-color;
-  background: linear-gradient(to right, #d0dad3, #a7d4b5);
-  margin-bottom: 5px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.2));
-}
-
-.NavbarDarkExample .nav-link {
-  color: $text-color-secondary;
-  font-size: $font-size-base;
-  filter: drop-shadow(3px 0px 2px rgba(51, 51, 51, 0.3));
-
-  font-family: $font-family;
-  letter-spacing: 1px;
-  font-weight: 300;
-  display: flex;
-  padding: 0 40px;
-  align-items: baseline;
-  justify-content: flex-start;
-  width: 250px;
-  gap: 10px;
-  text-transform: uppercase;
-  background-color: lightcyan;
-  margin-bottom: 3px;
-}
-
-.NavbarDarkExample .nav-link:hover {
-  color: #070707;
-  font-weight: 500;
-}
-
-.NavbarDarkExample .nav-dropdown-item {
-  color: $text-color-secondary; /* Цвет текста для неактивных элементов */
-  font-size: $font-size-sm;
-  padding: 8px 20px;
-  cursor: pointer;
-  background-color: $background-color;
-}
-
-.dropdown-item.active {
-  padding: 2px 20px;
-  font-weight: $font-weight-bold;
+.text-white-75 {
   color: white;
-  border: 0;
-  background-color: darkgray; /* Фон для активного элемента */
-}
+  text-decoration: none;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  padding: 5px 5px;
+  text-transform: uppercase;
+  transition: color 0.3s ease, text-decoration 0.3s ease-in-out;
+  transition: letter-spacing 0.3s ease-in-out;
+  &:hover {
+    color: $primary-color; // Or use a different color for hover
+    outline: 2px solid $primary-color; // Focused state with primary color outline
+    outline-offset: 2px;
+    letter-spacing: 1px;
+  }
 
-.NavbarDarkExample .nav-dropdown {
-  margin-bottom: 10px;
-}
+  &:active {
+    color: darken($primary-color, 10%);
+  }
 
-.NavbarDarkExample .nav-dropdown-item.active {
-  background-color: $success-color;
-  color: white;
-}
-
-.NavbarDarkExample .nav-link.active {
-  background-color: $success-color;
-}
-
-.NavbarDarkExample .section-title:first-of-type {
-  margin-top: 0;
-  border-top: none;
-}
-
-.dropdown-menu a:hover {
-  cursor: pointer;
-  color: black;
-  font-weight: $font-weight-bold;
-}
-
-.navbar-expand .navbar-nav .nav-link .dropdown-toggle {
-  padding: 10px 50px;
-  align-items: baseline;
-}
-
-.navbar-expand-lg .navbar-nav .nav-link {
-  padding: 5px 30px;
-  align-items: baseline;
-}
-
-.dropdown-icon {
-  width: 22px;
-  padding: 0;
-  filter: opacity(0.7);
-}
-
-.dropdown-toggle::after {
-  display: inline-block;
-  margin-left: 0.255em;
-  vertical-align: 0.255em;
-  content: "";
-  border-top: 0;
-  border-right: 0.3em solid transparent;
-  border-bottom: 10px;
-  border-left: 0.3em solid transparent;
-}
-
-.navbar-nav .nav-link.active,
-.navbar-nav .nav-link.show {
-  color: $text-color;
-}
-
-.dropdown-menu.show {
-  display: block;
-  background-color: white;
-  border-radius: 0;
-  border: 0px;
-  padding: 0 30px;
+  &:focus {
+    outline: 2px solid $primary-color, 15%; // Focused state with primary color outline
+    outline-offset: 2px;
+  }
 }
 
 @media (min-width: 992px) {
-  .navbar-expand-lg .navbar-nav .dropdown-menu {
-    position: absolute;
-    width: 100%;
+  .navbar-brand {
+    // display: none !important;
+    visibility: hidden;
   }
 }
