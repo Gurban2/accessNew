@@ -98,7 +98,7 @@ const VisitorsAll = () => {
                   onClick={() => handleDelete(visitor.id)}
                   disabled={isLoading}
                 >
-                  {isLoading ? "Deleting..." : "Delete"} {/* Show loading text */}
+                  {isLoading ? "Deleting..." : "Delete"}
                 </button>                
               </td>
             </tr>
