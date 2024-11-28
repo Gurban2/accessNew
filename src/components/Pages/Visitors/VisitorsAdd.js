@@ -24,7 +24,7 @@ const VisitorsAdd = () => {
     description: "",
   });
 
- 
+
 
   const handleCapture = (imageSrc) => {
     setPhotoPreview(imageSrc);
@@ -34,7 +34,7 @@ const VisitorsAdd = () => {
     }));
     setUseWebcam(false);
   };
-
+  // console.log():
   const handleChange = (event) => {
     const { name, value, files } = event.target;
 
@@ -165,8 +165,8 @@ const VisitorsAdd = () => {
             name="phone"
             placeholder="Enter Phone"
             value={formData.phone}
-            onChange={handlePhoneChange}  
-            inputMode="tel"  
+            onChange={handlePhoneChange}
+            inputMode="tel"
             pattern="^\+?\d{1,4}-?\d{1,24}$"
             title="Phone number format: +[country code]-[number], up to 24 digits"
             required
