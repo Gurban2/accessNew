@@ -75,7 +75,7 @@ const VisitorsAdd = () => {
       !formData.photo ||
       !formData.description
     ) {
-      setError("All fields, are required!");
+      setError("all fields, are required!");
       return false;
     }
     return true;
@@ -109,7 +109,7 @@ const VisitorsAdd = () => {
 
   return (
     <div className="visitor-add-container">
-      <h1 className="visitor-add">Visitors - Add</h1>
+      <h1 className="visitor-add">Visitors - add</h1>
       <form className="visitor-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">

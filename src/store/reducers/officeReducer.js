@@ -6,10 +6,12 @@ const officeSlice = createSlice({
     { id: "1", name: "Sales", phone: "555 555 555", address: "A" },
     { id: "2", name: "Marketing", phone: "555 555 555", address: "B" },
     { id: "3", name: "HR", phone: "555 555 555", address: "C" },
-    { id: "4", name: "IT", phone: "555 555 555", address: "D" }
+    { id: "4", name: "IT", phone: "555 555 555", address: "D" },
   ],
   reducers: {
     addOffice: (state, action) => {
+      console.log({ state, action });
+
       const existingOffice = state.find(
         (office) => office.name === action.payload.name
       );
@@ -17,9 +19,8 @@ const officeSlice = createSlice({
         alert("Alredy exist");
         return state;
       }
-      // return [...state, action.payload];
       const updatedState = [...state, action.payload];
-      console.log("State after adding office:", updatedState);      
+      console.log("State after adding office:", updatedState);
       return updatedState;
     },
     deleteOffice: (state, action) => {

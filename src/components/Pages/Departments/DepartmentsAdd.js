@@ -37,7 +37,7 @@ const DepartmentsAdd = () => {
       !formData.parent ||
       !formData.office
     ) {
-      setError("All fields are required!");
+      setError("all fields are required!");
       return false;
     }
     return true;
@@ -57,7 +57,7 @@ const DepartmentsAdd = () => {
 
   return (
     <div className="department-add-container">
-      <h1 className="department-add">Department - Add</h1>
+      <h1 className="department-add">Department - add</h1>
       <form className="department-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">

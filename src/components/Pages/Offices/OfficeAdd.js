@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import { useDispatch } from "react-redux";
 import { addOffice } from "../../../store/reducers/officeReducer";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const OfficeAdd = ({ entity }) => {
   const [formData, setFormData] = useState({
@@ -30,19 +30,20 @@ const OfficeAdd = ({ entity }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validateForm()) return;  
+    if (!validateForm()) return;
     const uniqueId = Date.now().toString();
     const newFormData = { ...formData, id: uniqueId };
     setLoading(true);
     dispatch(addOffice(newFormData));
-    setFormData({ id: "",name: "", address: "", phone: "" });
+
+    setFormData({ id: "", name: "", address: "", phone: "" });
     setLoading(false);
-    toast.success("Office Successfully Added")
+    toast.success("Office Successfully Added");
   };
 
   return (
     <div className="offices-add-container">
-      <h1 className="offices-add">{entity} - Add</h1>
+      <h1 className="offices-add">{entity} - add</h1>
       <form className="offices-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">

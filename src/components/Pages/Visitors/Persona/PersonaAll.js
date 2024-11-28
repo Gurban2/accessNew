@@ -44,6 +44,7 @@ const PersonaAll = () => {
 
   return (
     <div className="persona-all-container">
+
       <h1 className="persona-all-title">Personas Marked as "Non Grata"</h1>
       {personNonGrataVisitors.length > 0 ? (
         <><button
@@ -52,6 +53,7 @@ const PersonaAll = () => {
         >
           Add Persona
         </button>
+
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -138,6 +140,7 @@ const PersonaAll = () => {
           <p style={{ color: "red", fontStyle: "italic", marginTop: "20px" }}>
             These users are marked as "Person Non Grata."
           </p>
+
         </>
       ) : (
         <p className="no-personas">No "Person Non Grata" users found.</p>

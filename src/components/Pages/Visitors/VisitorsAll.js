@@ -29,9 +29,9 @@ const VisitorsAll = () => {
   
   return (
     <div className="visitors-all-container">
-      <h1 className="visitors-all-list">Visitors - All</h1>
+      <h1 className="visitors-all-list">Visitors - all</h1>
       <Link to="/visitors/add" className="btn btn-primary">
-        Add Visitor
+        add Visitor
       </Link>
       <Table striped bordered hover>
         <thead>

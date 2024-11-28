@@ -84,6 +84,16 @@ const PersonaAdd = () => {
           placeholder="Search for a visitor"
           className="search-input"
         />
+
+
+        <button
+          onClick={handleAdd}
+          className="btn btn-primary"
+          disabled={!matchedVisitor} // Кнопка активна только если найден посетитель
+        >
+          add
+        </button>
+
       </div>
 
       {matchedVisitors.length > 0 && (
