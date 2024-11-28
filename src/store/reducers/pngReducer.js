@@ -12,7 +12,9 @@ const pngReducer = createSlice({
       if (existingPersona) {
         alert("This persona already exists.");
       } else {
-        return [...state, action.payload];
+        const updatedState = [...state, action.payload];
+        console.log("State after adding:", updatedState);
+        return updatedState;
       }
     },
     deletePersona: (state, action) => {

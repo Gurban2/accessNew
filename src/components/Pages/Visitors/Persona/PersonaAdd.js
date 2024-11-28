@@ -1,56 +1,81 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPersona } from "../../../../store/reducers/pngReducer";
-
+import { updateVisitor } from "../../../../store/reducers/visitorReducer";
+import { Table, Button } from "react-bootstrap";
+import AddModal from "./ConfirmModal";
 const PersonaAdd = () => {
   const [inputValue, setInputValue] = useState("");
-  const [matchedVisitor, setMatchedVisitor] = useState(null); // Для хранения найденного посетителя
-  const dispatch = useDispatch();
+  const [matchedVisitors, setMatchedVisitors] = useState([]);
+  const [reason, setReason] = useState("");
+  const [selectedVisitor, setSelectedVisitor] = useState(null);
 
-  // Список всех посетителей (например, приходит из Redux или другого источника)
-  const visitors = useSelector((state) => state.visitors || []); // Предположим, что visitors — это отдельный slice
-  const personas = useSelector((state) => state.personas || []);
+  const dispatch = useDispatch();
+  const visitors = useSelector((state) => state.visitors || []);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
 
-    // Поиск соответствия в списке visitors
-    const match = visitors.find(
-      (visitor) => visitor.name.toLowerCase() === value.toLowerCase()
-    );
-    setMatchedVisitor(match || null); // Устанавливаем найденного посетителя или null
+    if (value.trim() === "") {
+      setMatchedVisitors([]);
+    } else {
+      const matches = visitors.filter((visitor) =>
+        visitor.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setMatchedVisitors(matches);
+    }
   };
-
-  const handleAdd = () => {
-    if (!matchedVisitor) {
+  const handleAdd = (visitor) => {
+    setSelectedVisitor(visitor);
+    if (!visitor) {
       alert("No matching visitor found!");
       return;
     }
 
-    // Проверка на существование в списке персон
-    const isExisting = personas.some(
-      (persona) =>
-        persona.name.toLowerCase() === matchedVisitor.name.toLowerCase()
+    if (visitor.personNonGrata === "true") {
+      if (
+        window.confirm(
+          `This visitor is already marked as 'Person Non Grata'. Do you want to remove this status?`
+        )
+      ) {
+        dispatch(
+          updateVisitor({
+            id: visitor.id,
+            personNonGrata: "false",
+            reason: "",
+          })
+        );
+        alert(`${visitor.name} is no longer marked as 'Person Non Grata'.`);
+      }
+    }
+  };
+
+  const handleConfirmAdd = () => {
+    if (!reason.trim()) {
+      alert("Please provide a reason.");
+      return;
+    }
+
+    dispatch(
+      updateVisitor({
+        id: selectedVisitor.id,
+        personNonGrata: "true",
+        reason: reason.trim(),
+      })
     );
 
-    if (isExisting) {
-      alert("This persona already exists!");
-    } else {
-      dispatch(
-        addPersona({
-          id: matchedVisitor.id,
-          name: matchedVisitor.name,
-        })
-      );
-      setInputValue("");
-      setMatchedVisitor(null); // Сбросить найденного посетителя
-    }
+    setInputValue("");
+    setMatchedVisitors([]);
+    setReason("");
+  };
+
+  const handleCancel = () => {
+    setReason("");
   };
 
   return (
     <div className="persona-add-container">
-      <h1 className="persona-add-title">add Persona</h1>
+      <h1 className="persona-add-title">Add or Remove 'Person Non Grata'</h1>
       <div className="search-bar">
         <input
           type="text"
@@ -59,6 +84,8 @@ const PersonaAdd = () => {
           placeholder="Search for a visitor"
           className="search-input"
         />
+
+
         <button
           onClick={handleAdd}
           className="btn btn-primary"
@@ -66,13 +93,101 @@ const PersonaAdd = () => {
         >
           add
         </button>
+
       </div>
-      {/* Отображение результата поиска */}
-      {matchedVisitor && (
-        <div className="search-result">
-          <p>Found visitor: {matchedVisitor.name}</p>
-        </div>
+
+      {matchedVisitors.length > 0 && (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>FIN</th>
+              <th>Status</th>
+              <th>Reason</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {matchedVisitors.map((visitor) => (
+              <tr key={visitor.id}>
+                <td>
+                  {visitor.photo ? (
+                    typeof visitor.photo === "string" ? (
+                      <img
+                        src={visitor.photo}
+                        alt={`${visitor.name}`}
+                        className="visitor-photo"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          marginRight: "10px",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={URL.createObjectURL(visitor.photo)}
+                        alt={`${visitor.name}`}
+                        className="visitor-photo"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          marginRight: "10px",
+                        }}
+                      />
+                    )
+                  ) : (
+                    <div
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                        backgroundColor: "#ddd",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginRight: "10px",
+                        fontSize: "12px",
+                      }}
+                    >
+                      No photo
+                    </div>
+                  )}
+                </td>
+                <td>{visitor.name}</td>
+                <td>{visitor.fin}</td>
+                <td
+                  style={{
+                    color: visitor.personNonGrata === "true" ? "red" : "green",
+                  }}
+                >
+                  {visitor.personNonGrata === "true"
+                    ? "Person Non Grata"
+                    : "Not Person Non Grata"}
+                </td>
+                <td>{visitor.reason || "N/A"}</td>
+                <td>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => handleAdd(visitor)}
+                  >
+                    {visitor.personNonGrata === "true"
+                      ? "Remove from Non Grata"
+                      : <AddModal onChange={(e) => setReason(e.target.value)} onConfirm={handleConfirmAdd} onCancel={handleCancel} />
+                    }
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       )}
+
     </div>
   );
 };
