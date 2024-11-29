@@ -3,6 +3,7 @@ import "./style.scss";
 import { useDispatch } from "react-redux";
 import { addOffice } from "../../../store/reducers/officeReducer";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom"; // Импортируем Link для навигации
 
 const OfficeAdd = ({ entity }) => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,11 @@ const OfficeAdd = ({ entity }) => {
 
   return (
     <div className="offices-add-container">
-      <h1 className="offices-add">{entity} - add</h1>
+      {/* Breadcrumbs section */}
+      <nav className="breadcrumbs">
+        <Link to="/">Dashboard</Link> &gt; <span>{entity} - Add</span>
+      </nav>
+
       <form className="offices-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">

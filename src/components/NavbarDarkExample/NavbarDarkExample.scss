@@ -26,7 +26,7 @@
 
 .text-white-50:hover {
   background-color: #3f5e83;
-  color: white!important;
+  color: white !important;
 }
 .text-white-75 {
   color: $text-color !important;
@@ -48,7 +48,6 @@
 
   &:active {
     color: darken($primary-color, 10%);
-    
   }
 
   &:focus {
@@ -56,10 +55,23 @@
     outline-offset: 2px;
   }
 }
+.breadcrumbs {
+  font-size: 14px;
+  color: #555;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  color: #333;
+}
 
 @media (min-width: 992px) {
-  .navbar-brand {
-    // display: none !important;
-    visibility: hidden;
-  }
 }
