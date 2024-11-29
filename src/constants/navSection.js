@@ -1,12 +1,14 @@
 import { AppPaths } from "./appPaths";
 import officeIcon from "../assets/dashboardIcons/officeIcon.svg";
-import departmentIcon from "../assets/dashboardIcons/departmentIcon.svg";
-import personaIcon from "../assets/dashboardIcons/personaIcon.png";
+import departmentIcon from "../assets/dashboardIcons/departmentIcon.png";
+import personaIcon from "../assets/dashboardIcons/personaIcon.svg";
 import usersIcon from "../assets/dashboardIcons/usersIcon.png";
-import visitorsIcon from "../assets/dashboardIcons/visitor-card.png";
+import visitorsIcon from "../assets/dashboardIcons/visitor.svg";
 import permissionsIcon from "../assets/dashboardIcons/permissionsIcon.png";
+// import dashboard from "../assets/dashboardIcons/dashboard.svg";
 
 const sections = [
+  // { title: "Dashboard", icon: dashboard, path: AppPaths.offices.dashboard },
   {
     title: "Offices and Departments",
     departments: [

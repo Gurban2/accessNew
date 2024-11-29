@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import sections from "../../constants/navSection"; // You can use the same sections here
-import { FaChevronDown, FaChevronUp } from "react-icons/fa"; // Icons for collapsible arrows
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./NavbarDarkExample.scss"; 
+import "./NavbarDarkExample.scss";
+import dashboardIcon from "../../assets/dashboardIcons/dashboard.svg";
 
 const NavbarDarkExample = () => {
   const [show, setShow] = useState(false);
-  const [openMenu, setOpenMenu] = useState(null); // Tracks which main menu is open
+  const [openMenu, setOpenMenu] = useState(0); // Keep the first section open by default
   const [openSubmenu, setOpenSubmenu] = useState({}); // Tracks which submenu is open
 
   const handleClose = () => setShow(false);
@@ -45,6 +45,13 @@ const NavbarDarkExample = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
+            <Navbar.Brand as={NavLink} to="/" className="navbar-link">
+              <img
+                src={dashboardIcon}
+                alt="Dashboard Icon"
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+            </Navbar.Brand>
             {sections.map((section, sectionIndex) => (
               <div key={section.title}>
                 <Nav.Link
@@ -54,13 +61,6 @@ const NavbarDarkExample = () => {
                   }
                 >
                   {section.title}
-                  <span className="ms-2">
-                    {openMenu === sectionIndex ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )}
-                  </span>
                 </Nav.Link>
                 <Collapse in={openMenu === sectionIndex}>
                   <div className="submenu ms-3">
@@ -109,8 +109,10 @@ const NavbarDarkExample = () => {
         className="d-none d-lg-block bg-dark text-white vh-100 p-3"
         style={{ width: "250px", transition: "width 0.3s ease-in-out" }}
       >
-        <h4>Dashboard</h4>
         <Nav className="flex-column">
+          <Nav.Link as={NavLink} to="/" className="text-white fw-bold">
+            Dashboard
+          </Nav.Link>
           {sections.map((section, sectionIndex) => (
             <div key={section.title}>
               <Nav.Link
@@ -120,13 +122,6 @@ const NavbarDarkExample = () => {
                 }
               >
                 {section.title}
-                <span className="ms-2">
-                  {openMenu === sectionIndex ? (
-                    <FaChevronUp />
-                  ) : (
-                    <FaChevronDown />
-                  )}
-                </span>
               </Nav.Link>
               <Collapse in={openMenu === sectionIndex}>
                 <div className="ms-3">

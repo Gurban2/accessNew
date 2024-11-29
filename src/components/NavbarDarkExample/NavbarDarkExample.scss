@@ -1,41 +1,58 @@
 @import "../../variables.scss";
 .bg-dark {
   --bs-bg-opacity: 1;
-  background-color: rgb(48, 20, 77) !important;
+  background-color: rgb(255, 255, 255) !important;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-  border-right: 8px solid wheat;
+  // border-right: 5px solid rgb(119, 116, 116);
 }
-
+.flex-column {
+  flex-direction: column !important;
+  padding-top: 50px;
+  width: max-content;
+}
 .ms-4 {
+  color: $text-color !important;
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+.text-white {
+  color: $text-color !important;
 }
 .text-white-50 {
   --bs-text-opacity: 1;
-  color: rgb(255, 255, 255) !important;
+  color: $text-color-secondary !important;
+}
+
+.text-white-50:hover {
+  background-color: #3f5e83;
+  color: white!important;
 }
 .text-white-75 {
-  color: white;
+  color: $text-color !important;
   text-decoration: none;
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
-  padding: 5px 5px;
+  padding: 2px 5px;
   text-transform: uppercase;
   transition: color 0.3s ease, text-decoration 0.3s ease-in-out;
   transition: letter-spacing 0.3s ease-in-out;
+
   &:hover {
-    color: $primary-color; // Or use a different color for hover
+    color: $primary-color !important; // Or use a different color for hover
     outline: 2px solid $primary-color; // Focused state with primary color outline
     outline-offset: 2px;
     letter-spacing: 1px;
+    // padding: 2px 0;
   }
 
   &:active {
     color: darken($primary-color, 10%);
+    
   }
 
   &:focus {
-    outline: 2px solid $primary-color, 15%; // Focused state with primary color outline
+    outline: 2px solid #3f5e83, 15%; // Focused state with primary color outline
     outline-offset: 2px;
   }
 }
