@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Form, Col, Row, InputGroup, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Button, Form, Col, Row, InputGroup, FormControl } from 'react-bootstrap';
 import { addStaff } from "../../../store/reducers/staffReducer";
 import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "../UserPermissions/style.scss";
+import { Link } from 'react-router-dom';
 
 const AddUser = () => {
   const offices = useSelector((state) => state.offices);
@@ -49,10 +51,8 @@ const AddUser = () => {
   };
   const handleCopyPassword = () => {
     navigator.clipboard.writeText(formData.password).then(() => {
-      // alert("Password copied to clipboard!");
       toast.success("Password copied to clipboard!");
     }).catch(err => {
-      // alert("Failed to copy password: ", err);
       toast.error("Password copied to clipboard!");
     });
   };
@@ -63,11 +63,11 @@ const AddUser = () => {
       !formData.username ||
       !formData.email ||
       !formData.phone ||
-      !formData.extension ||      
+      !formData.extension ||
       !formData.position ||
       !formData.role ||
       !formData.office ||
-      !formData.department||
+      !formData.department ||
       !formData.password ||
       !formData.confirmPassword ||
       !formData.active
@@ -80,7 +80,6 @@ const AddUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    // alert('Form Submitted');
     const uniqueId = Date.now().toString();
     const newFormData = {
       ...formData,
@@ -98,24 +97,27 @@ const AddUser = () => {
       extension: "",
       position: "",
       role: "",
-      office:"",
+      office: "",
       department: "",
-      password:"",
-      confirmPassword:"",
-      active:"",
+      password: "",
+      confirmPassword: "",
+      active: "",
     });
     setLoading(false);
     toast.success("User Successfully Added!");
-    // You can handle the form submission logic here (e.g., API request)
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Create User</h2>
-      <Form onSubmit={handleSubmit}>
+    <div className="user-add-container">
+      <nav className="breadcrumb">
+        <Link to="/">Dashboard</Link> &gt;{" "}
+        <Link to="/users/permissions/list">User & Permissions</Link> &gt; <span>Add User</span>
+      </nav>
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <Form.Label className="form-label-head">Edit sections which want to change</Form.Label>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label className="form-label">Name</Form.Label>
             <Form.Control
               type="text"
               name="name"
@@ -126,7 +128,7 @@ const AddUser = () => {
           </Form.Group>
 
           <Form.Group as={Col} controlId="username">
-            <Form.Label>Username</Form.Label>
+            <Form.Label className="form-label">Username</Form.Label>
             <Form.Control
               type="text"
               name="username"
@@ -135,11 +137,9 @@ const AddUser = () => {
               required
             />
           </Form.Group>
-        </Row>
 
-        <Row className="mb-3">
           <Form.Group as={Col} controlId="email">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="form-label">Email</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -148,9 +148,8 @@ const AddUser = () => {
               required
             />
           </Form.Group>
-
           <Form.Group as={Col} controlId="phone">
-            <Form.Label>Phone</Form.Label>
+            <Form.Label className="form-label">Phone</Form.Label>
             <Form.Control
               type="tel"
               name="phone"
@@ -160,20 +159,19 @@ const AddUser = () => {
             />
           </Form.Group>
         </Row>
-
         <Row className="mb-3">
           <Form.Group as={Col} controlId="extension">
-            <Form.Label>Extension</Form.Label>
+            <Form.Label className="form-label">Extension</Form.Label>
             <Form.Control
               type="text"
               name="extension"
               value={formData.extension}
               onChange={handleChange}
+              required
             />
           </Form.Group>
-
           <Form.Group as={Col} controlId="position">
-            <Form.Label>Position</Form.Label>
+            <Form.Label className="form-label">Position</Form.Label>
             <Form.Control
               type="text"
               name="position"
@@ -182,28 +180,25 @@ const AddUser = () => {
               required
             />
           </Form.Group>
-        </Row>
-
-        <Row className="mb-3">
           <Form.Group as={Col} controlId="role">
-            <Form.Label>Role</Form.Label>
-            <Form.Control
+            <Form.Label className="form-label">Role</Form.Label>
+            <Form.Select
               as="select"
               name="role"
               value={formData.role}
               onChange={handleChange}
               required
             >
+              <option value="">default</option>
               <option value="admin">Admin</option>
               <option value="manager">Manager</option>
               <option value="manager">Reception</option>
               <option value="user">User</option>
-            </Form.Control>
+            </Form.Select>
           </Form.Group>
-
           <Form.Group as={Col} controlId="office">
-            <Form.Label>Office</Form.Label>
-            <Form.Control
+            <Form.Label className="form-label">Office</Form.Label>
+            <Form.Select
               as="select"
               name="office"
               value={formData.office}
@@ -218,35 +213,31 @@ const AddUser = () => {
                   {office.name}
                 </option>
               ))}
-            </Form.Control>
+            </Form.Select>
           </Form.Group>
         </Row>
-
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="department">
-            <Form.Label>Department</Form.Label>
-            <Form.Control
+        <Row className="mb-12">
+          <Form.Group as={Col} sm={3} controlId="department">
+            <Form.Label className="form-label">Department</Form.Label>
+            <Form.Select
               as="select"
               name="department"
               value={formData.department}
               onChange={handleChange}
               required
             >
-              <option value="" disabled>
-                Select Department
-              </option>
+              <option disabled>Select Department</option>
               {departments.departmentsData.map((department) => (
                 <option key={department.id} value={department.name}>
                   {department.name}
                 </option>
               ))}
-            </Form.Control>
+            </Form.Select>
           </Form.Group>
         </Row>
-
         <Row className="mb-3">
           <Form.Group as={Col} controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="form-label">Password</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -255,9 +246,8 @@ const AddUser = () => {
               required
             />
           </Form.Group>
-
           <Form.Group as={Col} controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label className="form-label">Confirm Password</Form.Label>
             <Form.Control
               type="password"
               name="confirmPassword"
@@ -267,11 +257,9 @@ const AddUser = () => {
             />
           </Form.Group>
         </Row>
-
-        {/* Display the generated password and add the copy button */}
         <Row className="mb-3 mt-3">
-          <Form.Group as={Col}>
-            <Form.Label>Generated Password</Form.Label>
+          <Form.Group as={Col} sm={6}>
+            <Form.Label className="form-label">Generated Password</Form.Label>
             <InputGroup>
               <Button variant="outline-secondary" onClick={handleCopyPassword}>
                 Copy
@@ -286,10 +274,9 @@ const AddUser = () => {
             </InputGroup>
           </Form.Group>
         </Row>
-
         <Row className="mb-3 mt-3">
           <Form.Group as={Col} controlId="active">
-            <Form.Label>Active</Form.Label>
+            <Form.Label className="form-label">Active</Form.Label>
             <Form.Check
               type="switch"
               id="activeSwitch"
@@ -299,10 +286,11 @@ const AddUser = () => {
             />
           </Form.Group>
         </Row>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Row className="mb-3 d-flex justify-content-end">
+          <Button as={Col} sm={1} variant="success" type="submit">
+            Submit
+          </Button>
+        </Row>
       </Form>
     </div>
   );

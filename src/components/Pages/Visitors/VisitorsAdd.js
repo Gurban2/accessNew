@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { addVisitor } from "../../../store/reducers/visitorReducer";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "./style.scss";
+import { Forum } from "@mui/icons-material";
 
 const VisitorsAdd = () => {
   const [error, setError] = useState(null);
@@ -82,17 +84,13 @@ const VisitorsAdd = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
-
-    // Получаем текущее время в формате строки
     const currentTime = new Date().toISOString();
-
     const uniqueId = Date.now().toString();
-    const newFormData = { 
-      ...formData, 
-      id: uniqueId, 
-      createdAt: currentTime // Добавляем текущее время
+    const newFormData = {
+      ...formData,
+      id: uniqueId,
+      createdAt: currentTime
     };
-
     setLoading(true);
     dispatch(addVisitor(newFormData));
 
@@ -121,125 +119,137 @@ const VisitorsAdd = () => {
         <Link to="/">Dashboard</Link> &gt;{" "}
         <Link to="/visitors/all">Visitors</Link> &gt; <span>Add Visitor</span>
       </nav>
-
-      <form className="visitor-add-form" onSubmit={handleSubmit}>
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <Form.Label className="form-label-head">Visitor add</Form.Label>
         {error && <div className="error">{error}</div>}
-        <div className="form-group">
-          <label htmlFor="photo">Photo</label>
-          <div className="photo-input">
-            {useWebcam ? (
-              <WebcamCapture
-                onCapture={handleCapture}
-                onCancel={() => setUseWebcam(false)}
-              />
-            ) : (
-              <>
-                <input
-                  type="file"
-                  id="photo"
-                  name="photo"
-                  accept="image/*"
-                  onChange={handleChange}
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="name">
+            <Form.Label className="form-label-head">Name</Form.Label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="phone">
+            <Form.Label className="form-label-head">Phone</Form.Label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter Phone"
+              value={formData.phone}
+              onChange={handlePhoneChange}
+              inputMode="tel"
+              pattern="^\+?\d{1,4}-?\d{1,24}$"
+              title="Phone number format: +[country code]-[number], up to 24 digits"
+              required
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="fin">
+            <Form.Label className="form-label-head">Fin</Form.Label>
+            <input
+              type="text"
+              id="fin"
+              name="fin"
+              placeholder="Enter Fin"
+              value={formData.fin}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="photo">
+            <Form.Label className="form-label-head" htmlFor="photo">Photo</Form.Label>
+            <div className="photo-input">
+              {useWebcam ? (
+                <WebcamCapture
+                  onCapture={handleCapture}
+                  onCancel={() => setUseWebcam(false)}
                 />
-                <button
-                  type="button"
-                  onClick={() => setUseWebcam(true)}
-                  className="webcam-button"
-                >
-                  Use Webcam
-                </button>
-              </>
-            )}
-          </div>
-          {photoPreview && (
-            <div className="photo-preview">
-              <img src={photoPreview} alt="Preview" />
+              ) : (
+                <>
+                  <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setUseWebcam(true)}
+                    className="webcam-button"
+                  >
+                    Use Webcam
+                  </button>
+                </>
+              )}
             </div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter Phone"
-            value={formData.phone}
-            onChange={handlePhoneChange}
-            inputMode="tel"
-            pattern="^\+?\d{1,4}-?\d{1,24}$"
-            title="Phone number format: +[country code]-[number], up to 24 digits"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="fin">Fin</label>
-          <input
-            type="text"
-            id="fin"
-            name="fin"
-            placeholder="Enter Fin"
-            value={formData.fin}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter Email"
-            value={formData.email}
-            onChange={handleChange}
-            title="@mail.com"
+            {photoPreview && (
+              <div className="photo-preview">
+                <img src={photoPreview} alt="Preview" />
+              </div>
+            )}
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="email">
+            <Form.Label className="form-label-head" htmlFor="email">Email</Form.Label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Email"
+              value={formData.email}
+              onChange={handleChange}
+              title="@mail.com"
             // required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Enter Address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Enter Description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="4"
-            // required
-          ></textarea>
-        </div>
-        <button type="submit" className="submit-button" disabled={loading}>
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId="address">
+            <Form.Label className="form-label-head" htmlFor="address">Address</Form.Label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="Enter Address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}  className="mb-3" controlId="ControlTextarea">
+            <Form.Label className="form-label-head">Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter Description"
+              required
+            />
+
+          </Form.Group>
+        </Row>
+        <Row className="mb-3 d-flex justify-content-end">
+        <Button variant="success" type="submit"  disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
-        </button>
-        <button type="button" onClick={handleCancel} className="cancel-button">
+        </Button>
+        <Button variant="danger" type="cancel" onClick={handleCancel} >
           Cancel
-        </button>
-      </form>
+        </Button>
+          </Row>        
+        
+      </Form>
     </div>
   );
 };
