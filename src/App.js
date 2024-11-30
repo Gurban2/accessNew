@@ -20,9 +20,9 @@ import Dashboard from "./components/dashboard.js";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
 // import Translations from "./components/Pages/Site/Translations";
-import AddPer from "./components/Pages/UserPermissions/AddPer";
+import AddPermissons from "./components/Pages/UserPermissions/AddPermissons";
 import AddUser from "./components/Pages/UserPermissions/AddUser";
-import AllPer from "./components/Pages/UserPermissions/AllPer";
+import AllPermissions from "./components/Pages/UserPermissions/AllPermissions";
 import ListUsers from "./components/Pages/UserPermissions/ListUsers";
 
 import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
@@ -95,7 +95,7 @@ function App() {
                 {/* Users & Permissions */}
                 <Route
                   path={AppPaths.users.permissions.add}
-                  element={<AddPer />}
+                  element={<AddPermissons />}
                 />
                 <Route
                   path={AppPaths.users.permissions.addUser}
@@ -103,7 +103,7 @@ function App() {
                 />
                 <Route
                   path={AppPaths.users.permissions.all}
-                  element={<AllPer />}
+                  element={<AllPermissions />}
                 />
                 <Route
                   path={AppPaths.users.permissions.list}
