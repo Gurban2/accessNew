@@ -1,5 +1,5 @@
 :root {
-//   --primary-color: #3f5e83;
+  //   --primary-color: #3f5e83;
   --success-color: #28a745;
   --success-color-hover: #1b5a29;
   --danger-color: #dc3545;
@@ -23,4 +23,7 @@
   --font-weight-normal-bold: 400;
   --font-weight-bold: 700;
   --line-height-base: 1.5;
+  --form-background: #fff;
+  --primary-color: #007bff;
+  --hover-color: darken(var(--primary-color), 10%);
 }
