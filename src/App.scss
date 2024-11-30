@@ -1,8 +1,14 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
 @import "/src/variables.scss";
+
 .app {
   display: flex;
   height: 100vh; /* Full height */
-  background-color: $background-color;
+  background-color: var(--background-color);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .main {
@@ -10,13 +16,11 @@
   // margin-left: 250px; /* Sidebar width */
 
   overflow-y: hidden; /* Allow scroll if content overflows */
-  background-color: $context-bg-color;
-
+  background-color: var(--background-color);
 }
 
 /* Navbar/Sidebar styles */
 .content {
   padding: 0 20px;
-  background-color: $context-bg-color;
-
+  background-color: var(--background-color);
 }

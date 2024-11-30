@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import sections from "../../constants/navSection"; // You can use the same sections here
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./NavbarDarkExample.scss";
-import dashboardIcon from "../../assets/dashboardIcons/dashboard.svg";
+import dashboardIcon from "../../assets/icons/dashboard/dashboard.svg";
 
 const NavbarDarkExample = () => {
   const [show, setShow] = useState(false);

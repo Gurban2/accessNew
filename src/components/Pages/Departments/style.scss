@@ -1,5 +1,3 @@
-@import "../../../variables.scss";
-
 .department-add-container {
   display: flex;
   flex-direction: column;
@@ -11,12 +9,12 @@
 
 .department-add {
   margin-bottom: 20px;
-  font-size: $font-size-lg;
-  color: $text-color;
+  font-size: var(--font-size-lg);
+  color: var(--text-color);
 }
 
 .department-add-form {
-  background-color: $card-bg;
+  background-color: var(--card-bg);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -31,41 +29,41 @@
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: $font-weight-bold;
-  color: $text-color;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
 }
 
 input,
 select {
   width: 100%;
   padding: 10px;
-  border: 1px solid $input-border;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
-  font-size: $font-size-base;
-  background-color: $background-color;
+  font-size: var(--font-size-base);
+  background-color: var(--background-color);
 }
 
 input:focus,
 select:focus {
-  border-color: $primary-color;
+  border-color: var(--primary-color);
   outline: none;
   background-color: #fff;
 }
 
 .submit-button {
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
-  font-size: $font-size-base;
+  font-size: var(--font-size-base);
   cursor: pointer;
   width: 100%;
   text-align: center;
 }
 
 .submit-button:hover {
-  background-color: $button-hover;
+  background-color: var(--button-hover);
 }
 
 /* Стили для компонента AllDepartments */
@@ -75,17 +73,17 @@ select:focus {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: $context-bg-color;
+  background-color: var(--background-color);
 }
 
 .department-all-list {
   margin-bottom: 20px;
-  font-size: $font-size-lg;
-  color: $text-color;
+  font-size: var(--font-size-lg);
+  color: var(--text-color);
 }
 
 .department-all-table {
-  background-color: $card-bg;
+  background-color: var(--card-bg);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -102,32 +100,32 @@ select:focus {
 .table td {
   padding: 10px;
   text-align: left;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
 }
 
 .table th {
-  background-color: $primary-color;
-  color: $card-bg;
+  background-color: var(--primary-color);
+  color: var(--card-bg);
 }
 
 .table tr:nth-child(even) {
-  background-color: $breadcrumb-bg;
+  background-color: var(--breadcrumb-bg);
 }
 
 .table tr:hover {
-  background-color: $table-hover;
+  background-color: var(--table-hover);
 }
 
 .p-2{
   padding:2px 5px 2px 5px !important;
-  font-size: $font-size-base;
-  background-color: $primary-color;
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
   border: 0;
   border-radius: 2px;
 }
 
 .p-2:hover{
-  background-color: $success-color;
+  background-color: var(--success-color);
   border: 0;
 }
 .navigation-underline{
