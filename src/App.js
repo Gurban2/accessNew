@@ -15,7 +15,8 @@ import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
-// import MySidebar from "./components/NavbarDarkExample/sidebar";
+// import MySidebar from "./components/NavbarDarkExample/mySidebar";
+import Dashboard from "./components/dashboard.js";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
 // import Translations from "./components/Pages/Site/Translations";
@@ -38,12 +39,13 @@ function App() {
       <Router>
         <div className="app">
           {/* <MySidebar /> */}
-          <NavbarDarkExample /> 
+          <NavbarDarkExample />
           <div className="main">
             {/* <Header /> */}
 
             <div className="content">
               <Routes>
+                <Route path={AppPaths.dashboard.home} element={<Dashboard />} />
                 {/* Offices */}
                 <Route path={AppPaths.offices.add} element={<OfficesAdd />} />
                 <Route path={AppPaths.offices.all} element={<OfficesAll />} />
@@ -75,11 +77,11 @@ function App() {
                   element={<VisitorView />}
                 />
                 <Route
-                  path={AppPaths.visitors.persona.PersonaAll}
+                  path={AppPaths.visitors.persona.all}
                   element={<PersonaAll />}
                 />
                 <Route
-                  path={AppPaths.visitors.persona.PersonaAdd}
+                  path={AppPaths.visitors.persona.add}
                   element={<PersonaAdd />}
                 />
 
