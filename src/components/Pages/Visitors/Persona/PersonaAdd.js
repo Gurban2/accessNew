@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateVisitor } from "../../../../store/reducers/visitorReducer";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import AddModal from "./ConfirmModal";
 
@@ -79,15 +79,18 @@ const PersonaAdd = () => {
   return (
     <div className="persona-add-container">
       <h1 className="persona-add-title">Add or Remove 'Person Non Grata'</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Search for a visitor"
-          className="search-input"
-        />
-      </div>
+      <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Search</Form.Label>
+          <Form.Control
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder="Search for a visitor"
+            className="search-input"
+          />
+        </Form.Group>
+      </Form>
       {matchedVisitors.length > 0 && (
         <Table striped bordered hover>
           <thead>
