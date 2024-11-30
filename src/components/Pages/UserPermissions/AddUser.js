@@ -4,7 +4,7 @@ import { Button, Form, Col, Row, InputGroup, FormControl } from 'react-bootstrap
 import { addStaff } from "../../../store/reducers/staffReducer";
 import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from "../UserPermissions/style.scss";
+import "../UserPermissions/style.scss";
 import { Link } from 'react-router-dom';
 
 const AddUser = () => {
@@ -108,7 +108,7 @@ const AddUser = () => {
   };
 
   return (
-    <div className="container mt-5 add-user-div">
+    <div className="user-add-container">
       <nav className="breadcrumb">
         <Link to="/">Dashboard</Link> &gt;{" "}
         <Link to="/users/permissions/list">User & Permissions</Link> &gt; <span>Add User</span>
