@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateVisitor } from "../../../../store/reducers/visitorReducer";
 import { Table, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 import AddModal from "./ConfirmModal";
+
 const PersonaAdd = () => {
   const [inputValue, setInputValue] = useState("");
   const [matchedVisitors, setMatchedVisitors] = useState([]);
@@ -67,6 +69,7 @@ const PersonaAdd = () => {
     setInputValue("");
     setMatchedVisitors([]);
     setReason("");
+    toast.success("Person Non Grata Successfully Added");
   };
 
   const handleCancel = () => {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./style.scss";
 import { useDispatch } from "react-redux";
 import { addOffice } from "../../../store/reducers/officeReducer";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom"; // Импортируем Link для навигации
+import "./style.scss";
 
 const OfficeAdd = ({ entity }) => {
   const [formData, setFormData] = useState({

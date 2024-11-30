@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePersona,updateVisitor } from "../../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
@@ -7,7 +7,6 @@ import Table from "react-bootstrap/Table";
 const PersonaAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [reason, setReason] = useState("");
@@ -47,13 +46,10 @@ const PersonaAll = () => {
 
       <h1 className="persona-all-title">Personas Marked as "Non Grata"</h1>
       {personNonGrataVisitors.length > 0 ? (
-        <><button
-          onClick={() => navigate("/persona/add")}
-          className="btn btn-primary"
-        >
-          Add Persona
-        </button>
-
+        <>
+        <Link to="/persona/add" className="btn btn-primary p-2">
+        Add Persona
+        </Link>
           <Table striped bordered hover>
             <thead>
               <tr>

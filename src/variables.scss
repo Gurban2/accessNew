@@ -10,7 +10,9 @@ $breadcrumb-bg: #ffffff;
 $card-bg: #ffffff;
 $table-hover: #f1f3f5;
 $input-border: #ced4da;
-$button-hover: darken($primary-color, 10%);
+// $button-hover: darken($primary-color, 10%);
+$button-hover: mix(black, $primary-color, 10%);
+
 $secondary-color: #dacc0d;
 $secondary-color-hover: #877f0a;
 
