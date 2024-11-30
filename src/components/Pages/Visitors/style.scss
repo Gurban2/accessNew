@@ -326,7 +326,7 @@ textarea:focus {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid lighten(var(--form-background), 10%);
+  border: 1px solid --lighten-form-background;
 }
 
 .form-label {
@@ -335,7 +335,7 @@ textarea:focus {
   color: #333;
 }
 
-.form-label-head{
+.form-label-head {
   font-weight: bold;
   font-size: 24px;
   color: #333;
@@ -350,7 +350,7 @@ textarea:focus {
   width: 100%;
 
   &:hover {
-      background-color: var(--hover-color);
-      color: #fff;
+    background-color: var(--hover-color);
+    color: #fff;
   }
 }

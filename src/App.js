@@ -29,6 +29,7 @@ import { AppPaths } from "./constants/appPaths";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
+import Dashboard from "./components/dashboard";
 
 function App() {
   return (

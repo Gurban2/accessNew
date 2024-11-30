@@ -25,5 +25,6 @@
   --line-height-base: 1.5;
   --form-background: #fff;
   --primary-color: #007bff;
-  --hover-color: darken(var(--primary-color), 10%);
+  --hover-color: darken(--primary-color, 10%);
+  --lighten-form-background: lighten(--form-background, 10%);
 }
