@@ -7,6 +7,7 @@
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+  
 }
 
 .offices-add {
@@ -75,7 +76,8 @@ select:focus {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: $background-color;
+  background-color: $context-bg-color;
+  
 }
 
 .offices-all-list {
