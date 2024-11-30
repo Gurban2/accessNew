@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  overflow: auto;//
-  padding: 20px;//
-  box-sizing: border-box;//
+  overflow: auto; //
+  padding: 20px; //
+  box-sizing: border-box; //
 }
 
 .visitor-add {
@@ -24,12 +24,12 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  max-height: 80vh;//
-  overflow-y: auto;//
+  max-height: 80vh; //
+  overflow-y: auto; //
 }
 
 .form-group {
-  margin-bottom: 15px;  
+  margin-bottom: 15px;
 }
 
 label {
@@ -245,7 +245,7 @@ textarea:focus {
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;   
+  cursor: pointer;
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
@@ -261,4 +261,64 @@ textarea:focus {
 
 .btn-view-visitor-secondary:hover {
   background-color: $success-color-hover;
+}
+
+.p-2 {
+  padding: 2px 5px 2px 5px !important;
+  font-size: $font-size-base;
+  background-color: $primary-color;
+  border: 0;
+  border-radius: 2px;
+}
+
+.p-2:hover {
+  background-color: $success-color;
+  border: 0;
+}
+.navigation-underline {
+  width: 100%;
+  padding: 0;
+  margin: 3px;
+}
+.breadcrumb {
+  font-size: 14px;
+  color: #555;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #333;
+}
+
+.submit-button,
+.cancel-button {
+  background-color: #fff;
+  color: $primary-color;
+  font-weight: $font-weight-bold;
+  padding: 3px 5px;
+}
+.submit-button:hover,
+.cancel-button:hover {
+  background-color: $primary-color;
+  color: whitesmoke;
+}
+.btn-info {
+  border-radius: 2px;
+  background-color: #fff;
+  border: 0;
+  padding: 3px 5px;
+}
+.actions {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }

@@ -5,8 +5,9 @@ import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Table from "react-bootstrap/Table";
 
 const DepartmentsAll = () => {
-  const departments = useSelector((state) => state.departments.departmentsData || []);
-  // console.log(departments);
+  const departments = useSelector(
+    (state) => state.departments.departmentsData || []
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,10 +23,16 @@ const DepartmentsAll = () => {
 
   return (
     <div className="departments-all-container">
-      <h1 className="departments-all-list">Departments - all</h1>
-      <Link to="/departments/add" className="btn btn-primary">
-        add Department
-      </Link>
+      <div className="departments-wrapper d-row">
+        <nav className="breadcrumbs">
+          <Link to="/">Dashboard</Link> &gt; <span>Departments</span>
+        </nav>
+
+        <Link to="/departments/add" className="btn btn-primary p-2">
+          Add Department
+        </Link>
+      </div>
+      <hr className="navigation-underline" />
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -61,7 +68,6 @@ const DepartmentsAll = () => {
           ))}
         </tbody>
       </Table>
-      
     </div>
   );
 };

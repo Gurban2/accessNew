@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { addDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 const DepartmentsAdd = () => {
   const offices = useSelector((state) => state.offices);
-  // console.log("Offices массив:", offices);
 
   const [formData, setFormData] = useState({
     id: "",
@@ -37,7 +37,7 @@ const DepartmentsAdd = () => {
       !formData.parent ||
       !formData.office
     ) {
-      setError("all fields are required!");
+      setError("All fields are required!");
       return false;
     }
     return true;
@@ -45,21 +45,29 @@ const DepartmentsAdd = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validateForm()) return;    
+    if (!validateForm()) return;
+
     const uniqueId = Date.now().toString();
     const newFormData = { ...formData, id: uniqueId };
+
     setLoading(true);
     dispatch(addDepartment(newFormData));
-    setFormData({ id: "",name: "", phone: "", parent: "", office: "" });
+    setFormData({ id: "", name: "", phone: "", parent: "", office: "" });
     setLoading(false);
     toast.success("Department successfully added");
   };
 
   return (
     <div className="department-add-container">
-      <h1 className="department-add">Department - add</h1>
+      {/* Breadcrumbs section */}
+      <nav className="breadcrumbs">
+        <Link to="/">Dashboard</Link> &gt; <span>Departments Add</span>
+      </nav>
+
+      {/* Form for adding departments */}
       <form className="department-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
+
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -72,6 +80,7 @@ const DepartmentsAdd = () => {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
@@ -84,6 +93,7 @@ const DepartmentsAdd = () => {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="parent">Parent</label>
           <select
@@ -101,6 +111,7 @@ const DepartmentsAdd = () => {
             <option value="3">Parent Department 3</option>
           </select>
         </div>
+
         <div className="form-group">
           <label htmlFor="office">Office</label>
           <select
@@ -120,6 +131,7 @@ const DepartmentsAdd = () => {
             ))}
           </select>
         </div>
+
         <button type="submit" className="submit-button" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </button>

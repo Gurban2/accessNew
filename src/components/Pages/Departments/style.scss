@@ -117,3 +117,21 @@ select:focus {
 .table tr:hover {
   background-color: $table-hover;
 }
+
+.p-2{
+  padding:2px 5px 2px 5px !important;
+  font-size: $font-size-base;
+  background-color: $primary-color;
+  border: 0;
+  border-radius: 2px;
+}
+
+.p-2:hover{
+  background-color: $success-color;
+  border: 0;
+}
+.navigation-underline{
+  width: 100%;
+  padding: 0;
+  margin: 3px;
+}

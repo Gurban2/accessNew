@@ -111,7 +111,9 @@ const NavbarDarkExample = () => {
       >
         <Nav className="flex-column">
           <Nav.Link as={NavLink} to="/" className="text-white fw-bold">
+            <hr />
             Dashboard
+            <hr />
           </Nav.Link>
           {sections.map((section, sectionIndex) => (
             <div key={section.title}>
@@ -123,42 +125,42 @@ const NavbarDarkExample = () => {
               >
                 {section.title}
               </Nav.Link>
-              <Collapse in={openMenu === sectionIndex}>
-                <div className="ms-3">
-                  {section.departments.map((department, departmentIndex) => (
-                    <div key={department.title}>
-                      <Nav.Link
-                        className="text-white-50 d-flex align-items-center"
-                        onClick={() =>
-                          toggleSubmenu(sectionIndex, departmentIndex)
-                        }
-                      >
-                        <img
-                          src={department.icon}
-                          alt={`${department.title} Icon`}
-                          style={{ width: "20px", marginRight: "8px" }}
-                        />
-                        {department.title}
-                      </Nav.Link>
-                      <Collapse
-                        in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}
-                      >
-                        <div className="ms-4">
-                          {department.items.map((item) => (
-                            <NavLink
-                              key={item.label}
-                              to={item.path}
-                              className="text-white-75"
-                            >
-                              {item.label}
-                            </NavLink>
-                          ))}
-                        </div>
-                      </Collapse>
-                    </div>
-                  ))}
-                </div>
-              </Collapse>
+              {/* <Collapse in={openMenu === sectionIndex}> */}
+              <div className="ms-3">
+                {section.departments.map((department, departmentIndex) => (
+                  <div key={department.title}>
+                    <Nav.Link
+                      className="text-white-50 d-flex align-items-center"
+                      onClick={() =>
+                        toggleSubmenu(sectionIndex, departmentIndex)
+                      }
+                    >
+                      <img
+                        src={department.icon}
+                        alt={`${department.title} Icon`}
+                        style={{ width: "20px", marginRight: "8px" }}
+                      />
+                      {department.title}
+                    </Nav.Link>
+                    <Collapse
+                      in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}
+                    >
+                      <div className="ms-4">
+                        {department.items.map((item) => (
+                          <NavLink
+                            key={item.label}
+                            to={item.path}
+                            className="text-white-75"
+                          >
+                            {item.label}
+                          </NavLink>
+                        ))}
+                      </div>
+                    </Collapse>
+                  </div>
+                ))}
+              </div>
+              {/* </Collapse> */}
             </div>
           ))}
         </Nav>

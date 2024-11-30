@@ -46,7 +46,7 @@ const OfficeAdd = ({ entity }) => {
     <div className="offices-add-container">
       {/* Breadcrumbs section */}
       <nav className="breadcrumbs">
-        <Link to="/">Dashboard</Link> &gt; <span>{entity} - Add</span>
+        <Link to="/">Dashboard</Link> &gt; <span>{entity} Add</span>
       </nav>
 
       <form className="offices-add-form" onSubmit={handleSubmit}>

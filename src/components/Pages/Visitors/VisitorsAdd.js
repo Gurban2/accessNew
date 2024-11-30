@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { addVisitor } from "../../../store/reducers/visitorReducer";
 import { toast } from "react-toastify";
@@ -24,8 +24,6 @@ const VisitorsAdd = () => {
     description: "",
   });
 
-
-
   const handleCapture = (imageSrc) => {
     setPhotoPreview(imageSrc);
     setFormData((prev) => ({
@@ -34,7 +32,7 @@ const VisitorsAdd = () => {
     }));
     setUseWebcam(false);
   };
-  // console.log():
+
   const handleChange = (event) => {
     const { name, value, files } = event.target;
 
@@ -75,7 +73,7 @@ const VisitorsAdd = () => {
       !formData.photo ||
       !formData.description
     ) {
-      setError("all fields, are required!");
+      setError("All fields are required!");
       return false;
     }
     return true;
@@ -84,10 +82,20 @@ const VisitorsAdd = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) return;
+
+    // Получаем текущее время в формате строки
+    const currentTime = new Date().toISOString();
+
     const uniqueId = Date.now().toString();
-    const newFormData = { ...formData, id: uniqueId };
+    const newFormData = { 
+      ...formData, 
+      id: uniqueId, 
+      createdAt: currentTime // Добавляем текущее время
+    };
+
     setLoading(true);
     dispatch(addVisitor(newFormData));
+
     setFormData({
       id: "",
       photo: "",
@@ -109,7 +117,11 @@ const VisitorsAdd = () => {
 
   return (
     <div className="visitor-add-container">
-      <h1 className="visitor-add">Visitors - add</h1>
+      <nav className="breadcrumb">
+        <Link to="/">Dashboard</Link> &gt;{" "}
+        <Link to="/visitors/all">Visitors</Link> &gt; <span>Add Visitor</span>
+      </nav>
+
       <form className="visitor-add-form" onSubmit={handleSubmit}>
         {error && <div className="error">{error}</div>}
         <div className="form-group">
@@ -194,7 +206,7 @@ const VisitorsAdd = () => {
             value={formData.email}
             onChange={handleChange}
             title="@mail.com"
-            required
+            // required
           />
         </div>
         <div className="form-group">
@@ -218,17 +230,13 @@ const VisitorsAdd = () => {
             value={formData.description}
             onChange={handleChange}
             rows="4"
-            required
+            // required
           ></textarea>
         </div>
         <button type="submit" className="submit-button" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </button>
-        <button
-          type="button"
-          onClick={handleCancel}
-          className="cancel-button"
-        >
+        <button type="button" onClick={handleCancel} className="cancel-button">
           Cancel
         </button>
       </form>
@@ -237,4 +245,3 @@ const VisitorsAdd = () => {
 };
 
 export default VisitorsAdd;
-

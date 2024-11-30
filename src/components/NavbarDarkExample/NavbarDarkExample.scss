@@ -3,12 +3,19 @@
   --bs-bg-opacity: 1;
   background-color: rgb(255, 255, 255) !important;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-  // border-right: 5px solid rgb(119, 116, 116);
+  padding-left: 0px;
+  border-left: 5px solid $primary-color;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+hr {
+  margin: 3px 0;
 }
 .flex-column {
   flex-direction: column !important;
-  padding-top: 50px;
+  padding-top: 5px;
   width: max-content;
+  padding-bottom: 30px;
 }
 .ms-4 {
   color: $text-color !important;
@@ -16,17 +23,27 @@
   flex-direction: column;
   gap: 5px;
 }
+.ms-3 {
+  margin-left: 1rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 .text-white {
   color: $text-color !important;
 }
 .text-white-50 {
   --bs-text-opacity: 1;
+  padding-top: 3px;
+
   color: $text-color-secondary !important;
 }
 
 .text-white-50:hover {
   background-color: #3f5e83;
   color: white !important;
+  border-left: 5px solid $text-color-secondary;
+  padding-left: 11px;
 }
 .text-white-75 {
   color: $text-color !important;
@@ -39,11 +56,11 @@
   transition: letter-spacing 0.3s ease-in-out;
 
   &:hover {
-    color: $primary-color !important; // Or use a different color for hover
-    outline: 2px solid $primary-color; // Focused state with primary color outline
-    outline-offset: 2px;
+    color: rgb(255, 255, 255) !important; // Or use a different color for hover
+    background-color: #a09c9c;
+    // font-weight: $font-weight-bold;
+
     letter-spacing: 1px;
-    // padding: 2px 0;
   }
 
   &:active {
@@ -51,9 +68,12 @@
   }
 
   &:focus {
-    outline: 2px solid #3f5e83, 15%; // Focused state with primary color outline
-    outline-offset: 2px;
+    background-color: #d8dce0;
   }
+}
+
+.p-3 {
+  padding: 0.5rem !important;
 }
 .breadcrumbs {
   font-size: 14px;
@@ -74,4 +94,13 @@
 }
 
 @media (min-width: 992px) {
+  .light {
+    padding-top: var(--bs-navbar-brand-padding-y);
+    padding-bottom: var(--bs-navbar-brand-padding-y);
+    margin-right: var(--bs-navbar-brand-margin-end);
+    font-size: var(--bs-navbar-brand-font-size);
+    color: black;
+    text-decoration: none;
+    white-space: nowrap;
+  }
 }

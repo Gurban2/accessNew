@@ -26,13 +26,19 @@ const VisitorsAll = () => {
   const handleView = (id) => {
     navigate(`/visitors/view/${id}`);
   };
-  
+
   return (
     <div className="visitors-all-container">
-      <h1 className="visitors-all-list">Visitors - all</h1>
-      <Link to="/visitors/add" className="btn btn-primary">
-        add Visitor
-      </Link>
+      <div className="visitors-wrapper d-row">
+        <nav className="breadcrumbs">
+          <Link to="/">Dashboard</Link> &gt; <span>Visitors - All</span>
+        </nav>
+
+        <Link to="/visitors/add" className="btn btn-primary p-2">
+          Add Visitors
+        </Link>
+      </div>
+      <hr className="navigation-underline" />
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -80,8 +86,8 @@ const VisitorsAll = () => {
               <td>{visitor.name}</td>
               <td>{visitor.phone}</td>
               <td>{visitor.fin}</td>
-              <td>
-              <button
+              <td className="">
+                <button
                   className="btn btn-info btn-sm"
                   onClick={() => handleView(visitor.id)}
                 >
@@ -99,12 +105,12 @@ const VisitorsAll = () => {
                   disabled={isLoading}
                 >
                   {isLoading ? "Deleting..." : "Delete"}
-                </button>                
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>      
+      </Table>
     </div>
   );
 };

@@ -7,10 +7,8 @@ import { deleteOffice } from "../../../store/reducers/officeReducer";
 
 const OfficeAll = () => {
   const offices = useSelector((state) => state.offices);
-  console.log({ offices })
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log("Offices массив: officeAll", offices);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this office?")) {
@@ -24,10 +22,16 @@ const OfficeAll = () => {
 
   return (
     <div className="offices-all-container">
-      <h1 className="offices-all-list">Offices - all</h1>
-      <Link to="/offices/add" className="btn btn-primary">
-        add Office
-      </Link>
+      <div className="offices-wrapper d-row">
+        <nav className="breadcrumbs">
+          <Link to="/">Dashboard</Link> &gt; <span>Offices - All</span>
+        </nav>
+
+        <Link to="/offices/add" className="btn btn-primary p-2">
+          Add Office
+        </Link>
+      </div>
+      <hr className="navigation-underline" />
       <Table striped bordered hover>
         <thead>
           <tr>
