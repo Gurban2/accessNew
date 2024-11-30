@@ -10,11 +10,13 @@
   // margin-left: 250px; /* Sidebar width */
 
   overflow-y: hidden; /* Allow scroll if content overflows */
-  background-color: $background-color;
+  background-color: $context-bg-color;
+
 }
 
 /* Navbar/Sidebar styles */
 .content {
   padding: 0 20px;
-  background-color: $background-color;
+  background-color: $context-bg-color;
+
 }

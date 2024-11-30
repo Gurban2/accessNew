@@ -6,9 +6,8 @@ import Modal from '../../../../components/Modal';
 const AddModal = ({ onChange, reason, onConfirm, onCancel }) => {
     return (
         <Modal onConfirm={onConfirm} onCancel={onCancel} btnText={'Add to Person Non Grata'} title="Provide Reason">
-            <InputGroup>
-                <InputGroup.Text >{reason}</InputGroup.Text>
-                <Form.Control onChange={onChange} as="textarea" aria-label="Reason" />
+            <InputGroup>                
+                <Form.Control onChange={onChange} as="textarea" aria-label="Reason" rows={5} />
             </InputGroup>
         </Modal>
     )
