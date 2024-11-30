@@ -1,4 +1,7 @@
 export const AppPaths = {
+  dashboard: {
+    home: "/",
+  },
   offices: {
     all: "/offices/all",
     add: "/offices/add",
