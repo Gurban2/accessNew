@@ -1,0 +1,31 @@
+.logout {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  align-self: center;
+  gap: 12px;
+  width: 100%;
+  cursor: pointer;
+  padding: 12px;
+  &-icon {
+    display: flex;
+    transform: rotate(180deg);
+    cursor: pointer;
+  }
+
+  &-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--link-default);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  &:hover {
+    background-color: var(--sidebar-hover-bg);
+    color: var(--link-hover);
+
+    .logout-text {
+      color: var(--link-hover);
+    }
+  }
+}

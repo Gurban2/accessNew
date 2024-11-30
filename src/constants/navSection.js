@@ -1,11 +1,11 @@
 import { AppPaths } from "./appPaths";
-import officeIcon from "../assets/dashboardIcons/officeIcon.svg";
-import departmentIcon from "../assets/dashboardIcons/departmentIcon.png";
-import personaIcon from "../assets/dashboardIcons/personaIcon.svg";
-import usersIcon from "../assets/dashboardIcons/usersIcon.png";
-import visitorsIcon from "../assets/dashboardIcons/visitor.svg";
-import permissionsIcon from "../assets/dashboardIcons/permissionsIcon.png";
-// import dashboard from "../assets/dashboardIcons/dashboard.svg";
+import officeIcon from "../assets/icons/dashboard/officeIcon.svg";
+import departmentIcon from "../assets/icons/dashboard/departmentIcon.png";
+import personaIcon from "../assets/icons/dashboard/personaIcon.svg";
+import usersIcon from "../assets/icons/dashboard/usersIcon.png";
+import visitorsIcon from "../assets/icons/dashboard/visitor.svg";
+import permissionsIcon from "../assets/icons/dashboard/permissionsIcon.png";
+// import dashboard from "../assets/icons/dashboard/dashboard.svg";
 
 const sections = [
   // { title: "Dashboard", icon: dashboard, path: AppPaths.offices.dashboard },
@@ -29,6 +29,7 @@ const sections = [
         ],
       },
     ],
+    icon: officeIcon,
   },
   {
     title: "Visitors",
@@ -50,6 +51,7 @@ const sections = [
         ],
       },
     ],
+    icon: visitorsIcon,
   },
   {
     title: "Users & Permissions",
@@ -71,6 +73,7 @@ const sections = [
         ],
       },
     ],
+    icon: usersIcon,
   },
 ];
 

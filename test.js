@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import { Button, Form, Col, Row, InputGroup, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { toast } from "react-toastify";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddUser = () => {
   const offices = useSelector((state) => state.offices);

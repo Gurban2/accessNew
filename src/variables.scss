@@ -1,26 +1,26 @@
-$primary-color: #3f5e83;
-$success-color: #28a745;
-$success-color-hover: #1b5a29;
-$danger-color: #dc3545;
-$text-color: #2b3674;
-$text-color-secondary: #707EAE;
-$background-color: #ffffff;
-$border-color: #babec2;
-$breadcrumb-bg: #ffffff;
-$card-bg: #ffffff;
-$table-hover: #f1f3f5;
-$input-border: #ced4da;
-// $button-hover: darken($primary-color, 10%);
-$button-hover: mix(black, $primary-color, 10%);
+:root {
+//   --primary-color: #3f5e83;
+  --success-color: #28a745;
+  --success-color-hover: #1b5a29;
+  --danger-color: #dc3545;
+  --text-color: #2b3674;
+  --background-color: #ffffff;
+  --border-color: #babec2;
+  --breadcrumb-bg: #ffffff;
+  --card-bg: #ffffff;
+  --table-hover: #f1f3f5;
+  --input-border: #ced4da;
+  // --button-hover: darken(--primary-color, 10%);
+  --button-hover: mix(black, --primary-color, 10%);
 
-$secondary-color: #dacc0d;
-$secondary-color-hover: #877f0a;
+  --secondary-color: #dacc0d;
 
-$font-family: "Roboto Flex", sans-serif;
-$font-size-base: 14px;
-$font-size-sm: 12px;
-$font-size-lg: 18px;
-$font-weight-normal: 300;
-$font-weight-normal-bold: 400;
-$font-weight-bold: 700;
-$line-height-base: 1.5;
+  --font-family: "Roboto Flex", sans-serif;
+  --font-size-base: 14px;
+  --font-size-sm: 12px;
+  --font-size-lg: 18px;
+  --font-weight-normal: 300;
+  --font-weight-normal-bold: 400;
+  --font-weight-bold: 700;
+  --line-height-base: 1.5;
+}

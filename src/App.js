@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 // import Header from "./components/Header/Header";
-import NavbarDarkExample from "./components/NavbarDarkExample/NavbarDarkExample";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";
@@ -15,7 +14,7 @@ import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
-// import MySidebar from "./components/NavbarDarkExample/sidebar";
+import MySidebar from "./components/NavbarDarkExample/sidebar";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
 // import Translations from "./components/Pages/Site/Translations";
@@ -27,9 +26,9 @@ import ListUsers from "./components/Pages/UserPermissions/ListUsers";
 import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
 import PersonaAll from "./components/Pages/Visitors/Persona/PersonaAll";
 import { AppPaths } from "./constants/appPaths";
-import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "./App.scss";
 
 function App() {
   return (
@@ -37,8 +36,7 @@ function App() {
       <ToastContainer position="top-right" />
       <Router>
         <div className="app">
-          {/* <MySidebar /> */}
-          <NavbarDarkExample /> 
+          <MySidebar />
           <div className="main">
             {/* <Header /> */}
 
