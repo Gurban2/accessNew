@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-// import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";
@@ -14,7 +14,7 @@ import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
-import MySidebar from "./components/NavbarDarkExample/sidebar";
+import MySidebar from "./components/Sidebar/Sidebar";
 
 // import SiteSet from "./components/Pages/Site/SiteSet";
 // import Translations from "./components/Pages/Site/Translations";
@@ -29,7 +29,7 @@ import { AppPaths } from "./constants/appPaths";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
         <div className="app">
           <MySidebar />
           <div className="main">
-            {/* <Header /> */}
+            <Header />
 
             <div className="content">
               <Routes>

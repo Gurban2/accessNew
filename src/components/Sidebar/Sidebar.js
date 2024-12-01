@@ -9,7 +9,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import LogoutButton from "../LogoutButton";
-import "./NavbarDarkExample.scss";
+import "./Sidebar.scss";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false); // Offcanvas visibility for mobile

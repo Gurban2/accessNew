@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./header.scss";
 
-function Header() {
+function Header({ userName }) {
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
+        <Navbar.Brand href="#home">My Application</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
+          {userName ? (
+            <Navbar.Text>
+              Signed in as: <a href="#profile">{userName}</a>
+            </Navbar.Text>
+          ) : (
+            <Navbar.Text>
+              <a href="#login">Login</a>
+            </Navbar.Text>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
