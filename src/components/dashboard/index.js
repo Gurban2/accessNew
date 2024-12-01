@@ -16,7 +16,7 @@ const Dashboard = () => {
   const handleViewAllOffices = () => navigate("/offices/all");
   const handleViewAllDepartments = () => navigate("/departments/list");
 
-  const handleViewAllVisitors = () => navigate("/visitors/list");
+  const handleViewAllVisitors = () => navigate("/visitors/all");
 
   return (
     <Container fluid>

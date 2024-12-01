@@ -50,7 +50,7 @@ const Dashboard = () => {
         fields={["name", "phone", "email", "address"]}
         headers={["#", "Name", "Phone", "Email", "Address"]}
         noDataMessage="No visitors available"
-        onViewAll={() => handleViewAll("/visitors/list")}
+        onViewAll={() => handleViewAll("/visitors/all")}
       />
 
       {/* Offices Section */}
