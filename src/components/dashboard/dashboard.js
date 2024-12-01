@@ -7,23 +7,23 @@ import "./dashboardStyle.css";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // Redux selectors
+  
   const offices = useSelector((state) => state.offices) || [];
   const departments =
     useSelector((state) => state.departments.departmentsData) || [];
   const visitors = useSelector((state) => state.visitors) || [];
 
-  // Sorted data for displaying the latest 3 records
+ 
   const sortedOffices = [...offices].sort((a, b) => b.id - a.id).slice(-3);
   const sortedDepartments = [...departments]
     .sort((a, b) => b.id - a.id)
     .slice(-3);
   const sortedVisitors = [...visitors].sort((a, b) => b.id - a.id).slice(-3);
 
-  // Navigation handlers
+
   const handleViewAll = (path) => navigate(path);
 
-  // Render helpers
+  
   const renderTableRows = (data, fields, noDataMessage) => {
     if (data.length === 0) {
       return (
