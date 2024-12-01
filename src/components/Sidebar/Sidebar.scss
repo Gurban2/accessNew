@@ -4,9 +4,6 @@
   --success-color: #28a745;
   --success-color-hover: #1b5a29;
   --danger-color: #dc3545;
-  --text-color: #2b3674;
-  --text-color-secondary: #fff;
-  --background-color: #ffffff;
   --border-color: #babec2;
   --breadcrumb-bg: #ffffff;
   --card-bg: #ffffff;
@@ -17,17 +14,21 @@
   --secondary-color-hover: #3f2e3f;
 
   /* Sidebar Colors */
-  --sidebar-bg: var(--primary-color);
+  --sidebar-bg: var(--background-color);
   --sidebar-hover-bg: #2b314b; /* Slightly dark hover for sidebar */
   --sidebar-active-bg: var(--secondary-color-hover);
-  --link-default: var(--text-color-secondary);
-  --link-hover: var(--primary-color);
+  --sidebar-link-active: #e2ecff;
+  --link-default: var(--link-color);
+  --link-hover: var(--link-color);
   --link-active: var(--primary-color);
   --divider-color: var(--border-color);
 }
 
 .sidebar {
   display: flex;
+  border-right: 1px solid var(--border-default);
+  padding: 0 12px;
+  font-family: Rubik, Helvetica, Arial, serif !important;
 
   /* Collapsed Sidebar */
   .collapsed-sidebar {
@@ -53,37 +54,84 @@
     color: var(--link-default) !important;
     text-decoration: none;
   }
-  .submenu-popout a:hover {
-    background-color: var(--sidebar-hover-bg) !important;
-    color: var(--link-hover) !important;
-  }
 
   /* Sidebar Links */
   .nav-link,
   .sidebar-link {
-    color: var(--link-default) !important;
-    font-weight: 400;
+    color: var(--text-color-secondary) !important;
+    font-weight: 500;
     font-size: 14px;
     padding: 10px 15px;
     border-radius: 4px;
-    background: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    cursor: pointer;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .sidebar-link {
-    margin-left: 12px;
+    display: flex !important;
+    gap: 8px;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 10px 20px !important;
+    border-left: 1px solid var(--border-default);
+    border-right: 1px solid var(--border-default);
+    border-radius: 0;
+    &:first-child {
+      border-top: 1px solid var(--border-default);
+    }
+
+    &:last-child {
+      border-bottom: 1px solid var(--border-default);
+      border-bottom-left-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+    }
+
+    h4 {
+      font-size: 1rem !important;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0;
+    }
   }
+
+  .nav-link.active,
   .nav-link:hover {
-    background-color: var(--sidebar-hover-bg) !important;
-    color: var(--link-hover);
+    border: 1px solid var(--border-default);
+    background: var(--white);
+    border-radius: 5px;
+  }
+
+  .nav-link.active {
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .sidebar-link.active {
+    background: var(--sidebar-link-active) !important;
+    border-radius: 5px;
+    border-radius: 0;
+    color: var(--link-color) !important;
+
+    h4 {
+      color: inherit !important;
+    }
   }
 
   /* Active Section */
-  .active-section,
-  .active {
-    border-left: 4px solid var(--link-active) !important;
-    padding-left: 12px;
-    background-color: var(--sidebar-hover-bg) !important;
-    color: var(--link-hover) !important;
+  .active + .collapse {
+    background: var(--white);
+
+    .sidebar-link:first-child {
+      border-top: 1px solid #dfe3e7;
+    }
   }
 
   /* Arrow Icon Rotation */
@@ -108,6 +156,17 @@
     margin: 1rem 0;
   }
 
+  .active-section {
+    color: var(--text-color) !important;
+    touch-action: none;
+    cursor: default;
+
+    &:hover {
+      color: var(--text-color) !important;
+      background: transparent !important;
+      border: none !important;
+    }
+  }
   .btn-close {
     filter: invert(1);
   }
@@ -118,11 +177,6 @@
     font-size: 14px;
     padding: 10px 15px;
     border-radius: 4px;
-
-    &:hover {
-      background-color: var(--sidebar-hover-bg) !important;
-      color: var(--link-hover) !important;
-    }
 
     @media (max-width: 768px) {
       padding-left: 2.5em !important;
@@ -144,7 +198,7 @@
     width: 32px !important;
     position: absolute;
     top: 20px;
-    right: -10px;
+    right: -22px;
     z-index: 3;
   }
 
@@ -154,10 +208,118 @@
     font-weight: 700;
     margin-bottom: 1rem !important;
   }
+  .bg-dark {
+    background-color: var(--sidebar-bg) !important;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color-secondary) !important;
+    margin: 0;
+    margin-top: 60px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &-collapse-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(1) !important;
+  }
+
+  .navbar-toggler {
+    &:hover {
+      background: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: absolute;
+    border: none;
+    z-index: 5;
+    padding: 0;
+    margin: 0;
+    left: 10px;
+    top: 12px;
+
+    .bg-dark {
+      background-color: transparent !important;
+      padding: 0;
+    }
+
+    .navbar-toggler {
+      padding: 0;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &-bg {
+    background-color: var(--background-color) !important;
+  }
 }
 
 .offcanvas {
   .btn-close {
-    filter: invert(1) !important;
+    color: var(--text-color-secondary) !important;
+  }
+  &-title {
+    color: var(--text-color-secondary) !important;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .nav-link {
+    color: var(--text-color-secondary) !important;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .active-section {
+    color: var(--text-color) !important;
+  }
+
+  .sidebar-link {
+    display: flex !important;
+    gap: 8px;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 10px 20px !important;
+    color: var(--text-color-secondary) !important;
+
+    h4 {
+      font-size: 1rem !important;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+
+  .sidebar-link.active {
+    background: var(--sidebar-link-active) !important;
+    border-radius: 5px;
+    color: var(--link-color) !important;
+
+    h4 {
+      color: inherit !important;
+    }
+  }
+
+  .nav-link {
+    gap: 8px;
   }
 }
