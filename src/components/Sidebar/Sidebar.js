@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 import sections from "../../constants/navSection"; // Your sections data
@@ -7,38 +7,45 @@ import {
   FaChevronRight,
   FaArrowLeft,
   FaArrowRight,
+  FaHome,
+  FaBars,
 } from "react-icons/fa";
 import LogoutButton from "../LogoutButton";
-import "./NavbarDarkExample.scss";
+import "./Sidebar.scss";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false); // Offcanvas visibility for mobile
   const [isCollapsed, setIsCollapsed] = useState(false); // Tracks sidebar collapsed state
-  const [activeSection, setActiveSection] = useState(null); // Tracks active section
   const [activeHover, setActiveHover] = useState(null); // Tracks hovered icon for pop-out menu
   const [openSubmenu, setOpenSubmenu] = useState({}); // Tracks open submenus
+  const [isMouseOn, setIsMouseOn] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const toggleSubmenu = (sectionIndex, departmentIndex) => {
     setOpenSubmenu((prev) => ({
-      ...prev,
       [`${sectionIndex}-${departmentIndex}`]:
         !prev[`${sectionIndex}-${departmentIndex}`],
     }));
   };
 
-  const clickLogout = () => {
-    console.log("Logout");
-  };
+  const hideSidebar = useMemo(() => {
+    return isCollapsed && !isMouseOn;
+  }, [isCollapsed, isMouseOn]);
+
+  const clickLogout = () => {};
 
   return (
-    <div className="sidebar">
+    <div
+      className="sidebar"
+      onMouseLeave={() => setIsMouseOn(false)}
+      onMouseOver={() => setIsMouseOn(true)}
+    >
       {/* Navbar for small screens */}
       <Navbar bg="dark" variant="dark" expand="lg" className="d-lg-none w-100">
         <Navbar.Brand href="/" className="fw-bold text-white cursor-pointer">
-          Dashboard
+          <FaHome /> Dashboard
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
       </Navbar>
@@ -47,8 +54,9 @@ const Sidebar = () => {
       <Offcanvas
         show={show}
         onHide={handleClose}
-        className="bg-dark text-white"
+        className="sidebar-bg text-white"
         placement="start"
+        icon={<FaBars />}
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
@@ -60,9 +68,6 @@ const Sidebar = () => {
                 key={section.title}
                 section={section}
                 sectionIndex={index}
-                isCollapsed={false} // Mobile view is always expanded
-                activeSection={activeSection}
-                setActiveSection={setActiveSection}
                 openSubmenu={openSubmenu}
                 toggleSubmenu={toggleSubmenu}
               />
@@ -75,11 +80,11 @@ const Sidebar = () => {
 
       <div
         className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s ${
-          isCollapsed ? "collapsed-sidebar" : ""
+          hideSidebar ? "collapsed-sidebar" : ""
         }`}
         style={{
-          width: isCollapsed ? "80px" : "250px",
-          transition: "width 0.3s ease-in-out",
+          width: hideSidebar ? "80px" : "250px",
+          // transition: "width 0.3s ease-in-out",
         }}
       >
         <button
@@ -88,12 +93,12 @@ const Sidebar = () => {
         >
           {isCollapsed ? <FaArrowRight /> : <FaArrowLeft />}
         </button>
-        {!isCollapsed && (
+        {!hideSidebar && (
           <Navbar.Brand
             href="/"
             className="fw-bold text-white cursor-pointer mb-3 ms-2"
           >
-            Dashboard
+            <FaHome /> Dashboard
           </Navbar.Brand>
         )}
         <Nav className="flex-column">
@@ -103,9 +108,7 @@ const Sidebar = () => {
               key={section.title}
               section={section}
               sectionIndex={index}
-              isCollapsed={isCollapsed}
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
+              isCollapsed={hideSidebar}
               activeHover={activeHover}
               setActiveHover={setActiveHover}
               openSubmenu={openSubmenu}
@@ -113,7 +116,10 @@ const Sidebar = () => {
             />
           ))}
         </Nav>
-        <LogoutButton text="Sign out" onClick={clickLogout} />
+        <LogoutButton
+          text={hideSidebar ? null : "Sign out"}
+          onClick={clickLogout}
+        />
       </div>
     </div>
   );
@@ -123,15 +129,12 @@ const SidebarSection = ({
   section,
   sectionIndex,
   isCollapsed,
-  activeSection,
-  setActiveSection,
   activeHover,
   setActiveHover,
   openSubmenu,
   toggleSubmenu,
   handleClose,
 }) => {
-  const isOpen = activeSection === sectionIndex;
   const { pathname } = useLocation();
 
   return (
@@ -142,72 +145,16 @@ const SidebarSection = ({
     >
       {/* Main Section Link */}
       <Nav.Link
-        className={`text-white d-flex align-items-center justify-content-between ${
-          isOpen ? "active-section" : ""
-        }`}
-        onClick={() => setActiveSection(isOpen ? null : sectionIndex)}
+        className={`text-white d-flex align-items-center justify-content-between active-section`}
       >
         <div className="d-flex align-items-center">
-          <img
-            src={section.icon}
-            alt={`${section.title} Icon`}
-            className="me-2"
-            style={{ width: "20px" }}
-          />
           {!isCollapsed && section.title}
         </div>
-        {!isCollapsed &&
-          (isOpen ? (
-            <FaChevronDown className={`ms-auto`} />
-          ) : (
-            <FaChevronRight className={`ms-auto`} />
-          ))}
       </Nav.Link>
 
-      {/* Pop-Out Menu for Collapsed View */}
-      {isCollapsed && activeHover === section.title && (
-        <div className="submenu-popout bg-dark text-white position-absolute p-2">
-          <h6 className="text-white mb-2 submenu-title">{section.title}</h6>
-          {section.departments.map((department, departmentIndex) => (
-            <div key={department.title}>
-              <Nav.Link
-                className={`${
-                  openSubmenu[`${sectionIndex}-${departmentIndex}`]
-                    ? "active"
-                    : ""
-                } text-white d-flex justify-content-between align-items-center`}
-                onClick={() => toggleSubmenu(sectionIndex, departmentIndex)}
-              >
-                {department.title}
-                {openSubmenu[`${sectionIndex}-${departmentIndex}`] ? (
-                  <FaChevronDown className={`ms-auto`} />
-                ) : (
-                  <FaChevronRight className={`ms-auto`} />
-                )}
-              </Nav.Link>
-              <Collapse in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}>
-                <div>
-                  {department.items.map((item) => (
-                    <NavLink
-                      key={item.label}
-                      to={item.path}
-                      className={`${
-                        pathname === item.path ? "active" : ""
-                      } text-white text-decoration-none d-block py-1 sidebar-link`}
-                    >
-                      {item.label}
-                    </NavLink>
-                  ))}
-                </div>
-              </Collapse>
-            </div>
-          ))}
-        </div>
-      )}
-
       {/* Expand Submenu for Expanded View */}
-      <Collapse in={isOpen && !isCollapsed}>
-        <div className="ms-3">
+      <Collapse in={true}>
+        <div className="sidebar-collapse-submenu">
           {section.departments.map((department, departmentIndex) => (
             <div key={department.title}>
               <Nav.Link
@@ -215,15 +162,19 @@ const SidebarSection = ({
                   openSubmenu[`${sectionIndex}-${departmentIndex}`]
                     ? "active"
                     : ""
-                } text-white d-flex justify-content-between align-items-center`}
+                } text-white d-flex justify-content-${
+                  isCollapsed ? "center" : "between"
+                } align-items-center`}
                 onClick={() => toggleSubmenu(sectionIndex, departmentIndex)}
               >
-                {department.title}
-                {openSubmenu[`${sectionIndex}-${departmentIndex}`] ? (
-                  <FaChevronDown className={`ms-auto`} />
-                ) : (
-                  <FaChevronRight className={`ms-auto`} />
-                )}
+                {department.icon}
+                {!isCollapsed && department.title}
+                {!isCollapsed &&
+                  (openSubmenu[`${sectionIndex}-${departmentIndex}`] ? (
+                    <FaChevronDown className={`ms-auto`} />
+                  ) : (
+                    <FaChevronRight className={`ms-auto`} />
+                  ))}
               </Nav.Link>
               <Collapse in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}>
                 <div onClick={handleClose}>
@@ -235,7 +186,8 @@ const SidebarSection = ({
                         pathname === item.path ? "active" : ""
                       }text-white text-decoration-none d-block py-1 sidebar-link`}
                     >
-                      {item.label}
+                      <FaArrowRight />
+                      <h4> {item.label}</h4>
                     </NavLink>
                   ))}
                 </div>
