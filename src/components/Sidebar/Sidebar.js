@@ -81,7 +81,8 @@ const Sidebar = () => {
 
       <div
         className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s 
-        ${ hideSidebar ? "collapsed-sidebar" : "" }
+        ${hideSidebar ? "collapsed-sidebar" : ""}
+        `}
         style={{
           width: hideSidebar ? "80px" : "250px",
           // transition: "width 0.3s ease-in-out",
@@ -135,7 +136,6 @@ const SidebarSection = ({
   toggleSubmenu,
   handleClose,
 }) => {
-
   const { pathname } = useLocation();
 
   return (
@@ -160,6 +160,7 @@ const SidebarSection = ({
             <div key={department.title}>
               <Nav.Link
                 className={`${
+                  !isCollapsed &&
                   openSubmenu[`${sectionIndex}-${departmentIndex}`]
                     ? "active"
                     : ""
@@ -177,7 +178,12 @@ const SidebarSection = ({
                     <FaChevronRight className={`ms-auto`} />
                   ))}
               </Nav.Link>
-              <Collapse in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}>
+              <Collapse
+                in={
+                  !isCollapsed &&
+                  openSubmenu[`${sectionIndex}-${departmentIndex}`]
+                }
+              >
                 <div onClick={handleClose}>
                   {department.items.map((item) => (
                     <NavLink

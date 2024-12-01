@@ -94,8 +94,8 @@
     }
 
     h4 {
-      font-size: 15px !important;
-      font-weight: 400;
+      font-size: 1rem !important;
+      font-weight: 500;
       line-height: 1.4;
       margin: 0;
     }
@@ -270,7 +270,6 @@
 .offcanvas {
   .btn-close {
     color: var(--text-color-secondary) !important;
-    // filter: invert(1) !important;
   }
   &-title {
     color: var(--text-color-secondary) !important;
@@ -304,7 +303,7 @@
 
     h4 {
       font-size: 1rem !important;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 1.4;
       margin: 0;
     }
@@ -318,5 +317,9 @@
     h4 {
       color: inherit !important;
     }
+  }
+
+  .nav-link {
+    gap: 8px;
   }
 }
