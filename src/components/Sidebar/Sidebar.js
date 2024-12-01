@@ -16,6 +16,7 @@ import "./Sidebar.scss";
 const Sidebar = () => {
   const [show, setShow] = useState(false); // Offcanvas visibility for mobile
   const [isCollapsed, setIsCollapsed] = useState(false); // Tracks sidebar collapsed state
+
   const [activeHover, setActiveHover] = useState(null); // Tracks hovered icon for pop-out menu
   const [openSubmenu, setOpenSubmenu] = useState({}); // Tracks open submenus
   const [isMouseOn, setIsMouseOn] = useState(false);
@@ -79,9 +80,8 @@ const Sidebar = () => {
       {/* Sidebar for large screens */}
 
       <div
-        className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s ${
-          hideSidebar ? "collapsed-sidebar" : ""
-        }`}
+        className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s 
+        ${ hideSidebar ? "collapsed-sidebar" : "" }
         style={{
           width: hideSidebar ? "80px" : "250px",
           // transition: "width 0.3s ease-in-out",
@@ -135,6 +135,7 @@ const SidebarSection = ({
   toggleSubmenu,
   handleClose,
 }) => {
+
   const { pathname } = useLocation();
 
   return (

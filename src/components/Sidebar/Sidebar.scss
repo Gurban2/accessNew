@@ -54,9 +54,6 @@
     color: var(--link-default) !important;
     text-decoration: none;
   }
-  .submenu-popout a:hover {
-    // color: var(--link-hover) !important;
-  }
 
   /* Sidebar Links */
   .nav-link,
@@ -170,7 +167,6 @@
       border: none !important;
     }
   }
-
   .btn-close {
     filter: invert(1);
   }
@@ -181,10 +177,6 @@
     font-size: 14px;
     padding: 10px 15px;
     border-radius: 4px;
-
-    &:hover {
-      // color: var(--link-hover) !important;
-    }
 
     @media (max-width: 768px) {
       padding-left: 2.5em !important;
@@ -216,7 +208,6 @@
     font-weight: 700;
     margin-bottom: 1rem !important;
   }
-
   .bg-dark {
     background-color: var(--sidebar-bg) !important;
   }
