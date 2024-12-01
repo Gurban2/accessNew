@@ -28,8 +28,9 @@ import PersonaAll from "./components/Pages/Visitors/Persona/PersonaAll";
 import { AppPaths } from "./constants/appPaths";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Dashboard from "./components/dashboard";
 import "./App.scss";
-import Dashboard from "./components/dashboard/dashboard";
+
 
 function App() {
   return (

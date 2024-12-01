@@ -1,10 +1,14 @@
+import React from "react";
 import { AppPaths } from "./appPaths";
-import officeIcon from "../assets/icons/dashboard/officeIcon.svg";
-import departmentIcon from "../assets/icons/dashboard/departmentIcon.png";
-import personaIcon from "../assets/icons/dashboard/personaIcon.svg";
-import usersIcon from "../assets/icons/dashboard/usersIcon.png";
-import visitorsIcon from "../assets/icons/dashboard/visitor.svg";
-import permissionsIcon from "../assets/icons/dashboard/permissionsIcon.png";
+import {
+  FaBuilding,
+  FaChartBar,
+  FaUser,
+  FaUserCheck,
+  FaUsers,
+  FaUserTimes,
+} from "react-icons/fa";
+
 // import dashboard from "../assets/icons/dashboard/dashboard.svg";
 
 const sections = [
@@ -14,7 +18,7 @@ const sections = [
     departments: [
       {
         title: "Offices",
-        icon: officeIcon,
+        icon: <FaChartBar />,
         items: [
           { label: "All", path: AppPaths.offices.all },
           { label: "Add", path: AppPaths.offices.add },
@@ -22,21 +26,20 @@ const sections = [
       },
       {
         title: "Departments",
-        icon: departmentIcon,
+        icon: <FaBuilding />,
         items: [
           { label: "All", path: AppPaths.departments.all },
           { label: "Add", path: AppPaths.departments.add },
         ],
       },
     ],
-    icon: officeIcon,
   },
   {
     title: "Visitors",
     departments: [
       {
         title: "Visitors",
-        icon: visitorsIcon,
+        icon: <FaUser />,
         items: [
           { label: "All", path: AppPaths.visitors.all },
           { label: "Add", path: AppPaths.visitors.add },
@@ -44,21 +47,20 @@ const sections = [
       },
       {
         title: "Persona Non Grata",
-        icon: personaIcon,
+        icon: <FaUserTimes />,
         items: [
           { label: "All", path: AppPaths.visitors.persona.all },
           { label: "Add", path: AppPaths.visitors.persona.add },
         ],
       },
     ],
-    icon: visitorsIcon,
   },
   {
     title: "Users & Permissions",
     departments: [
       {
         title: "Users",
-        icon: usersIcon,
+        icon: <FaUsers />,
         items: [
           { label: "List", path: AppPaths.users.permissions.list },
           { label: "Add User", path: AppPaths.users.permissions.addUser },
@@ -66,14 +68,13 @@ const sections = [
       },
       {
         title: "Permissions",
-        icon: permissionsIcon,
+        icon: <FaUserCheck />,
         items: [
           { label: "All", path: AppPaths.users.permissions.all },
           { label: "Add Permission", path: AppPaths.users.permissions.add },
         ],
       },
     ],
-    icon: usersIcon,
   },
 ];
 
