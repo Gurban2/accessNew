@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import sections from "../../constants/navSection"; // Your sections data
 import {
   FaChevronDown,
@@ -37,7 +37,11 @@ const Sidebar = () => {
     <div className="sidebar">
       {/* Navbar for small screens */}
       <Navbar bg="dark" variant="dark" expand="lg" className="d-lg-none w-100">
-        <Navbar.Brand href="/" className="fw-bold text-white cursor-pointer">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="fw-bold text-white cursor-pointer"
+        >
           Dashboard
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
@@ -72,7 +76,6 @@ const Sidebar = () => {
       </Offcanvas>
 
       {/* Sidebar for large screens */}
-
       <div
         className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s ${
           isCollapsed ? "collapsed-sidebar" : ""
@@ -90,7 +93,8 @@ const Sidebar = () => {
         </button>
         {!isCollapsed && (
           <Navbar.Brand
-            href="/"
+            as={Link}
+            to="/"
             className="fw-bold text-white cursor-pointer mb-3 ms-2"
           >
             Dashboard
@@ -99,7 +103,6 @@ const Sidebar = () => {
         <Nav className="flex-column">
           {sections.map((section, index) => (
             <SidebarSection
-              handleClose={handleClose}
               key={section.title}
               section={section}
               sectionIndex={index}
@@ -129,7 +132,6 @@ const SidebarSection = ({
   setActiveHover,
   openSubmenu,
   toggleSubmenu,
-  handleClose,
 }) => {
   const isOpen = activeSection === sectionIndex;
   const { pathname } = useLocation();
@@ -142,6 +144,8 @@ const SidebarSection = ({
     >
       {/* Main Section Link */}
       <Nav.Link
+        as={NavLink}
+        to={section.link || "/"} // Default link to section, or fallback to home
         className={`text-white d-flex align-items-center justify-content-between ${
           isOpen ? "active-section" : ""
         }`}
@@ -226,14 +230,14 @@ const SidebarSection = ({
                 )}
               </Nav.Link>
               <Collapse in={openSubmenu[`${sectionIndex}-${departmentIndex}`]}>
-                <div onClick={handleClose}>
+                <div>
                   {department.items.map((item) => (
                     <NavLink
                       key={item.label}
                       to={item.path}
                       className={`${
                         pathname === item.path ? "active" : ""
-                      }text-white text-decoration-none d-block py-1 sidebar-link`}
+                      } text-white text-decoration-none d-block py-1 sidebar-link`}
                     >
                       {item.label}
                     </NavLink>

@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
+import Search from "../../Searchbar";
 import { FaEye } from "react-icons/fa";
 
 const VisitorsAll = () => {
-  const visitors = useSelector((state) => state.visitors);
+  const visitors = useSelector((state) => state.visitors || []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredVisitors, setFilteredVisitors] = useState(visitors);
+
+  // Обновление фильтрованных посетителей при изменении поиска или данных
+  useEffect(() => {
+    const query = searchQuery.toLowerCase();
+    setFilteredVisitors(
+      visitors.filter(
+        (visitor) =>
+          visitor.name.toLowerCase().includes(query) ||
+          visitor.phone.toLowerCase().includes(query) ||
+          visitor.fin.toLowerCase().includes(query)
+      )
+    );
+  }, [searchQuery, visitors]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this Visitor?")) {
@@ -33,12 +49,23 @@ const VisitorsAll = () => {
         <nav className="breadcrumbs">
           <Link to="/">Dashboard</Link> &gt; <span>Visitors - All</span>
         </nav>
-
-        <Link to="/visitors/add" className="btn btn-primary p-2">
-          Add Visitors
-        </Link>
+        <div className="searchAddBtn">
+          <div className="search-bar">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by name, phone, or FIN"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <Link to="/visitors/add" className="btn btn-primary p-1">
+            Add Visitors
+          </Link>
+        </div>
       </div>
       <hr className="navigation-underline" />
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -51,7 +78,7 @@ const VisitorsAll = () => {
           </tr>
         </thead>
         <tbody>
-          {visitors.map((visitor, index) => (
+          {filteredVisitors.map((visitor, index) => (
             <tr key={visitor.id}>
               <td>{index + 1}</td>
               <td>
