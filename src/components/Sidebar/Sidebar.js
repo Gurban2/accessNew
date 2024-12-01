@@ -133,6 +133,7 @@ const SidebarSection = ({
   setActiveHover,
   openSubmenu,
   toggleSubmenu,
+  handleClose,
 }) => {
   const { pathname } = useLocation();
 
