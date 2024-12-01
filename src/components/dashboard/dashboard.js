@@ -1,149 +1,127 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Container, Table, Button } from "react-bootstrap";
 import "./dashboardStyle.css";
-import { Container } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
 
 const Dashboard = () => {
-  const offices = useSelector((state) => state.offices);
-  const departments = useSelector(
-    (state) => state.departments.departmentsData || []
-  );
-  const visitors = useSelector((state) => state.visitors);
   const navigate = useNavigate();
 
-  const handleViewAllOffices = () => navigate("/offices/all");
-  const handleViewAllDepartments = () => navigate("/departments/list");
+  // Redux selectors
+  const offices = useSelector((state) => state.offices) || [];
+  const departments =
+    useSelector((state) => state.departments.departmentsData) || [];
+  const visitors = useSelector((state) => state.visitors) || [];
 
-  const handleViewAllVisitors = () => navigate("/visitors/list");
+  // Sorted data for displaying the latest 3 records
+  const sortedOffices = [...offices].sort((a, b) => b.id - a.id).slice(-3);
+  const sortedDepartments = [...departments]
+    .sort((a, b) => b.id - a.id)
+    .slice(-3);
+  const sortedVisitors = [...visitors].sort((a, b) => b.id - a.id).slice(-3);
+
+  // Navigation handlers
+  const handleViewAll = (path) => navigate(path);
+
+  // Render helpers
+  const renderTableRows = (data, fields, noDataMessage) => {
+    if (data.length === 0) {
+      return (
+        <tr>
+          <td colSpan={fields.length}>{noDataMessage}</td>
+        </tr>
+      );
+    }
+    return data.map((item, index) => (
+      <tr key={item.id || index}>
+        {fields.map((field) => (
+          <td key={field}>{item[field]}</td>
+        ))}
+      </tr>
+    ));
+  };
 
   return (
     <Container fluid>
       {/* Visitors Section */}
-      <div className="visitors">
-        <h4>Visitors Overview</h4>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(visitors) && visitors.length > 0 ? (
-              visitors.slice(-3).map((visitor, index) => (
-                <tr key={visitor.id}>
-                  {/* Simple calculation for row index */}
-                  <td>{visitors.length - 3 + index + 1}</td>
-                  <td>{visitor.name}</td>
-                  <td>{visitor.phone}</td>
-                  <td>{visitor.email}</td>
-                  <td>{visitor.address}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5">No visitors available</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-        <div className="text-center">
-          <button
-            onClick={handleViewAllVisitors}
-            className="btn btn-primary mt-1"
-          >
-            Open Full List
-          </button>
-        </div>
-      </div>
-      <hr />
-      {/* Offices Section */}
+      <Section
+        title="Visitors Overview"
+        data={sortedVisitors}
+        fields={["name", "phone", "email", "address"]}
+        headers={["#", "Name", "Phone", "Email", "Address"]}
+        noDataMessage="No visitors available"
+        onViewAll={() => handleViewAll("/visitors/list")}
+      />
 
-      <div className="offices">
-        <h4>Offices Overview</h4>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Office Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(offices) && offices.length > 0 ? (
-              offices.slice(-3).map((office, index) => (
-                <tr key={office.id}>
-                  {/* Simple calculation for row index */}
-                  <td>{offices.length - 3 + index + 1}</td>
-                  <td>{office.name}</td>
-                  <td>{office.address}</td>
-                  <td>{office.phone}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4">No offices available</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-        <div className="text-center">
-          <button
-            onClick={handleViewAllOffices}
-            className="btn btn-primary mt-1"
-          >
-            Open Full List
-          </button>
-        </div>
-      </div>
-      <hr />
+      {/* Offices Section */}
+      <Section
+        title="Offices Overview"
+        data={sortedOffices}
+        fields={["name", "address", "phone"]}
+        headers={["#", "Office Name", "Address", "Phone Number"]}
+        noDataMessage="No offices available"
+        onViewAll={() => handleViewAll("/offices/all")}
+      />
+
       {/* Departments Section */}
-      <div className="departments">
-        <h4>Departments Overview</h4>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Department Name</th>
-              <th>Phone</th>
-              <th>Office</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(departments) && departments.length > 0 ? (
-              departments.slice(-3).map((department, index) => (
-                <tr key={department.id}>
-                  {/* Simple calculation for row index */}
-                  <td>{departments.length - 3 + index + 1}</td>
-                  <td>{department.name}</td>
-                  <td>{department.phone}</td>
-                  <td>{department.office}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4">No departments available</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-        <div className="text-center">
-          <button
-            onClick={handleViewAllDepartments}
-            className="btn btn-primary mt-1"
-          >
-            Open Full List
-          </button>
-        </div>
-      </div>
+      <Section
+        title="Departments Overview"
+        data={sortedDepartments}
+        fields={["name", "phone", "office"]}
+        headers={["#", "Department Name", "Phone", "Office"]}
+        noDataMessage="No departments available"
+        onViewAll={() => handleViewAll("/departments/list")}
+      />
     </Container>
   );
+};
+
+// Reusable Section Component
+const Section = ({
+  title,
+  data,
+  headers,
+  fields,
+  noDataMessage,
+  onViewAll,
+}) => (
+  <div className="dashboard-section">
+    <div className="section-header">
+      <h4>{title}</h4>
+      <Button variant="primary p-1 " onClick={onViewAll}>
+        Open Full List
+      </Button>
+    </div>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          {headers.map((header, index) => (
+            <th key={index}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>{renderTableRows(data, fields, noDataMessage)}</tbody>
+    </Table>
+  </div>
+);
+
+// Helper to render table rows
+const renderTableRows = (data, fields, noDataMessage) => {
+  if (data.length === 0) {
+    return (
+      <tr>
+        <td colSpan={fields.length}>{noDataMessage}</td>
+      </tr>
+    );
+  }
+  return data.map((item, index) => (
+    <tr key={item.id || index}>
+      <td>{index + 1}</td>
+      {fields.map((field, fieldIndex) => (
+        <td key={fieldIndex}>{item[field]}</td>
+      ))}
+    </tr>
+  ));
 };
 
 export default Dashboard;

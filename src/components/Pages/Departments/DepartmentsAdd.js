@@ -1,60 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
-import "./style.scss";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import "./style.scss";
+
+// Validation schema with Yup
+const validationSchema = Yup.object({
+  name: Yup.string().required("Department name is required"),
+  phone: Yup.string().required("Phone number is required"),
+  parent: Yup.string().required("Parent department is required"),
+  office: Yup.string().required("Office selection is required"),
+});
 
 const DepartmentsAdd = () => {
   const offices = useSelector((state) => state.offices);
-
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    phone: "",
-    parent: "",
-    office: "",
-  });
-
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const validateForm = () => {
-    setError(null);
-
-    if (
-      !formData.name ||
-      !formData.phone ||
-      !formData.parent ||
-      !formData.office
-    ) {
-      setError("All fields are required!");
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!validateForm()) return;
-
+  const handleSubmit = (values, { setSubmitting }) => {
     const uniqueId = Date.now().toString();
-    const newFormData = { ...formData, id: uniqueId };
+    const newFormData = { ...values, id: uniqueId };
 
-    setLoading(true);
     dispatch(addDepartment(newFormData));
-    setFormData({ id: "", name: "", phone: "", parent: "", office: "" });
-    setLoading(false);
     toast.success("Department successfully added");
+    setSubmitting(false);
   };
 
   return (
@@ -65,77 +36,76 @@ const DepartmentsAdd = () => {
       </nav>
 
       {/* Form for adding departments */}
-      <form className="department-add-form" onSubmit={handleSubmit}>
-        {error && <div className="error">{error}</div>}
+      <Formik
+        initialValues={{
+          name: "",
+          phone: "",
+          parent: "",
+          office: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="department-add-form">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <Field
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter department name"
+                className="form-control"
+              />
+              <ErrorMessage name="name" component="div" className="error" />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter department name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone</label>
+              <Field
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter department phone"
+                className="form-control"
+              />
+              <ErrorMessage name="phone" component="div" className="error" />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter department phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="parent">Parent</label>
+              <Field as="select" id="parent" name="parent" className="form-control">
+                <option value="" disabled>
+                  Select parent department
+                </option>
+                <option value="1">Parent Department 1</option>
+                <option value="2">Parent Department 2</option>
+                <option value="3">Parent Department 3</option>
+              </Field>
+              <ErrorMessage name="parent" component="div" className="error" />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="parent">Parent</label>
-          <select
-            id="parent"
-            name="parent"
-            value={formData.parent}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              Select parent department
-            </option>
-            <option value="1">Parent Department 1</option>
-            <option value="2">Parent Department 2</option>
-            <option value="3">Parent Department 3</option>
-          </select>
-        </div>
+            <div className="form-group">
+              <label htmlFor="office">Office</label>
+              <Field as="select" id="office" name="office" className="form-control">
+                <option value="" disabled>
+                  Select office
+                </option>
+                {offices.map((office) => (
+                  <option key={office.id} value={office.name}>
+                    {office.name}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="office" component="div" className="error" />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="office">Office</label>
-          <select
-            id="office"
-            name="office"
-            value={formData.office}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              Select office
-            </option>
-            {offices.map((office) => (
-              <option key={office.id} value={office.name}>
-                {office.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? "Submitting..." : "Submit"}
-        </button>
-      </form>
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

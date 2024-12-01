@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteStaff } from "../../../store/reducers/staffReducer";
 import Table from "react-bootstrap/Table";
 import { FaEye } from "react-icons/fa";
+import "../UserPermissions/style.scss";
 
 const ListUsers = () => {
   const staffs = useSelector((state) => state.staffs);
@@ -28,15 +29,16 @@ const ListUsers = () => {
   };
 
   return (
-    <div className="visitors-all-container">
-      <div className="visitors-wrapper d-row">
+    <div className="user-all-container">
+      <div className="user-wrapper d-row">
         <nav className="breadcrumbs">
           <Link to="/">Dashboard</Link> &gt; <span>Users - All</span>
         </nav>
 
-        <Link to="/users/permissions/add-user" className="btn btn-primary p-2">
+        <Link to="/permissions/add-user" className="btn btn-primary p-2">
           Add Users
         </Link>
+
       </div>
       <hr className="navigation-underline" />
       <Table striped bordered hover>

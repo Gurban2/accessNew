@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Table from "react-bootstrap/Table";
+import Search from "../../Searchbar";
 
 const DepartmentsAll = () => {
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );
+  const [filteredDepartments, setFilteredDepartments] = useState(departments); // Состояние для фильтрованных данных
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Синхронизация `filteredDepartments` с `departments`
+  useEffect(() => {
+    setFilteredDepartments(departments);
+  }, [departments]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this department?")) {
@@ -27,12 +34,19 @@ const DepartmentsAll = () => {
         <nav className="breadcrumbs">
           <Link to="/">Dashboard</Link> &gt; <span>Departments</span>
         </nav>
-
-        <Link to="/departments/add" className="btn btn-primary p-2">
-          Add Department
-        </Link>
+        <div className="searchAddBtn">
+          <Search
+            data={departments}
+            onFilter={setFilteredDepartments}
+            placeholder="Search departments..."
+          />
+          <Link to="/departments/add" className="btn btn-primary ">
+            Add Department
+          </Link>
+        </div>
       </div>
       <hr className="navigation-underline" />
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -44,7 +58,7 @@ const DepartmentsAll = () => {
           </tr>
         </thead>
         <tbody>
-          {departments.map((department, index) => (
+          {filteredDepartments.map((department, index) => (
             <tr key={department.id}>
               <td>{index + 1}</td>
               <td>{department.name}</td>

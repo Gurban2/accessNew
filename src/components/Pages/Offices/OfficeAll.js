@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { deleteOffice } from "../../../store/reducers/officeReducer";
+import Search from "../../Searchbar";
+
+import "./style.scss";
 
 const OfficeAll = () => {
   const offices = useSelector((state) => state.offices);
+  const [filteredOffices, setFilteredOffices] = useState(offices);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setFilteredOffices(offices);
+  }, [offices]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this office?")) {
@@ -25,13 +33,20 @@ const OfficeAll = () => {
       <div className="offices-wrapper d-row">
         <nav className="breadcrumbs">
           <Link to="/">Dashboard</Link> &gt; <span>Offices - All</span>
-        </nav>
-
-        <Link to="/offices/add" className="btn btn-primary p-2">
-          Add Office
-        </Link>
+        </nav>{" "}
+        <div className="searchAddBtn">
+          <Search
+            data={offices}
+            onFilter={setFilteredOffices}
+            placeholder="Search offices..."
+          />
+          <Link to="/offices/add" className="btn btn-primary p-1">
+            Add Office
+          </Link>
+        </div>
       </div>
       <hr className="navigation-underline" />
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -43,7 +58,7 @@ const OfficeAll = () => {
           </tr>
         </thead>
         <tbody>
-          {offices.map((office, index) => (
+          {filteredOffices.map((office, index) => (
             <tr key={office.id}>
               <td>{index + 1}</td>
               <td>{office.name}</td>
