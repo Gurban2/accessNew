@@ -4,7 +4,7 @@ import { addDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import Breadcrumb from "../Breadcrumb"; // Импортируем Breadcrumb
 import "./style.scss";
 
 // Validation schema with Yup
@@ -31,9 +31,12 @@ const DepartmentsAdd = () => {
   return (
     <div className="department-add-container">
       {/* Breadcrumbs section */}
-      <nav className="breadcrumbs">
-        <Link to="/">Dashboard</Link> &gt; <span>Departments Add</span>
-      </nav>
+      <Breadcrumb
+        paths={[
+          { label: "Dashboard", to: "/" },
+          { label: "Departments Add" },
+        ]}
+      />
 
       {/* Form for adding departments */}
       <Formik

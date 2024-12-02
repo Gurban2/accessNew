@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteDepartment } from "../../../store/reducers/departmentReducer";
+import Breadcrumb from "../Breadcrumb";
 import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 
@@ -9,11 +10,10 @@ const DepartmentsAll = () => {
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );
-  const [filteredDepartments, setFilteredDepartments] = useState(departments); // Состояние для фильтрованных данных
+  const [filteredDepartments, setFilteredDepartments] = useState(departments);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Синхронизация `filteredDepartments` с `departments`
   useEffect(() => {
     setFilteredDepartments(departments);
   }, [departments]);
@@ -31,16 +31,16 @@ const DepartmentsAll = () => {
   return (
     <div className="departments-all-container">
       <div className="departments-wrapper d-row">
-        <nav className="breadcrumbs">
-          <Link to="/">Dashboard</Link> &gt; <span>Departments</span>
-        </nav>
+        <Breadcrumb
+          paths={[{ label: "Dashboard", to: "/" }, { label: "Departments" }]}
+        />
         <div className="searchAddBtn">
           <Search
             data={departments}
             onFilter={setFilteredDepartments}
             placeholder="Search departments..."
           />
-          <Link to="/departments/add" className="btn btn-primary ">
+          <Link to="/departments/add" className="btn btn-primary">
             Add Department
           </Link>
         </div>

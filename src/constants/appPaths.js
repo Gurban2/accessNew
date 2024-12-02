@@ -35,4 +35,5 @@ export const AppPaths = {
       all: "/persona/all",
     },
   },
+  
 };

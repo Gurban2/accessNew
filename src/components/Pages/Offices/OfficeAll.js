@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Table from "react-bootstrap/Table";
 import { deleteOffice } from "../../../store/reducers/officeReducer";
+import Breadcrumb from "../Breadcrumb";
+import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 
 import "./style.scss";
@@ -31,9 +31,9 @@ const OfficeAll = () => {
   return (
     <div className="offices-all-container">
       <div className="offices-wrapper d-row">
-        <nav className="breadcrumbs">
-          <Link to="/">Dashboard</Link> &gt; <span>Offices - All</span>
-        </nav>{" "}
+        <Breadcrumb
+          paths={[{ label: "Dashboard", to: "/" }, { label: "Offices - All" }]}
+        />
         <div className="searchAddBtn">
           <Search
             data={offices}
