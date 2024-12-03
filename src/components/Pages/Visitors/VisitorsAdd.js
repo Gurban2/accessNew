@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { addVisitor } from "../../../store/reducers/visitorReducer";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -13,6 +13,7 @@ import "./style.scss";
 const VisitorsAdd = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
   const [useWebcam, setUseWebcam] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ const VisitorsAdd = () => {
     setPhotoPreview(imageSrc);
     setFieldValue("photo", imageSrc);
     setUseWebcam(false);
+    setShowModal(false);
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -80,53 +82,38 @@ const VisitorsAdd = () => {
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, isSubmitting, errors, touched }) => (
-          <FormikForm className="form-container">
+          <FormikForm className="form-container" >
             <Form.Label className="form-label-head">Visitor add</Form.Label>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={3} controlId="photo">
                 <Form.Label className="form-label-head" htmlFor="photo">
                   Photo
                 </Form.Label>
-                <div className="photo-input">
-                  {useWebcam ? (
-                    <div className="webcam-container">
-                      <WebcamCapture
-                        onCapture={(imageSrc) =>
-                          handleCapture(imageSrc, setFieldValue)
-                        }
-                        onCancel={() => {
-                          setUseWebcam(false);
-                          setPhotoPreview(null); // Clear photo preview when canceled
-                        }}
-                      />
+                <div
+                  className="photo-input"
+                  onClick={() => setShowModal(true)}  // Open the modal when clicked
+                >
+                  {photoPreview ? (
+                    <div className="photo-preview">
+                      <img src={photoPreview} alt="Preview" />
                     </div>
                   ) : (
-                    <>
-                      <input
-                        type="file"
-                        name="photo"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files[0];
-                          setFieldValue("photo", file);
-                          setPhotoPreview(URL.createObjectURL(file));
-                        }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setUseWebcam(true)}
-                        className="webcam-button"
-                      >
-                        Use Webcam
-                      </button>
-                    </>
+                    <div className="photo-placeholder">
+                      <span className="plus-icon">+</span>
+                    </div>
                   )}
                 </div>
-                {photoPreview && (
-                  <div className="photo-preview">
-                    <img src={photoPreview} alt="Preview" />
-                  </div>
-                )}
+                {/* <input
+                  type="file"
+                  name="photo"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    setFieldValue("photo", file);
+                    setPhotoPreview(URL.createObjectURL(file));
+                    setShowModal(false);  // Close the modal after selecting
+                  }}
+                /> */}
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
@@ -173,9 +160,9 @@ const VisitorsAdd = () => {
                   className="form-control"
                 />
                 <ErrorMessage name="email" component="div" className="error" />
-              </Form.Group>              
+              </Form.Group>
             </Row>
-            <Row className="mb-3">              
+            <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="address">
                 <Form.Label className="form-label-head">Address</Form.Label>
                 <Field
@@ -214,7 +201,8 @@ const VisitorsAdd = () => {
                 as={Col}
                 xs={12}
                 md={2}
-                variant="primary"
+                sm={1}
+                variant="success"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -231,6 +219,47 @@ const VisitorsAdd = () => {
                 Cancel
               </Button>
             </Row>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Capture/Upload Photo</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+              <div className="d-flex justify-content-between">
+                  <div style={{ flex: 1, marginRight: "10px" }}>
+                    <input
+                      type="file"
+                      name="photo"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        setFieldValue("photo", file);
+                        setPhotoPreview(URL.createObjectURL(file));
+                        setShowModal(false);  // Close the modal after selecting
+                      }}
+                      className="form-control"
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <button
+                      type="button"
+                      onClick={() => setUseWebcam(true)}
+                      className="webcam-button form-control"
+                    >
+                      Use Webcam
+                    </button>
+                  </div>
+                </div>
+                {useWebcam && (
+                  <WebcamCapture
+                    onCapture={(imageSrc) => handleCapture(imageSrc, setFieldValue)}
+                    onCancel={() => {
+                      setUseWebcam(false);
+                      setPhotoPreview(null);
+                    }}
+                  />
+                )}
+              </Modal.Body>
+            </Modal>
           </FormikForm>
         )}
       </Formik>
