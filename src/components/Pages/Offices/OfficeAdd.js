@@ -1,17 +1,31 @@
 import React from "react";
 import { Formik, Form } from "formik";
+import { useDispatch } from "react-redux"; // Import useDispatch
+import { addOffice } from "../../../store/reducers/officeReducer"; // Import addOffice action
 import { OfficeValidationSchema } from "../InputValidation";
+import { toast } from "react-toastify";
+
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
 
 const OfficeAdd = () => {
+  const dispatch = useDispatch(); // Initialize dispatch
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    const uniqueId = Date.now().toString();
+    const newOffice = { ...values, id: uniqueId };
+
+    dispatch(addOffice(newOffice));
+    toast.success("Office successfully added");
+
+    setSubmitting(false);
+  };
+
   return (
     <Formik
       initialValues={{ name: "", address: "", phone: "" }}
       validationSchema={OfficeValidationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false);
-      }}
+      onSubmit={handleSubmit} // Use the handleSubmit function to dispatch the action
     >
       {({ isSubmitting }) => (
         <div className="offices-add-container">
@@ -20,7 +34,6 @@ const OfficeAdd = () => {
               paths={[
                 { label: "Dashboard", to: "/" },
                 { label: "Offices", to: "/Offices/all" },
-
                 { label: "Offices - Add" },
               ]}
             />

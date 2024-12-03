@@ -3,18 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
-import { Formik, Field, Form, ErrorMessage } from "formik";
 import Breadcrumb from "../Breadcrumb";
-
-import * as Yup from "yup";
 import "./style.scss";
-
-// Validation schema with Yup
-const validationSchema = Yup.object({
-  name: Yup.string().required("Department name is required"),
-  phone: Yup.string().required("Phone number is required"),
-  office: Yup.string().required("Office selection is required"),
-});
 
 const DepartmentEdit = () => {
   const { id } = useParams();
@@ -26,14 +16,31 @@ const DepartmentEdit = () => {
     state.departments.departmentsData.find((department) => department.id === id)
   );
 
+  const [formData, setFormData] = React.useState({
+    name: "",
+    phone: "",
+    office: "",
+  });
+
   useEffect(() => {
-    if (!department) {
+    if (department) {
+      setFormData({
+        name: department.name,
+        phone: department.phone,
+        office: department.office,
+      });
+    } else {
       navigate("/departments/all");
     }
   }, [department, navigate]);
 
-  const handleSubmit = (values) => {
-    dispatch(editDepartment({ id: department.id, data: values }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editDepartment({ id: department.id, data: formData }));
     toast.success("Department successfully edited");
     navigate("/departments/all");
   };
@@ -44,72 +51,63 @@ const DepartmentEdit = () => {
 
   return (
     <div className="department-add-container">
-       <div className="offices-wrapper d-row">
+      <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
             { label: "Dashboard", to: "/" },
             { label: "Departments", to: "/departments/list" },
-
             { label: "Department - Edit" },
           ]}
         />
       </div>
       <hr className="navigation-underline" />
       <h1 className="department-add">Edit Department</h1>
-      <Formik
-        initialValues={{
-          name: department.name,
-          phone: department.phone,
-          office: department.office,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form className="department-add-form">
-            <div className="form-group">
-              <label htmlFor="name">Department Name</label>
-              <Field
-                type="text"
-                name="name"
-                value={department.name}
-                className="form-control"
-              />
-              <ErrorMessage name="name" component="div" className="error" />
-            </div>
+      <form className="department-add-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Department Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-            <div className="form-group">
-              <label htmlFor="phone">Phone</label>
-              <Field
-                type="tel"
-                name="phone"
-                value={department.phone}
-                className="form-control"
-              />
-              <ErrorMessage name="phone" component="div" className="error" />
-            </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-            <div className="form-group">
-              <label>Office</label>
-              <Field as="select" name="office" className="form-control">
-                <option value="" disabled>
-                  Select office
-                </option>
-                {offices.map((office) => (
-                  <option key={office.id} value={office.name}>
-                    {office.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="office" component="div" className="error" />
-            </div>
+        <div className="form-group">
+          <label htmlFor="office">Office</label>
+          <select
+            name="office"
+            value={formData.office}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              Select office
+            </option>
+            {offices.map((office) => (
+              <option key={office.id} value={office.name}>
+                {office.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-            <button type="submit" className="submit-button" disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Save Changes"}
-            </button>
-          </Form>
-        )}
-      </Formik>
+        <button type="submit" className="submit-button">
+          Save Changes
+        </button>
+      </form>
     </div>
   );
 };

@@ -1,37 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
-import Table from "react-bootstrap/Table";
-import Search from "../../Searchbar";
 import { FaEye } from "react-icons/fa";
-import Breadcrumb from "../Breadcrumb";
+import Table from "react-bootstrap/Table";
 
 const VisitorsAll = () => {
-  const visitors = useSelector((state) => state.visitors || []);
+  const visitors = useSelector((state) => state.visitors.visitorsData || []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredVisitors, setFilteredVisitors] = useState(visitors);
 
-  // Обновление фильтрованных посетителей при изменении поиска или данных
-  useEffect(() => {
+  // Mемоизированный список фильтрованных посетителей
+  const filteredVisitors = useMemo(() => {
     const query = searchQuery.toLowerCase();
-    setFilteredVisitors(
-      visitors.filter(
-        (visitor) =>
-          visitor.name.toLowerCase().includes(query) ||
-          visitor.phone.toLowerCase().includes(query) ||
-          visitor.fin.toLowerCase().includes(query)
-      )
+    return visitors.filter(
+      (visitor) =>
+        visitor.name.toLowerCase().includes(query) ||
+        visitor.phone.toLowerCase().includes(query) ||
+        visitor.fin.toLowerCase().includes(query)
     );
   }, [searchQuery, visitors]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this Visitor?")) {
       setIsLoading(true);
-      dispatch(deleteVisitor({ id }));
+      try {
+        await dispatch(deleteVisitor({ id }));
+      } catch (error) {
+        console.error("Error deleting visitor", error);
+      }
       setIsLoading(false);
     }
   };
@@ -46,27 +45,6 @@ const VisitorsAll = () => {
 
   return (
     <div className="visitors-all-container">
-      <div className="visitors-wrapper d-row">
-        <Breadcrumb
-            paths={[{ label: "Dashboard", to: "/" }, { label: "Visitors - All" },]}
-        />
-        <div className="searchAddBtn">
-          <div className="search-bar">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by name, phone, or FIN"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          <Link to="/visitors/add" className="btn btn-primary p-1">
-            Add Visitors
-          </Link>
-        </div>
-      </div>
-      <hr className="navigation-underline" />
-
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -84,29 +62,11 @@ const VisitorsAll = () => {
               <td>{index + 1}</td>
               <td>
                 {visitor.photo ? (
-                  typeof visitor.photo === "string" ? (
-                    <img
-                      src={visitor.photo}
-                      alt={`${visitor.name}`}
-                      className="visitor-photo"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={URL.createObjectURL(visitor.photo)}
-                      alt={`${visitor.name}`}
-                      className="visitor-photo"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  )
+                  <img
+                    src={visitor.photo}
+                    alt={visitor.name}
+                    style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                  />
                 ) : (
                   "No photo"
                 )}
@@ -114,7 +74,7 @@ const VisitorsAll = () => {
               <td>{visitor.name}</td>
               <td>{visitor.phone}</td>
               <td>{visitor.fin}</td>
-              <td className="">
+              <td>
                 <button
                   className="btn btn-info btn-sm"
                   onClick={() => handleView(visitor.id)}

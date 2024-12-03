@@ -16,14 +16,8 @@
 
 // General container for the add visitor page
 .visitor-add-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  // padding: 20px;
   box-sizing: border-box;
-  overflow: auto;
   background-color: var(--background-color);
 }
 
@@ -38,12 +32,10 @@
 // Form container for adding visitors
 .visitor-add-form {
   background-color: var(--card-bg);
-  padding: 20px 30px;
+  // padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  max-height: 80vh;
+
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -109,7 +101,29 @@ textarea:focus {
 .photo-input {
   position: relative;
   display: flex;
+  width: 70px; // Adjust the size as needed
+  height: 70px; // Adjust the size as needed
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px var(--border-color); // Optional, for a border around the image
+  justify-content: center;
+  align-items: center;
 }
+.photo-placeholder {
+  display: flex;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 50%;
+  // border: 2px dashed #ccc;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-color-secondary);
+}
+
 .webcam-container {
   width: 250px;
   height: 250px;
@@ -119,12 +133,29 @@ textarea:focus {
   video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This ensures the webcam video fills the container */
+    object-fit: cover;
+    /* This ensures the webcam video fills the container */
   }
 }
+
 .webcam-preview {
   max-width: 100%;
   border-radius: 4px;
+}
+
+.plus-icon {
+  color: #007bff;
+}
+
+.photo-preview {
+  width: 200px; // Adjust the size as needed
+  height: 200px; // Adjust the size as needed
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #ccc; // Optional, for a border around the image
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .photo-preview img {
@@ -136,6 +167,7 @@ textarea:focus {
   height: 250px;
   object-fit: cover;
 }
+
 .btn-primary {
   padding: 4px 6px;
   font-size: var(--font-size-base);
@@ -147,19 +179,33 @@ textarea:focus {
 
   transition: background-color 0.3s;
 }
+
 .capture-button,
 .cancel-webcam,
 .btn-primary,
 .webcam-button {
-  padding: 4px 6px;
-  font-size: var(--font-size-base);
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
+  // padding: 4px 6px;
+  // font-size: var(--font-size-base);
+  // background-color: var(--primary-color);
+  // color: white;
+  // border: none;
+  // border-radius: 2px;
+  // cursor: pointer;
+  // transition: background-color 0.3s;
 
-  transition: background-color 0.3s;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .capture-button:hover,
@@ -168,16 +214,23 @@ textarea:focus {
   background-color: var(--secondary-color);
 }
 
-
-
-
 // Form labels and buttons inside the form container
 .form-container {
-  background-color: var(--form-background);
-  width: 1200px;
-  border-radius: 5px !important;
+  // background-color: var(--form-background);
+  // padding: 20px 30px;
+  // border-radius: 8px ;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  // border: 1px solid var(--lighten-form-background);
+
+  background-color: var(--card-bg);
+  padding: 0 30px;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  // border: 1px solid var(--border-color);
+  width: auto; /* Ensure that the width adjusts based on content */
+  max-width: 100%; /* Make sure the form container doesn't overflow on small screens */
+  max-height: 100vh;
+  // overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .form-label {

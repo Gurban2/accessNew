@@ -11,6 +11,7 @@ const DepartmentsAll = () => {
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );
+  console.log(departments)
   const [filteredDepartments, setFilteredDepartments] = useState(departments);
   const dispatch = useDispatch();
   const navigate = useNavigate();
