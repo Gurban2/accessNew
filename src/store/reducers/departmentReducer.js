@@ -7,7 +7,25 @@ const departmentSlice = createSlice({
       { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
       { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
       { id: "3", name: "HR", phone: "555 555 555", office: "C" },
-      { id: "4", name: "IT", phone: "555 555 555", office: "D" }
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },
+      { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },{ id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },
+      { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },{ id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },
+      { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
+      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
+      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
+      { id: "4", name: "IT", phone: "555 555 555", office: "D" },
     ],
   },
   reducers: {
@@ -16,7 +34,8 @@ const departmentSlice = createSlice({
     },
     addDepartment: (state, action) => {
       const existingDepartment = state.departmentsData.find(
-        (department) => department.name === action.payload.name
+        (department) =>
+          department.name.toLowerCase() === action.payload.name.toLowerCase()
       );
       if (existingDepartment) {
         alert("Already exists");
@@ -40,7 +59,7 @@ const departmentSlice = createSlice({
         };
       }
     },
-    
+
     filterDepartment: (state, action) => {
       state.filteredDepartments = state.departmentsData.filter((department) =>
         department.name.toLowerCase().includes(action.payload.toLowerCase())

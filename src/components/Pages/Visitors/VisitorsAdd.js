@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
-import WebcamCapture from "../../WebcamReact/WebcamCapture";
-import { addVisitor } from "../../../store/reducers/visitorReducer";
+import { useNavigate } from "react-router-dom";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Breadcrumb from "../Breadcrumb"; // Import the Breadcrumb component
+import { VisitorValidationSchema } from "../InputValidation"; // Импорт схемы
+import WebcamCapture from "../../WebcamReact/WebcamCapture";
+import { addVisitor } from "../../../store/reducers/visitorReducer";
+import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
 
 const VisitorsAdd = () => {
@@ -15,26 +15,6 @@ const VisitorsAdd = () => {
   const [useWebcam, setUseWebcam] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    phone: Yup.string().required("Phone is required"),
-    fin: Yup.string().required("Fin is required"),
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    address: Yup.string().required("Address is required"),
-    description: Yup.string().required("Description is required"),
-    photo: Yup.mixed()
-      .required("Photo is required")
-      .test("fileType", "Unsupported file format", (value) => {
-        if (value) {
-          const fileType = value.type;
-          return fileType === "image/jpeg" || fileType === "image/png";
-        }
-        return true;
-      }),
-  });
 
   const handleCapture = (imageSrc, setFieldValue) => {
     setPhotoPreview(imageSrc);
@@ -58,13 +38,16 @@ const VisitorsAdd = () => {
 
   return (
     <div className="visitor-add-container">
-      <Breadcrumb
-        paths={[
-          { label: "Dashboard", to: "/" },
-          { label: "Visitors", to: "/visitors/all" },
-          { label: "Add Visitor", to: "/visitors/add" },
-        ]}
-      />
+      <div className="departments-wrapper d-row">
+        <Breadcrumb
+          paths={[
+            { label: "Dashboard", to: "/" },
+            { label: "Visitors", to: "/visitors/all" },
+            { label: "Add Visitor", to: "/visitors/add" },
+          ]}
+        />
+      </div>
+      <hr className="navigation-underline" />
 
       <Formik
         initialValues={{
@@ -76,7 +59,7 @@ const VisitorsAdd = () => {
           description: "",
           photo: "",
         }}
-        validationSchema={validationSchema}
+        validationSchema={VisitorValidationSchema}
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, isSubmitting, errors, touched }) => (
@@ -173,9 +156,9 @@ const VisitorsAdd = () => {
                   className="form-control"
                 />
                 <ErrorMessage name="email" component="div" className="error" />
-              </Form.Group>              
+              </Form.Group>
             </Row>
-            <Row className="mb-3">              
+            <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="address">
                 <Form.Label className="form-label-head">Address</Form.Label>
                 <Field

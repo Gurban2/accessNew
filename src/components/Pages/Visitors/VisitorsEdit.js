@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { editVisitor } from "../../../store/reducers/visitorReducer";
 import { toast } from "react-toastify";
-import { Formik, Field, Form as FormikForm } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Field, Form as FormikForm } from "formik";
+import Breadcrumb from "../Breadcrumb";
+
+import * as Yup from "yup";
 import "./style.scss";
 
 const VisitorsEdit = () => {
@@ -14,8 +16,10 @@ const VisitorsEdit = () => {
   const navigate = useNavigate();
   const [photoPreview, setPhotoPreview] = useState(null);
   const [useWebcam, setUseWebcam] = useState(false);
-  
-  const visitor = useSelector((state) => state.visitors.find((visitor) => visitor.id === id));
+
+  const visitor = useSelector((state) =>
+    state.visitors.find((visitor) => visitor.id === id)
+  );
 
   useEffect(() => {
     if (visitor) {
@@ -26,7 +30,9 @@ const VisitorsEdit = () => {
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     phone: Yup.string().required("Phone is required"),
-    email: Yup.string().email("Invalid email format").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
     address: Yup.string().required("Address is required"),
     description: Yup.string().required("Description is required"),
     photo: Yup.mixed().required("Photo is required"),
@@ -51,6 +57,16 @@ const VisitorsEdit = () => {
 
   return (
     <div className="visitor-add-container">
+      <div className="offices-wrapper d-row">
+        <Breadcrumb
+          paths={[
+            { label: "Dashboard", to: "/" },
+            { label: "Visitors", to: "/visitor/edit" },
+
+            { label: "Visitor - Edit" },
+          ]}
+        />
+      </div>
       <h1 className="visitor-add">Edit Visitor</h1>
       <Formik
         initialValues={{
@@ -67,7 +83,9 @@ const VisitorsEdit = () => {
       >
         {({ setFieldValue, isSubmitting, errors, touched }) => (
           <FormikForm className="form-container">
-            {Object.keys(errors).length > 0 && <div className="error">{Object.values(errors).join(', ')}</div>}
+            {Object.keys(errors).length > 0 && (
+              <div className="error">{Object.values(errors).join(", ")}</div>
+            )}
             <Field
               type="text"
               name="name"

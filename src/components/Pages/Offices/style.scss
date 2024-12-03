@@ -4,9 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
-  overflow: hidden;
 }
 .offices-wrapper {
   display: flex;
@@ -24,6 +22,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  margin-top: 20px;
 }
 
 .form-group {
@@ -74,7 +73,6 @@ select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
   background-color: var(--background-color);
 }
@@ -119,27 +117,7 @@ select:focus {
   background-color: var(--table-hover);
 }
 
-.breadcrumbs {
-  font-size: 14px;
-  color: #555;
-  width: fit-content;
-  background-color: var(--background-color);
-}
 
-.breadcrumbs a {
-  text-decoration: none;
-  color: #8f9091;
-  font-size: 14px;
-}
-
-.breadcrumbs a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumbs span {
-  color: #404140;
-  font-size: 16px;
-}
 .searchAddBtn {
   display: flex;
   align-items: center;
@@ -151,15 +129,17 @@ select:focus {
   max-width: 120px;
   width: 120px;
 }
-input{
+input {
   padding: 2px 3px !important;
 }
+
 .d-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  width: 100%;
+  width: -webkit-fill-available;
 }
+
 .d-row-left {
   display: flex;
 }
@@ -178,7 +158,6 @@ input{
 .navigation-underline {
   width: 100%;
   padding: 0;
-  margin: 3px;
 }
 
 .btn-danger,

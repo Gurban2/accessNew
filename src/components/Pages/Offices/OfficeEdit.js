@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editOffice } from "../../../store/reducers/officeReducer";
 import { toast } from "react-toastify";
+import Breadcrumb from "../Breadcrumb";
+
 import "./style.scss";
 
 const OfficeEdit = () => {
@@ -47,6 +49,17 @@ const OfficeEdit = () => {
 
   return (
     <div className="offices-add-container">
+      <div className="offices-wrapper d-row">
+        <Breadcrumb
+          paths={[
+            { label: "Dashboard", to: "/" },
+            { label: "Offices", to: "/Offices/all" },
+
+            { label: "Office - Edit" },
+          ]}
+        />
+      </div>
+      <hr className="navigation-underline" />
       <h1 className="offices-add">Edit Office</h1>
       <form className="offices-add-form" onSubmit={handleSubmit}>
         <div className="form-group">
@@ -76,7 +89,9 @@ const OfficeEdit = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="submit-button">Save Changes</button>
+        <button type="submit" className="submit-button">
+          Save Changes
+        </button>
       </form>
     </div>
   );

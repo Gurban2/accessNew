@@ -32,7 +32,7 @@ const OfficeAll = () => {
     <div className="offices-all-container">
       <div className="offices-wrapper d-row">
         <Breadcrumb
-          paths={[{ label: "Dashboard", to: "/" }, { label: "Offices - All" }]}
+          paths={[{ label: "Dashboard", to: "/" }, { label: "Offices - All" },]}
         />
         <div className="searchAddBtn">
           <Search

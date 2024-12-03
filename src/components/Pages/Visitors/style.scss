@@ -168,26 +168,8 @@ textarea:focus {
   background-color: var(--secondary-color);
 }
 
-// Styling for breadcrumb navigation
-.breadcrumb {
-  font-size: 14px;
-  color: #555;
 
-  a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: color 0.3s;
-  }
 
-  a:hover {
-    text-decoration: underline;
-    color: var(--primary-color);
-  }
-
-  span {
-    color: #333;
-  }
-}
 
 // Form labels and buttons inside the form container
 .form-container {

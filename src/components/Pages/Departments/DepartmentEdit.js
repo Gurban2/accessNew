@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { editDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import Breadcrumb from "../Breadcrumb";
+
 import * as Yup from "yup";
 import "./style.scss";
 
@@ -42,6 +44,17 @@ const DepartmentEdit = () => {
 
   return (
     <div className="department-add-container">
+       <div className="offices-wrapper d-row">
+        <Breadcrumb
+          paths={[
+            { label: "Dashboard", to: "/" },
+            { label: "Departments", to: "/departments/list" },
+
+            { label: "Department - Edit" },
+          ]}
+        />
+      </div>
+      <hr className="navigation-underline" />
       <h1 className="department-add">Edit Department</h1>
       <Formik
         initialValues={{

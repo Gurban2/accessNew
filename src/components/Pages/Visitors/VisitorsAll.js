@@ -5,6 +5,7 @@ import { deleteVisitor } from "../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 import { FaEye } from "react-icons/fa";
+import Breadcrumb from "../Breadcrumb";
 
 const VisitorsAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
@@ -46,9 +47,9 @@ const VisitorsAll = () => {
   return (
     <div className="visitors-all-container">
       <div className="visitors-wrapper d-row">
-        <nav className="breadcrumbs">
-          <Link to="/">Dashboard</Link> &gt; <span>Visitors - All</span>
-        </nav>
+        <Breadcrumb
+            paths={[{ label: "Dashboard", to: "/" }, { label: "Visitors - All" },]}
+        />
         <div className="searchAddBtn">
           <div className="search-bar">
             <input

@@ -2,22 +2,22 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addDepartment } from "../../../store/reducers/departmentReducer";
 import { toast } from "react-toastify";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Breadcrumb from "../Breadcrumb"; // Импортируем Breadcrumb
-import "./style.scss";
+import { Formik, Form } from "formik";
+import { DepartmentValidationSchema } from "../InputValidation";
+import Breadcrumb from "../Breadcrumb";
+import FormField from "../FormField";
 
-// Validation schema with Yup
-const validationSchema = Yup.object({
-  name: Yup.string().required("Department name is required"),
-  phone: Yup.string().required("Phone number is required"),
-  parent: Yup.string().required("Parent department is required"),
-  office: Yup.string().required("Office selection is required"),
-});
+import "./style.scss";
 
 const DepartmentsAdd = () => {
   const offices = useSelector((state) => state.offices);
   const dispatch = useDispatch();
+
+  const parentOptions = [
+    { value: "1", label: "Parent Department 1" },
+    { value: "2", label: "Parent Department 2" },
+    { value: "3", label: "Parent Department 3" },
+  ];
 
   const handleSubmit = (values, { setSubmitting }) => {
     const uniqueId = Date.now().toString();
@@ -30,15 +30,19 @@ const DepartmentsAdd = () => {
 
   return (
     <div className="department-add-container">
-      {/* Breadcrumbs section */}
-      <Breadcrumb
-        paths={[
-          { label: "Dashboard", to: "/" },
-          { label: "Departments Add" },
-        ]}
-      />
+      <div className="offices-wrapper d-row">
+        <Breadcrumb
+          paths={[
 
-      {/* Form for adding departments */}
+            { label: "Dashboard", to: "/" },
+            { label: "Departments", to: "/departments/list" },
+
+            { label: "Departments Add" },
+          ]}
+        />
+      </div>
+      <hr className="navigation-underline" />
+
       <Formik
         initialValues={{
           name: "",
@@ -46,64 +50,31 @@ const DepartmentsAdd = () => {
           parent: "",
           office: "",
         }}
-        validationSchema={validationSchema}
+        validationSchema={DepartmentValidationSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form className="department-add-form">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <Field
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter department name"
-                className="form-control"
-              />
-              <ErrorMessage name="name" component="div" className="error" />
-            </div>
+            <FormField label="Name" name="name" />
+            <FormField label="Phone" name="phone" type="tel" />
+            <FormField
+              label="Parent"
+              name="parent"
+              as="select"
+              options={parentOptions}
+            />
+            <FormField
+              label="Office"
+              name="office"
+              as="select"
+              options={offices}
+            />
 
-            <div className="form-group">
-              <label htmlFor="phone">Phone</label>
-              <Field
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="Enter department phone"
-                className="form-control"
-              />
-              <ErrorMessage name="phone" component="div" className="error" />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="parent">Parent</label>
-              <Field as="select" id="parent" name="parent" className="form-control">
-                <option value="" disabled>
-                  Select parent department
-                </option>
-                <option value="1">Parent Department 1</option>
-                <option value="2">Parent Department 2</option>
-                <option value="3">Parent Department 3</option>
-              </Field>
-              <ErrorMessage name="parent" component="div" className="error" />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="office">Office</label>
-              <Field as="select" id="office" name="office" className="form-control">
-                <option value="" disabled>
-                  Select office
-                </option>
-                {offices.map((office) => (
-                  <option key={office.id} value={office.name}>
-                    {office.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="office" component="div" className="error" />
-            </div>
-
-            <button type="submit" className="submit-button" disabled={isSubmitting}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </Form>

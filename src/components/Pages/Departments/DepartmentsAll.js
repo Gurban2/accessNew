@@ -5,6 +5,7 @@ import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Breadcrumb from "../Breadcrumb";
 import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
+import "./style.scss";
 
 const DepartmentsAll = () => {
   const departments = useSelector(
