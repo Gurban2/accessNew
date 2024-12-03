@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./dashboardStyle.css";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 const Dashboard = () => {
@@ -53,12 +53,9 @@ const Dashboard = () => {
           </tbody>
         </Table>
         <div className="text-center">
-          <button
-            onClick={handleViewAllVisitors}
-            className="btn btn-primary mt-1"
-          >
+          <Button type="button" onClick={handleViewAllVisitors}>
             Open Full List
-          </button>
+          </Button>
         </div>
       </div>
       <hr />
@@ -94,12 +91,9 @@ const Dashboard = () => {
           </tbody>
         </Table>
         <div className="text-center">
-          <button
-            onClick={handleViewAllOffices}
-            className="btn btn-primary mt-1"
-          >
+          <Button type=" button" onClick={handleViewAllOffices}>
             Open Full List
-          </button>
+          </Button>
         </div>
       </div>
       <hr />
@@ -134,12 +128,9 @@ const Dashboard = () => {
           </tbody>
         </Table>
         <div className="text-center">
-          <button
-            onClick={handleViewAllDepartments}
-            className="btn btn-primary mt-1"
-          >
+          <Button type="button" onClick={handleViewAllDepartments}>
             Open Full List
-          </button>
+          </Button>
         </div>
       </div>
     </Container>

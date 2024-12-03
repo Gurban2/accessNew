@@ -5,6 +5,7 @@ import { deleteStaff } from "../../../store/reducers/staffReducer";
 import Table from "react-bootstrap/Table";
 import { FaEye } from "react-icons/fa";
 import "../UserPermissions/style.scss";
+import { Button } from "react-bootstrap";
 
 const ListUsers = () => {
   const staffs = useSelector((state) => state.staffs);
@@ -35,10 +36,9 @@ const ListUsers = () => {
           <Link to="/">Dashboard</Link> &gt; <span>Users - All</span>
         </nav>
 
-        <Link to="/permissions/add-user" className="btn btn-primary p-2">
-          Add Users
-        </Link>
-
+        <Button type="button">
+          <Link to="/permissions/add-user">Add Users</Link>
+        </Button>
       </div>
       <hr className="navigation-underline" />
       <Table striped bordered hover>

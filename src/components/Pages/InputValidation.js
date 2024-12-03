@@ -45,13 +45,13 @@ export const VisitorValidationSchema = Yup.object({
   description: Yup.string()
     .min(5, "Description must be at least 5 characters.") // Минимальная длина описания
     .required("Description is required"),
-  photo: Yup.mixed()
-    .required("Photo is required")
-    .test("fileType", "Unsupported file format", (value) => {
-      if (value) {
-        const fileType = value.type;
-        return fileType === "image/jpeg" || fileType === "image/png";
-      }
-      return true;
-    }),
+  // photo: Yup.mixed()
+  //   .required("Photo is required")
+  //   .test("fileType", "Unsupported file format", (value) => {
+  //     if (value) {
+  //       const fileType = value.type;
+  //       return fileType === "image/jpeg" || fileType === "image/png";
+  //     }
+  //     return true;
+  //   }),
 });

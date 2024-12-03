@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 const AddUser = () => {
   const offices = useSelector((state) => state.offices);
   const departments = useSelector((state) => state.departments);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [, setError] = useState(null);
+  const [, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
@@ -109,7 +109,7 @@ const AddUser = () => {
 
   return (
     <div className="user-add-container">
-      <nav className="breadcrumb">
+      <nav className="breadcrumbs">
         <Link to="/">Dashboard</Link> &gt;{" "}
         <Link to="/users/permissions/list">User & Permissions</Link> &gt; <span>Add User</span>
       </nav>

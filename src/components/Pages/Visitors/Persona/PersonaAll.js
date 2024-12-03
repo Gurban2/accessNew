@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updatePersona,updateVisitor } from "../../../../store/reducers/visitorReducer";
+import {
+  updatePersona,
+  updateVisitor,
+} from "../../../../store/reducers/visitorReducer";
 import Table from "react-bootstrap/Table";
+import { Button } from "react-bootstrap";
 
 const PersonaAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
+  console.log({ visitors });
   const dispatch = useDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -22,11 +27,9 @@ const PersonaAll = () => {
     setIsPopupOpen(true);
   };
 
-
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this Persona?")) {
       dispatch(updateVisitor({ id, reason: "", personNonGrata: "false" }));
-      
     }
   };
 
@@ -43,13 +46,12 @@ const PersonaAll = () => {
 
   return (
     <div className="persona-all-container">
-
       <h1 className="persona-all-title">Personas Marked as "Non Grata"</h1>
       {personNonGrataVisitors.length > 0 ? (
         <>
-        <Link to="/persona/add" className="btn btn-primary p-2">
-        Add Persona
-        </Link>
+          <Button type="button">
+            <Link to="/persona/add">Add Persona</Link>
+          </Button>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -67,7 +69,7 @@ const PersonaAll = () => {
                   <td>{index + 1}</td>
                   <td>
                     {visitor.photo ? (
-                       typeof visitor.photo === "string" ? (
+                      typeof visitor.photo === "string" ? (
                         <img
                           src={visitor.photo}
                           alt={`${visitor.name}`}
@@ -136,7 +138,6 @@ const PersonaAll = () => {
           <p style={{ color: "red", fontStyle: "italic", marginTop: "20px" }}>
             These users are marked as "Person Non Grata."
           </p>
-
         </>
       ) : (
         <p className="no-personas">No "Person Non Grata" users found.</p>
@@ -180,13 +181,13 @@ const PersonaAll = () => {
               gap: "10px",
             }}
           >
-            <button
+            <Button
+              type="button"
               onClick={handleConfirmEdit}
-              className="btn btn-primary"
               style={{ padding: "5px 10px" }}
             >
               Confirm
-            </button>
+            </Button>
             <button
               onClick={handleCancel}
               className="btn btn-secondary"

@@ -6,12 +6,13 @@ import Breadcrumb from "../Breadcrumb";
 import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 import "./style.scss";
+import { Button } from "react-bootstrap";
 
 const DepartmentsAll = () => {
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );
-  console.log(departments)
+  console.log(departments);
   const [filteredDepartments, setFilteredDepartments] = useState(departments);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,9 +43,9 @@ const DepartmentsAll = () => {
             onFilter={setFilteredDepartments}
             placeholder="Search departments..."
           />
-          <Link to="/departments/add" className="btn btn-primary">
-            Add Department
-          </Link>
+          <Button type="button">
+            <Link to="/departments/add">Add Department</Link>
+          </Button>
         </div>
       </div>
       <hr className="navigation-underline" />

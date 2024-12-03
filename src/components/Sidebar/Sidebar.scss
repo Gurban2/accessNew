@@ -1,34 +1,7 @@
-:root {
-  /* Updated Color Palette */
-  --primary-color: rgb(52 170 255);
-  --success-color: #28a745;
-  --success-color-hover: #1b5a29;
-  --danger-color: #dc3545;
-  --border-color: #babec2;
-  --breadcrumb-bg: #ffffff;
-  --card-bg: #ffffff;
-  --table-hover: #f1f3f5;
-  --input-border: #ced4da;
-  --button-hover: mix(black, #3f5e83, 10%);
-  --secondary-color: #dacc0d;
-  --secondary-color-hover: #3f2e3f;
-
-  /* Sidebar Colors */
-  --sidebar-bg: var(--background-color);
-  --sidebar-hover-bg: #2b314b; /* Slightly dark hover for sidebar */
-  --sidebar-active-bg: var(--secondary-color-hover);
-  --sidebar-link-active: #e2ecff;
-  --link-default: var(--link-color);
-  --link-hover: var(--link-color);
-  --link-active: var(--primary-color);
-  --divider-color: var(--border-color);
-}
-
 .sidebar {
   display: flex;
   border-right: 1px solid var(--border-default);
   padding: 0 12px;
-  font-family: Rubik, Helvetica, Arial, serif !important;
 
   /* Collapsed Sidebar */
   .collapsed-sidebar {
@@ -116,13 +89,13 @@
   }
 
   .sidebar-link.active {
-    background: var(--sidebar-link-active) !important;
+    background: var(--link-default) !important;
     border-radius: 5px;
     border-radius: 0;
     color: var(--link-color) !important;
 
     h4 {
-      color: inherit !important;
+      color: var(--link-color) !important;
     }
   }
 
@@ -145,7 +118,7 @@
 
   /* Sidebar Titles */
   h4 {
-    color: var(--text-color);
+    color: var(--text-color-secondary) !important;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 1rem;
@@ -307,6 +280,7 @@
       font-weight: 500;
       line-height: 1.4;
       margin: 0;
+      color: var(--text-color-secondary) !important;
     }
   }
 
@@ -316,7 +290,7 @@
     color: var(--link-color) !important;
 
     h4 {
-      color: inherit !important;
+      color: var(--text-color-secondary) !important;
     }
   }
 

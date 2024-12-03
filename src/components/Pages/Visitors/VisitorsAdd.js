@@ -11,6 +11,7 @@ import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
 import { AppPaths } from "../../../constants/appPaths";
 import { FaPlus } from "react-icons/fa";
+import Capture from "../../../modules/Capture";
 
 const VisitorsAdd = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -74,16 +75,20 @@ const VisitorsAdd = () => {
                   className="photo-input"
                   onClick={() => setShowModal(true)} // Open the modal when clicked
                 >
-                  {photoPreview ? (
+                  {photoPreview && (
                     <div className="photo-preview">
                       <img src={photoPreview} alt="Preview" />
                     </div>
-                  ) : (
-                    <div className="photo-placeholder">
-                      <FaPlus />
-                    </div>
                   )}
                 </div>
+                <Capture
+                  onClose={() => setShowModal(false)}
+                  onConfirm={() => setShowModal(false)}
+                  handleCapture={(imageSrc) =>
+                    handleCapture(imageSrc, setFieldValue)
+                  }
+                  btnText={"Add Photo"}
+                />
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
@@ -166,22 +171,11 @@ const VisitorsAdd = () => {
                 />
               </Form.Group>
             </Row>
-            <Row className="mb-1 d-flex justify-content-end">
-              <Button
-                as={Col}
-                xs={12}
-                md={2}
-                sm={1}
-                variant="success"
-                type="submit"
-                disabled={isSubmitting}
-              >
+            <Row className="mb-1 d-flex justify-content-end  visitor-add-container-footer">
+              <Button variant="primary" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
               <Button
-                as={Col}
-                xs={12}
-                md={2}
                 variant="danger"
                 type="button"
                 onClick={() => navigate("/visitors/all")}
@@ -189,49 +183,6 @@ const VisitorsAdd = () => {
                 Cancel
               </Button>
             </Row>
-            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-              <Modal.Header closeButton>
-                <Modal.Title>Capture/Upload Photo</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className="d-flex justify-content-between">
-                  <div style={{ flex: 1, marginRight: "10px" }}>
-                    <input
-                      type="file"
-                      name="photo"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files[0];
-                        setFieldValue("photo", file);
-                        setPhotoPreview(URL.createObjectURL(file));
-                        setShowModal(false); // Close the modal after selecting
-                      }}
-                      className="form-control"
-                    />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <button
-                      type="button"
-                      onClick={() => setUseWebcam(true)}
-                      className="webcam-button form-control"
-                    >
-                      Use Webcam
-                    </button>
-                  </div>
-                </div>
-                {useWebcam && (
-                  <WebcamCapture
-                    onCapture={(imageSrc) =>
-                      handleCapture(imageSrc, setFieldValue)
-                    }
-                    onCancel={() => {
-                      setUseWebcam(false);
-                      setPhotoPreview(null);
-                    }}
-                  />
-                )}
-              </Modal.Body>
-            </Modal>
           </FormikForm>
         )}
       </Formik>

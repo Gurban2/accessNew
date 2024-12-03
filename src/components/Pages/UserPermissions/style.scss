@@ -1,3 +1,8 @@
+:root{
+  --form-background: var(--white);
+  --lighten-form-background: lighten(--form-background, 10%);
+}
+
 .user-add-container {
   display: flex;
   flex-direction: column;
@@ -30,19 +35,4 @@
   font-weight: bold;
   font-size: 24px;
   color: #333;
-}
-
-.submit-button {
-  background-color: #00ff08;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-
-  &:hover {
-    background-color: var(--hover-color);
-    color: #fff;
-  }
 }

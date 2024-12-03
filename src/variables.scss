@@ -1,35 +1,46 @@
 :root {
-  //   --primary-color: #3f5e83;
+  --white: #ffffff;
+  --red: #ff2829;
+  --red20: #ff5b5c;
+
+  --primary-color: #5a8dee;
   --success-color: #28a745;
   --success-color-hover: #1b5a29;
   --danger-color: #dc3545;
+  --error-color: #dc3545;
+  --border-color: #babec2;
+  --background-color: #f2f4f4;
+  --secondary-color: #dacc0d;
+  --secondary-color-hover: #3f2e3f;
   --text-color: #bac0c7;
   --text-color-secondary: #8494a7;
-  --link-color: #5a8dee;
-  --white: #ffffff;
   --border-default: #dfe3e7;
+  --hover-color: #2c6de9;
 
-  --background-color: #f2f4f4;
-  --border-color: #babec2;
-  --breadcrumb-bg: #ffffff;
-  --card-bg: #ffffff;
   --table-hover: #f1f3f5;
   --input-border: #ced4da;
-  // --button-hover: darken(--primary-color, 10%);
-  --button-hover: mix(black, --primary-color, 10%);
+  --button-hover: mix(black, #3f5e83, 10%);
 
-  --secondary-color: #dacc0d;
+  --link-color: var(--primary);
+  --link-default: var(--primary-color);
+  --link-hover: var(--link-color);
+  --link-active: var(--primary-color);
+  --divider-color: var(--border-color);
+
+  --breadcrumb-bg: var(--white);
+  --card-bg: var(--white);
 
   --font-family: "Roboto Flex", sans-serif;
-  --font-size-base: 14px;
-  --font-size-sm: 12px;
-  --font-size-lg: 18px;
-  --font-weight-normal: 300;
-  --font-weight-normal-bold: 400;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.8rem;
+  --font-size-lg: 1.25rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
   --font-weight-bold: 700;
   --line-height-base: 1.5;
-  --form-background: #fff;
-  --primary-color: #007bff;
-  --hover-color: darken(--primary-color, 10%);
-  --lighten-form-background: lighten(--form-background, 10%);
+
+  --sidebar-bg: var(--background-color);
+  --sidebar-hover-bg: #2b314b; /* Slightly dark hover for sidebar */
+  --sidebar-active-bg: var(--secondary-color-hover);
+  --sidebar-link-active: var(--link-default);
 }

@@ -10,15 +10,6 @@ const officeSlice = createSlice({
   ],
   reducers: {
     addOffice: (state, action) => {
-      console.log({ state, action });
-
-      const existingOffice = state.find(
-        (office) => office.name === action.payload.name
-      );
-      if (existingOffice) {
-        alert("Alredy exist");
-        return state;
-      }
       const updatedState = [...state, action.payload];
       console.log("State after adding office:", updatedState);
       return updatedState;

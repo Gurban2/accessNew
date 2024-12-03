@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import WebcamCapture from "../../WebcamReact/WebcamCapture";
+// import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { editVisitor } from "../../../store/reducers/visitorReducer";
 import { toast } from "react-toastify";
 import { Formik, Field, Form as FormikForm } from "formik";
@@ -14,18 +14,18 @@ const VisitorsEdit = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [photoPreview, setPhotoPreview] = useState(null);
-  const [useWebcam, setUseWebcam] = useState(false);
+  // const [photoPreview, setPhotoPreview] = useState(null);
+  // const [useWebcam, setUseWebcam] = useState(false);
 
   const visitor = useSelector((state) =>
     state.visitors.find((visitor) => visitor.id === id)
   );
 
-  useEffect(() => {
-    if (visitor) {
-      setPhotoPreview(visitor.photo);
-    }
-  }, [visitor]);
+  // useEffect(() => {
+  //   if (visitor) {
+  //     setPhotoPreview(visitor.photo);
+  //   }
+  // }, [visitor]);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
@@ -38,11 +38,11 @@ const VisitorsEdit = () => {
     photo: Yup.mixed().required("Photo is required"),
   });
 
-  const handleCapture = (imageSrc, setFieldValue) => {
-    setPhotoPreview(imageSrc);
-    setFieldValue("photo", imageSrc);
-    setUseWebcam(false);
-  };
+  // const handleCapture = (imageSrc, setFieldValue) => {
+  //   setPhotoPreview(imageSrc);
+  //   setFieldValue("photo", imageSrc);
+  //   setUseWebcam(false);
+  // };
 
   const handleSubmit = (values, { setSubmitting }) => {
     dispatch(editVisitor({ id: visitor.id, data: values }));
@@ -67,7 +67,7 @@ const VisitorsEdit = () => {
           ]}
         />
       </div>
-      <h1 className="visitor-add">Edit Visitor</h1>
+      <h1 className="visitor-add-title">Edit Visitor</h1>
       <Formik
         initialValues={{
           name: visitor.name,

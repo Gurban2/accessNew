@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
@@ -6,11 +6,11 @@ import { FaEye } from "react-icons/fa";
 import Table from "react-bootstrap/Table";
 
 const VisitorsAll = () => {
-  const visitors = useSelector((state) => state.visitors.visitorsData || []);
+  const visitors = useSelector((state) => state.visitors || []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   // Mемоизированный список фильтрованных посетителей
   const filteredVisitors = useMemo(() => {
@@ -65,7 +65,11 @@ const VisitorsAll = () => {
                   <img
                     src={visitor.photo}
                     alt={visitor.name}
-                    style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
                   "No photo"

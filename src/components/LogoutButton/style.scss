@@ -24,8 +24,9 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
   &:hover {
-    background: var(--sidebar-link-active) !important;
-    color: var(--text-color-secondary) !important;
+    background: var(--link-default) !important;
+    color: var(--white) !important;
   }
 }

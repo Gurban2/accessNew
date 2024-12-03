@@ -1,25 +1,43 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { useDispatch } from "react-redux"; // Import useDispatch
+import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
 import { addOffice } from "../../../store/reducers/officeReducer"; // Import addOffice action
 import { OfficeValidationSchema } from "../InputValidation";
 import { toast } from "react-toastify";
 
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
+import { AppPaths } from "../../../constants/appPaths";
+import { Button } from "react-bootstrap";
 
 const OfficeAdd = () => {
+  const offices = useSelector((state) => state.offices); // Get the state from the store
   const dispatch = useDispatch(); // Initialize dispatch
 
   const handleSubmit = (values, { setSubmitting }) => {
     const uniqueId = Date.now().toString();
     const newOffice = { ...values, id: uniqueId };
 
+    const existingOffice = offices.find(
+      (office) => office.name === newOffice.name
+    );
+
+    if (existingOffice) {
+      setSubmitting(false);
+      return toast.error("Office already exists");
+    }
+
     dispatch(addOffice(newOffice));
     toast.success("Office successfully added");
 
     setSubmitting(false);
   };
+
+  const breadCrumbs = [
+    { label: "Dashboard", to: AppPaths.dashboard.home },
+    { label: "Offices", to: AppPaths.offices.all },
+    { label: "Add Office", to: AppPaths.offices.add },
+  ];
 
   return (
     <Formik
@@ -30,13 +48,7 @@ const OfficeAdd = () => {
       {({ isSubmitting }) => (
         <div className="offices-add-container">
           <div className="offices-wrapper d-row">
-            <Breadcrumb
-              paths={[
-                { label: "Dashboard", to: "/" },
-                { label: "Offices", to: "/Offices/all" },
-                { label: "Offices - Add" },
-              ]}
-            />
+            <Breadcrumb paths={breadCrumbs} />
           </div>
           <hr className="navigation-underline" />
 
@@ -57,13 +69,9 @@ const OfficeAdd = () => {
               type="tel"
               placeholder="Enter Phone Number"
             />
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isSubmitting}
-            >
+            <Button type="submit" disabled={isSubmitting} variant="primary">
               {isSubmitting ? "Submitting..." : "Submit"}
-            </button>
+            </Button>
           </Form>
         </div>
       )}

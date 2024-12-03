@@ -7,6 +7,9 @@ import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 
 import "./style.scss";
+import { AppPaths } from "../../../constants/appPaths";
+import { Button } from "react-bootstrap";
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 
 const OfficeAll = () => {
   const offices = useSelector((state) => state.offices);
@@ -28,21 +31,24 @@ const OfficeAll = () => {
     navigate(`/offices/edit/${id}`);
   };
 
+  const breadCrumbs = [
+    { label: "Dashboard", to: AppPaths.dashboard.home },
+    { label: "Offices", to: AppPaths.offices.all },
+  ];
+
   return (
     <div className="offices-all-container">
       <div className="offices-wrapper d-row">
-        <Breadcrumb
-          paths={[{ label: "Dashboard", to: "/" }, { label: "Offices - All" },]}
-        />
+        <Breadcrumb paths={breadCrumbs} />
         <div className="searchAddBtn">
           <Search
             data={offices}
             onFilter={setFilteredOffices}
             placeholder="Search offices..."
           />
-          <Link to="/offices/add" className="btn btn-primary p-1">
-            Add Office
-          </Link>
+          <Button type="button">
+            <Link to="/offices/add">Add Office</Link>
+          </Button>
         </div>
       </div>
       <hr className="navigation-underline" />
@@ -64,19 +70,22 @@ const OfficeAll = () => {
               <td>{office.name}</td>
               <td>{office.address}</td>
               <td>{office.phone}</td>
-              <td>
-                <button
+              <td className="d-flex justify-between gap-2">
+                <Button
+                  variant="warning"
+                  className="w-100"
                   onClick={() => handleEdit(office.id)}
-                  className="btn btn-warning btn-sm"
                 >
-                  Edit
-                </button>{" "}
-                <button
+                  <FaEdit />
+                </Button>{" "}
+                <Button
+                  type="button"
+                  className="w-100"
+                  variant="danger"
                   onClick={() => handleDelete(office.id)}
-                  className="btn btn-danger btn-sm"
                 >
-                  Delete
-                </button>
+                  <FaRegTrashAlt />
+                </Button>
               </td>
             </tr>
           ))}
