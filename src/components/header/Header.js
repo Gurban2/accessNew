@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./header.scss";
+import LangSwitcher from "../../modules/LangSwitcher";
 
 const ref = React.createRef();
 const Header = ({ userName }) => {
@@ -40,17 +41,19 @@ const Header = ({ userName }) => {
         <Container>
           <Navbar.Brand href="#home">Access Store</Navbar.Brand>
           <Navbar.Toggle />
+
           <Navbar.Collapse className="justify-content-end">
             {userName ? (
               <Navbar.Text>
                 Signed in as: <a href="#profile">{userName}</a>
               </Navbar.Text>
             ) : (
-              <Navbar.Text>
+              <Navbar.Text className="me-3">
                 <a href="#login">Login</a>
               </Navbar.Text>
             )}
           </Navbar.Collapse>
+          <LangSwitcher />
         </Container>
       </Navbar>
     </div>

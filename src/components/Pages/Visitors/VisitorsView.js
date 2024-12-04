@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
 import { AppPaths } from "../../../constants/appPaths";
 import "./style.scss";
