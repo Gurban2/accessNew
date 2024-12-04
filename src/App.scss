@@ -1,5 +1,6 @@
+@use "sass:meta";
 @import "bootstrap/dist/css/bootstrap.min.css";
-@import "/src/variables.scss";
+@include meta.load-css("variables.scss");
 
 body {
   font-family: Rubik, Helvetica, Arial, serif !important;
