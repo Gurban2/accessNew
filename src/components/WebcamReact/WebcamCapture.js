@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import Webcam from "react-webcam";
 import "./style.scss";
 
-const WebcamCapture = ({ onCapture, onCancel }) => {
+const WebcamCapture = ({ onCapture }) => {
   const webcamRef = useRef(null);
 
   const handleCapture = () => {
@@ -27,9 +27,6 @@ const WebcamCapture = ({ onCapture, onCancel }) => {
           className="capture-button"
         >
           Capture Photo
-        </Button>
-        <Button type="button" onClick={onCancel} className="cancel-webcam">
-          Cancel
         </Button>
       </div>
     </div>
