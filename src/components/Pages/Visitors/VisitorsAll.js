@@ -29,7 +29,7 @@ const VisitorsAll = () => {
     if (window.confirm("Are you sure you want to delete this Visitor?")) {
       setIsLoading(true);
       try {
-        await dispatch(deleteVisitor({ id }));
+        dispatch(deleteVisitor({ id }));
       } catch (error) {
         console.error("Error deleting visitor", error);
       }

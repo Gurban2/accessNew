@@ -10,7 +10,6 @@ import { Button } from "react-bootstrap";
 
 const PersonaAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
-  console.log({ visitors });
   const dispatch = useDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,7 +17,7 @@ const PersonaAll = () => {
   const [selectedVisitorId, setSelectedVisitorId] = useState(null);
 
   const personNonGrataVisitors = visitors.filter(
-    (visitor) => visitor.personNonGrata === "true"
+    (visitor) => visitor.personNonGrata
   );
 
   const handleEdit = (id, currentReason) => {

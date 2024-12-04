@@ -1,187 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateVisitor } from "../../../../store/reducers/visitorReducer";
-import { Table, Button, Form } from "react-bootstrap";
-import { toast } from "react-toastify";
-import AddModal from "./ConfirmModal";
+import { Form, Button, Alert } from "react-bootstrap";
+import AddModal from "./AddModal";
+import DataTable from "../../../../modules/DataTable";
+
+import "./style.scss";
 
 const PersonaAdd = () => {
   const [inputValue, setInputValue] = useState("");
-  const [matchedVisitors, setMatchedVisitors] = useState([]);
   const [reason, setReason] = useState("");
-  const [selectedVisitor, setSelectedVisitor] = useState(null);
+  // const [selectedVisitor, setSelectedVisitor] = useState(null);
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-  const visitors = useSelector((state) => state.visitors || []);
+  const visitors = useSelector((state) => state.visitors.filter(v => !v.personNonGrata));
+
+  const matchedVisitors = useMemo(() => {
+    return visitors.filter((visitor) =>
+      visitor.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }, [inputValue, visitors]);
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-
-    if (value.trim() === "") {
-      setMatchedVisitors([]);
-    } else {
-      const matches = visitors.filter((visitor) =>
-        visitor.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setMatchedVisitors(matches);
-    }
-  };
-  const handleAdd = (visitor) => {
-    setSelectedVisitor(visitor);
-    if (!visitor) {
-      alert("No matching visitor found!");
-      return;
-    }
-
-    if (visitor.personNonGrata === "true") {
-      if (
-        window.confirm(
-          `This visitor is already marked as 'Person Non Grata'. Do you want to remove this status?`
-        )
-      ) {
-        dispatch(
-          updateVisitor({
-            id: visitor.id,
-            personNonGrata: "false",
-            reason: "",
-          })
-        );
-        alert(`${visitor.name} is no longer marked as 'Person Non Grata'.`);
-      }
-    }
+    setInputValue(e.target.value);
   };
 
-  const handleConfirmAdd = () => {
+  const handleConfirmAdd = (id) => {
     if (!reason.trim()) {
-      alert("Please provide a reason.");
+      setError("Please provide a reason.");
       return;
     }
 
-    dispatch(
-      updateVisitor({
-        id: selectedVisitor.id,
-        personNonGrata: "true",
-        reason: reason.trim(),
-      })
-    );
+    try {
+      dispatch(
+        updateVisitor({
+          id,
+          personNonGrata: true,
+          reason: reason.trim(),
+        })
+      );
 
-    setInputValue("");
-    setMatchedVisitors([]);
-    setReason("");
-    toast.success("Person Non Grata Successfully Added");
+      setInputValue("");
+      setReason("");
+      setError(""); // Clear error after successful update
+    } catch (error) {
+      setError("Failed to update. Please try again.");
+      console.log(error);
+    }
   };
 
-  const handleCancel = () => {
-    setReason("");
-  };
+  const headItems = ["ID", "Name", "Phone", "Fin", "Actions"];
+
+  const items = matchedVisitors.map((visitor) => ({
+    id: visitor.id,
+    name: visitor.name,
+    phone: visitor.phone,
+    fin: visitor.fin,
+    action: (
+      <AddModal
+        onChange={(e) => setReason(e.target.value)}
+        reason={reason}
+        onConfirm={() => handleConfirmAdd(visitor.id)}
+        // onCancel={() => (null)}
+      />
+    ),
+  }));
 
   return (
-    <div className="persona-add-container">
-      <h1 className="persona-add-title">Add or Remove 'Person Non Grata'</h1>
+    <div>
       <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Search</Form.Label>
+        <Form.Group controlId="searchVisitor">
+          <Form.Label>Search Visitor</Form.Label>
           <Form.Control
             type="text"
             value={inputValue}
             onChange={handleInputChange}
-            placeholder="Search for a visitor"
-            className="search-input"
+            placeholder="Search by name"
           />
         </Form.Group>
       </Form>
-      {matchedVisitors.length > 0 && (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>FIN</th>
-              <th>Status</th>
-              <th>Reason</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {matchedVisitors.map((visitor) => (
-              <tr key={visitor.id}>
-                <td>
-                  {visitor.photo ? (
-                    typeof visitor.photo === "string" ? (
-                      <img
-                        src={visitor.photo}
-                        alt={`${visitor.name}`}
-                        className="visitor-photo"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                          marginRight: "10px",
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={URL.createObjectURL(visitor.photo)}
-                        alt={`${visitor.name}`}
-                        className="visitor-photo"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                          marginRight: "10px",
-                        }}
-                      />
-                    )
-                  ) : (
-                    <div
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                        backgroundColor: "#ddd",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginRight: "10px",
-                        fontSize: "12px",
-                      }}
-                    >
-                      No photo
-                    </div>
-                  )}
-                </td>
-                <td>{visitor.name}</td>
-                <td>{visitor.fin}</td>
-                <td
-                  style={{
-                    color: visitor.personNonGrata === "true" ? "red" : "green",
-                  }}
-                >
-                  {visitor.personNonGrata === "true"
-                    ? "Person Non Grata"
-                    : "Not Person Non Grata"}
-                </td>
-                <td>{visitor.reason || "N/A"}</td>
-                <td>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={() => handleAdd(visitor)}
-                  >
-                    {visitor.personNonGrata === "true"
-                      ? "Remove from Non Grata"
-                      : <AddModal onChange={(e) => setReason(e.target.value)} onConfirm={handleConfirmAdd} onCancel={handleCancel} />
-                    }
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+
+      {error && <Alert variant="danger">{error}</Alert>}
+
+      {/* Display matched visitors as a DataTable */}
+      <DataTable
+        withAction
+        headItems={headItems}
+        tableProps={{ striped: true, bordered: true, hover: true }}
+        items={items}
+      />
+
+      {/* {selectedVisitor && (
+        
+      )} */}
     </div>
   );
 };

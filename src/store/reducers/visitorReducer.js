@@ -4,36 +4,36 @@ const visitorSlice = createSlice({
   name: "visitors",
   initialState: [
     {
-    id: "2",
-    name: "Admin",
-    phone: "555 555 555",
-    fin: "edhrfjr",
-    email: "user",
-    address: "B",  
-    tag: "person non grata",
-    reason: "",   
-  },
-  {
-    id: "3",
-    name: "Person",
-    phone: "555 555 555",
-    fin: "jtydjrt",
-    email: "user",
-    address: "C",
-    tag: "true",
-    reason: "",   
-  },
-  {
-    id: "4",
-    name: "Kuku",
-    phone: "555 555 555",
-    fin: "jtukfjd",
-    email: "user",
-    address: "D",
-    tag: "true",
-    reason: "",   
-  },
-],
+      id: "2",
+      name: "Admin",
+      phone: "555 555 555",
+      fin: "edhrfjr",
+      email: "user",
+      address: "B",
+      tag: "person non grata",
+      reason: "",
+    },
+    {
+      id: "3",
+      name: "Person",
+      phone: "555 555 555",
+      fin: "jtydjrt",
+      email: "user",
+      address: "C",
+      tag: "true",
+      reason: "",
+    },
+    {
+      id: "4",
+      name: "Kuku",
+      phone: "555 555 555",
+      fin: "jtukfjd",
+      email: "user",
+      address: "D",
+      tag: "true",
+      reason: "",
+    },
+  ],
 
   reducers: {
     setVisitors(state, action) {
@@ -68,19 +68,19 @@ const visitorSlice = createSlice({
     },
     updateVisitor: (state, action) => {
       const { id, personNonGrata, reason } = action.payload;
-      const visitorIndex = state.visitorsData.findIndex(
-        (visitor) => visitor.id === id
-      );
+      const visitorIndex = state.findIndex((visitor) => visitor.id === id);
 
+      if (visitorIndex === -1) return state;
+      
       return [
-        ...state.visitorsData.slice(0, visitorIndex),
+        ...state.slice(0, visitorIndex),
         {
-          ...state.visitorsData[visitorIndex],
+          ...state[visitorIndex],
           personNonGrata,
           reason,
           updatedAt: new Date().toISOString(),
         },
-        ...state.visitorsData.slice(visitorIndex + 1),
+        ...state.slice(visitorIndex + 1),
       ];
     },
     updatePersona: (state, action) => {

@@ -73,7 +73,6 @@ const staffSlice = createSlice({
     },
   },
 });
-console.log(new Date()); // Проверь, возвращает ли это правильную дату
 
 export const { addStaff, deleteStaff, editStaff, filterStaff, updateStaffr, updatePersona } =
   staffSlice.actions;
