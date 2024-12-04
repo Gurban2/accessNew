@@ -16,9 +16,7 @@ import VisitorView from "./components/Pages/Visitors/VisitorsView";
 import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
 import MySidebar from "./components/Sidebar/Sidebar";
 
-// import SiteSet from "./components/Pages/Site/SiteSet";
-// import Translations from "./components/Pages/Site/Translations";
-import AddPermissons from "./components/Pages/UserPermissions/AddPermissons";
+import AddPermissions from "./components/Pages/UserPermissions/AddPermissions";
 import AddUser from "./components/Pages/UserPermissions/AddUser";
 import AllPermissions from "./components/Pages/UserPermissions/AllPermissions";
 import ListUsers from "./components/Pages/UserPermissions/ListUsers";
@@ -31,7 +29,6 @@ import { ToastContainer } from "react-toastify";
 import Dashboard from "./components/dashboard";
 import "./App.scss";
 
-
 function App() {
   return (
     <Provider store={store}>
@@ -41,7 +38,6 @@ function App() {
           <MySidebar />
           <div className="main">
             <Header />
-
             <div className="content">
               <Routes>
                 <Route path={AppPaths.dashboard.home} element={<Dashboard />} />
@@ -94,7 +90,7 @@ function App() {
                 {/* Users & Permissions */}
                 <Route
                   path={AppPaths.users.permissions.add}
-                  element={<AddPermissons />}
+                  element={<AddPermissions />}
                 />
                 <Route
                   path={AppPaths.users.permissions.addUser}

@@ -23,24 +23,6 @@ const Dashboard = () => {
 
   const handleViewAll = (path) => navigate(path);
 
-  
-  const renderTableRows = (data, fields, noDataMessage) => {
-    if (data.length === 0) {
-      return (
-        <tr>
-          <td colSpan={fields.length}>{noDataMessage}</td>
-        </tr>
-      );
-    }
-    return data.map((item, index) => (
-      <tr key={item.id || index}>
-        {fields.map((field) => (
-          <td key={field}>{item[field]}</td>
-        ))}
-      </tr>
-    ));
-  };
-
   return (
     <Container fluid>
       {/* Visitors Section */}
