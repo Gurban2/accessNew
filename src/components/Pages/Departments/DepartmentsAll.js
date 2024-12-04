@@ -5,14 +5,14 @@ import { deleteDepartment } from "../../../store/reducers/departmentReducer";
 import Breadcrumb from "../Breadcrumb";
 import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
-import "./style.scss";
 import { Button } from "react-bootstrap";
+import "./style.scss"; 
 
 const DepartmentsAll = () => {
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );
-  console.log(departments);
+  // console.log(departments);
   const [filteredDepartments, setFilteredDepartments] = useState(departments);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +49,6 @@ const DepartmentsAll = () => {
         </div>
       </div>
       <hr className="navigation-underline" />
-
       <Table striped bordered hover>
         <thead>
           <tr>
