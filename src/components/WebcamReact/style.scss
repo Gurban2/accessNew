@@ -1,0 +1,16 @@
+.webcam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  &-preview {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+
+  &-actions {
+    display: flex;
+    gap: 10px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button } from "react-bootstrap";
 import Webcam from "react-webcam";
+import "./style.scss";
 
 const WebcamCapture = ({ onCapture, onCancel }) => {
   const webcamRef = useRef(null);
@@ -11,19 +12,26 @@ const WebcamCapture = ({ onCapture, onCancel }) => {
   };
 
   return (
-    <div className="webcam-capture-container">
+    <div className="webcam">
       <Webcam
         audio={false}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         className="webcam-preview"
       />
-      <Button type="button" onClick={handleCapture} className="capture-button">
-        Capture Photo
-      </Button>
-      <Button type="button" onClick={onCancel} className="cancel-webcam">
-        Cancel
-      </Button>
+
+      <div className="webcam-actions">
+        <Button
+          type="button"
+          onClick={handleCapture}
+          className="capture-button"
+        >
+          Capture Photo
+        </Button>
+        <Button type="button" onClick={onCancel} className="cancel-webcam">
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 };

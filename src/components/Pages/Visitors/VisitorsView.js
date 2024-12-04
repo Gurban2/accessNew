@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
+import { AppPaths } from "../../../constants/appPaths";
 
 const VisitorsView = () => {
   const { id } = useParams();
-  const visitors = useSelector((state) => state.visitors);
-  const [visitor, setVisitor] = useState(null);
-
-  useEffect(() => {
-    const foundVisitor = visitors.find((visitor) => visitor.id === id);
-    setVisitor(foundVisitor);
-  }, [id, visitors]);
+  const visitor = useSelector(
+    (state) =>
+      state.visitors.find((visitor) => visitor.id.toString() === id.toString()),
+    shallowEqual
+  );
 
   if (!visitor) {
     return <div>Loading...</div>;
@@ -23,8 +22,8 @@ const VisitorsView = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: "Dashboard", to: "/" },
-            { label: "Visitors", to: "/viditors/all" },
+            { label: "Dashboard", to: AppPaths.dashboard.home },
+            { label: "Visitors", to: AppPaths.visitors.all },
 
             { label: "Visitor - Edit" },
           ]}

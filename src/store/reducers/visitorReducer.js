@@ -2,7 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const visitorSlice = createSlice({
   name: "visitors",
-  initialState: [],
+  initialState: [
+    {
+      id: 1,
+      name: "John Doe",
+      phone: "1234567890",
+      fin: "1234567890",
+      email: "example@test.test",
+    },
+    {
+      id: 2,
+      name: "Qane Doe",
+      phone: "0987654321",
+      fin: "0987654321",
+      email: "sadas",
+    },
+  ],
 
   reducers: {
     setVisitors(state, action) {

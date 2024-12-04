@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import CoreModal from "react-bootstrap/Modal";
 
@@ -10,8 +10,15 @@ const Modal = ({
   onCancel,
   extraProps = {},
   defaultShow = false,
+  onClick,
+  btnProps = {},
+  hideBtn = false,
 }) => {
-  const [show, setShow] = useState(defaultShow);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setShow(defaultShow);
+  }, [defaultShow]);
 
   const handleClose = () => {
     onCancel && onCancel();
@@ -19,14 +26,22 @@ const Modal = ({
   };
 
   const handleShow = () => {
+    onClick && onClick();
     setShow(true);
+  };
+
+  const handleConfirm = () => {
+    onConfirm();
+    handleClose();
   };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        {btnText}
-      </Button>
+      {!hideBtn && (
+        <Button variant="primary" onClick={handleShow} {...btnProps}>
+          {btnText}
+        </Button>
+      )}
 
       <CoreModal
         show={show}
@@ -43,7 +58,7 @@ const Modal = ({
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={onConfirm}>
+          <Button variant="primary" onClick={handleConfirm}>
             Confirm
           </Button>
         </CoreModal.Footer>
