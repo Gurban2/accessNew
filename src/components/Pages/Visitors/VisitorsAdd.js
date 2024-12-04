@@ -1,30 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import WebcamCapture from "../../WebcamReact/WebcamCapture";
 import { addVisitor } from "../../../store/reducers/visitorReducer";
-import { Button, Col, Form, Row, Modal } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
 import { VisitorValidationSchema } from "../InputValidation"; // Импорт схемы
 import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
 import { AppPaths } from "../../../constants/appPaths";
-import { FaPlus } from "react-icons/fa";
 import Capture from "../../../modules/Capture";
 
 const VisitorsAdd = () => {
-  const [photoPreview, setPhotoPreview] = useState(null);
-  const [useWebcam, setUseWebcam] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleCapture = (imageSrc, setFieldValue) => {
-    setPhotoPreview(imageSrc);
     setFieldValue("photo", imageSrc);
-    setUseWebcam(false);
-    setShowModal(false);
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -66,25 +58,15 @@ const VisitorsAdd = () => {
         validationSchema={VisitorValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting, errors, touched }) => (
+        {({ setFieldValue, isSubmitting, values }) => (
           <FormikForm className="form-container">
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={3} controlId="photo">
                 <Form.Label className="form-label-head">Photo</Form.Label>
-                <div
-                  className="photo-input"
-                  onClick={() => setShowModal(true)} // Open the modal when clicked
-                >
-                  {photoPreview && (
-                    <div className="photo-preview">
-                      <img src={photoPreview} alt="Preview" />
-                    </div>
-                  )}
-                </div>
+
                 <Capture
-                  onClose={() => setShowModal(false)}
-                  onConfirm={() => setShowModal(false)}
-                  handleCapture={(imageSrc) =>
+                  photo={values.photo}
+                  onConfirm={(imageSrc) =>
                     handleCapture(imageSrc, setFieldValue)
                   }
                   btnText={"Add Photo"}

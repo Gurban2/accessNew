@@ -51,8 +51,6 @@
   }
 
   .photo-preview {
-    width: 200px; // Adjust the size as needed
-    height: 200px; // Adjust the size as needed
     overflow: hidden;
     border-radius: 50%;
     border: 2px solid #ccc; // Optional, for a border around the image
@@ -62,9 +60,9 @@
   }
 
   .photo-preview img {
-    width: 250px;
-    height: 250px;
     object-fit: cover;
+    width: 70px;
+    height: 70px;
   }
 
   .photo-input {
@@ -78,7 +76,13 @@
     background-color: var(--link-color);
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
+
+  .photo-input-icon {
+    color: var(--link-hover);
+  }
+
   .photo-placeholder {
     display: flex;
     width: 70px;
@@ -180,11 +184,6 @@
   //       object-fit: cover;
   //       /* This ensures the webcam video fills the container */
   //     }
-  //   }
-
-  //   .webcam-preview {
-  //     max-width: 100%;
-  //     border-radius: 4px;
   //   }
 
   //   .plus-icon {

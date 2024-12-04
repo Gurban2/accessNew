@@ -1,48 +1,23 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-// import WebcamCapture from "../../WebcamReact/WebcamCapture";
+import { useDispatch, useSelector } from "react-redux";
 import { editVisitor } from "../../../store/reducers/visitorReducer";
 import { toast } from "react-toastify";
 import { Formik, Field, Form as FormikForm } from "formik";
 import Breadcrumb from "../Breadcrumb";
 
-import * as Yup from "yup";
 import "./style.scss";
+import { AppPaths } from "../../../constants/appPaths";
+import { VisitorValidationSchema } from "../InputValidation";
+import { Button } from "react-bootstrap";
 
 const VisitorsEdit = () => {
   const { id } = useParams();
+  const visitor = useSelector((state) =>
+    state.visitors.find((visitor) => visitor.id.toString() === id.toString())
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [photoPreview, setPhotoPreview] = useState(null);
-  // const [useWebcam, setUseWebcam] = useState(false);
-
-  const visitor = useSelector((state) =>
-    state.visitors.find((visitor) => visitor.id === id)
-  );
-
-  // useEffect(() => {
-  //   if (visitor) {
-  //     setPhotoPreview(visitor.photo);
-  //   }
-  // }, [visitor]);
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    phone: Yup.string().required("Phone is required"),
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    address: Yup.string().required("Address is required"),
-    description: Yup.string().required("Description is required"),
-    photo: Yup.mixed().required("Photo is required"),
-  });
-
-  // const handleCapture = (imageSrc, setFieldValue) => {
-  //   setPhotoPreview(imageSrc);
-  //   setFieldValue("photo", imageSrc);
-  //   setUseWebcam(false);
-  // };
 
   const handleSubmit = (values, { setSubmitting }) => {
     dispatch(editVisitor({ id: visitor.id, data: values }));
@@ -60,8 +35,8 @@ const VisitorsEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: "Dashboard", to: "/" },
-            { label: "Visitors", to: "/visitor/edit" },
+            { label: "Dashboard", to: AppPaths.dashboard.home },
+            { label: "Visitors", to: AppPaths.visitors.all },
 
             { label: "Visitor - Edit" },
           ]}
@@ -78,10 +53,10 @@ const VisitorsEdit = () => {
           description: visitor.description,
           photo: visitor.photo,
         }}
-        validationSchema={validationSchema}
+        validationSchema={VisitorValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting, errors, touched }) => (
+        {({ setFieldValue, isSubmitting, errors, values }) => (
           <FormikForm className="form-container">
             {Object.keys(errors).length > 0 && (
               <div className="error">{Object.values(errors).join(", ")}</div>
@@ -91,17 +66,20 @@ const VisitorsEdit = () => {
               name="name"
               placeholder="Enter Name"
               className="form-control"
+              value={values.name}
+              onChange={(e) => setFieldValue("name", e.target.value)}
             />
             <Field
               type="tel"
               name="phone"
               placeholder="Enter Phone"
               className="form-control"
+              value={values.phone}
+              onChange={(e) => setFieldValue("phone", e.target.value)}
             />
-            {/* Repeat for other fields as needed */}
-            <button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Submit"}
-            </button>
+            </Button>
           </FormikForm>
         )}
       </Formik>
