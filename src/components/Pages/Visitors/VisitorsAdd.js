@@ -62,8 +62,6 @@ const VisitorsAdd = () => {
           <FormikForm className="form-container">
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={3} controlId="photo">
-                <Form.Label className="form-label-head">Photo</Form.Label>
-
                 <Capture
                   photo={values.photo}
                   onConfirm={(imageSrc) =>
@@ -71,6 +69,8 @@ const VisitorsAdd = () => {
                   }
                   btnText={"Add Photo"}
                 />
+                <Form.Label className="form-label-head">Photo</Form.Label>
+
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
@@ -134,10 +134,7 @@ const VisitorsAdd = () => {
                   className="error"
                 />
               </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={12} controlId="ControlTextarea">
+              <Form.Group as={Col} xs={12} md={6} controlId="ControlTextarea">
                 <Form.Label className="form-label-head">Description</Form.Label>
                 <Field
                   as="textarea"
@@ -153,6 +150,7 @@ const VisitorsAdd = () => {
                 />
               </Form.Group>
             </Row>
+
             <Row className="mb-1 d-flex justify-content-end  visitor-add-container-footer">
               <Button variant="primary" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit"}

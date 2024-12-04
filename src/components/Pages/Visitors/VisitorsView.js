@@ -4,6 +4,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
 import { AppPaths } from "../../../constants/appPaths";
+import "./style.scss";
 
 const VisitorsView = () => {
   const { id } = useParams();
@@ -24,12 +25,10 @@ const VisitorsView = () => {
           paths={[
             { label: "Dashboard", to: AppPaths.dashboard.home },
             { label: "Visitors", to: AppPaths.visitors.all },
-
-            { label: "Visitor - Edit" },
+            { label: "Visitor - View" },
           ]}
         />
       </div>
-      <h1 className="visitor-view-title">Visitor Details</h1>
       <div className="visitor-view-card">
         <div className="visitor-photo">
           {visitor.photo ? (
@@ -72,12 +71,6 @@ const VisitorsView = () => {
             <strong>Description:</strong> {visitor.description}
           </p>
         </div>
-        <Link
-          to="/visitors/all"
-          className="btn-view-visitor btn-view-visitor-secondary"
-        >
-          Back to all Visitors
-        </Link>
       </div>
     </div>
   );
