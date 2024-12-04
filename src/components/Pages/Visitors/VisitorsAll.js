@@ -1,12 +1,17 @@
-import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteVisitor } from "../../../store/reducers/visitorReducer";
+import Breadcrumb from "../Breadcrumb";
+import Search from "../../Searchbar";
 import { FaEye } from "react-icons/fa";
 import Table from "react-bootstrap/Table";
+import { Button } from "react-bootstrap";
+import "./style.scss"; 
 
 const VisitorsAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
+  const [filteredVisitorsss, setFilteredVisitors] = useState(visitors);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +27,9 @@ const VisitorsAll = () => {
         visitor.fin.toLowerCase().includes(query)
     );
   }, [searchQuery, visitors]);
+  // useEffect(() => {
+  //   setFilteredVisitors(visitors);
+  // }, [visitors]);
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this Visitor?")) {
@@ -45,6 +53,22 @@ const VisitorsAll = () => {
 
   return (
     <div className="visitors-all-container">
+      <div className="visitors-wrapper d-row">
+        <Breadcrumb
+          paths={[{ label: "Dashboard", to: "/" }, { label: "Visitors" }]}
+        />
+        <div className="searchAddBtn">
+          <Search
+            data={visitors}
+            onFilter={setFilteredVisitors}
+            placeholder="Search visitors..."
+          />
+          <Button type="button">
+            <Link to="/visitors/add">Add Visitor</Link>
+          </Button>
+        </div>
+      </div>
+      <hr className="navigation-underline" />
       <Table striped bordered hover>
         <thead>
           <tr>
