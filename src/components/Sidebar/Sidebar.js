@@ -12,8 +12,10 @@ import {
 } from "react-icons/fa";
 import LogoutButton from "../LogoutButton";
 import "./Sidebar.scss";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false); // Offcanvas visibility for mobile
   const [isCollapsed, setIsCollapsed] = useState(false); // Tracks sidebar collapsed state
 
@@ -99,7 +101,7 @@ const Sidebar = () => {
             to="/"
             className="fw-bold text-white cursor-pointer mb-3 ms-2"
           >
-            <FaHome /> Dashboard
+            <FaHome /> {t("dashboard")}
           </Navbar.Brand>
         )}
         <Nav className="flex-column">
