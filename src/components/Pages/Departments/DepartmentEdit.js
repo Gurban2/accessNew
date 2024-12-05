@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { editDepartment } from "../../../store/reducers/departmentReducer";
-import { toast } from "react-toastify";
-import Breadcrumb from "../Breadcrumb";
-import "./style.scss";
+import React, { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { editDepartment } from '../../../store/reducers/departmentReducer';
+import { toast } from 'react-toastify';
+import Breadcrumb from '../Breadcrumb';
+import './style.scss';
 
 const DepartmentEdit = () => {
   const { id } = useParams();
@@ -17,9 +17,9 @@ const DepartmentEdit = () => {
   );
 
   const [formData, setFormData] = React.useState({
-    name: "",
-    phone: "",
-    office: "",
+    name: '',
+    phone: '',
+    office: '',
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const DepartmentEdit = () => {
         office: department.office,
       });
     } else {
-      navigate("/departments/all");
+      navigate('/departments/all');
     }
   }, [department, navigate]);
 
@@ -41,8 +41,8 @@ const DepartmentEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editDepartment({ id: department.id, data: formData }));
-    toast.success("Department successfully edited");
-    navigate("/departments/all");
+    toast.success('Department successfully edited');
+    navigate('/departments/all');
   };
 
   if (!department) {
@@ -54,9 +54,9 @@ const DepartmentEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: "Dashboard", to: "/" },
-            { label: "Departments", to: "/departments/list" },
-            { label: "Department - Edit" },
+            { label: 'Dashboard', to: '/' },
+            { label: 'Departments', to: '/departments/list' },
+            { label: 'Department - Edit' },
           ]}
         />
       </div>

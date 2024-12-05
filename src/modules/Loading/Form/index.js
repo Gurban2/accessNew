@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./LoadingForm.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './LoadingForm.scss';
 
 const LoadingForm = ({ fields = 6 }) => {
   return (

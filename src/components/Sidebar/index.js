@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from "react";
-import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
-import { NavLink, useLocation, Link } from "react-router-dom";
-import sections from "../../constants/navSection";
+import React, { useMemo, useState } from 'react';
+import { Navbar, Nav, Offcanvas, Collapse } from 'react-bootstrap';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import sections from '../../constants/navSection';
 import {
   FaChevronDown,
   FaChevronRight,
@@ -9,10 +9,10 @@ import {
   FaArrowRight,
   FaHome,
   FaBars,
-} from "react-icons/fa";
-import LogoutButton from "../LogoutButton";
-import "./Sidebar.scss";
-import { useTranslation } from "react-i18next";
+} from 'react-icons/fa';
+import LogoutButton from '../LogoutButton';
+import './Sidebar.scss';
+import { useTranslation } from 'react-i18next';
 // import { t } from "i18next";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
@@ -41,7 +41,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
 
   return (
     <div className="sidebar-fixed">
-      <div className={`sidebar-header ${hideSidebar ? "collapsed" : ""}`}>
+      <div className={`sidebar-header ${hideSidebar ? 'collapsed' : ''}`}>
         <button
           onClick={() => onToggleCollapse(!isCollapsed)}
           className="btn btn-secondary btn-sm mb-3 collapse-button"
@@ -96,10 +96,10 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
         {/* Sidebar for large screens */}
         <div
           className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s 
-        ${hideSidebar ? "collapsed-sidebar" : ""}
+        ${hideSidebar ? 'collapsed-sidebar' : ''}
         `}
           style={{
-            width: hideSidebar ? "80px" : "250px",
+            width: hideSidebar ? '80px' : '250px',
             // transition: "width 0.3s ease-in-out",
           }}
         >
@@ -109,7 +109,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               to="/"
               className="fw-bold text-white cursor-pointer mb-3 ms-2"
             >
-              <FaHome /> {t("dashboard")}
+              <FaHome /> {t('dashboard')}
             </Navbar.Brand>
           )}
           <Nav className="flex-column">
@@ -127,7 +127,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
             ))}
           </Nav>
           <LogoutButton
-            text={hideSidebar ? null : "Sign out"}
+            text={hideSidebar ? null : 'Sign out'}
             onClick={clickLogout}
           />
         </div>
@@ -173,10 +173,10 @@ const SidebarSection = ({
                 className={`${
                   !isCollapsed &&
                   openSubmenu[`${sectionIndex}-${departmentIndex}`]
-                    ? "active"
-                    : ""
+                    ? 'active'
+                    : ''
                 } text-white d-flex justify-content-${
-                  isCollapsed ? "center" : "between"
+                  isCollapsed ? 'center' : 'between'
                 } align-items-center`}
                 onClick={() => toggleSubmenu(sectionIndex, departmentIndex)}
               >
@@ -201,7 +201,7 @@ const SidebarSection = ({
                       key={item.label}
                       to={item.path}
                       className={`${
-                        pathname === item.path ? "active" : ""
+                        pathname === item.path ? 'active' : ''
                       } text-white text-decoration-none d-block py-1 sidebar-link`}
                     >
                       <FaArrowRight />

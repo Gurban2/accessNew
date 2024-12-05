@@ -1,1 +1,1 @@
-export { default } from "./WebcamCapture";
+export { default } from './WebcamCapture';

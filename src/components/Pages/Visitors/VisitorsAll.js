@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteVisitor } from "../../../store/reducers/visitorReducer";
-import { FaEdit, FaEye, FaRegTrashAlt } from "react-icons/fa";
-import DataTable from "../../../modules/DataTable";
-import Avatar from "../../../modules/Avatar";
-import Breadcrumb from "../Breadcrumb";
-import { AppPaths } from "../../../constants/appPaths";
-import { useTranslation } from "react-i18next";
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteVisitor } from '../../../store/reducers/visitorReducer';
+import { FaEdit, FaEye, FaRegTrashAlt } from 'react-icons/fa';
+import DataTable from '../../../modules/DataTable';
+import Avatar from '../../../modules/Avatar';
+import Breadcrumb from '../Breadcrumb';
+import { AppPaths } from '../../../constants/appPaths';
+import { useTranslation } from 'react-i18next';
 
 const VisitorsAll = () => {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ const VisitorsAll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery] = useState("");
+  const [searchQuery] = useState('');
 
   const filteredVisitors = useMemo(() => {
     const query = searchQuery.toLowerCase();
@@ -29,12 +29,12 @@ const VisitorsAll = () => {
   }, [searchQuery, visitors]);
 
   const handleDelete = async (id) => {
-    if (window.confirm(t("visitorDeleteConfirm"))) {
+    if (window.confirm(t('visitorDeleteConfirm'))) {
       setIsLoading(true);
       try {
         dispatch(deleteVisitor({ id }));
       } catch (error) {
-        console.error(t("errorDeletingVisitor"), error);
+        console.error(t('errorDeletingVisitor'), error);
       }
       setIsLoading(false);
     }
@@ -49,12 +49,12 @@ const VisitorsAll = () => {
   };
 
   const headItems = [
-    "#", 
-    t("photo"), 
-    t("name"), 
-    t("phone"), 
-    t("fin"), 
-    t("actions")
+    '#',
+    t('photo'),
+    t('name'),
+    t('phone'),
+    t('fin'),
+    t('actions'),
   ];
 
   const items = filteredVisitors.map((visitor, index) => ({
@@ -66,15 +66,15 @@ const VisitorsAll = () => {
   }));
 
   if (!visitors || isLoading) {
-    return <p>{t("loading")}</p>;
+    return <p>{t('loading')}</p>;
   }
 
   return (
     <div className="visitors-all-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
-          { label: t("breadcrumb.visitors") },
+          { label: t('breadcrumb.dashboard'), to: AppPaths.dashboard.home },
+          { label: t('breadcrumb.visitors') },
         ]}
       />
       <DataTable
@@ -86,20 +86,20 @@ const VisitorsAll = () => {
           {
             text: (
               <>
-                <FaEye /> {t("view")}
+                <FaEye /> {t('view')}
               </>
             ),
-            variant: "info",
+            variant: 'info',
             onClick: (id) => handleView(id),
           },
           {
             text: <FaEdit />,
-            variant: "warning",
+            variant: 'warning',
             onClick: (id) => handleEdit(id),
           },
           {
             text: <FaRegTrashAlt />,
-            variant: "danger",
+            variant: 'danger',
             onClick: (id) => handleDelete(id),
           },
         ]}

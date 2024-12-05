@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import CoreModal from "react-bootstrap/Modal";
+import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import CoreModal from 'react-bootstrap/Modal';
 
 const Modal = ({
   btnText,

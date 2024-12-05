@@ -1,39 +1,39 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ToastContainer } from "react-toastify";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ToastContainer } from 'react-toastify';
 
-import store from "./store";
-import Header from "./components/Header";
-import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
-import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
-import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";
-import OfficesAdd from "./components/Pages/Offices/OfficeAdd";
-import OfficesAll from "./components/Pages/Offices/OfficeAll";
-import OfficeEdit from "./components/Pages/Offices/OfficeEdit";
-import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
-import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
-import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
-import VisitorView from "./components/Pages/Visitors/VisitorsView";
-import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
-import Sidebar from "./components/Sidebar";
+import store from './store';
+import Header from './components/Header';
+import DepartmentsAdd from './components/Pages/Departments/DepartmentsAdd';
+import DepartmentsAll from './components/Pages/Departments/DepartmentsAll';
+import DepartmentEdit from './components/Pages/Departments/DepartmentEdit';
+import OfficesAdd from './components/Pages/Offices/OfficeAdd';
+import OfficesAll from './components/Pages/Offices/OfficeAll';
+import OfficeEdit from './components/Pages/Offices/OfficeEdit';
+import VisitorAdd from './components/Pages/Visitors/VisitorsAdd';
+import VisitorAll from './components/Pages/Visitors/VisitorsAll';
+import VisitorEdit from './components/Pages/Visitors/VisitorsEdit';
+import VisitorView from './components/Pages/Visitors/VisitorsView';
+import VisitorReport from './components/Pages/Visitors/VisitorsReport';
+import Sidebar from './components/Sidebar';
 
-import AddPermissions from "./components/Pages/UserPermissions/AddPermissions";
-import AddUser from "./components/Pages/UserPermissions/AddUser";
-import AllPermissions from "./components/Pages/UserPermissions/AllPermissions";
-import ListUsers from "./components/Pages/UserPermissions/ListUsers";
+import AddPermissions from './components/Pages/UserPermissions/AddPermissions';
+import AddUser from './components/Pages/UserPermissions/AddUser';
+import AllPermissions from './components/Pages/UserPermissions/AllPermissions';
+import ListUsers from './components/Pages/UserPermissions/ListUsers';
 
-import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
-import PersonaAll from "./components/Pages/Visitors/Persona/PersonaAll";
-import { AppPaths } from "./constants/appPaths";
-import "react-toastify/dist/ReactToastify.css";
-import Dashboard from "./components/dashboard";
-import { AuthProvider } from "./contexts/auth/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./components/Pages/Login/Login";
-import "./App.scss";
+import PersonaAdd from './components/Pages/Visitors/Persona/PersonaAdd';
+import PersonaAll from './components/Pages/Visitors/Persona/PersonaAll';
+import { AppPaths } from './constants/appPaths';
+import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './components/dashboard';
+import { AuthProvider } from './contexts/auth/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './components/Pages/Login/Login';
+import './App.scss';
 
 const queryClient = new QueryClient();
 
@@ -51,7 +51,7 @@ function App() {
                 isCollapsed={isCollapsedSideBar}
                 onToggleCollapse={setIsCollapsedSideBar}
               />
-              <div className={`main ${isCollapsedSideBar ? "main--full" : ""}`}>
+              <div className={`main ${isCollapsedSideBar ? 'main--full' : ''}`}>
                 <Header isCollapsedSideBar={isCollapsedSideBar} />
 
                 <div className="content">

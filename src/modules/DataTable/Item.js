@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Item = ({ data }) => {
   return Object.values(data).map((item, index) => (

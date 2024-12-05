@@ -1,10 +1,16 @@
-import React from "react";
-import { Field, ErrorMessage } from "formik";
+import React from 'react';
+import { Field, ErrorMessage } from 'formik';
 
-const FormField = ({ label, name, type = "text", as = "input", options = [] }) => (
+const FormField = ({
+  label,
+  name,
+  type = 'text',
+  as = 'input',
+  options = [],
+}) => (
   <div className="form-group">
     <label htmlFor={name}>{label}</label>
-    {as === "select" ? (
+    {as === 'select' ? (
       <Field as="select" id={name} name={name} className="form-control">
         <option value="" disabled>
           Select {label.toLowerCase()}
