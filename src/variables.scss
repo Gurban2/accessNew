@@ -16,21 +16,23 @@
   --text-color-secondary: #8494a7;
   --border-default: #dfe3e7;
   --hover-color: #2c6de9;
+  --primary-hover: #e2ecff;
 
   --table-hover: #f1f3f5;
   --input-border: #ced4da;
   --button-hover: mix(black, #3f5e83, 10%);
 
-  --link-color: var(--primary);
+  --link-color: var(--primary-color);
   --link-default: var(--primary-color);
-  --link-hover: var(--link-color);
-  --link-active: var(--primary-color);
+  --link-hover: var(--primary-hover);
+  --link-active: var(--primary-hover);
   --divider-color: var(--border-color);
 
   --breadcrumb-bg: var(--white);
   --card-bg: var(--white);
 
   --font-family: "Roboto Flex", sans-serif;
+  --font-color: #475f7b;
   --font-size-base: 1rem;
   --font-size-sm: 0.8rem;
   --font-size-lg: 1.25rem;

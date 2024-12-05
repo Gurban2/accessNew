@@ -69,7 +69,12 @@ const OfficeAdd = () => {
               type="tel"
               placeholder="Enter Phone Number"
             />
-            <Button type="submit" disabled={isSubmitting} variant="primary">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              variant="primary"
+              className="btn-primary"
+            >
               {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </Form>

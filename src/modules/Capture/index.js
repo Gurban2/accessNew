@@ -1,71 +1,71 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import WebcamCapture from "../../components/WebcamReact";
-import { Button, Form } from "react-bootstrap";
+import { FaPlus } from "react-icons/fa";
 
-const Capture = ({ onClose, handleCapture, btnText, onConfirm }) => {
+const Capture = ({ btnText, onConfirm, btnClassName, photo }) => {
+  const [showModal, setShowModal] = useState(false);
   const [useWebcam, setUseWebcam] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
 
-  const fileInputRef = React.createRef();
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-
-    if (!file) {
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      setPhotoPreview(reader.result);
-      handleCapture(reader.result);
-    };
-  };
-
   const handleWebcamCapture = (imageSrc) => {
     setPhotoPreview(imageSrc);
-    handleCapture(imageSrc);
     setUseWebcam(false);
   };
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
+  const handleConfirm = () => {
+    onConfirm(photoPreview);
+    reset();
   };
+  const reset = () => {
+    setPhotoPreview(null);
+    setUseWebcam(true); 
+  };
+
   return (
-    <Modal onConfirm={onConfirm} btnText={btnText} centered>
-      <div className="d-flex justify-content-between">
-        <div style={{ flex: 1, marginRight: "10px" }}>
-          <Form.Control
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
+    <>
+      <div
+        className="photo-input"
+        onClick={() => {
+          setShowModal(true);
+          setUseWebcam(true);
+        }}
+      >
+        {photo && (
+          <div className="photo-preview">
+            <img src={photo} alt="Preview" />
+          </div>
+        )}
 
-          <Button variant="primary" onClick={handleButtonClick}>
-            Choose File
-          </Button>
-        </div>
-        <div style={{ flex: 1 }}>
-          <Button
-            type="button"
-            onClick={() => setUseWebcam(true)}
-            className="webcam-button form-control"
-          >
-            Use Webcam
-          </Button>
-        </div>
+        {!photo && <FaPlus className="photo-input-icon" size={30} />}
       </div>
-      {useWebcam && (
-        <WebcamCapture onCapture={handleWebcamCapture} onCancel={onClose} />
-      )}
+      <Modal
+        hideBtn
+        defaultShow={showModal}
+        onCancel={() => setShowModal(false)}
+        onConfirm={handleConfirm}
+        btnText={btnText}
+        btnClassName={btnClassName}
+        centered
+      >
+        {useWebcam && (
+          <WebcamCapture
+            onCapture={handleWebcamCapture}
+          />
+        )}
 
-      {photoPreview && (
-        <img src={photoPreview} alt="Preview" style={{ width: "100%" }} />
-      )}
-    </Modal>
+        {photoPreview && (
+         <div>
+         <img src={photoPreview} alt="Preview" style={{ width: "100%" }} />
+         <div className="mt-3">
+           <button type="button" onClick={reset} className="btn btn-secondary">
+             Reset
+           </button>
+         </div>
+       </div>
+        )}
+      </Modal>
+    </>
   );
 };
 

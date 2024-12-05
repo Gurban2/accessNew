@@ -10,11 +10,10 @@ const pngReducer = createSlice({
           persona.name.toLowerCase() === action.payload.name.toLowerCase()
       );
       if (existingPersona) {
-        alert("This persona already exists.");
+        // Instead of alert, set an error state in your component
+        return state; // Do not change the state if the persona already exists
       } else {
-        const updatedState = [...state, action.payload];
-        console.log("State after adding:", updatedState);
-        return updatedState;
+        return [...state, action.payload];
       }
     },
     deletePersona: (state, action) => {
