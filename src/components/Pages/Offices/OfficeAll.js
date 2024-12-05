@@ -1,30 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Breadcrumb from "../Breadcrumb";
-import Search from "../../Searchbar";
-
-import "./style.scss";
-import { AppPaths } from "../../../constants/appPaths";
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+import Breadcrumb from "../Breadcrumb";
+import Search from "../../Searchbar";
+import { AppPaths } from "../../../constants/appPaths";
 import { useDeleteOffice, useFetchOffices } from "../../../hooks/useOffices";
 import DataTable from "../../../modules/DataTable";
-import { toast } from "react-toastify";
+import "./style.scss";
 
 const OfficeAll = () => {
   const { isLoading } = useFetchOffices();
   const { mutateAsync } = useDeleteOffice();
   const { data: offices } = useSelector((state) => state.offices);
-  const [filteredOffices, setFilteredOffices] = useState(offices);
+
+  const { t } = useTranslation();
+
+  const [searchQuery] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setFilteredOffices(offices);
-  }, [offices]);
+  // Filter offices based on the search query
+  const filteredOffices = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return offices?.filter(
+      (office) =>
+        office.name.toLowerCase().includes(query) ||
+        office.phone.toLowerCase().includes(query) ||
+        office.address.toLowerCase().includes(query)
+    );
+  }, [searchQuery, offices]);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this office?")) {
+    if (window.confirm(t("office.add.deleteConfirm"))) {
       try {
         await mutateAsync(id);
         toast.success("Office successfully deleted");
@@ -38,31 +49,54 @@ const OfficeAll = () => {
     navigate(`/offices/edit/${id}`);
   };
 
-  const breadCrumbs = [
-    { label: "Dashboard", to: AppPaths.dashboard.home },
-    { label: "Offices", to: AppPaths.offices.all },
+  // Head items for the DataTable
+  const headItems = [
+    "#",
+    t("office.add.officeName"),
+    t("office.add.address"),
+    t("office.all.phoneNumber"),
+    t("office.all.departments"),
+    t("office.all.actions"),
   ];
 
-  const headItems = ["#", "Office Name", "Address", "Phone Number", "Actions"];
   const items = filteredOffices?.map((office, index) => ({
     id: office.id,
     name: office.name,
     address: office.address,
     phone: office.phone,
+    departments: office.departmentName,
+    // actions: (
+    //   <>
+    //     <Button
+    //       variant="warning"
+    //       className="w-100"
+    //       onClick={() => handleEdit(office.id)}
+    //     >
+    //       <FaEdit />
+    //     </Button>{" "}
+    //     <Button
+    //       variant="danger"
+    //       className="w-100"
+    //       onClick={() => handleDelete(office.id)}
+    //     >
+    //       <FaRegTrashAlt />
+    //     </Button>
+    //   </>
+    // ),
   }));
 
   return (
     <div className="offices-all-container">
       <div className="offices-wrapper d-row">
-        <Breadcrumb paths={breadCrumbs} />
+        <Breadcrumb
+          paths={[
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
+          ]}
+        />
         <div className="searchAddBtn">
-          <Search
-            data={offices}
-            onFilter={setFilteredOffices}
-            placeholder="Search offices..."
-          />
           <Button type="button">
-            <Link to={AppPaths.offices.add}>Add Office</Link>
+            <Link to={AppPaths.offices.add}>{t("office.add.add")}</Link>
           </Button>
         </div>
       </div>

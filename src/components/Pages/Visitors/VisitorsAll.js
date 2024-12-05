@@ -7,8 +7,11 @@ import DataTable from "../../../modules/DataTable";
 import Avatar from "../../../modules/Avatar";
 import Breadcrumb from "../Breadcrumb";
 import { AppPaths } from "../../../constants/appPaths";
+import { useTranslation } from "react-i18next";
 
 const VisitorsAll = () => {
+  const { t } = useTranslation();
+
   const visitors = useSelector((state) => state.visitors);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,12 +29,12 @@ const VisitorsAll = () => {
   }, [searchQuery, visitors]);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this Visitor?")) {
+    if (window.confirm(t("visitorDeleteConfirm"))) {
       setIsLoading(true);
       try {
         dispatch(deleteVisitor({ id }));
       } catch (error) {
-        console.error("Error deleting visitor", error);
+        console.error(t("errorDeletingVisitor"), error);
       }
       setIsLoading(false);
     }
@@ -45,7 +48,14 @@ const VisitorsAll = () => {
     navigate(`/visitors/view/${id}`);
   };
 
-  const headItems = ["#", "Photo", "Name", "Phone", "Fin", "Actions"];
+  const headItems = [
+    "#", 
+    t("photo"), 
+    t("name"), 
+    t("phone"), 
+    t("fin"), 
+    t("actions")
+  ];
 
   const items = filteredVisitors.map((visitor, index) => ({
     id: visitor.id,
@@ -56,15 +66,15 @@ const VisitorsAll = () => {
   }));
 
   if (!visitors || isLoading) {
-    return <p>Loading...</p>;
+    return <p>{t("loading")}</p>;
   }
 
   return (
     <div className="visitors-all-container">
       <Breadcrumb
         paths={[
-          { label: "Dashboard", to: AppPaths.dashboard.home },
-          { label: "Visitors" },
+          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+          { label: t("breadcrumb.visitors") },
         ]}
       />
       <DataTable
@@ -76,7 +86,7 @@ const VisitorsAll = () => {
           {
             text: (
               <>
-                <FaEye /> View
+                <FaEye /> {t("view")}
               </>
             ),
             variant: "info",

@@ -1,5 +1,159 @@
 {
-  "welcome": "Tətbiqimizə xoş gəldiniz!",
-  "description": "Bu, Azərbaycan dilində bir təsviridir.",
-  "dashboard": "Idarə paneli"
+  "welcome": "Tətbiqimizə xoş gəlmisiniz!",
+  "description": "Təsvir",
+  "dashboard": "İdarəetmə Paneli",
+  "officesDepartments": "Ofislər və Şöbələr",
+  "offices": "Ofislər",
+  "departments": "Şöbələr",
+  "visitors": "Ziyarətçilər",
+  "personaNonGrata": "Persona Non Grata",
+  "all": "Hamısı",
+  "add": "Əlavə et",
+  "usersPermissions": "İstifadəçilər və İcazələr",
+  "users": "İstifadəçilər",
+  "permissions": "İcazələr",
+  "visitorDeleteConfirm": "Bu Ziyarətçini silmək istədiyinizdən əminsiniz?",
+  "errorDeletingVisitor": "Ziyarətçi silinərkən səhv baş verdi",
+  "photo": "Şəkil",
+  "name": "Ad",
+  "phone": "Telefon",
+  "fin": "FIN",
+  "actions": "Əməliyyatlar",
+  "view": "Baxış",
+  "loading": "Yüklənir...",
+
+  "visitorAll": {
+    "title": "Bütün Ziyarətçilər",
+    "loading": "Yüklənir...",
+    "actions": "Əməliyyatlar",
+    "view": "Baxış",
+    "deleteConfirm": "Bu Ziyarətçini silmək istədiyinizdən əminsiniz?",
+    "errorDeleting": "Ziyarətçi silinərkən səhv baş verdi"
+  },
+
+  "visitor": {
+    "add": {
+      "success": "Ziyarətçi uğurla yeniləndi",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+      "error": "Ziyarətçi əlavə edilərkən səhv baş verdi"
+    },
+    "edit": {
+      "title": "Ziyarətçini Redaktə Et",
+      "success": "Ziyarətçi uğurla yeniləndi"
+    }
+  },
+
+  "visitorAdd": {
+    "title": "Ziyarətçi Əlavə Et",
+    "success": "Ziyarətçi uğurla əlavə olundu",
+    "submitting": "Göndərilir...",
+    "submit": "Göndər",
+    "reset": "Təmizlə",
+    "name": "Ad",
+    "enterName": "Adı daxil edin",
+    "phone": "Telefon",
+    "enterPhone": "Telefon nömrəsini daxil edin",
+    "fin": "FIN",
+    "enterFin": "FIN daxil edin",
+    "email": "E-poçt",
+    "enterEmail": "E-poçtu daxil edin",
+    "address": "Ünvan",
+    "enterAddress": "Ünvanı daxil edin",
+    "description": "Təsvir",
+    "enterDescription": "Təsviri daxil edin",
+    "addItem": "Məhsul Əlavə Et",
+    "itemName": "Məhsul Adı",
+    "itemDescription": "Məhsul Təsviri",
+    "addPhoto": "Şəkil əlavə et"
+  },
+
+  "visitorReport": {
+    "title": "Ziyarətçi Hesabatı",
+    "generateReport": "Hesabatı Yarat",
+    "downloadReport": "Hesabatı Yüklə",
+    "dateRange": "Tarix Aralığı",
+    "from": "Başlanğıc",
+    "to": "Son",
+    "noData": "Bu dövr üçün məlumat mövcud deyil"
+  },
+
+  "visitorView": {
+    "noPhoto": "Şəkil yoxdu",
+    "viewVisitor": "Ziyarətçi",
+    "name": "Ad",
+    "phone": "Telefon",
+    "fin": "FIN",
+    "email": "Elektron ünvan",
+    "address": "Ünvan",
+    "description": "Təsvir"
+  },
+
+  "office": {
+    "add": {
+      "add": "Ofis əlavə et",
+      "success": "Ofis uğurla əlavə olundu",
+      "officeExists": "Bu adla ofis artıq mövcuddur",
+      "officeName": "Ofis adı",
+      "address": "Ünvan",
+      "phone": "Telefon",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər"
+    },
+    "all": {
+      "title": "Bütün Ofislər",
+      "searchPlaceholder": "Ofisləri axtarın...",
+      "deleteConfirm": "Bu ofisi silmək istədiyinizdən əminsinizmi?",
+      "noOffices": "Mövcud ofis yoxdur",
+      "officeName": "Ofisin Adı",
+      "address": "Ünvan",
+      "phoneNumber": "Telefon Nömrəsi",
+      "departments": "Şöbələr",
+      "actions": "Əməliyyatlar",
+      "edit": "Redaktə Et",
+      "delete": "Sil"
+    },
+    "edit": {
+      "title": "Ofisi Redaktə Et",
+      "success": "Ofis uğurla redaktə edildi",
+      "notFound": "Ofis tapılmadı",
+      "officeName": "Ofisin Adı",
+      "address": "Ünvan",
+      "phone": "Telefon",
+      "saveChanges": "Dəyişiklikləri Yadda Saxla",
+      "breadcrumb": "Ofis - Redaktə"
+    }
+  },
+
+  "department": {
+    "all": {
+      "name": "Şöbə adı",
+      "phone": "Telefon",
+      "office": "Ofis",
+      "actions": "Əməliyyatlar",
+      "deleteConfirm": "Bu şöbəni silmək istədiyinizdən əminsiniz?",
+      "add": "Şöbə əlavə et"
+    },
+    "add": {
+      "name": "Şöbə adı",
+      "phone": "Telefon",
+      "parent": "Əsas şöbə",
+      "add": "Şöbə əlavə et",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+
+      "office": "Ofis"
+    }
+  },
+  "breadcrumb": {
+    "dashboard": "İdarəetmə Paneli",
+    "visitors": "Ziyarətçilər",
+    "addVisitor": "Ziyarətçi Əlavə Et",
+    "editVisitor": "Ziyarətçini Redaktə Et",
+    "visitorReport": "Ziyarətçi Hesabatı",
+    "offices": "Ofislər",
+    "addOffice": "Ofis əlavə et",
+    "departments": "Şöbələr",
+    "addDepartment": "Şöbə əlavə et"
+  }
 }

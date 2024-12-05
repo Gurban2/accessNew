@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
 import { NavLink, useLocation, Link } from "react-router-dom";
-import sections from "../../constants/navSection"; // Your sections data
+import sections from "../../constants/navSection";
 import {
   FaChevronDown,
   FaChevronRight,
@@ -13,6 +13,7 @@ import {
 import LogoutButton from "../LogoutButton";
 import "./Sidebar.scss";
 import { useTranslation } from "react-i18next";
+// import { t } from "i18next";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { t } = useTranslation();
@@ -146,6 +147,7 @@ const SidebarSection = ({
   handleClose,
 }) => {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -158,7 +160,7 @@ const SidebarSection = ({
         className={`text-white d-flex align-items-center justify-content-between active-section`}
       >
         <div className="d-flex align-items-center">
-          {!isCollapsed && section.title}
+          {!isCollapsed && t(section.title)}
         </div>
       </Nav.Link>
 
@@ -179,7 +181,7 @@ const SidebarSection = ({
                 onClick={() => toggleSubmenu(sectionIndex, departmentIndex)}
               >
                 {department.icon}
-                {!isCollapsed && department.title}
+                {!isCollapsed && t(department.title)}
                 {!isCollapsed &&
                   (openSubmenu[`${sectionIndex}-${departmentIndex}`] ? (
                     <FaChevronDown className={`ms-auto`} />
@@ -203,7 +205,7 @@ const SidebarSection = ({
                       } text-white text-decoration-none d-block py-1 sidebar-link`}
                     >
                       <FaArrowRight />
-                      <h4> {item.label}</h4>
+                      <h4> {t(item.label)}</h4>
                     </NavLink>
                   ))}
                 </div>

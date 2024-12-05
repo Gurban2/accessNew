@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteDepartment } from "../../../store/reducers/departmentReducer";
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
-import Table from "react-bootstrap/Table";
-import Search from "../../Searchbar";
+import { AppPaths } from "../../../constants/appPaths";
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
-import "./style.scss"; 
+import { Link } from "react-router-dom";
+import "./style.scss";
 
 const DepartmentsAll = () => {
-  const departments = useSelector(
-    (state) => state.departments.departmentsData || []
-  );
-  // console.log(departments);
-  const [filteredDepartments, setFilteredDepartments] = useState(departments);
+  const { t } = useTranslation();
+
+  const departments = useSelector((state) => state.departments.departmentsData || []);
+  const [searchQuery] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setFilteredDepartments(departments);
-  }, [departments]);
+  // Filter departments based on the search query
+  const filteredDepartments = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return departments?.filter(
+      (department) =>
+        department.name.toLowerCase().includes(query) ||
+        department.phone.toLowerCase().includes(query) ||
+        department.office.toLowerCase().includes(query)
+    );
+  }, [searchQuery, departments]);
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this department?")) {
+    if (window.confirm(t("department.deleteConfirm"))) {
       dispatch(deleteDepartment({ id }));
     }
   };
@@ -31,59 +40,64 @@ const DepartmentsAll = () => {
     navigate(`/departments/edit/${id}`);
   };
 
+  // Head items for the DataTable
+  const headItems = [
+    "#",
+    t("department.all.name"),
+    t("department.all.phone"),
+    t("department.all.office"),
+    t("department.all.actions"),
+  ];
+
+  // Format items for the DataTable
+  const items = filteredDepartments.map((department, index) => ({
+    id: department.id,
+    departmentName: department.name,
+    phone: department.phone,
+    office: department.office,
+    actions: (
+      <>
+        <Button
+          variant="warning"
+          className="w-100"
+          onClick={() => handleEdit(department.id)}
+        >
+          <FaEdit />
+        </Button>{" "}
+        <Button
+          variant="danger"
+          className="w-100"
+          onClick={() => handleDelete(department.id)}
+        >
+          <FaRegTrashAlt />
+        </Button>
+      </>
+    ),
+  }));
+
   return (
     <div className="departments-all-container">
       <div className="departments-wrapper d-row">
         <Breadcrumb
-          paths={[{ label: "Dashboard", to: "/" }, { label: "Departments" }]}
+          paths={[
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.departments"), to: AppPaths.departments.all },
+          ]}
         />
         <div className="searchAddBtn">
-          <Search
-            data={departments}
-            onFilter={setFilteredDepartments}
-            placeholder="Search departments..."
-          />
           <Button type="button">
-            <Link to="/departments/add">Add Department</Link>
+            <Link to="/departments/add">{t("department.all.add")}</Link>
           </Button>
         </div>
       </div>
       <hr className="navigation-underline" />
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Office</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredDepartments.map((department, index) => (
-            <tr key={department.id}>
-              <td>{index + 1}</td>
-              <td>{department.name}</td>
-              <td>{department.phone}</td>
-              <td>{department.office}</td>
-              <td>
-                <button
-                  className="btn btn-warning btn-sm"
-                  onClick={() => handleEdit(department.id)}
-                >
-                  Edit
-                </button>{" "}
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDelete(department.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+
+      <DataTable
+        withAction
+        headItems={headItems}
+        tableProps={{ striped: true, bordered: true, hover: true }}
+        items={items}
+      />
     </div>
   );
 };

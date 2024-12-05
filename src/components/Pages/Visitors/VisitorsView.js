@@ -4,9 +4,12 @@ import { shallowEqual, useSelector } from "react-redux";
 import Breadcrumb from "../Breadcrumb";
 import { AppPaths } from "../../../constants/appPaths";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 
 const VisitorsView = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
+
   const visitor = useSelector(
     (state) =>
       state.visitors.find((visitor) => visitor.id.toString() === id.toString()),
@@ -14,7 +17,7 @@ const VisitorsView = () => {
   );
 
   if (!visitor) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>; // Use translation for loading
   }
 
   return (
@@ -22,9 +25,9 @@ const VisitorsView = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: "Dashboard", to: AppPaths.dashboard.home },
-            { label: "Visitors", to: AppPaths.visitors.all },
-            { label: "Visitor - View" },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
+            { label: t("visitorView.viewVisitor") }, // Translation for 'View Visitor'
           ]}
         />
       </div>
@@ -46,28 +49,29 @@ const VisitorsView = () => {
             )
           ) : (
             <div className="visitor-photo-frame">
-              <span>No Photo</span>
+              <span>{t("visitorView.noPhoto")}</span>{" "}
             </div>
           )}
         </div>
         <div className="visitor-info">
           <p>
-            <strong>Name:</strong> {visitor.name}
+            <strong>{t("name")}:</strong> {t("visitorView.name")}
           </p>
           <p>
-            <strong>Phone:</strong> {visitor.phone}
+            <strong>{t("phone")}:</strong> {t("visitorView.phone")}
           </p>
           <p>
-            <strong>FIN:</strong> {visitor.fin}
+            <strong>{t("fin")}:</strong> {t("visitorView.fin")}
           </p>
           <p>
-            <strong>Email:</strong> {visitor.email}
+            <strong>{t("email")}:</strong> {t("visitorView.email")}
           </p>
           <p>
-            <strong>Address:</strong> {visitor.address}
+            <strong>{t("address")}:</strong> {t("visitorView.address")}
           </p>
           <p>
-            <strong>Description:</strong> {visitor.description}
+            <strong>{t("description")}:</strong>{" "}
+            {t("visitorView.description")}
           </p>
         </div>
       </div>

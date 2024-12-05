@@ -4,6 +4,8 @@ import departmentReducer from "./reducers/departmentReducer";
 import visitorReducer from "./reducers/visitorReducer";
 import pngReducer from "./reducers/pngReducer";
 import staffReducer from "./reducers/staffReducer";
+import authReducer from "./reducers/authReducer";
+
 
 const rootReducer = combineReducers({
   offices: officeReducer,
@@ -11,5 +13,7 @@ const rootReducer = combineReducers({
   visitors: visitorReducer,
   personas: pngReducer,
   staffs: staffReducer,
+  auth: authReducer,
+
 });
 export default rootReducer;

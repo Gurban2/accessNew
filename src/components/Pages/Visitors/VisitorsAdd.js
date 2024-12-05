@@ -11,8 +11,11 @@ import "./style.scss";
 import { AppPaths } from "../../../constants/appPaths";
 import Capture from "../../../modules/Capture";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const VisitorsAdd = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
@@ -47,7 +50,7 @@ const VisitorsAdd = () => {
     };
     dispatch(addVisitor(newFormData));
     setSubmitting(false);
-    toast.success("Visitor successfully added");
+    toast.success(t("visitorAdd.success"));
     navigate("/visitors/all");
   };
 
@@ -55,9 +58,9 @@ const VisitorsAdd = () => {
     <div className="visitor-add-container">
       <Breadcrumb
         paths={[
-          { label: "Dashboard", to: AppPaths.dashboard.home },
-          { label: "Visitors", to: AppPaths.visitors.all },
-          { label: "Add Visitor", to: AppPaths.visitors.add },
+          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+          { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
+          { label: t("breadcrumb.addVisitor"), to: AppPaths.visitors.add },
         ]}
       />
       <hr className="navigation-underline" />
@@ -83,30 +86,35 @@ const VisitorsAdd = () => {
                   onConfirm={(imageSrc) =>
                     handleCapture(imageSrc, setFieldValue)
                   }
-                  btnText={"Add Photo"}
+                  btnText={t("visitorAdd.addPhoto")}
                 />
-                <Form.Label className="form-label-head">Photo</Form.Label>
-
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.addPhoto")}
+                </Form.Label>
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="name">
-                <Form.Label className="form-label-head">Name</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.name")}
+                </Form.Label>
                 <Field
                   type="text"
                   name="name"
-                  placeholder="Enter Name"
+                  placeholder={t("visitorAdd.enterName")}
                   className="form-control"
                 />
                 <ErrorMessage name="name" component="div" className="error" />
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="phone">
-                <Form.Label className="form-label-head">Phone</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.phone")}
+                </Form.Label>
                 <Field
                   type="tel"
                   name="phone"
-                  placeholder="Enter Phone"
+                  placeholder={t("visitorAdd.enterPhone")}
                   className="form-control"
                 />
                 <ErrorMessage name="phone" component="div" className="error" />
@@ -114,21 +122,25 @@ const VisitorsAdd = () => {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="fin">
-                <Form.Label className="form-label-head">Fin</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.fin")}
+                </Form.Label>
                 <Field
                   type="text"
                   name="fin"
-                  placeholder="Enter Fin"
+                  placeholder={t("visitorAdd.enterFin")}
                   className="form-control"
                 />
                 <ErrorMessage name="fin" component="div" className="error" />
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="email">
-                <Form.Label className="form-label-head">Email</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.email")}
+                </Form.Label>
                 <Field
                   type="email"
                   name="email"
-                  placeholder="Enter Email"
+                  placeholder={t("visitorAdd.enterEmail")}
                   className="form-control"
                 />
                 <ErrorMessage name="email" component="div" className="error" />
@@ -136,11 +148,13 @@ const VisitorsAdd = () => {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="address">
-                <Form.Label className="form-label-head">Address</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.address")}
+                </Form.Label>
                 <Field
                   type="text"
                   name="address"
-                  placeholder="Enter Address"
+                  placeholder={t("visitorAdd.enterAddress")}
                   className="form-control"
                 />
                 <ErrorMessage
@@ -150,12 +164,14 @@ const VisitorsAdd = () => {
                 />
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="ControlTextarea">
-                <Form.Label className="form-label-head">Description</Form.Label>
+                <Form.Label className="form-label-head">
+                  {t("visitorAdd.description")}
+                </Form.Label>
                 <Field
                   as="textarea"
                   rows={3}
                   name="description"
-                  placeholder="Enter Description"
+                  placeholder={t("visitorAdd.enterDescription")}
                   className="form-control"
                 />
                 <ErrorMessage
@@ -167,8 +183,8 @@ const VisitorsAdd = () => {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="additem">
-                <Button variant="warning" onClick={handleAddItem}>Add Item
-
+                <Button variant="warning" onClick={handleAddItem}>
+                  {t("visitorAdd.addItem")}
                 </Button>
               </Form.Group>
             </Row>
@@ -176,8 +192,8 @@ const VisitorsAdd = () => {
               <Table bordered className="mb-3">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>{t("visitorAdd.itemName")}</th>
+                    <th>{t("visitorAdd.itemDescription")}</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -187,7 +203,7 @@ const VisitorsAdd = () => {
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder="Item Name"
+                          placeholder={t("visitorAdd.itemName")}
                           value={item.name}
                           onChange={(e) =>
                             handleItemChange(index, "name", e.target.value)
@@ -197,10 +213,14 @@ const VisitorsAdd = () => {
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder="Item Description"
+                          placeholder={t("visitorAdd.itemDescription")}
                           value={item.description}
                           onChange={(e) =>
-                            handleItemChange(index, "description", e.target.value)
+                            handleItemChange(
+                              index,
+                              "description",
+                              e.target.value
+                            )
                           }
                         />
                       </td>
@@ -220,15 +240,10 @@ const VisitorsAdd = () => {
             )}
             <div className="form-actions">
               <Button variant="primary" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting
+                  ? t("visitorAdd.submitting")
+                  : t("visitorAdd.submit")}
               </Button>
-              {/* <Button
-                variant="danger"
-                type="button"
-                onClick={() => navigate("/visitors/all")}
-              >
-                Cancel
-              </Button> */}
               <Button
                 variant="secondary"
                 type="button"
@@ -237,7 +252,7 @@ const VisitorsAdd = () => {
                   setItems([]);
                 }}
               >
-                Reset
+                {t("visitorAdd.reset")}
               </Button>
             </div>
           </FormikForm>

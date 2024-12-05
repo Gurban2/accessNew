@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import { useSelector } from "react-redux"; // Import useDispatch
 import { OfficeValidationSchema } from "../InputValidation";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
@@ -13,6 +14,7 @@ import { useAddOffice } from "../../../hooks/useOffices";
 const OfficeAdd = () => {
   const { data: offices } = useSelector((state) => state.offices); // Get the state from the store
   const { mutateAsync, isPending } = useAddOffice();
+  const { t } = useTranslation();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const uniqueId = Date.now().toString();
@@ -24,13 +26,13 @@ const OfficeAdd = () => {
 
     if (existingOffice) {
       setSubmitting(false);
-      return toast.error("Office already exists");
+      return toast.error(t("office.add.officeExists")); // Используем перевод
     }
 
     try {
       await mutateAsync(newOffice);
       resetForm();
-      toast.success("Office successfully added");
+      toast.success(t("office.add.success"));
     } catch (error) {
       toast.error("An error occurred while adding the office");
     }
@@ -39,9 +41,9 @@ const OfficeAdd = () => {
   };
 
   const breadCrumbs = [
-    { label: "Dashboard", to: AppPaths.dashboard.home },
-    { label: "Offices", to: AppPaths.offices.all },
-    { label: "Add Office", to: AppPaths.offices.add },
+    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home }, // Локализуем заголовки хлебных крошек
+    { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
+    { label: t("breadcrumb.addOffice"), to: AppPaths.offices.add },
   ];
 
   return (
@@ -59,28 +61,30 @@ const OfficeAdd = () => {
 
           <Form className="offices-add-form">
             <FormField
-              label="Office Name"
+              label={t("office.add.officeName")}
               name="name"
-              placeholder="Enter Office Name"
+              placeholder={t("office.add.OfficeName")}
             />
             <FormField
-              label="Address"
+              label={t("office.add.address")}
               name="address"
-              placeholder="Enter Address"
+              placeholder={t("office.add.Address")}
             />
             <FormField
-              label="Phone"
+              label={t("office.add.phone")}
               name="phone"
               type="tel"
-              placeholder="Enter Phone Number"
+              placeholder={t("office.add.phone")}
             />
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPending}
               variant="primary"
               className="btn-primary"
             >
-              {isPending ? "Submitting..." : "Submit"}
+              {isSubmitting || isPending
+                ? t("office.add.submitting")
+                : t("office.add.submit")}
             </Button>
           </Form>
         </div>
