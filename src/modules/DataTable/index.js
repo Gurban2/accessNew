@@ -3,8 +3,18 @@ import Table from "react-bootstrap/Table";
 import Item from "./Item";
 import { Button } from "react-bootstrap";
 import "./styles.scss";
+import LoadingTable from "../Loading/Table";
 
-const DataTable = ({ headItems, items, tableProps, actionItems }) => {
+const DataTable = ({
+  headItems,
+  items,
+  tableProps,
+  actionItems,
+  isLoading,
+}) => {
+  if (!items || isLoading) {
+    return <LoadingTable />;
+  }
   return (
     <Table {...tableProps} className="data-table">
       <thead>

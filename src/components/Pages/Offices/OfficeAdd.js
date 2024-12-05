@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
-import { addOffice } from "../../../store/reducers/officeReducer"; // Import addOffice action
+import { useSelector } from "react-redux"; // Import useDispatch
 import { OfficeValidationSchema } from "../InputValidation";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -10,14 +9,14 @@ import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
 import { AppPaths } from "../../../constants/appPaths";
 import { Button } from "react-bootstrap";
+import { useAddOffice } from "../../../hooks/useOffices";
 
 const OfficeAdd = () => {
+  const { data: offices } = useSelector((state) => state.offices); // Get the state from the store
+  const { mutateAsync, isPending } = useAddOffice();
   const { t } = useTranslation();
 
-  const offices = useSelector((state) => state.offices); // Get the state from the store
-  const dispatch = useDispatch(); // Initialize dispatch
-
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const uniqueId = Date.now().toString();
     const newOffice = { ...values, id: uniqueId };
 
@@ -30,8 +29,13 @@ const OfficeAdd = () => {
       return toast.error(t("office.add.officeExists")); // Используем перевод
     }
 
-    dispatch(addOffice(newOffice));
-    toast.success(t("office.add.success")); // Используем перевод
+    try {
+      await mutateAsync(newOffice);
+      resetForm();
+      toast.success(t("office.add.success"));
+    } catch (error) {
+      toast.error("An error occurred while adding the office");
+    }
 
     setSubmitting(false);
   };
@@ -57,7 +61,7 @@ const OfficeAdd = () => {
 
           <Form className="offices-add-form">
             <FormField
-              label={t("office.add.officeName")} 
+              label={t("office.add.officeName")}
               name="name"
               placeholder={t("office.add.OfficeName")}
             />
@@ -74,11 +78,13 @@ const OfficeAdd = () => {
             />
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPending}
               variant="primary"
               className="btn-primary"
             >
-              {isSubmitting ? t("office.add.submitting") : t("office.add.submit")} 
+              {isSubmitting || isPending
+                ? t("office.add.submitting")
+                : t("office.add.submit")}
             </Button>
           </Form>
         </div>

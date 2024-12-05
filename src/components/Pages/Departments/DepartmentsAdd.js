@@ -6,13 +6,14 @@ import { Formik, Form } from "formik";
 import { DepartmentValidationSchema } from "../InputValidation";
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
-import { useTranslation } from "react-i18next";  // Added to handle translations
+import { useTranslation } from "react-i18next"; // Added to handle translations
 
 import "./style.scss";
+import { AppPaths } from "../../../constants/appPaths";
 
 const DepartmentsAdd = () => {
+  const { data: offices } = useSelector((state) => state.offices);
   const { t } = useTranslation(); // Initialize translation hook
-  const offices = useSelector((state) => state.offices);
   const dispatch = useDispatch();
 
   const parentOptions = [
@@ -35,8 +36,11 @@ const DepartmentsAdd = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: "/" },
-            { label: t("breadcrumb.departments"), to: "/departments/list" },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            {
+              label: t("breadcrumb.departments"),
+              to: AppPaths.departments.all,
+            },
             { label: t("breadcrumb.addDepartment") },
           ]}
         />
@@ -56,7 +60,11 @@ const DepartmentsAdd = () => {
         {({ isSubmitting }) => (
           <Form className="department-add-form">
             <FormField label={t("department.add.name")} name="name" />
-            <FormField label={t("department.add.phone")} name="phone" type="tel" />
+            <FormField
+              label={t("department.add.phone")}
+              name="phone"
+              type="tel"
+            />
             <FormField
               label={t("department.add.parent")}
               name="parent"
@@ -75,7 +83,9 @@ const DepartmentsAdd = () => {
               className="submit-button"
               disabled={isSubmitting}
             >
-              {isSubmitting ? t("department.add.submitting") : t("department.add.submit")}
+              {isSubmitting
+                ? t("department.add.submitting")
+                : t("department.add.submit")}
             </button>
           </Form>
         )}

@@ -20,7 +20,7 @@ const FormField = ({ label, name, type = "text", as = "input", options = [] }) =
         type={type}
         id={name}
         name={name}
-        placeholder={`Enter ${label.toLowerCase()}`}
+        placeholder={`${label.toLowerCase()}`}
         className="form-control"
       />
     )}

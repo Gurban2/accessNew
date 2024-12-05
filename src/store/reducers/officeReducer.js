@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const officeSlice = createSlice({
   name: "offices",
-  initialState: [
-    { id: "1", name: "Sales", phone: "555 555 555", address: "A" },
-    { id: "2", name: "Marketing", phone: "555 555 555", address: "B" },
-    { id: "3", name: "HR", phone: "555 555 555", address: "C" },
-    { id: "4", name: "IT", phone: "555 555 555", address: "D" },
-  ],
+  initialState: {
+    data: [],
+    loading: false,
+    meta: {},
+  },
   reducers: {
     addOffice: (state, action) => {
       const updatedState = [...state, action.payload];
@@ -25,11 +24,34 @@ const officeSlice = createSlice({
       );
     },
 
-    filterOffice: (state, action) => {},
+    setOffices: (state, action) => {
+      return {
+        ...state,
+        data: action.payload,
+      };
+    },
+    setLoading: (state, action) => {
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    },
+    setOfficeMeta: (state, action) => {
+      return {
+        ...state,
+        meta: action.payload,
+      };
+    },
   },
 });
 
-export const { addOffice, deleteOffice, editOffice, filterOffice } =
-  officeSlice.actions;
+export const {
+  addOffice,
+  deleteOffice,
+  editOffice,
+  setOffices,
+  setLoading,
+  setOfficeMeta,
+} = officeSlice.actions;
 
 export default officeSlice.reducer;

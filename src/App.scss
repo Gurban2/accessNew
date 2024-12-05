@@ -3,6 +3,7 @@
 
 body {
   font-family: Rubik, Helvetica, Arial, serif !important;
+  background-color: var(--background-color);
 }
 
 .app {
@@ -16,8 +17,11 @@ body {
 
 .main {
   flex-grow: 1; /* Main content will take up remaining space */
+  margin-left: 250px;
 
-  background-color: var(--background-color);
+  &--full {
+    margin-left: 80px;
+  }
 }
 
 /* Navbar/Sidebar styles */
@@ -68,4 +72,25 @@ a {
 
 .error {
   color: var(--red);
+}
+
+input::placeholder {
+  color: #888; /* Replace with your desired color */
+  opacity: 1; /* Ensures full opacity */
+}
+
+/* Change Placeholder Color on Focus */
+input:focus::placeholder {
+  color: #aaa; /* Adjust as needed for focused state */
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Additional Styling for Specific Input Types */
+textarea::placeholder {
+  color: #666;
 }

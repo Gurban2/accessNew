@@ -1,23 +1,25 @@
 import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteOffice } from "../../../store/reducers/officeReducer";
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import DataTable from "../../../modules/DataTable";
-import Breadcrumb from "../Breadcrumb";
-import { AppPaths } from "../../../constants/appPaths";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
+import Breadcrumb from "../Breadcrumb";
+import { AppPaths } from "../../../constants/appPaths";
+import { useDeleteOffice, useFetchOffices } from "../../../hooks/useOffices";
+import DataTable from "../../../modules/DataTable";
 import "./style.scss";
 
 const OfficeAll = () => {
+  const { isLoading } = useFetchOffices();
+  const { mutateAsync } = useDeleteOffice();
+  const { data: offices } = useSelector((state) => state.offices);
+
   const { t } = useTranslation();
 
-  const offices = useSelector((state) => state.offices);
   const [searchQuery] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // Filter offices based on the search query
@@ -31,9 +33,14 @@ const OfficeAll = () => {
     );
   }, [searchQuery, offices]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm(t("office.add.deleteConfirm"))) {
-      dispatch(deleteOffice({ id }));
+      try {
+        await mutateAsync(id);
+        toast.success("Office successfully deleted");
+      } catch (error) {
+        toast.error("An error occurred while deleting the office");
+      }
     }
   };
 
@@ -51,31 +58,12 @@ const OfficeAll = () => {
     t("office.all.actions"),
   ];
 
-  // Format items for the DataTable
-  const items = filteredOffices.map((office, index) => ({
+  const items = filteredOffices?.map((office, index) => ({
     id: office.id,
-    officeName: office.name,
+    name: office.name,
     address: office.address,
-    phoneNumber: office.phone,
+    phone: office.phone,
     departments: office.departmentName,
-    actions: (
-      <>
-        <Button
-          variant="warning"
-          className="w-100"
-          onClick={() => handleEdit(office.id)}
-        >
-          <FaEdit />
-        </Button>{" "}
-        <Button
-          variant="danger"
-          className="w-100"
-          onClick={() => handleDelete(office.id)}
-        >
-          <FaRegTrashAlt />
-        </Button>
-      </>
-    ),
   }));
 
   return (
@@ -89,17 +77,30 @@ const OfficeAll = () => {
         />
         <div className="searchAddBtn">
           <Button type="button">
-            <Link to="/offices/add">{t("office.add.add")}</Link>
+            <Link to={AppPaths.offices.add}>{t("office.add.add")}</Link>
           </Button>
         </div>
       </div>
       <hr className="navigation-underline" />
 
       <DataTable
+        isLoading={isLoading}
         withAction
         headItems={headItems}
         tableProps={{ striped: true, bordered: true, hover: true }}
         items={items}
+        actionItems={[
+          {
+            text: <FaEdit />,
+            variant: "warning",
+            onClick: handleEdit,
+          },
+          {
+            text: <FaRegTrashAlt />,
+            variant: "danger",
+            onClick: handleDelete,
+          },
+        ]}
       />
     </div>
   );

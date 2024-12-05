@@ -1,22 +1,21 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { editOffice } from "../../../store/reducers/officeReducer";
+import { useFetchOfficeById, useUpdateOffice } from "../../../hooks/useOffices";
 import { toast } from "react-toastify";
 import Breadcrumb from "../Breadcrumb";
 import { useTranslation } from "react-i18next";
 
 import "./style.scss";
+import LoadingForm from "../../../modules/Loading/Form";
 
 const OfficeEdit = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const { mutateAsync: updateOffice } = useUpdateOffice();
+  const { data, isLoading } = useFetchOfficeById(id);
   const navigate = useNavigate();
 
-  const office = useSelector((state) =>
-    state.offices.find((office) => office.id === id)
-  );
+  const office = data?.data;
 
   const [formData, setFormData] = React.useState({
     name: "",
@@ -38,12 +37,21 @@ const OfficeEdit = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(editOffice({ id: office.id, data: formData }));
-    toast.success(t("office.edit.success")); // Используем перевод
-    navigate("/offices/all");
+
+    try {
+      await updateOffice({ id, office: formData });
+      toast.success(t("office.edit.success"));
+      navigate("/offices/all");
+    } catch (error) {
+      toast.error("Error editing office");
+    }
   };
+
+  if (isLoading) {
+    return <LoadingForm />;
+  }
 
   if (!office) {
     return <p>{t("office.edit.notFound")}</p>; // Используем перевод
@@ -61,7 +69,8 @@ const OfficeEdit = () => {
         />
       </div>
       <hr className="navigation-underline" />
-      <h1 className="offices-add">{t("office.edit.title")}</h1> {/* Используем перевод */}
+      <h1 className="offices-add">{t("office.edit.title")}</h1>{" "}
+      {/* Используем перевод */}
       <form className="offices-add-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">{t("office.edit.officeName")}</label>

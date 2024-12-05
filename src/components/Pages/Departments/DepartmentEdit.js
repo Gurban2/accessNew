@@ -10,7 +10,7 @@ const DepartmentEdit = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const offices = useSelector((state) => state.offices);
+  const { data: offices } = useSelector((state) => state.offices);
 
   const department = useSelector((state) =>
     state.departments.departmentsData.find((department) => department.id === id)

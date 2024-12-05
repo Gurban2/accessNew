@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { Navbar, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";  // Import Link for navigation
+import { Navbar, Container } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 
 const ref = React.createRef();
-
-const Header = ({ userName }) => {
+const Header = ({ userName, isCollapsedSideBar }) => {
   useEffect(() => {
     const header = ref.current;
     const placeholder = document.createElement("div");
@@ -15,11 +14,11 @@ const Header = ({ userName }) => {
       if (
         document.body.scrollTop > 50 ||
         document.documentElement.scrollTop > 50
-      ) {        
+      ) {
         placeholder.style.height = `${header.offsetHeight}px`;
         header.parentNode.insertBefore(placeholder, header);
         header.classList.add("header--sticky");
-      } else {        
+      } else {
         placeholder.style.height = "0";
         if (placeholder.parentNode) {
           placeholder.parentNode.removeChild(placeholder);
@@ -35,13 +34,16 @@ const Header = ({ userName }) => {
   }, []);
 
   return (
-    <div className="header" ref={ref}>
+    <div
+      className={`header ${isCollapsedSideBar ? "header--full" : ""}`}
+      ref={ref}
+    >
       <Navbar className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">Access Store</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className="me-3">              
+            <Navbar.Text className="me-3">
               <Link to="/login">Login</Link>
             </Navbar.Text>
           </Navbar.Collapse>
