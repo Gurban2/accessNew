@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppPaths } from './appPaths';
 import {
   FaBuilding,
   FaChartBar,
@@ -8,6 +7,7 @@ import {
   FaUsers,
   FaUserTimes,
 } from 'react-icons/fa';
+import { AppPaths } from './appPaths';
 
 // import dashboard from "../assets/icons/dashboard/dashboard.svg";
 

@@ -1,14 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteDepartment } from '../../../store/reducers/departmentReducer';
-import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
-import DataTable from '../../../modules/DataTable';
-import Breadcrumb from '../Breadcrumb';
-import { AppPaths } from '../../../constants/appPaths';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { AppPaths } from '../../../constants/appPaths';
+import DataTable from '../../../modules/DataTable';
+import { deleteDepartment } from '../../../store/reducers/departmentReducer';
+import Breadcrumb from '../Breadcrumb';
 import './style.scss';
 
 const DepartmentsAll = () => {

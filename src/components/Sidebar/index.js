@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Navbar, Nav, Offcanvas, Collapse } from 'react-bootstrap';
-import { NavLink, useLocation, Link } from 'react-router-dom';
-import sections from '../../constants/navSection';
+import { useTranslation } from 'react-i18next';
 import {
   FaChevronDown,
   FaChevronRight,
@@ -10,9 +9,11 @@ import {
   FaHome,
   FaBars,
 } from 'react-icons/fa';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+
+import sections from '../../constants/navSection';
 import LogoutButton from '../LogoutButton';
 import './Sidebar.scss';
-import { useTranslation } from 'react-i18next';
 // import { t } from "i18next";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {

@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateVisitor } from '../../../../store/reducers/visitorReducer';
 import { Form, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import AddModal from './AddModal';
 import DataTable from '../../../../modules/DataTable';
+import { updateVisitor } from '../../../../store/reducers/visitorReducer';
 
 import './style.scss';
 

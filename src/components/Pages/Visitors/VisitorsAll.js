@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteVisitor } from '../../../store/reducers/visitorReducer';
-import { FaEdit, FaEye, FaRegTrashAlt } from 'react-icons/fa';
-import DataTable from '../../../modules/DataTable';
-import Avatar from '../../../modules/Avatar';
-import Breadcrumb from '../Breadcrumb';
-import { AppPaths } from '../../../constants/appPaths';
 import { useTranslation } from 'react-i18next';
+import { FaEdit, FaEye, FaRegTrashAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AppPaths } from '../../../constants/appPaths';
+import Avatar from '../../../modules/Avatar';
+import DataTable from '../../../modules/DataTable';
+import { deleteVisitor } from '../../../store/reducers/visitorReducer';
+import Breadcrumb from '../Breadcrumb';
 
 const VisitorsAll = () => {
   const { t } = useTranslation();

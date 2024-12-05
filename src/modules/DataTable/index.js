@@ -1,7 +1,7 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import Item from './Item';
-import { Button } from 'react-bootstrap';
 import './styles.scss';
 import LoadingTable from '../Loading/Table';
 

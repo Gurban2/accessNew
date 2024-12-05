@@ -1,17 +1,17 @@
+import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import React, { useState } from 'react';
+import { Button, Col, Form, Row, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addVisitor } from '../../../store/reducers/visitorReducer';
-import { Button, Col, Form, Row, Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
-import { VisitorValidationSchema } from '../InputValidation';
-import Breadcrumb from '../Breadcrumb';
-import './style.scss';
 import { AppPaths } from '../../../constants/appPaths';
 import Capture from '../../../modules/Capture';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { useTranslation } from 'react-i18next';
+import { addVisitor } from '../../../store/reducers/visitorReducer';
+import Breadcrumb from '../Breadcrumb';
+import { VisitorValidationSchema } from '../InputValidation';
+import './style.scss';
 
 const VisitorsAdd = () => {
   const { t } = useTranslation();

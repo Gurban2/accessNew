@@ -1,4 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   fetchOffices,
   addOffice,
@@ -6,9 +8,7 @@ import {
   fetchOffice,
   updateOffice,
 } from '../api/officesApi';
-import { useDispatch } from 'react-redux';
 import { setOfficeMeta, setOffices } from '../store/reducers/officeReducer';
-import { useEffect } from 'react';
 
 export const useFetchOffices = () => {
   const dispatch = useDispatch();

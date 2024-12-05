@@ -1,15 +1,15 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addDepartment } from '../../../store/reducers/departmentReducer';
-import { toast } from 'react-toastify';
 import { Formik, Form } from 'formik';
-import { DepartmentValidationSchema } from '../InputValidation';
+import React from 'react';
+import { useTranslation } from 'react-i18next'; // Added to handle translations
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { AppPaths } from '../../../constants/appPaths';
+import { addDepartment } from '../../../store/reducers/departmentReducer';
 import Breadcrumb from '../Breadcrumb';
 import FormField from '../FormField';
-import { useTranslation } from 'react-i18next'; // Added to handle translations
+import { DepartmentValidationSchema } from '../InputValidation';
 
 import './style.scss';
-import { AppPaths } from '../../../constants/appPaths';
 
 const DepartmentsAdd = () => {
   const { data: offices } = useSelector((state) => state.offices);

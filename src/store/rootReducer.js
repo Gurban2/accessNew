@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import officeReducer from './reducers/officeReducer';
+import authReducer from './reducers/authReducer';
 import departmentReducer from './reducers/departmentReducer';
-import visitorReducer from './reducers/visitorReducer';
+import officeReducer from './reducers/officeReducer';
 import pngReducer from './reducers/pngReducer';
 import staffReducer from './reducers/staffReducer';
-import authReducer from './reducers/authReducer';
+import visitorReducer from './reducers/visitorReducer';
 
 const rootReducer = combineReducers({
   offices: officeReducer,

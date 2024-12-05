@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { shallowEqual, useSelector } from 'react-redux';
-import Breadcrumb from '../Breadcrumb';
-import { AppPaths } from '../../../constants/appPaths';
-import './style.scss';
 import { useTranslation } from 'react-i18next';
+import { shallowEqual, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { AppPaths } from '../../../constants/appPaths';
+import Breadcrumb from '../Breadcrumb';
+import './style.scss';
 
 const VisitorsView = () => {
   const { t } = useTranslation();

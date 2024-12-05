@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { editDepartment } from '../../../store/reducers/departmentReducer';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { editDepartment } from '../../../store/reducers/departmentReducer';
 import Breadcrumb from '../Breadcrumb';
 import './style.scss';
 

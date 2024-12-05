@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import './LoadingTable.scss'; // Add your styles here
 
 const LoadingTable = ({ rows = 5, columns = 4 }) => {

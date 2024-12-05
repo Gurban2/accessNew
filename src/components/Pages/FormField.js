@@ -1,5 +1,5 @@
-import React from 'react';
 import { Field, ErrorMessage } from 'formik';
+import React from 'react';
 
 const FormField = ({
   label,

@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import Breadcrumb from '../Breadcrumb';
 import { AppPaths } from '../../../constants/appPaths';
 import { useDeleteOffice, useFetchOffices } from '../../../hooks/useOffices';
 import DataTable from '../../../modules/DataTable';
+import Breadcrumb from '../Breadcrumb';
 import './style.scss';
 
 const OfficeAll = () => {

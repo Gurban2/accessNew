@@ -1,9 +1,9 @@
 import React from 'react';
+import { Button, Container } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './dashboardStyle.css';
-import { Button, Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
 
 const Dashboard = () => {
   const { data: offices } = useSelector((state) => state.offices);

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   updatePersona,
   updateVisitor,
 } from '../../../../store/reducers/visitorReducer';
-import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
 
 const PersonaAll = () => {
   const visitors = useSelector((state) => state.visitors || []);

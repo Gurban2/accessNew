@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   Button,
   Form,
@@ -8,11 +7,13 @@ import {
   InputGroup,
   FormControl,
 } from 'react-bootstrap';
-import { addStaff } from '../../../store/reducers/staffReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { addStaff } from '../../../store/reducers/staffReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../UserPermissions/style.scss';
-import { Link } from 'react-router-dom';
 
 const AddUser = () => {
   const { data: offices } = useSelector((state) => state.offices);

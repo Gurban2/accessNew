@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteStaff } from '../../../store/reducers/staffReducer';
+import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { FaEye } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { deleteStaff } from '../../../store/reducers/staffReducer';
 import '../UserPermissions/style.scss';
-import { Button } from 'react-bootstrap';
 
 const ListUsers = () => {
   const staffs = useSelector((state) => state.staffs);

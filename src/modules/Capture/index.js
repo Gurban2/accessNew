@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Modal from '../Modal';
-import WebcamCapture from '../../components/WebcamReact';
 import { FaPlus } from 'react-icons/fa';
+import WebcamCapture from '../../components/WebcamReact';
+import Modal from '../Modal';
 
 const Capture = ({ btnText, onConfirm, btnClassName, photo }) => {
   const [showModal, setShowModal] = useState(false);

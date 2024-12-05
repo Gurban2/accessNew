@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { FaArrowRight } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   loginSuccess,
   loginFailure,
 } from '../../../store/reducers/authReducer';
-import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaArrowRight } from 'react-icons/fa';
 import './style.scss';
 
 const Login = () => {
