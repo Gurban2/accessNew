@@ -1,26 +1,25 @@
 import React, { useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
+import { Navbar, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";  // Import Link for navigation
 import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 
 const ref = React.createRef();
+
 const Header = ({ userName }) => {
   useEffect(() => {
-    const header = ref.current; // Your header reference
+    const header = ref.current;
     const placeholder = document.createElement("div");
 
     const updateHeaderSticky = () => {
       if (
         document.body.scrollTop > 50 ||
         document.documentElement.scrollTop > 50
-      ) {
-        // Set the placeholder height to match the header
+      ) {        
         placeholder.style.height = `${header.offsetHeight}px`;
         header.parentNode.insertBefore(placeholder, header);
         header.classList.add("header--sticky");
-      } else {
-        // Remove the placeholder
+      } else {        
         placeholder.style.height = "0";
         if (placeholder.parentNode) {
           placeholder.parentNode.removeChild(placeholder);
@@ -41,17 +40,10 @@ const Header = ({ userName }) => {
         <Container>
           <Navbar.Brand href="#home">Access Store</Navbar.Brand>
           <Navbar.Toggle />
-
           <Navbar.Collapse className="justify-content-end">
-            {userName ? (
-              <Navbar.Text>
-                Signed in as: <a href="#profile">{userName}</a>
-              </Navbar.Text>
-            ) : (
-              <Navbar.Text className="me-3">
-                <a href="#login">Login</a>
-              </Navbar.Text>
-            )}
+            <Navbar.Text className="me-3">              
+              <Link to="/login">Login</Link>
+            </Navbar.Text>
           </Navbar.Collapse>
           <LangSwitcher />
         </Container>
