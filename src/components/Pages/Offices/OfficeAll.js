@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteOffice } from "../../../store/reducers/officeReducer";
+import { useSelector } from "react-redux";
 import Breadcrumb from "../Breadcrumb";
-import Table from "react-bootstrap/Table";
 import Search from "../../Searchbar";
 
 import "./style.scss";
 import { AppPaths } from "../../../constants/appPaths";
 import { Button } from "react-bootstrap";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import { useDeleteOffice, useFetchOffices } from "../../../hooks/useOffices";
+import DataTable from "../../../modules/DataTable";
+import { toast } from "react-toastify";
 
 const OfficeAll = () => {
-  const offices = useSelector((state) => state.offices);
+  const { isLoading } = useFetchOffices();
+  const { mutateAsync } = useDeleteOffice();
+  const { data: offices } = useSelector((state) => state.offices);
   const [filteredOffices, setFilteredOffices] = useState(offices);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     setFilteredOffices(offices);
   }, [offices]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this office?")) {
-      dispatch(deleteOffice({ id }));
+      try {
+        await mutateAsync(id);
+        toast.success("Office successfully deleted");
+      } catch (error) {
+        toast.error("An error occurred while deleting the office");
+      }
     }
   };
 
@@ -36,6 +43,14 @@ const OfficeAll = () => {
     { label: "Offices", to: AppPaths.offices.all },
   ];
 
+  const headItems = ["#", "Office Name", "Address", "Phone Number", "Actions"];
+  const items = filteredOffices?.map((office, index) => ({
+    id: office.id,
+    name: office.name,
+    address: office.address,
+    phone: office.phone,
+  }));
+
   return (
     <div className="offices-all-container">
       <div className="offices-wrapper d-row">
@@ -47,50 +62,31 @@ const OfficeAll = () => {
             placeholder="Search offices..."
           />
           <Button type="button">
-            <Link to="/offices/add">Add Office</Link>
+            <Link to={AppPaths.offices.add}>Add Office</Link>
           </Button>
         </div>
       </div>
       <hr className="navigation-underline" />
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Office Name</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredOffices.map((office, index) => (
-            <tr key={office.id}>
-              <td>{index + 1}</td>
-              <td>{office.name}</td>
-              <td>{office.address}</td>
-              <td>{office.phone}</td>
-              <td className="d-flex justify-between gap-2">
-                <Button
-                  variant="warning"
-                  className="w-100"
-                  onClick={() => handleEdit(office.id)}
-                >
-                  <FaEdit />
-                </Button>{" "}
-                <Button
-                  type="button"
-                  className="w-100"
-                  variant="danger"
-                  onClick={() => handleDelete(office.id)}
-                >
-                  <FaRegTrashAlt />
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <DataTable
+        isLoading={isLoading}
+        withAction
+        headItems={headItems}
+        tableProps={{ striped: true, bordered: true, hover: true }}
+        items={items}
+        actionItems={[
+          {
+            text: <FaEdit />,
+            variant: "warning",
+            onClick: handleEdit,
+          },
+          {
+            text: <FaRegTrashAlt />,
+            variant: "danger",
+            onClick: handleDelete,
+          },
+        ]}
+      />
     </div>
   );
 };

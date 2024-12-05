@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
-import { addOffice } from "../../../store/reducers/officeReducer"; // Import addOffice action
+import { useSelector } from "react-redux"; // Import useDispatch
 import { OfficeValidationSchema } from "../InputValidation";
 import { toast } from "react-toastify";
 
@@ -9,12 +8,13 @@ import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
 import { AppPaths } from "../../../constants/appPaths";
 import { Button } from "react-bootstrap";
+import { useAddOffice } from "../../../hooks/useOffices";
 
 const OfficeAdd = () => {
-  const offices = useSelector((state) => state.offices); // Get the state from the store
-  const dispatch = useDispatch(); // Initialize dispatch
+  const { data: offices } = useSelector((state) => state.offices); // Get the state from the store
+  const { mutateAsync, isPending } = useAddOffice();
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const uniqueId = Date.now().toString();
     const newOffice = { ...values, id: uniqueId };
 
@@ -27,8 +27,13 @@ const OfficeAdd = () => {
       return toast.error("Office already exists");
     }
 
-    dispatch(addOffice(newOffice));
-    toast.success("Office successfully added");
+    try {
+      await mutateAsync(newOffice);
+      resetForm();
+      toast.success("Office successfully added");
+    } catch (error) {
+      toast.error("An error occurred while adding the office");
+    }
 
     setSubmitting(false);
   };
@@ -75,7 +80,7 @@ const OfficeAdd = () => {
               variant="primary"
               className="btn-primary"
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isPending ? "Submitting..." : "Submit"}
             </Button>
           </Form>
         </div>

@@ -6,7 +6,7 @@ import { Button, Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 const Dashboard = () => {
-  const offices = useSelector((state) => state.offices);
+  const { data: offices } = useSelector((state) => state.offices);
   const departments = useSelector(
     (state) => state.departments.departmentsData || []
   );

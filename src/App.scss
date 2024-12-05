@@ -3,6 +3,7 @@
 
 body {
   font-family: Rubik, Helvetica, Arial, serif !important;
+  background-color: var(--background-color);
 }
 
 .app {
@@ -16,8 +17,11 @@ body {
 
 .main {
   flex-grow: 1; /* Main content will take up remaining space */
+  margin-left: 250px;
 
-  background-color: var(--background-color);
+  &--full {
+    margin-left: 80px;
+  }
 }
 
 /* Navbar/Sidebar styles */

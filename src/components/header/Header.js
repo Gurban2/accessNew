@@ -5,7 +5,7 @@ import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 
 const ref = React.createRef();
-const Header = ({ userName }) => {
+const Header = ({ userName, isCollapsedSideBar }) => {
   useEffect(() => {
     const header = ref.current; // Your header reference
     const placeholder = document.createElement("div");
@@ -36,7 +36,10 @@ const Header = ({ userName }) => {
   }, []);
 
   return (
-    <div className="header" ref={ref}>
+    <div
+      className={`header ${isCollapsedSideBar ? "header--full" : ""}`}
+      ref={ref}
+    >
       <Navbar className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">Access Store</Navbar.Brand>

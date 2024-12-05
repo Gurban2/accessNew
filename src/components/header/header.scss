@@ -1,5 +1,6 @@
 .header {
   padding: 0 12px;
+
   .navbar {
     position: relative;
     display: flex;
@@ -34,6 +35,11 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10;
+    margin-left: 250px;
+
+    &.header--full {
+      margin-left: 80px !important;
+    }
   }
 }

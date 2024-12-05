@@ -10,7 +10,7 @@ import FormField from "../FormField";
 import "./style.scss";
 
 const DepartmentsAdd = () => {
-  const offices = useSelector((state) => state.offices);
+  const { data: offices } = useSelector((state) => state.offices);
   const dispatch = useDispatch();
 
   const parentOptions = [
@@ -33,7 +33,6 @@ const DepartmentsAdd = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-
             { label: "Dashboard", to: "/" },
             { label: "Departments", to: "/departments/list" },
 

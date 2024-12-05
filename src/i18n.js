@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next) // Bind react-i18next to the instance
   .init({
     fallbackLng: "en",
-    debug: true,
+    debug: false,
     backend: {
       loadPath: "/locales/{{lng}}/translation.json", // Path to load translations
     },
