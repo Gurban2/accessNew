@@ -14,64 +14,64 @@ import {
 const sections = [
   // { title: "Dashboard", icon: dashboard, path: AppPaths.offices.dashboard },
   {
-    title: "Offices and Departments",
+    title: "officesDepartments",
     departments: [
       {
-        title: "Offices",
+        title: "offices",
         icon: <FaChartBar />,
         items: [
-          { label: "All", path: AppPaths.offices.all },
-          { label: "Add", path: AppPaths.offices.add },
+          { label: "all", path: AppPaths.offices.all },
+          { label: "add", path: AppPaths.offices.add },
         ],
       },
       {
-        title: "Departments",
+        title: "departments",
         icon: <FaBuilding />,
         items: [
-          { label: "All", path: AppPaths.departments.all },
-          { label: "Add", path: AppPaths.departments.add },
+          { label: "all", path: AppPaths.departments.all },
+          { label: "add", path: AppPaths.departments.add },
         ],
       },
     ],
   },
   {
-    title: "Visitors",
+    title: "visitors",
     departments: [
       {
-        title: "Visitors",
+        title: "visitors",
         icon: <FaUser />,
         items: [
-          { label: "All", path: AppPaths.visitors.all },
-          { label: "Add", path: AppPaths.visitors.add },
+          { label: "all", path: AppPaths.visitors.all },
+          { label: "add", path: AppPaths.visitors.add },
         ],
       },
       {
-        title: "Persona Non Grata",
+        title: "personaNonGrata",
         icon: <FaUserTimes />,
         items: [
-          { label: "All", path: AppPaths.visitors.persona.all },
-          { label: "Add", path: AppPaths.visitors.persona.add },
+          { label: "all", path: AppPaths.visitors.persona.all },
+          { label: "add", path: AppPaths.visitors.persona.add },
         ],
       },
     ],
   },
   {
-    title: "Users & Permissions",
+    title: "usersPermissions",
     departments: [
       {
-        title: "Users",
+        title: "users",
         icon: <FaUsers />,
         items: [
-          { label: "List", path: AppPaths.users.permissions.list },
-          { label: "Add User", path: AppPaths.users.permissions.addUser },
+          { label: "all", path: AppPaths.users.permissions.list },
+          { label: "add", path: AppPaths.users.permissions.addUser },
         ],
       },
       {
-        title: "Permissions",
+        title: "permissions",
         icon: <FaUserCheck />,
         items: [
-          { label: "All", path: AppPaths.users.permissions.all },
-          { label: "Add Permission", path: AppPaths.users.permissions.add },
+          { label: "all", path: AppPaths.users.permissions.all },
+          { label: "add", path: AppPaths.users.permissions.add },
         ],
       },
     ],

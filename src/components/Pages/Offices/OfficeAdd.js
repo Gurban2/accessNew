@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
 import { addOffice } from "../../../store/reducers/officeReducer"; // Import addOffice action
 import { OfficeValidationSchema } from "../InputValidation";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
@@ -11,6 +12,8 @@ import { AppPaths } from "../../../constants/appPaths";
 import { Button } from "react-bootstrap";
 
 const OfficeAdd = () => {
+  const { t } = useTranslation();
+
   const offices = useSelector((state) => state.offices); // Get the state from the store
   const dispatch = useDispatch(); // Initialize dispatch
 
@@ -24,19 +27,19 @@ const OfficeAdd = () => {
 
     if (existingOffice) {
       setSubmitting(false);
-      return toast.error("Office already exists");
+      return toast.error(t("office.add.officeExists")); // Используем перевод
     }
 
     dispatch(addOffice(newOffice));
-    toast.success("Office successfully added");
+    toast.success(t("office.add.success")); // Используем перевод
 
     setSubmitting(false);
   };
 
   const breadCrumbs = [
-    { label: "Dashboard", to: AppPaths.dashboard.home },
-    { label: "Offices", to: AppPaths.offices.all },
-    { label: "Add Office", to: AppPaths.offices.add },
+    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home }, // Локализуем заголовки хлебных крошек
+    { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
+    { label: t("breadcrumb.addOffice"), to: AppPaths.offices.add },
   ];
 
   return (
@@ -54,20 +57,20 @@ const OfficeAdd = () => {
 
           <Form className="offices-add-form">
             <FormField
-              label="Office Name"
+              label={t("office.add.officeName")} 
               name="name"
-              placeholder="Enter Office Name"
+              placeholder={t("office.add.OfficeName")}
             />
             <FormField
-              label="Address"
+              label={t("office.add.address")}
               name="address"
-              placeholder="Enter Address"
+              placeholder={t("office.add.Address")}
             />
             <FormField
-              label="Phone"
+              label={t("office.add.phone")}
               name="phone"
               type="tel"
-              placeholder="Enter Phone Number"
+              placeholder={t("office.add.phone")}
             />
             <Button
               type="submit"
@@ -75,7 +78,7 @@ const OfficeAdd = () => {
               variant="primary"
               className="btn-primary"
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? t("office.add.submitting") : t("office.add.submit")} 
             </Button>
           </Form>
         </div>

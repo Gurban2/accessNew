@@ -6,17 +6,19 @@ import { Formik, Form } from "formik";
 import { DepartmentValidationSchema } from "../InputValidation";
 import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
+import { useTranslation } from "react-i18next";  // Added to handle translations
 
 import "./style.scss";
 
 const DepartmentsAdd = () => {
+  const { t } = useTranslation(); // Initialize translation hook
   const offices = useSelector((state) => state.offices);
   const dispatch = useDispatch();
 
   const parentOptions = [
-    { value: "1", label: "Parent Department 1" },
-    { value: "2", label: "Parent Department 2" },
-    { value: "3", label: "Parent Department 3" },
+    { value: "1", label: t("department.add.parent") + " 1" },
+    { value: "2", label: t("department.add.parent") + " 2" },
+    { value: "3", label: t("department.add.parent") + " 3" },
   ];
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -24,7 +26,7 @@ const DepartmentsAdd = () => {
     const newFormData = { ...values, id: uniqueId };
 
     dispatch(addDepartment(newFormData));
-    toast.success("Department successfully added");
+    toast.success(t("department.add.success"));
     setSubmitting(false);
   };
 
@@ -33,11 +35,9 @@ const DepartmentsAdd = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-
-            { label: "Dashboard", to: "/" },
-            { label: "Departments", to: "/departments/list" },
-
-            { label: "Departments Add" },
+            { label: t("breadcrumb.dashboard"), to: "/" },
+            { label: t("breadcrumb.departments"), to: "/departments/list" },
+            { label: t("breadcrumb.addDepartment") },
           ]}
         />
       </div>
@@ -55,16 +55,16 @@ const DepartmentsAdd = () => {
       >
         {({ isSubmitting }) => (
           <Form className="department-add-form">
-            <FormField label="Name" name="name" />
-            <FormField label="Phone" name="phone" type="tel" />
+            <FormField label={t("department.add.name")} name="name" />
+            <FormField label={t("department.add.phone")} name="phone" type="tel" />
             <FormField
-              label="Parent"
+              label={t("department.add.parent")}
               name="parent"
               as="select"
               options={parentOptions}
             />
             <FormField
-              label="Office"
+              label={t("department.add.office")}
               name="office"
               as="select"
               options={offices}
@@ -75,7 +75,7 @@ const DepartmentsAdd = () => {
               className="submit-button"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? t("department.add.submitting") : t("department.add.submit")}
             </button>
           </Form>
         )}
