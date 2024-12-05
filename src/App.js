@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 
 import store from "./store";
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";

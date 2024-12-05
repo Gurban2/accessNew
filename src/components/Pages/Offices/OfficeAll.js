@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,6 @@ import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 import Breadcrumb from "../Breadcrumb";
-import Search from "../../Searchbar";
 import { AppPaths } from "../../../constants/appPaths";
 import { useDeleteOffice, useFetchOffices } from "../../../hooks/useOffices";
 import DataTable from "../../../modules/DataTable";
@@ -65,24 +64,6 @@ const OfficeAll = () => {
     address: office.address,
     phone: office.phone,
     departments: office.departmentName,
-    // actions: (
-    //   <>
-    //     <Button
-    //       variant="warning"
-    //       className="w-100"
-    //       onClick={() => handleEdit(office.id)}
-    //     >
-    //       <FaEdit />
-    //     </Button>{" "}
-    //     <Button
-    //       variant="danger"
-    //       className="w-100"
-    //       onClick={() => handleDelete(office.id)}
-    //     >
-    //       <FaRegTrashAlt />
-    //     </Button>
-    //   </>
-    // ),
   }));
 
   return (
