@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteStaff } from "../../../store/reducers/staffReducer";
-import Table from "react-bootstrap/Table";
-import { FaEye } from "react-icons/fa";
-import "../UserPermissions/style.scss";
-import { Button } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
+import { FaEye } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { deleteStaff } from '../../../store/reducers/staffReducer';
+import '../UserPermissions/style.scss';
 
 const ListUsers = () => {
   const staffs = useSelector((state) => state.staffs);
@@ -14,7 +15,7 @@ const ListUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this Staff?")) {
+    if (window.confirm('Are you sure you want to delete this Staff?')) {
       setIsLoading(true);
       dispatch(deleteStaff({ id }));
       setIsLoading(false);
@@ -59,15 +60,15 @@ const ListUsers = () => {
               <td>{index + 1}</td>
               <td>
                 {staff.photo ? (
-                  typeof staff.photo === "string" ? (
+                  typeof staff.photo === 'string' ? (
                     <img
                       src={staff.photo}
                       alt={`${staff.name}`}
                       className="visitor-photo"
                       style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
+                        width: '50px',
+                        height: '50px',
+                        objectFit: 'cover',
                       }}
                     />
                   ) : (
@@ -76,14 +77,14 @@ const ListUsers = () => {
                       alt={`${staff.name}`}
                       className="visitor-photo"
                       style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
+                        width: '50px',
+                        height: '50px',
+                        objectFit: 'cover',
                       }}
                     />
                   )
                 ) : (
-                  "No photo"
+                  'No photo'
                 )}
               </td>
               <td>{staff.name}</td>
@@ -96,19 +97,19 @@ const ListUsers = () => {
                   onClick={() => handleView(staff.id)}
                 >
                   <FaEye /> View
-                </button>{" "}
+                </button>{' '}
                 <button
                   className="btn btn-warning btn-sm"
                   onClick={() => handleEdit(staff.id)}
                 >
                   Edit
-                </button>{" "}
+                </button>{' '}
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() => handleDelete(staff.id)}
                   disabled={isLoading}
                 >
-                  {isLoading ? "Deleting..." : "Delete"}
+                  {isLoading ? 'Deleting...' : 'Delete'}
                 </button>
               </td>
             </tr>

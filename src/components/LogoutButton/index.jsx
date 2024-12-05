@@ -1,6 +1,6 @@
-import React from "react";
-import { ReactComponent as LogoutIcon } from "../../assets/icons/dashboard/logout.svg";
-import "./style.scss";
+import React from 'react';
+import { ReactComponent as LogoutIcon } from '../../assets/icons/dashboard/logout.svg';
+import './style.scss';
 
 const LogoutButton = ({ onClick, text }) => {
   return (

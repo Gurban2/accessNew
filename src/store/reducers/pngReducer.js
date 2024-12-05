@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const pngReducer = createSlice({
-  name: "personas",
+  name: 'personas',
   initialState: [],
   reducers: {
     addPersona: (state, action) => {

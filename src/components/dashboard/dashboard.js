@@ -1,8 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Container, Table, Button } from "react-bootstrap";
-import "./dashboardStyle.css";
+import React from 'react';
+import { Container, Table, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import './dashboardStyle.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -26,30 +26,30 @@ const Dashboard = () => {
       <Section
         title="Visitors Overview"
         data={sortedVisitors}
-        fields={["name", "phone", "email", "address"]}
-        headers={["#", "Name", "Phone", "Email", "Address"]}
+        fields={['name', 'phone', 'email', 'address']}
+        headers={['#', 'Name', 'Phone', 'Email', 'Address']}
         noDataMessage="No visitors available"
-        onViewAll={() => handleViewAll("/visitors/all")}
+        onViewAll={() => handleViewAll('/visitors/all')}
       />
 
       {/* Offices Section */}
       <Section
         title="Offices Overview"
         data={sortedOffices}
-        fields={["name", "address", "phone"]}
-        headers={["#", "Office Name", "Address", "Phone Number"]}
+        fields={['name', 'address', 'phone']}
+        headers={['#', 'Office Name', 'Address', 'Phone Number']}
         noDataMessage="No offices available"
-        onViewAll={() => handleViewAll("/offices/all")}
+        onViewAll={() => handleViewAll('/offices/all')}
       />
 
       {/* Departments Section */}
       <Section
         title="Departments Overview"
         data={sortedDepartments}
-        fields={["name", "phone", "office"]}
-        headers={["#", "Department Name", "Phone", "Office"]}
+        fields={['name', 'phone', 'office']}
+        headers={['#', 'Department Name', 'Phone', 'Office']}
         noDataMessage="No departments available"
-        onViewAll={() => handleViewAll("/departments/list")}
+        onViewAll={() => handleViewAll('/departments/list')}
       />
     </Container>
   );

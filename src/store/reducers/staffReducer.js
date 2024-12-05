@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const staffSlice = createSlice({
-  name: "staffs",
+  name: 'staffs',
   initialState: [
     {
-      id: "1",
-      name: "User",
-      username: "",
-      email: "user@user.com",
-      phone: "555 555 555",
-      extension: "erhtj",
-      position: "A",      
-      role: "Manager",
-      office: "",
-      department: "",
-      password:"",
-      passwordConfirm:"",
-      active: "true",      
-    },   
+      id: '1',
+      name: 'User',
+      username: '',
+      email: 'user@user.com',
+      phone: '555 555 555',
+      extension: 'erhtj',
+      position: 'A',
+      role: 'Manager',
+      office: '',
+      department: '',
+      password: '',
+      passwordConfirm: '',
+      active: 'true',
+    },
   ],
   reducers: {
     addStaff: (state, action) => {
@@ -25,12 +25,15 @@ const staffSlice = createSlice({
         (staff) => staff.id === action.payload.id
       );
       if (existingStaff) {
-        alert("Already exists");
+        alert('Already exists');
         return state;
       }
       // Add time when adding a new visitor
-      const updatedState = [...state, { ...action.payload, createdAt: new Date().toISOString() }];
-      console.log("State after adding:", updatedState);
+      const updatedState = [
+        ...state,
+        { ...action.payload, createdAt: new Date().toISOString() },
+      ];
+      console.log('State after adding:', updatedState);
       return updatedState;
     },
     deleteStaff: (state, action) => {
@@ -39,7 +42,11 @@ const staffSlice = createSlice({
     editStaff: (state, action) => {
       return state.map((staff) =>
         staff.id === action.payload.id
-          ? { ...staff, ...action.payload.data, updatedAt: new Date().toISOString() } // Add time when editing
+          ? {
+              ...staff,
+              ...action.payload.data,
+              updatedAt: new Date().toISOString(),
+            } // Add time when editing
           : staff
       );
     },
@@ -74,7 +81,13 @@ const staffSlice = createSlice({
   },
 });
 
-export const { addStaff, deleteStaff, editStaff, filterStaff, updateStaffr, updatePersona } =
-  staffSlice.actions;
+export const {
+  addStaff,
+  deleteStaff,
+  editStaff,
+  filterStaff,
+  updateStaffr,
+  updatePersona,
+} = staffSlice.actions;
 
 export default staffSlice.reducer;

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const Search = ({ data, onFilter, placeholder = "Search..." }) => {
-  const [query, setQuery] = useState("");
+const Search = ({ data, onFilter, placeholder = 'Search...' }) => {
+  const [query, setQuery] = useState('');
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();

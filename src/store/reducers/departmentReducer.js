@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const departmentSlice = createSlice({
-  name: "departments",
+  name: 'departments',
   initialState: {
     departmentsData: [
-      { id: "1", name: "Sales", phone: "555 555 555", office: "A" },
-      { id: "2", name: "Marketing", phone: "555 555 555", office: "B" },
-      { id: "3", name: "HR", phone: "555 555 555", office: "C" },
-      { id: "4", name: "IT", phone: "555 555 555", office: "D" },
+      { id: '1', name: 'Sales', phone: '555 555 555', office: 'A' },
+      { id: '2', name: 'Marketing', phone: '555 555 555', office: 'B' },
+      { id: '3', name: 'HR', phone: '555 555 555', office: 'C' },
+      { id: '4', name: 'IT', phone: '555 555 555', office: 'D' },
     ],
   },
   reducers: {
@@ -20,7 +20,7 @@ const departmentSlice = createSlice({
           department.name.toLowerCase() === action.payload.name.toLowerCase()
       );
       if (existingDepartment) {
-        alert("Already exists");
+        alert('Already exists');
         return;
       }
       state.departmentsData.push(action.payload);

@@ -1,37 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const visitorSlice = createSlice({
-  name: "visitors",
+  name: 'visitors',
   initialState: [
     {
-      id: "2",
-      name: "Admin",
-      phone: "555 555 555",
-      fin: "edhrfjr",
-      email: "user",
-      address: "B",
-      tag: "person non grata",
-      reason: "",
+      id: '2',
+      name: 'Admin',
+      phone: '555 555 555',
+      fin: 'edhrfjr',
+      email: 'user',
+      address: 'B',
+      tag: 'person non grata',
+      reason: '',
     },
     {
-      id: "3",
-      name: "Person",
-      phone: "555 555 555",
-      fin: "jtydjrt",
-      email: "user",
-      address: "C",
-      tag: "true",
-      reason: "",
+      id: '3',
+      name: 'Person',
+      phone: '555 555 555',
+      fin: 'jtydjrt',
+      email: 'user',
+      address: 'C',
+      tag: 'true',
+      reason: '',
     },
     {
-      id: "4",
-      name: "Kuku",
-      phone: "555 555 555",
-      fin: "jtukfjd",
-      email: "user",
-      address: "D",
-      tag: "true",
-      reason: "",
+      id: '4',
+      name: 'Kuku',
+      phone: '555 555 555',
+      fin: 'jtukfjd',
+      email: 'user',
+      address: 'D',
+      tag: 'true',
+      reason: '',
     },
   ],
 
@@ -71,7 +71,7 @@ const visitorSlice = createSlice({
       const visitorIndex = state.findIndex((visitor) => visitor.id === id);
 
       if (visitorIndex === -1) return state;
-      
+
       return [
         ...state.slice(0, visitorIndex),
         {

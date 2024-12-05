@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const officeSlice = createSlice({
-  name: "offices",
+  name: 'offices',
   initialState: {
     data: [],
     loading: false,
@@ -10,7 +10,7 @@ const officeSlice = createSlice({
   reducers: {
     addOffice: (state, action) => {
       const updatedState = [...state, action.payload];
-      console.log("State after adding office:", updatedState);
+      console.log('State after adding office:', updatedState);
       return updatedState;
     },
     deleteOffice: (state, action) => {

@@ -1,21 +1,22 @@
-import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteDepartment } from "../../../store/reducers/departmentReducer";
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import DataTable from "../../../modules/DataTable";
-import Breadcrumb from "../Breadcrumb";
-import { AppPaths } from "../../../constants/appPaths";
-import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "./style.scss";
+import React, { useState, useMemo } from 'react';
+import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { AppPaths } from '../../../constants/appPaths';
+import DataTable from '../../../modules/DataTable';
+import { deleteDepartment } from '../../../store/reducers/departmentReducer';
+import Breadcrumb from '../Breadcrumb';
+import './style.scss';
 
 const DepartmentsAll = () => {
   const { t } = useTranslation();
 
-  const departments = useSelector((state) => state.departments.departmentsData || []);
-  const [searchQuery] = useState("");
+  const departments = useSelector(
+    (state) => state.departments.departmentsData || []
+  );
+  const [searchQuery] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const DepartmentsAll = () => {
   }, [searchQuery, departments]);
 
   const handleDelete = (id) => {
-    if (window.confirm(t("department.deleteConfirm"))) {
+    if (window.confirm(t('department.deleteConfirm'))) {
       dispatch(deleteDepartment({ id }));
     }
   };
@@ -42,11 +43,11 @@ const DepartmentsAll = () => {
 
   // Head items for the DataTable
   const headItems = [
-    "#",
-    t("department.all.name"),
-    t("department.all.phone"),
-    t("department.all.office"),
-    t("department.all.actions"),
+    '#',
+    t('department.all.name'),
+    t('department.all.phone'),
+    t('department.all.office'),
+    t('department.all.actions'),
   ];
 
   // Format items for the DataTable
@@ -63,7 +64,7 @@ const DepartmentsAll = () => {
           onClick={() => handleEdit(department.id)}
         >
           <FaEdit />
-        </Button>{" "}
+        </Button>{' '}
         <Button
           variant="danger"
           className="w-100"
@@ -80,13 +81,16 @@ const DepartmentsAll = () => {
       <div className="departments-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
-            { label: t("breadcrumb.departments"), to: AppPaths.departments.all },
+            { label: t('breadcrumb.dashboard'), to: AppPaths.dashboard.home },
+            {
+              label: t('breadcrumb.departments'),
+              to: AppPaths.departments.all,
+            },
           ]}
         />
         <div className="searchAddBtn">
           <Button type="button">
-            <Link to="/departments/add">{t("department.all.add")}</Link>
+            <Link to="/departments/add">{t('department.all.add')}</Link>
           </Button>
         </div>
       </div>

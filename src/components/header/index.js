@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { Navbar, Container } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Import Link for navigation
-import "./header.scss";
-import LangSwitcher from "../../modules/LangSwitcher";
+import React, { useEffect } from 'react';
+import { Navbar, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import './header.scss';
+import LangSwitcher from '../../modules/LangSwitcher';
 
 const ref = React.createRef();
 const Header = ({ userName, isCollapsedSideBar }) => {
   useEffect(() => {
     const header = ref.current;
-    const placeholder = document.createElement("div");
+    const placeholder = document.createElement('div');
 
     const updateHeaderSticky = () => {
       if (
@@ -17,25 +17,25 @@ const Header = ({ userName, isCollapsedSideBar }) => {
       ) {
         placeholder.style.height = `${header.offsetHeight}px`;
         header.parentNode.insertBefore(placeholder, header);
-        header.classList.add("header--sticky");
+        header.classList.add('header--sticky');
       } else {
-        placeholder.style.height = "0";
+        placeholder.style.height = '0';
         if (placeholder.parentNode) {
           placeholder.parentNode.removeChild(placeholder);
         }
-        header.classList.remove("header--sticky");
+        header.classList.remove('header--sticky');
       }
     };
 
-    window.addEventListener("scroll", updateHeaderSticky);
+    window.addEventListener('scroll', updateHeaderSticky);
     return () => {
-      window.removeEventListener("scroll", updateHeaderSticky);
+      window.removeEventListener('scroll', updateHeaderSticky);
     };
   }, []);
 
   return (
     <div
-      className={`header ${isCollapsedSideBar ? "header--full" : ""}`}
+      className={`header ${isCollapsedSideBar ? 'header--full' : ''}`}
       ref={ref}
     >
       <Navbar className="bg-body-tertiary">

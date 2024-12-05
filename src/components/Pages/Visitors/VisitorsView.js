@@ -1,10 +1,11 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
-import Breadcrumb from "../Breadcrumb";
-import { AppPaths } from "../../../constants/appPaths";
-import "./style.scss";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { shallowEqual, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { AppPaths } from '../../../constants/appPaths';
+import Breadcrumb from '../Breadcrumb';
+import './style.scss';
 
 const VisitorsView = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const VisitorsView = () => {
   );
 
   if (!visitor) {
-    return <div>{t("loading")}</div>; // Use translation for loading
+    return <div>{t('loading')}</div>; // Use translation for loading
   }
 
   return (
@@ -25,16 +26,16 @@ const VisitorsView = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
-            { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
-            { label: t("visitorView.viewVisitor") }, // Translation for 'View Visitor'
+            { label: t('breadcrumb.dashboard'), to: AppPaths.dashboard.home },
+            { label: t('breadcrumb.visitors'), to: AppPaths.visitors.all },
+            { label: t('visitorView.viewVisitor') }, // Translation for 'View Visitor'
           ]}
         />
       </div>
       <div className="visitor-view-card">
         <div className="visitor-photo">
           {visitor.photo ? (
-            typeof visitor.photo === "string" ? (
+            typeof visitor.photo === 'string' ? (
               <img
                 src={visitor.photo}
                 alt={`${visitor.name}`}
@@ -49,29 +50,28 @@ const VisitorsView = () => {
             )
           ) : (
             <div className="visitor-photo-frame">
-              <span>{t("visitorView.noPhoto")}</span>{" "}
+              <span>{t('visitorView.noPhoto')}</span>{' '}
             </div>
           )}
         </div>
         <div className="visitor-info">
           <p>
-            <strong>{t("name")}:</strong> {t("visitorView.name")}
+            <strong>{t('name')}:</strong> {t('visitorView.name')}
           </p>
           <p>
-            <strong>{t("phone")}:</strong> {t("visitorView.phone")}
+            <strong>{t('phone')}:</strong> {t('visitorView.phone')}
           </p>
           <p>
-            <strong>{t("fin")}:</strong> {t("visitorView.fin")}
+            <strong>{t('fin')}:</strong> {t('visitorView.fin')}
           </p>
           <p>
-            <strong>{t("email")}:</strong> {t("visitorView.email")}
+            <strong>{t('email')}:</strong> {t('visitorView.email')}
           </p>
           <p>
-            <strong>{t("address")}:</strong> {t("visitorView.address")}
+            <strong>{t('address')}:</strong> {t('visitorView.address')}
           </p>
           <p>
-            <strong>{t("description")}:</strong>{" "}
-            {t("visitorView.description")}
+            <strong>{t('description')}:</strong> {t('visitorView.description')}
           </p>
         </div>
       </div>

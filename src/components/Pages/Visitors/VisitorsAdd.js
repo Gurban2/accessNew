@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addVisitor } from "../../../store/reducers/visitorReducer";
-import { Button, Col, Form, Row, Table } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
-import { VisitorValidationSchema } from "../InputValidation";
-import Breadcrumb from "../Breadcrumb";
-import "./style.scss";
-import { AppPaths } from "../../../constants/appPaths";
-import Capture from "../../../modules/Capture";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
+import React, { useState } from 'react';
+import { Button, Col, Form, Row, Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AppPaths } from '../../../constants/appPaths';
+import Capture from '../../../modules/Capture';
+import { addVisitor } from '../../../store/reducers/visitorReducer';
+import Breadcrumb from '../Breadcrumb';
+import { VisitorValidationSchema } from '../InputValidation';
+import './style.scss';
 
 const VisitorsAdd = () => {
   const { t } = useTranslation();
@@ -21,11 +21,11 @@ const VisitorsAdd = () => {
   const [items, setItems] = useState([]);
 
   const handleCapture = (imageSrc, setFieldValue) => {
-    setFieldValue("photo", imageSrc);
+    setFieldValue('photo', imageSrc);
   };
 
   const handleAddItem = () => {
-    setItems([...items, { name: "", description: "" }]);
+    setItems([...items, { name: '', description: '' }]);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -50,29 +50,29 @@ const VisitorsAdd = () => {
     };
     dispatch(addVisitor(newFormData));
     setSubmitting(false);
-    toast.success(t("visitorAdd.success"));
-    navigate("/visitors/all");
+    toast.success(t('visitorAdd.success'));
+    navigate('/visitors/all');
   };
 
   return (
     <div className="visitor-add-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
-          { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
-          { label: t("breadcrumb.addVisitor"), to: AppPaths.visitors.add },
+          { label: t('breadcrumb.dashboard'), to: AppPaths.dashboard.home },
+          { label: t('breadcrumb.visitors'), to: AppPaths.visitors.all },
+          { label: t('breadcrumb.addVisitor'), to: AppPaths.visitors.add },
         ]}
       />
       <hr className="navigation-underline" />
       <Formik
         initialValues={{
-          name: "",
-          phone: "",
-          fin: "",
-          email: "",
-          address: "",
-          description: "",
-          photo: "",
+          name: '',
+          phone: '',
+          fin: '',
+          email: '',
+          address: '',
+          description: '',
+          photo: '',
         }}
         validationSchema={VisitorValidationSchema}
         onSubmit={handleSubmit}
@@ -86,10 +86,10 @@ const VisitorsAdd = () => {
                   onConfirm={(imageSrc) =>
                     handleCapture(imageSrc, setFieldValue)
                   }
-                  btnText={t("visitorAdd.addPhoto")}
+                  btnText={t('visitorAdd.addPhoto')}
                 />
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.addPhoto")}
+                  {t('visitorAdd.addPhoto')}
                 </Form.Label>
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
@@ -97,24 +97,24 @@ const VisitorsAdd = () => {
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="name">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.name")}
+                  {t('visitorAdd.name')}
                 </Form.Label>
                 <Field
                   type="text"
                   name="name"
-                  placeholder={t("visitorAdd.enterName")}
+                  placeholder={t('visitorAdd.enterName')}
                   className="form-control"
                 />
                 <ErrorMessage name="name" component="div" className="error" />
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="phone">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.phone")}
+                  {t('visitorAdd.phone')}
                 </Form.Label>
                 <Field
                   type="tel"
                   name="phone"
-                  placeholder={t("visitorAdd.enterPhone")}
+                  placeholder={t('visitorAdd.enterPhone')}
                   className="form-control"
                 />
                 <ErrorMessage name="phone" component="div" className="error" />
@@ -123,24 +123,24 @@ const VisitorsAdd = () => {
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="fin">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.fin")}
+                  {t('visitorAdd.fin')}
                 </Form.Label>
                 <Field
                   type="text"
                   name="fin"
-                  placeholder={t("visitorAdd.enterFin")}
+                  placeholder={t('visitorAdd.enterFin')}
                   className="form-control"
                 />
                 <ErrorMessage name="fin" component="div" className="error" />
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="email">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.email")}
+                  {t('visitorAdd.email')}
                 </Form.Label>
                 <Field
                   type="email"
                   name="email"
-                  placeholder={t("visitorAdd.enterEmail")}
+                  placeholder={t('visitorAdd.enterEmail')}
                   className="form-control"
                 />
                 <ErrorMessage name="email" component="div" className="error" />
@@ -149,12 +149,12 @@ const VisitorsAdd = () => {
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="address">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.address")}
+                  {t('visitorAdd.address')}
                 </Form.Label>
                 <Field
                   type="text"
                   name="address"
-                  placeholder={t("visitorAdd.enterAddress")}
+                  placeholder={t('visitorAdd.enterAddress')}
                   className="form-control"
                 />
                 <ErrorMessage
@@ -165,13 +165,13 @@ const VisitorsAdd = () => {
               </Form.Group>
               <Form.Group as={Col} xs={12} md={6} controlId="ControlTextarea">
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.description")}
+                  {t('visitorAdd.description')}
                 </Form.Label>
                 <Field
                   as="textarea"
                   rows={3}
                   name="description"
-                  placeholder={t("visitorAdd.enterDescription")}
+                  placeholder={t('visitorAdd.enterDescription')}
                   className="form-control"
                 />
                 <ErrorMessage
@@ -184,7 +184,7 @@ const VisitorsAdd = () => {
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="additem">
                 <Button variant="warning" onClick={handleAddItem}>
-                  {t("visitorAdd.addItem")}
+                  {t('visitorAdd.addItem')}
                 </Button>
               </Form.Group>
             </Row>
@@ -192,8 +192,8 @@ const VisitorsAdd = () => {
               <Table bordered className="mb-3">
                 <thead>
                   <tr>
-                    <th>{t("visitorAdd.itemName")}</th>
-                    <th>{t("visitorAdd.itemDescription")}</th>
+                    <th>{t('visitorAdd.itemName')}</th>
+                    <th>{t('visitorAdd.itemDescription')}</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -203,22 +203,22 @@ const VisitorsAdd = () => {
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder={t("visitorAdd.itemName")}
+                          placeholder={t('visitorAdd.itemName')}
                           value={item.name}
                           onChange={(e) =>
-                            handleItemChange(index, "name", e.target.value)
+                            handleItemChange(index, 'name', e.target.value)
                           }
                         />
                       </td>
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder={t("visitorAdd.itemDescription")}
+                          placeholder={t('visitorAdd.itemDescription')}
                           value={item.description}
                           onChange={(e) =>
                             handleItemChange(
                               index,
-                              "description",
+                              'description',
                               e.target.value
                             )
                           }
@@ -241,8 +241,8 @@ const VisitorsAdd = () => {
             <div className="form-actions">
               <Button variant="primary" type="submit" disabled={isSubmitting}>
                 {isSubmitting
-                  ? t("visitorAdd.submitting")
-                  : t("visitorAdd.submit")}
+                  ? t('visitorAdd.submitting')
+                  : t('visitorAdd.submit')}
               </Button>
               <Button
                 variant="secondary"
@@ -252,7 +252,7 @@ const VisitorsAdd = () => {
                   setItems([]);
                 }}
               >
-                {t("visitorAdd.reset")}
+                {t('visitorAdd.reset')}
               </Button>
             </div>
           </FormikForm>

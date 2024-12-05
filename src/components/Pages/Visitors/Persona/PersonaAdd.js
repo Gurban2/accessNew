@@ -1,20 +1,22 @@
-import React, { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateVisitor } from "../../../../store/reducers/visitorReducer";
-import { Form, Button, Alert } from "react-bootstrap";
-import AddModal from "./AddModal";
-import DataTable from "../../../../modules/DataTable";
+import React, { useState, useMemo } from 'react';
+import { Form, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import AddModal from './AddModal';
+import DataTable from '../../../../modules/DataTable';
+import { updateVisitor } from '../../../../store/reducers/visitorReducer';
 
-import "./style.scss";
+import './style.scss';
 
 const PersonaAdd = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [reason, setReason] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  const [reason, setReason] = useState('');
   // const [selectedVisitor, setSelectedVisitor] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
-  const visitors = useSelector((state) => state.visitors.filter(v => !v.personNonGrata));
+  const visitors = useSelector((state) =>
+    state.visitors.filter((v) => !v.personNonGrata)
+  );
 
   const matchedVisitors = useMemo(() => {
     return visitors.filter((visitor) =>
@@ -28,7 +30,7 @@ const PersonaAdd = () => {
 
   const handleConfirmAdd = (id) => {
     if (!reason.trim()) {
-      setError("Please provide a reason.");
+      setError('Please provide a reason.');
       return;
     }
 
@@ -41,16 +43,16 @@ const PersonaAdd = () => {
         })
       );
 
-      setInputValue("");
-      setReason("");
-      setError(""); // Clear error after successful update
+      setInputValue('');
+      setReason('');
+      setError(''); // Clear error after successful update
     } catch (error) {
-      setError("Failed to update. Please try again.");
+      setError('Failed to update. Please try again.');
       console.log(error);
     }
   };
 
-  const headItems = ["ID", "Name", "Phone", "Fin", "Actions"];
+  const headItems = ['ID', 'Name', 'Phone', 'Fin', 'Actions'];
 
   const items = matchedVisitors.map((visitor) => ({
     id: visitor.id,

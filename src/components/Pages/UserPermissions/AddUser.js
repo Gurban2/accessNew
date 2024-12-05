@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
 import {
   Button,
   Form,
@@ -7,12 +6,14 @@ import {
   Row,
   InputGroup,
   FormControl,
-} from "react-bootstrap";
-import { addStaff } from "../../../store/reducers/staffReducer";
-import { toast } from "react-toastify";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../UserPermissions/style.scss";
-import { Link } from "react-router-dom";
+} from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { addStaff } from '../../../store/reducers/staffReducer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../UserPermissions/style.scss';
 
 const AddUser = () => {
   const { data: offices } = useSelector((state) => state.offices);
@@ -21,17 +22,17 @@ const AddUser = () => {
   const [, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: "",
-    username: "",
-    email: "",
-    phone: "",
-    extension: "",
-    position: "",
-    role: "user",
-    office: "new-york",
-    department: "hr",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    username: '',
+    email: '',
+    phone: '',
+    extension: '',
+    position: '',
+    role: 'user',
+    office: 'new-york',
+    department: 'hr',
+    password: '',
+    confirmPassword: '',
     active: true,
   });
 
@@ -60,10 +61,10 @@ const AddUser = () => {
     navigator.clipboard
       .writeText(formData.password)
       .then(() => {
-        toast.success("Password copied to clipboard!");
+        toast.success('Password copied to clipboard!');
       })
       .catch((err) => {
-        toast.error("Password copied to clipboard!");
+        toast.error('Password copied to clipboard!');
       });
   };
   const validateForm = () => {
@@ -82,7 +83,7 @@ const AddUser = () => {
       !formData.confirmPassword ||
       !formData.active
     ) {
-      setError("All fields are required!");
+      setError('All fields are required!');
       return false;
     }
     return true;
@@ -99,29 +100,29 @@ const AddUser = () => {
     dispatch(addStaff(newFormData));
 
     setFormData({
-      id: "",
-      name: "",
-      username: "",
-      email: "",
-      phone: "",
-      extension: "",
-      position: "",
-      role: "",
-      office: "",
-      department: "",
-      password: "",
-      confirmPassword: "",
-      active: "",
+      id: '',
+      name: '',
+      username: '',
+      email: '',
+      phone: '',
+      extension: '',
+      position: '',
+      role: '',
+      office: '',
+      department: '',
+      password: '',
+      confirmPassword: '',
+      active: '',
     });
     setLoading(false);
-    toast.success("User Successfully Added!");
+    toast.success('User Successfully Added!');
   };
 
   return (
     <div className="user-add-container">
       <nav className="breadcrumbs">
-        <Link to="/">Dashboard</Link> &gt;{" "}
-        <Link to="/users/permissions/list">User & Permissions</Link> &gt;{" "}
+        <Link to="/">Dashboard</Link> &gt;{' '}
+        <Link to="/users/permissions/list">User & Permissions</Link> &gt;{' '}
         <span>Add User</span>
       </nav>
       <Form className="form-container" onSubmit={handleSubmit}>
@@ -277,7 +278,7 @@ const AddUser = () => {
               <Button variant="outline-secondary" onClick={handleCopyPassword}>
                 Copy
               </Button>
-              <FormControl value={formData.password || ""} readOnly />
+              <FormControl value={formData.password || ''} readOnly />
               <Button variant="secondary" onClick={generatePassword}>
                 Generate Password
               </Button>
@@ -290,7 +291,7 @@ const AddUser = () => {
             <Form.Check
               type="switch"
               id="activeSwitch"
-              label={formData.active ? "Active" : "Inactive"}
+              label={formData.active ? 'Active' : 'Inactive'}
               checked={formData.active}
               onChange={handleToggleActive}
             />

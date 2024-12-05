@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { Button } from "react-bootstrap";
-import Webcam from "react-webcam";
-import "./style.scss";
+import React, { useRef } from 'react';
+import { Button } from 'react-bootstrap';
+import Webcam from 'react-webcam';
+import './style.scss';
 
 const WebcamCapture = ({ onCapture }) => {
   const webcamRef = useRef(null);

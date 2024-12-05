@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   updatePersona,
   updateVisitor,
-} from "../../../../store/reducers/visitorReducer";
-import Table from "react-bootstrap/Table";
-import { Button } from "react-bootstrap";
+} from '../../../../store/reducers/visitorReducer';
 
 const PersonaAll = () => {
   const visitors = useSelector((state) => state.visitors || []);
   const dispatch = useDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [reason, setReason] = useState("");
+  const [reason, setReason] = useState('');
   const [selectedVisitorId, setSelectedVisitorId] = useState(null);
 
   const personNonGrataVisitors = visitors.filter(
@@ -27,25 +27,27 @@ const PersonaAll = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this Persona?")) {
-      dispatch(updateVisitor({ id, reason: "", personNonGrata: "false" }));
+    if (window.confirm('Are you sure you want to delete this Persona?')) {
+      dispatch(updateVisitor({ id, reason: '', personNonGrata: 'false' }));
     }
   };
 
   const handleConfirmEdit = () => {
     dispatch(updatePersona({ id: selectedVisitorId, reason }));
     setIsPopupOpen(false);
-    setReason("");
+    setReason('');
   };
 
   const handleCancel = () => {
     setIsPopupOpen(false);
-    setReason("");
+    setReason('');
   };
 
   return (
     <div className="persona-all-container">
-      <h1 className="persona-all-title">Personas Marked as "Non Grata"</h1>
+      <h1 className="persona-all-title">
+        Personas Marked as &quot;Non Grata&quot;
+      </h1>
       {personNonGrataVisitors.length > 0 ? (
         <>
           <Button type="button">
@@ -68,17 +70,17 @@ const PersonaAll = () => {
                   <td>{index + 1}</td>
                   <td>
                     {visitor.photo ? (
-                      typeof visitor.photo === "string" ? (
+                      typeof visitor.photo === 'string' ? (
                         <img
                           src={visitor.photo}
                           alt={`${visitor.name}`}
                           className="visitor-photo"
                           style={{
-                            width: "50px",
-                            height: "50px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            marginRight: "10px",
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '50%',
+                            objectFit: 'cover',
+                            marginRight: '10px',
                           }}
                         />
                       ) : (
@@ -87,26 +89,26 @@ const PersonaAll = () => {
                           alt={`${visitor.name}`}
                           className="visitor-photo"
                           style={{
-                            width: "50px",
-                            height: "50px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            marginRight: "10px",
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '50%',
+                            objectFit: 'cover',
+                            marginRight: '10px',
                           }}
                         />
                       )
                     ) : (
                       <div
                         style={{
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "50%",
-                          backgroundColor: "#ddd",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          marginRight: "10px",
-                          fontSize: "12px",
+                          width: '50px',
+                          height: '50px',
+                          borderRadius: '50%',
+                          backgroundColor: '#ddd',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginRight: '10px',
+                          fontSize: '12px',
                         }}
                       >
                         No photo
@@ -115,14 +117,14 @@ const PersonaAll = () => {
                   </td>
                   <td>{visitor.name}</td>
                   <td>{visitor.fin}</td>
-                  <td>{visitor.reason || "No reason provided"}</td>
+                  <td>{visitor.reason || 'No reason provided'}</td>
                   <td>
                     <button
                       className="btn btn-warning btn-sm"
                       onClick={() => handleEdit(visitor.id, visitor.reason)}
                     >
                       Edit
-                    </button>{" "}
+                    </button>{' '}
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={() => handleDelete(visitor.id)}
@@ -134,26 +136,28 @@ const PersonaAll = () => {
               ))}
             </tbody>
           </Table>
-          <p style={{ color: "red", fontStyle: "italic", marginTop: "20px" }}>
-            These users are marked as "Person Non Grata."
+          <p style={{ color: 'red', fontStyle: 'italic', marginTop: '20px' }}>
+            These users are marked as &quot;Person Non Grata.&quot;
           </p>
         </>
       ) : (
-        <p className="no-personas">No "Person Non Grata" users found.</p>
+        <p className="no-personas">
+          No &quot;Person Non Grata&quot; users found.
+        </p>
       )}
 
       {isPopupOpen && (
         <div
           className="popup"
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "#fff",
-            padding: "20px",
-            borderRadius: "8px",
-            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#fff',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
             zIndex: 1000,
           }}
         >
@@ -163,34 +167,34 @@ const PersonaAll = () => {
             onChange={(e) => setReason(e.target.value)}
             placeholder="Enter reason for marking as 'Person Non Grata'"
             style={{
-              width: "100%",
-              height: "100px",
-              marginTop: "10px",
-              padding: "10px",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
-              resize: "none",
+              width: '100%',
+              height: '100px',
+              marginTop: '10px',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ddd',
+              resize: 'none',
             }}
           />
           <div
             style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: "10px",
-              gap: "10px",
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '10px',
+              gap: '10px',
             }}
           >
             <Button
               type="button"
               onClick={handleConfirmEdit}
-              style={{ padding: "5px 10px" }}
+              style={{ padding: '5px 10px' }}
             >
               Confirm
             </Button>
             <button
               onClick={handleCancel}
               className="btn btn-secondary"
-              style={{ padding: "5px 10px" }}
+              style={{ padding: '5px 10px' }}
             >
               Cancel
             </button>
@@ -202,12 +206,12 @@ const PersonaAll = () => {
         <div
           className="popup-overlay"
           style={{
-            position: "fixed",
+            position: 'fixed',
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             zIndex: 2,
           }}
         ></div>
