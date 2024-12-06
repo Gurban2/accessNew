@@ -132,7 +132,9 @@
       "office": "Ofis",
       "actions": "Əməliyyatlar",
       "deleteConfirm": "Bu şöbəni silmək istədiyinizdən əminsiniz?",
-      "add": "Şöbə əlavə et"
+      "add": "Şöbə əlavə et",
+      "search": "Şöbə axtarın",
+      "loading": "Yüklənir..."
     },
     "add": {
       "name": "Şöbə adı",

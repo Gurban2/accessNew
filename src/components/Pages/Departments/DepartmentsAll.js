@@ -1,39 +1,39 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
-import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { AppPaths } from '../../../constants/appPaths';
+import {
+  useDeleteDepartment,
+  useFetchDepartments,
+} from '../../../hooks/useDepartments';
 import DataTable from '../../../modules/DataTable';
-import { deleteDepartment } from '../../../store/reducers/departmentReducer';
 import Breadcrumb from '../Breadcrumb';
 import './style.scss';
 
 const DepartmentsAll = () => {
   const { t } = useTranslation();
-
-  const departments = useSelector(
-    (state) => state.departments.departmentsData || []
-  );
-  const [searchQuery] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Filter departments based on the search query
-  const filteredDepartments = useMemo(() => {
-    const query = searchQuery.toLowerCase();
-    return departments?.filter(
-      (department) =>
-        department.name.toLowerCase().includes(query) ||
-        department.phone.toLowerCase().includes(query) ||
-        department.office.toLowerCase().includes(query)
-    );
-  }, [searchQuery, departments]);
+  // Состояние для поиска
+  const [query, setQuery] = useState('');
 
-  const handleDelete = (id) => {
+  // Загружаем департаменты с фильтрацией по запросу
+  const { data: departments, isLoading } = useFetchDepartments(query);
+
+  const { mutateAsync: deleteDepartment } = useDeleteDepartment();
+
+  const handleDelete = async (id) => {
     if (window.confirm(t('department.deleteConfirm'))) {
-      dispatch(deleteDepartment({ id }));
+      try {
+        await deleteDepartment(id);
+        toast.success('Department successfully deleted');
+      } catch (error) {
+        toast.error('An error occurred while deleting the department');
+      }
     }
   };
 
@@ -41,7 +41,7 @@ const DepartmentsAll = () => {
     navigate(`/departments/edit/${id}`);
   };
 
-  // Head items for the DataTable
+  // Head items для DataTable
   const headItems = [
     '#',
     t('department.all.name'),
@@ -50,30 +50,12 @@ const DepartmentsAll = () => {
     t('department.all.actions'),
   ];
 
-  // Format items for the DataTable
-  const items = filteredDepartments.map((department, index) => ({
+  // Отображаем департаменты
+  const items = departments?.map((department, index) => ({
     id: department.id,
     departmentName: department.name,
     phone: department.phone,
     office: department.office,
-    actions: (
-      <>
-        <Button
-          variant="warning"
-          className="w-100"
-          onClick={() => handleEdit(department.id)}
-        >
-          <FaEdit />
-        </Button>{' '}
-        <Button
-          variant="danger"
-          className="w-100"
-          onClick={() => handleDelete(department.id)}
-        >
-          <FaRegTrashAlt />
-        </Button>
-      </>
-    ),
   }));
 
   return (
@@ -88,20 +70,45 @@ const DepartmentsAll = () => {
             },
           ]}
         />
-        <div className="searchAddBtn">
-          <Button type="button">
-            <Link to="/departments/add">{t('department.all.add')}</Link>
-          </Button>
+        <div className="search-add-departments">
+          <input
+            type="text"
+            placeholder={t('department.all.search')}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)} // Обновляем запрос для фильтрации
+          />
+          <div className="searchAddBtn">
+            <Button type="button">
+              <Link to="/departments/add">{t('department.all.add')}</Link>
+            </Button>
+          </div>
         </div>
       </div>
       <hr className="navigation-underline" />
 
-      <DataTable
-        withAction
-        headItems={headItems}
-        tableProps={{ striped: true, bordered: true, hover: true }}
-        items={items}
-      />
+      {/* Отображаем таблицу или индикатор загрузки */}
+      {isLoading ? (
+        <div>{t('department.all.loading')}</div> // Сообщение о загрузке
+      ) : (
+        <DataTable
+          withAction
+          headItems={headItems}
+          tableProps={{ striped: true, bordered: true, hover: true }}
+          items={items}
+          actionItems={[
+            {
+              text: <FaEdit />,
+              variant: 'warning',
+              onClick: (id) => handleEdit(id),
+            },
+            {
+              text: <FaRegTrashAlt />,
+              variant: 'danger',
+              onClick: (id) => handleDelete(id),
+            },
+          ]}
+        />
+      )}
     </div>
   );
 };

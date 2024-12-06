@@ -26,7 +26,7 @@ const OfficeAdd = () => {
 
     if (existingOffice) {
       setSubmitting(false);
-      return toast.error(t('office.add.officeExists')); // Используем перевод
+      return toast.error(t('office.add.officeExists'));
     }
 
     try {

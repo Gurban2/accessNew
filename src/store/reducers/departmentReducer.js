@@ -3,49 +3,54 @@ import { createSlice } from '@reduxjs/toolkit';
 const departmentSlice = createSlice({
   name: 'departments',
   initialState: {
-    departmentsData: [
-      { id: '1', name: 'Sales', phone: '555 555 555', office: 'A' },
-      { id: '2', name: 'Marketing', phone: '555 555 555', office: 'B' },
-      { id: '3', name: 'HR', phone: '555 555 555', office: 'C' },
-      { id: '4', name: 'IT', phone: '555 555 555', office: 'D' },
-    ],
+    departmentsData: [],
+    loading: false,
+    meta: {},
   },
   reducers: {
-    setDepartment(state, action) {
-      state.departmentsData = action.payload;
-    },
     addDepartment: (state, action) => {
-      const existingDepartment = state.departmentsData.find(
-        (department) =>
-          department.name.toLowerCase() === action.payload.name.toLowerCase()
-      );
-      if (existingDepartment) {
-        alert('Already exists');
-        return;
-      }
-      state.departmentsData.push(action.payload);
+      const updatedState = [...state.departmentsData, action.payload];
+      console.log('State after adding department:', updatedState);
+      return {
+        ...state,
+        departmentsData: updatedState,
+      };
     },
     deleteDepartment: (state, action) => {
-      state.departmentsData = state.departmentsData.filter(
-        (department) => department.id !== action.payload.id
-      );
+      return {
+        ...state,
+        departmentsData: state.departmentsData.filter(
+          (department) => department.id !== action.payload.id
+        ),
+      };
     },
     editDepartment: (state, action) => {
-      const index = state.departmentsData.findIndex(
-        (department) => department.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.departmentsData[index] = {
-          ...state.departmentsData[index],
-          ...action.payload.data,
-        };
-      }
+      return {
+        ...state,
+        departmentsData: state.departmentsData.map((department) =>
+          department.id === action.payload.id
+            ? { ...department, ...action.payload.data }
+            : department
+        ),
+      };
     },
-
-    filterDepartment: (state, action) => {
-      state.filteredDepartments = state.departmentsData.filter((department) =>
-        department.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
+    setDepartment: (state, action) => {
+      return {
+        ...state,
+        departmentsData: action.payload,
+      };
+    },
+    setLoading: (state, action) => {
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    },
+    setDepartmentMeta: (state, action) => {
+      return {
+        ...state,
+        meta: action.payload,
+      };
     },
   },
 });
@@ -54,8 +59,9 @@ export const {
   addDepartment,
   deleteDepartment,
   editDepartment,
-  filterDepartment,
   setDepartment,
+  setLoading,
+  setDepartmentMeta,
 } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

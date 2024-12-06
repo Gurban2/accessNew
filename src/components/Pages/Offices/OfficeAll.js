@@ -18,7 +18,6 @@ const OfficeAll = () => {
   const { data: offices } = useSelector((state) => state.offices);
 
   const { t } = useTranslation();
-
   const navigate = useNavigate();
 
   const filteredOffices = useMemo(() => {

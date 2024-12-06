@@ -8,6 +8,7 @@
 .departments-wrapper {
   display: flex;
 }
+
 .department-add {
   margin-bottom: 20px;
   font-size: var(--font-size-lg);
@@ -87,7 +88,9 @@ select:focus {
   width: 100%;
   max-width: 800px;
 }
-
+.search-add-departments {
+  display: flex;
+}
 .table {
   width: 100%;
   border-collapse: collapse;

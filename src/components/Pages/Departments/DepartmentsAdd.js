@@ -1,10 +1,12 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
-import { useTranslation } from 'react-i18next'; // Added to handle translations
-import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+
 import { AppPaths } from '../../../constants/appPaths';
-import { addDepartment } from '../../../store/reducers/departmentReducer';
+import { useAddDepartment } from '../../../hooks/useDepartments';
+
 import Breadcrumb from '../Breadcrumb';
 import FormField from '../FormField';
 import { DepartmentValidationSchema } from '../InputValidation';
@@ -12,23 +14,39 @@ import { DepartmentValidationSchema } from '../InputValidation';
 import './style.scss';
 
 const DepartmentsAdd = () => {
-  const { data: offices } = useSelector((state) => state.offices);
-  const { t } = useTranslation(); // Initialize translation hook
-  const dispatch = useDispatch();
+  const { data: departments } = useSelector((state) => state.offices);
+  const { t } = useTranslation();
+  const { mutateAsync, isPending } = useAddDepartment(); // Using mutateAsync here
 
-  const parentOptions = [
-    { value: '1', label: t('department.add.parent') + ' 1' },
-    { value: '2', label: t('department.add.parent') + ' 2' },
-    { value: '3', label: t('department.add.parent') + ' 3' },
-  ];
+  const offices = useSelector((state) => state.offices.data); // Assuming office data comes from Redux store
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const parentOptions = departments.map((department) => ({
+    value: department.id,
+    label: department.name,
+  }));
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const uniqueId = Date.now().toString();
-    const newFormData = { ...values, id: uniqueId };
+    const newDepartment = { ...values, id: uniqueId };
 
-    dispatch(addDepartment(newFormData));
-    toast.success(t('department.add.success'));
-    setSubmitting(false);
+    const existingDepartment = departments.find(
+      (department) => department.name === newDepartment.name
+    );
+
+    if (existingDepartment) {
+      setSubmitting(false);
+      return toast.error(t('department.add.departmentExists'));
+    }
+
+    try {
+      await mutateAsync(newDepartment); // Using mutateAsync for the async call
+      toast.success(t('department.add.success'));
+      resetForm();
+    } catch (error) {
+      toast.error(t('department.add.error'));
+    } finally {
+      setSubmitting(false); // Ensure this is called even if there is an error
+    }
   };
 
   return (
@@ -75,13 +93,16 @@ const DepartmentsAdd = () => {
               label={t('department.add.office')}
               name="office"
               as="select"
-              options={offices}
+              options={offices.map((office) => ({
+                value: office.id,
+                label: office.name,
+              }))}
             />
 
             <button
               type="submit"
               className="submit-button"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPending}
             >
               {isSubmitting
                 ? t('department.add.submitting')
