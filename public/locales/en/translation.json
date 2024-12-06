@@ -132,7 +132,9 @@
       "office": "Office",
       "actions": "Actions",
       "deleteConfirm": "Are you sure you want to delete this department?",
-      "add": "Add Department"
+      "add": "Add Department",
+      "search": "Search Departments",
+      "loading": "Loading"
     },
     "add": {
       "name": "Department Name",
