@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './dashboardStyle.css';
+import './dashboardStyle.scss';
 
 const Dashboard = () => {
   const navigate = useNavigate();

@@ -10,15 +10,14 @@ import { useAddDepartment } from '../../../hooks/useDepartments';
 import Breadcrumb from '../Breadcrumb';
 import FormField from '../FormField';
 import { DepartmentValidationSchema } from '../InputValidation';
-
 import './style.scss';
 
 const DepartmentsAdd = () => {
   const { data: departments } = useSelector((state) => state.offices);
   const { t } = useTranslation();
-  const { mutateAsync, isPending } = useAddDepartment(); // Using mutateAsync here
+  const { mutateAsync, isPending } = useAddDepartment();
 
-  const offices = useSelector((state) => state.offices.data); // Assuming office data comes from Redux store
+  const offices = useSelector((state) => state.offices.data);
 
   const parentOptions = departments.map((department) => ({
     value: department.id,
@@ -39,13 +38,13 @@ const DepartmentsAdd = () => {
     }
 
     try {
-      await mutateAsync(newDepartment); // Using mutateAsync for the async call
+      await mutateAsync(newDepartment);
       toast.success(t('department.add.success'));
       resetForm();
     } catch (error) {
       toast.error(t('department.add.error'));
     } finally {
-      setSubmitting(false); // Ensure this is called even if there is an error
+      setSubmitting(false);
     }
   };
 
@@ -77,7 +76,11 @@ const DepartmentsAdd = () => {
       >
         {({ isSubmitting }) => (
           <Form className="department-add-form">
-            <FormField label={t('department.add.name')} name="name" />
+            <FormField
+              label={t('department.add.name')}
+              name="name"
+              className="form-control"
+            />
             <FormField
               label={t('department.add.phone')}
               name="phone"

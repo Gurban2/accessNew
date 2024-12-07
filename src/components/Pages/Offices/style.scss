@@ -4,9 +4,11 @@
   align-items: center;
   height: 100vh;
 }
+
 .offices-wrapper {
   display: flex;
 }
+
 .offices-add {
   margin-bottom: 20px;
   font-size: var(--font-size-lg);
@@ -15,17 +17,14 @@
 
 .offices-add-form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column;
   background-color: var(--card-bg);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-top: 20px;
-
+  margin-top: 10px;
   .form-group {
-    flex: 1 0 calc(50% - 8px);
     margin-bottom: 15px;
   }
 
@@ -36,34 +35,48 @@
     color: var(--text-color);
   }
 
-  input,
-  select {
+  input {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--input-border);
-    border-radius: 4px;
+    border-radius: 4px !important;
     font-size: var(--font-size-base);
-    background-color: var(--background-color);
-  }
-
-  input:focus,
-  select:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    background-color: #fff;
+    margin-bottom: 0 !important;
+    color: var(--text-color) !important;
+    background-color: white !important;
+    &::placeholder {
+      color: var(--text-color) !important;
+    }
   }
 
   .submit-button {
     background-color: var(--primary-color);
     color: white;
-    padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px !important;
     font-size: var(--font-size-base);
     cursor: pointer;
-    width: 100%;
     text-align: center;
   }
+}
+
+.search-add-offices {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offices-add-form input,
+.search {
+  border: 0 !important;
+  border-bottom: 1px solid var(--input-border) !important;
+  border-left: 1px solid var(--input-border) !important;
+  border-radius: 2px;
+  padding: 6px 3px !important;
+  font-size: var(--font-size-base);
+  background-color: var(--background-color);
+  letter-spacing: 0.02rem;
+  transition: ease-in-out 0.2s;
 }
 
 .offices-all-container {
@@ -120,11 +133,13 @@
   justify-content: center;
   gap: 10px;
 }
+
 .p-1 {
   padding: 2px 4px;
   max-width: 120px;
   width: 120px;
 }
+
 input {
   padding: 2px 3px !important;
 }
@@ -139,8 +154,9 @@ input {
 .d-row-left {
   display: flex;
 }
+
 .p-2 {
-  padding: 2px 5px 2px 5px !important;
+  padding: 2px 5px !important;
   font-size: var(--font-size-base);
   background-color: var(--primary-color);
   border: 0;
@@ -151,6 +167,7 @@ input {
   background-color: var(--success-color);
   border: 0;
 }
+
 .navigation-underline {
   width: 100%;
   padding: 0;

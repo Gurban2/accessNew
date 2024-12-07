@@ -1,3 +1,5 @@
+// style.scss
+
 .department-add-container {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,7 @@
 
 .departments-wrapper {
   display: flex;
+  // box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .department-add {
@@ -16,56 +19,119 @@
 }
 
 .department-add-form {
+  display: flex;
+  flex-direction: column;
   background-color: var(--card-bg);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
-  margin-top: 20px;
+  margin-top: 10px;
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+  }
+  .form-control {
+    display: block !important;
+    padding: 3px 6px !important;
+    border: 0px;
+    border-radius: 2px !important;
+    letter-spacing: 0.02rem !important;
+    transition: ease-in-out 0.2s !important;
+    margin-bottom: 0px !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--input-border) !important;
+    border-left: 1px solid var(--input-border) !important;
+    &:focus {
+      outline: none !important;
+      background-color: #fff !important;
+      letter-spacing: 0rem !important;
+      box-shadow: none !important;
+    }
+    &::placeholder {
+      color: var(--text-color) !important;
+    }
+  }
+
+  .submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 2px !important;
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    text-align: center;
+    padding: 6px 12px !important;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--hover-color);
+      border: 0;
+    }
+
+    &:disabled {
+      background-color: var(--disabled-color);
+      cursor: not-allowed;
+    }
+  }
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: var(--font-weight-bold);
-  color: var(--text-color);
-}
-
-input,
 select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  font-size: var(--font-size-base);
-  background-color: var(--background-color);
-}
-
-input:focus,
-select:focus {
-  border-color: var(--primary-color);
   outline: none;
   background-color: #fff;
+  color: var(--text-color) !important;
+}
+.search {
+  padding: 6px 3px !important;
+  font-size: var(--font-size-sm);
+  background-color: var(--background-color);
+  letter-spacing: 0.02rem;
+  transition: ease-in-out 0.2s;
+  color: var(--primary-color) !important ;
+}
+
+.searchAddBt,
+.btn-primary a {
+  font-size: var(--font-size-base);
+  padding: 2px 3px !important;
+}
+
+[type='button']:not(:disabled),
+[type='reset']:not(:disabled),
+[type='submit']:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+  border-radius: 2px !important;
+  border-color: var(--border-color);
 }
 
 .submit-button {
   background-color: var(--primary-color);
   color: white;
-  padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px !important;
   font-size: var(--font-size-base);
   cursor: pointer;
-  width: 100%;
   text-align: center;
+  padding: 6px 12px !important;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--success-color);
+  }
+
+  &:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+  }
 }
 
-/* Стили для компонента AllDepartments */
+/* Styles for AllDepartments component */
 .departments-all-container {
   display: flex;
   flex-direction: column;
@@ -88,46 +154,51 @@ select:focus {
   width: 100%;
   max-width: 800px;
 }
+
 .search-add-departments {
   display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
 .table {
   width: 100%;
   border-collapse: collapse;
-}
 
-.table th,
-.table td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid var(--border-color);
-}
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+  }
 
-.table th {
-  background-color: var(--primary-color);
-  color: var(--card-bg);
-}
+  th {
+    background-color: var(--primary-color);
+    color: var(--card-bg);
+  }
 
-.table tr:nth-child(even) {
-  background-color: var(--breadcrumb-bg);
-}
+  tr:nth-child(even) {
+    background-color: var(--breadcrumb-bg);
+  }
 
-.table tr:hover {
-  background-color: var(--table-hover);
+  tr:hover {
+    background-color: var(--table-hover);
+  }
 }
 
 .p-2 {
-  padding: 2px 5px 2px 5px !important;
+  padding: 2px 5px !important;
   font-size: var(--font-size-base);
   background-color: var(--primary-color);
   border: 0;
   border-radius: 2px;
+
+  &:hover {
+    background-color: var(--hover-color);
+    border: 0;
+  }
 }
 
-.p-2:hover {
-  background-color: var(--success-color);
-  border: 0;
-}
 .navigation-underline {
   width: 100%;
   padding: 0;

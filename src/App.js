@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import Dashboard from './components/dashboard';
+import Dashboard from './components/dashboard/dashboard';
 import Header from './components/Header';
 import DepartmentEdit from './components/Pages/Departments/DepartmentEdit';
 import DepartmentsAdd from './components/Pages/Departments/DepartmentsAdd';
