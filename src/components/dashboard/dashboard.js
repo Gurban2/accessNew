@@ -10,13 +10,15 @@ const Dashboard = () => {
   const { data: offices } = useSelector((state) => state.offices) || [];
   const departments =
     useSelector((state) => state.departments.departmentsData) || [];
-  const visitors = useSelector((state) => state.visitors) || [];
+  const visitors = useSelector((state) => state.visitors) || []; // Ensure it's an array
 
   const sortedOffices = [...offices].sort((a, b) => b.id - a.id).slice(-3);
   const sortedDepartments = [...departments]
     .sort((a, b) => b.id - a.id)
     .slice(-3);
-  const sortedVisitors = [...visitors].sort((a, b) => b.id - a.id).slice(-3);
+  const sortedVisitors = [...visitors.data]
+    .sort((a, b) => b.id - a.id)
+    .slice(-3);
 
   const handleViewAll = (path) => navigate(path);
 

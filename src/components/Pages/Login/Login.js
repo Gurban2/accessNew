@@ -3,18 +3,19 @@ import { Form, Button } from "react-bootstrap";
 import { FaArrowRight, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { loginSuccess, loginFailure } from '../../../store/reducers/authReducer';
 import { login } from "../../../api/authApi";
-// import { useAuth } from '../../../contexts/auth/AuthContext';
-import "./style.scss"; // Import the SCSS file for styling
+import { fetchDepartments } from "../../../api/departmentsApi";
+import { fetchOffices } from "../../../api/officesApi";
+import { fetchVisitors } from "../../../api/visitorsApi";
+import "./style.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepLoggedIn, setKeepLoggedIn] = useState(false); // State for "Keep me logged in"
-  // const { login } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [loading, setLoading] = useState(false); // Loading state for button
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,55 +27,63 @@ const Login = () => {
       setErrorMessage("Please enter both email and password.");
       return;
     }
-
+    setLoading(true);
     try {
       console.log("Sending login request with data:", { email, password });
       await login(email, password, dispatch);
+      // Fetch all necessary data after login
+      await fetchAllData(); // Fetch departments, offices, and persona non grata
       navigate("/"); // Redirect after successful login
     } catch (err) {
       console.error("Login failed:", err.response?.data); // Log the full error response
       setErrorMessage("Invalid email or password. Please try again."); // Show specific error message
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
-  // const handleLogout = () => {
-  //   logout(dispatch);
-  //   navigate('/login'); // Redirect to the login page after logout
-  // };
+  // Fetch departments, offices, and persona non grata data after login with timeout
+  const fetchAllData = async () => {
+    const timeout = 50000; // Timeout duration in milliseconds (10 seconds)
+
+    const fetchDataWithTimeout = async () => {
+      try {
+        // Define the promise for fetching data
+        const dataPromise = Promise.all([
+          fetchDepartments(),
+          fetchOffices(),
+          fetchVisitors(),
+        ]);
+
+        // Create a timeout promise
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), timeout),
+        );
+
+        // Use Promise.race to race the data fetch against the timeout
+        const [departments, offices, visitors] = await Promise.race([
+          dataPromise,
+          timeoutPromise,
+        ]);
+
+        // Optionally, store the fetched data in Redux, Context, or useState
+        console.log("Fetched all data:", { departments, offices, visitors });
+        // Dispatch actions to store the data in Redux or handle it as necessary
+        // dispatch({ type: 'SET_DEPARTMENTS', payload: departments });
+        // dispatch({ type: 'SET_OFFICES', payload: offices });
+      } catch (error) {
+        console.error("Error fetching data after login:", error.message);
+        // Show error message if timeout or fetch fails
+        setErrorMessage("Failed to fetch data. Please try again later.");
+      }
+    };
+
+    await fetchDataWithTimeout();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleLogin();
-    // try {
-    //   // Fetch users from JSON
-    //   const response = await fetch('/users.json');
-    //   const users = await response.json();
-
-    //   // Find the user that matches the credentials
-    //   const user = users.find(
-    //     (user) => user.email === email && user.password === password
-    //   );
-
-    //   if (user) {
-    //     dispatch(loginSuccess(user));
-    //     login();
-
-    //     // Persist login if "Keep me logged in" is checked
-    //     if (keepLoggedIn) {
-    //       localStorage.setItem('isAuthenticated', 'true'); // Store login status in localStorage
-    //     }
-
-    //     navigate('/'); // Navigate to the main page
-    //   } else {
-    //     // Dispatch login failure action with error message
-    //     dispatch(loginFailure('Invalid email or password'));
-    //     alert('Invalid email or password');
-    //   }
-    // } catch (error) {
-    //   dispatch(loginFailure('Something went wrong'));
-    //   console.error('Login error:', error);
-    //   alert('Something went wrong, please try again.');
-    // }
   };
 
   return (
@@ -135,8 +144,9 @@ const Login = () => {
                   type="submit"
                   variant="primary"
                   className="submit-button w-100"
+                  disabled={loading} // Disable the button while loading
                 >
-                  <span>Login</span>
+                  <span>{loading ? "Logging in..." : "Login"}</span>
                   <FaArrowRight />
                 </Button>
               </Form>

@@ -1,6 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import {
   fetchOffices,
@@ -8,14 +8,15 @@ import {
   deleteOffice,
   fetchOffice,
   updateOffice,
-} from '../api/officesApi';
-import { setOfficeMeta, setOffices } from '../store/reducers/officeReducer';
+} from "../api/officesApi";
+
+import { setOfficeMeta, setOffices } from "../store/reducers/officeReducer";
 
 export const useFetchOffices = () => {
   const dispatch = useDispatch();
 
   const query = useQuery({
-    queryKey: ['offices'],
+    queryKey: ["offices"],
     queryFn: fetchOffices,
   });
 
@@ -32,18 +33,18 @@ export const useFetchOffices = () => {
 
 export const useFetchOfficeById = (id) => {
   return useQuery({
-    queryKey: ['office', id],
+    queryKey: ["office", id],
     queryFn: () => fetchOffice(id),
   });
 };
 
 export const useAddOffice = () => {
   const queryClient = useQueryClient();
-
+  console.log(queryClient);
   return useMutation({
     mutationFn: addOffice,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['offices'] }); // Refresh offices
+      queryClient.invalidateQueries({ queryKey: ["offices"] });
     },
   });
 };
@@ -54,7 +55,7 @@ export const useUpdateOffice = () => {
   return useMutation({
     mutationFn: (data) => updateOffice(data.id, data.office),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['offices'] }); // Refresh offices
+      queryClient.invalidateQueries({ queryKey: ["offices"] });
     },
   });
 };
@@ -65,7 +66,7 @@ export const useDeleteOffice = () => {
   return useMutation({
     mutationFn: deleteOffice,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['offices'] }); // Refresh offices
+      queryClient.invalidateQueries({ queryKey: ["offices"] }); // Refresh offices
     },
   });
 };
