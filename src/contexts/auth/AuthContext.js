@@ -1,34 +1,36 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-// Create a context for authentication
+// Create an AuthContext
 const AuthContext = createContext();
 
-// Custom hook to use the AuthContext
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-// AuthProvider to manage authentication state
+// AuthProvider to wrap the application and manage auth state
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Check if the token exists in localStorage for initial auth state
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("token") !== null, // Check if there is a valid token
+  );
 
   useEffect(() => {
-    // Check if the user is already authenticated (e.g., from localStorage or session)
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setIsAuthenticated(true);
+    // Update localStorage when isAuthenticated state changes
+    if (isAuthenticated) {
+      localStorage.setItem("isAuthenticated", "true");
+    } else {
+      localStorage.removeItem("isAuthenticated"); // Optionally remove the flag when logging out
+      localStorage.removeItem("token"); // Remove token from localStorage when logging out
     }
-  }, []);
+  }, [isAuthenticated]);
 
-  const login = (userData) => {
-    // Save user data to localStorage
-    localStorage.setItem('user', JSON.stringify(userData));
+  // This is the login function that updates isAuthenticated to true
+  const login = (token) => {
+    // Save the token to localStorage and update isAuthenticated state
+    localStorage.setItem("token", token);
     setIsAuthenticated(true);
   };
 
+  // This is the logout function that updates isAuthenticated to false
   const logout = () => {
-    // Remove user data from localStorage
-    localStorage.removeItem('user');
+    // Remove token and set isAuthenticated to false
+    localStorage.removeItem("token");
     setIsAuthenticated(false);
   };
 
@@ -38,3 +40,6 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+// Custom hook to use auth
+export const useAuth = () => useContext(AuthContext);
