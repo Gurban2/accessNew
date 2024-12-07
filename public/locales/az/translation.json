@@ -102,7 +102,7 @@
     },
     "all": {
       "title": "Bütün Ofislər",
-      "searchPlaceholder": "Ofisləri axtarın...",
+      "searchPlaceholder": "Ofis axtarın...",
       "deleteConfirm": "Bu ofisi silmək istədiyinizdən əminsinizmi?",
       "noOffices": "Mövcud ofis yoxdur",
       "officeName": "Ofisin Adı",
@@ -111,7 +111,9 @@
       "departments": "Şöbələr",
       "actions": "Əməliyyatlar",
       "edit": "Redaktə Et",
-      "delete": "Sil"
+      "delete": "Sil",
+      "search":"Ofis axtar",
+      "loading":"Yüklənir..."
     },
     "edit": {
       "title": "Ofisi Redaktə Et",

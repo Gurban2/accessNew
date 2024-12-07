@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { AppPaths } from '../../../constants/appPaths';
@@ -13,27 +12,20 @@ import Breadcrumb from '../Breadcrumb';
 import './style.scss';
 
 const OfficeAll = () => {
-  const { isLoading } = useFetchOffices();
-  const { mutateAsync } = useDeleteOffice();
-  const { data: offices } = useSelector((state) => state.offices);
-
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const filteredOffices = useMemo(() => {
-    const query = ''; // TODO: Get the search query from the search input (Qurban)
-    return offices?.filter(
-      (office) =>
-        office.name.toLowerCase().includes(query) ||
-        office.phone.toLowerCase().includes(query) ||
-        office.address.toLowerCase().includes(query)
-    );
-  }, [offices]);
+  const [query, setQuery] = useState('');
+
+  // Загружаем офисы с фильтрацией
+  const { data: offices, isLoading } = useFetchOffices(query);
+
+  const { mutateAsync: deleteOffice } = useDeleteOffice();
 
   const handleDelete = async (id) => {
     if (window.confirm(t('office.add.deleteConfirm'))) {
       try {
-        await mutateAsync(id);
+        await deleteOffice(id);
         toast.success('Office successfully deleted');
       } catch (error) {
         toast.error('An error occurred while deleting the office');
@@ -45,7 +37,6 @@ const OfficeAll = () => {
     navigate(`/offices/edit/${id}`);
   };
 
-  // Head items for the DataTable
   const headItems = [
     '#',
     t('office.add.officeName'),
@@ -54,7 +45,7 @@ const OfficeAll = () => {
     t('office.all.actions'),
   ];
 
-  const items = filteredOffices?.map((office, index) => ({
+  const items = offices?.map((office) => ({
     id: office.id,
     name: office.name,
     address: office.address,
@@ -70,33 +61,45 @@ const OfficeAll = () => {
             { label: t('breadcrumb.offices'), to: AppPaths.offices.all },
           ]}
         />
-        <div className="searchAddBtn">
-          <Button type="button">
-            <Link to={AppPaths.offices.add}>{t('office.add.add')}</Link>
-          </Button>
+        <div className="search-add-offices">
+          <input
+            type="text"
+            placeholder={t('office.all.search')}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="search"
+          />
+          <div>
+            <Button type="button" className="searchAddBtn">
+              <Link to="/offices/add">{t('office.add.add')}</Link>
+            </Button>
+          </div>
         </div>
       </div>
       <hr className="navigation-underline" />
 
-      <DataTable
-        isLoading={isLoading}
-        withAction
-        headItems={headItems}
-        tableProps={{ striped: true, bordered: true, hover: true }}
-        items={items}
-        actionItems={[
-          {
-            text: <FaEdit />,
-            variant: 'warning',
-            onClick: handleEdit,
-          },
-          {
-            text: <FaRegTrashAlt />,
-            variant: 'danger',
-            onClick: handleDelete,
-          },
-        ]}
-      />
+      {isLoading ? (
+        <div>{t('office.all.loading')}</div>
+      ) : (
+        <DataTable
+          withAction
+          headItems={headItems}
+          tableProps={{ striped: true, bordered: true, hover: true }}
+          items={items}
+          actionItems={[
+            {
+              text: <FaEdit />,
+              variant: 'warning',
+              onClick: (id) => handleEdit(id),
+            },
+            {
+              text: <FaRegTrashAlt />,
+              variant: 'danger',
+              onClick: (id) => handleDelete(id),
+            },
+          ]}
+        />
+      )}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { useAddOffice } from '../../../hooks/useOffices';
 import Breadcrumb from '../Breadcrumb';
 import FormField from '../FormField';
 import { OfficeValidationSchema } from '../InputValidation';
+import './style.scss';
 
 const OfficeAdd = () => {
   const { data: offices } = useSelector((state) => state.offices); // Get the state from the store

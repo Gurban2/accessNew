@@ -75,10 +75,11 @@ const DepartmentsAll = () => {
             type="text"
             placeholder={t('department.all.search')}
             value={query}
-            onChange={(e) => setQuery(e.target.value)} // Обновляем запрос для фильтрации
+            onChange={(e) => setQuery(e.target.value)}
+            className="search"
           />
-          <div className="searchAddBtn">
-            <Button type="button">
+          <div>
+            <Button type="button" className="searchAddBtn">
               <Link to="/departments/add">{t('department.all.add')}</Link>
             </Button>
           </div>
