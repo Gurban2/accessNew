@@ -1,67 +1,117 @@
+// General settings
 $primary-color: #007bff;
-$secondary-color: #f8f9fa;
+$secondary-color: #6c757d;
+$background-light: #f8f9fa;
+$text-color-dark: #343a40;
 
+// Login Container
 .login-container {
-  // background: url('') no-repeat center center fixed;
   background-size: cover;
+  background-position: center;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-form {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.login-form h4 {
-  font-size: 1.25rem;
-  color: #333;
-}
-
-.login-form h1 {
-  font-size: 1.75rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.form-label {
-  font-weight: bold;
-}
-
-.form-control {
-  margin-bottom: 15px;
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  font-weight: bold;
+// Login Card
+.login-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: $primary-color;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  flex-wrap: nowrap;
+  width: 70%;
+  max-width: 1200px;
+  height: 70%;
+}
 
-  &:hover {
-    background-color: darken($primary-color, 10%);
+// Left Section - Login Form
+.login-form {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .form-content {
+    display: flex;
+    flex-direction: column; // Ensure content inside is stacked vertically
+    
+
+    .form-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center; // Center the text
+      gap: 30px; // Add gap between subtitle and title
+      margin-bottom: 20px; // Add space below the header
+
+      h4.form-subtitle {
+        font-size: 1.47rem;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: Rubik, Helvetica, Arial, serif;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #475F7B;
+      }
+
+      h1.form-title {
+        font-size: 80%;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #828D99 !important;
+      }
+    }
+
+    // Add padding to the .form-body
+    .form-body {
+      padding: 24px; // Add 20px padding as requested
+    }
+
+    .submit-button {
+      background-color: $primary-color;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+
+      span {
+        flex-grow: 1; // Make the label take available space
+        text-align: center; // Center the label
+      }
+
+      svg {
+        font-size: 1.2rem;
+        margin-left: auto; // Push the arrow to the far right
+      }
+    }
   }
 }
 
-.bg-image {
-  // background: url('') no-repeat center center;
+// Right Section - Login Image
+.login-image {
+  flex: 1;
   background-size: cover;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
+  background-position: center;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }

@@ -1,8 +1,7 @@
-// src/reducers/authReducer.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: null, // This will hold user data after login
     isAuthenticated: false, // This will be true after successful login
@@ -23,13 +22,9 @@ const authSlice = createSlice({
       state.isAuthenticated = false; // Set authenticated flag to false
       state.error = null; // Clear any error messages
     },
-    setError(state, action) {
-      state.error = action.payload; // Set error message manually
-    },
   },
 });
 
-export const { loginSuccess, loginFailure, logout, setError } =
-  authSlice.actions;
+export const { loginSuccess, loginFailure, logout } = authSlice.actions;
 
 export default authSlice.reducer;

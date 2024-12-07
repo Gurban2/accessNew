@@ -91,7 +91,7 @@
 
   "office": {
     "add": {
-      "add":"Add new Office",
+      "add": "Add new Office",
       "success": "Office successfully added",
       "officeExists": "Office already exists",
       "officeName": "Office Name",
@@ -100,7 +100,7 @@
       "submitting": "Submitting...",
       "submit": "Submit"
     },
-    "all":{
+    "all": {
       "title": "All Offices",
       "searchPlaceholder": "Search offices...",
       "deleteConfirm": "Are you sure you want to delete this office?",
@@ -113,7 +113,7 @@
       "edit": "Edit",
       "delete": "Delete"
     },
-    "edit":{
+    "edit": {
       "title": "Edit Office",
       "success": "Office successfully edited",
       "notFound": "Office not found",
@@ -126,7 +126,7 @@
   },
 
   "department": {
-    "all":{
+    "all": {
       "name": "Department Name",
       "phone": "Phone",
       "office": "Office",
@@ -142,20 +142,19 @@
       "parent": "Parent",
       "add": "Add Department",
       "submitting": "Submit",
-      "office":"Office",
+      "office": "Office",
       "submit": "Submit"
-
     }
   },
-   "breadcrumb": {
-      "dashboard": "Dashboard",
-      "visitors": "Visitors",
-      "addVisitor": "Add Visitor",
-      "editVisitor": "Edit Visitor",
-      "visitorReport": "Visitor Report",
-      "offices": "Offices",
-      "addOffice": "Office",
-      "departments": "Departments",
-      "addDepartment": "Add Department"
+  "breadcrumb": {
+    "dashboard": "Dashboard",
+    "visitors": "Visitors",
+    "addVisitor": "Add Visitor",
+    "editVisitor": "Edit Visitor",
+    "visitorReport": "Visitor Report",
+    "offices": "Offices",
+    "addOffice": "Office",
+    "departments": "Departments",
+    "addDepartment": "Add Department"
   }
 }

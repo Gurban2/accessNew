@@ -7,13 +7,13 @@
     "react-app",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
+    // "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
   "plugins": ["react", "prettier", "import"],
   "rules": {
-    "prettier/prettier": "error",
+    // "prettier/prettier": "error",
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/react-in-jsx-scope": "off",

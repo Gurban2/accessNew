@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
-import { Navbar, Nav, Offcanvas, Collapse } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import React, { useMemo, useState } from "react";
+import { Navbar, Nav, Offcanvas, Collapse } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import {
   FaChevronDown,
   FaChevronRight,
@@ -8,21 +8,27 @@ import {
   FaArrowRight,
   FaHome,
   FaBars,
-} from 'react-icons/fa';
-import { NavLink, useLocation, Link } from 'react-router-dom';
-
-import sections from '../../constants/navSection';
-import LogoutButton from '../LogoutButton';
-import './Sidebar.scss';
+} from "react-icons/fa";
+import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
+import sections from "../../constants/navSection";
+import LogoutButton from "../LogoutButton";
+// import {useAuth} from '../../contexts/auth/AuthContext';
+// import { logout } from '../../api/authApi';
+import "./Sidebar.scss";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/reducers/authReducer";
 // import { t } from "i18next";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false); // Offcanvas visibility for mobile
-
   const [activeHover, setActiveHover] = useState(null); // Tracks hovered icon for pop-out menu
   const [openSubmenu, setOpenSubmenu] = useState({}); // Tracks open submenus
   const [isMouseOn, setIsMouseOn] = useState(false);
+
+  // const { logout } = useAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,11 +44,22 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
     return isCollapsed && !isMouseOn;
   }, [isCollapsed, isMouseOn]);
 
-  const clickLogout = () => {};
+  // const handleLogout = () => {
+  //     logout(dispatch);
+  //     navigate('/login'); // Redirect to the login page after logout
+  //   };
+
+  // Correct logout function
+  const handleLogout = () => {
+    // Dispatch the logout action to reset Redux state
+    dispatch(logout());
+    // Redirect user to login page after logging out
+    navigate("/login");
+  };
 
   return (
     <div className="sidebar-fixed">
-      <div className={`sidebar-header ${hideSidebar ? 'collapsed' : ''}`}>
+      <div className={`sidebar-header ${hideSidebar ? "collapsed" : ""}`}>
         <button
           onClick={() => onToggleCollapse(!isCollapsed)}
           className="btn btn-secondary btn-sm mb-3 collapse-button"
@@ -97,10 +114,10 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
         {/* Sidebar for large screens */}
         <div
           className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s 
-        ${hideSidebar ? 'collapsed-sidebar' : ''}
+        ${hideSidebar ? "collapsed-sidebar" : ""}
         `}
           style={{
-            width: hideSidebar ? '80px' : '250px',
+            width: hideSidebar ? "80px" : "250px",
             // transition: "width 0.3s ease-in-out",
           }}
         >
@@ -110,7 +127,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               to="/"
               className="fw-bold text-white cursor-pointer mb-3 ms-2"
             >
-              <FaHome /> {t('dashboard')}
+              <FaHome /> {t("dashboard")}
             </Navbar.Brand>
           )}
           <Nav className="flex-column">
@@ -128,8 +145,8 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
             ))}
           </Nav>
           <LogoutButton
-            text={hideSidebar ? null : 'Sign out'}
-            onClick={clickLogout}
+            text={hideSidebar ? null : "Sign out"}
+            onClick={handleLogout} // Call handleLogout on sign out
           />
         </div>
       </div>
@@ -150,6 +167,11 @@ const SidebarSection = ({
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
+  // Safely check if departments is an array before mapping
+  const departments = Array.isArray(section.departments)
+    ? section.departments
+    : [];
+
   return (
     <div
       className="position-relative sidebar-section"
@@ -168,16 +190,16 @@ const SidebarSection = ({
       {/* Expand Submenu for Expanded View */}
       <Collapse in={true}>
         <div className="sidebar-collapse-submenu">
-          {section.departments.map((department, departmentIndex) => (
+          {departments.map((department, departmentIndex) => (
             <div key={department.title}>
               <Nav.Link
                 className={`${
                   !isCollapsed &&
                   openSubmenu[`${sectionIndex}-${departmentIndex}`]
-                    ? 'active'
-                    : ''
+                    ? "active"
+                    : ""
                 } text-white d-flex justify-content-${
-                  isCollapsed ? 'center' : 'between'
+                  isCollapsed ? "center" : "between"
                 } align-items-center`}
                 onClick={() => toggleSubmenu(sectionIndex, departmentIndex)}
               >
@@ -202,7 +224,7 @@ const SidebarSection = ({
                       key={item.label}
                       to={item.path}
                       className={`${
-                        pathname === item.path ? 'active' : ''
+                        pathname === item.path ? "active" : ""
                       } text-white text-decoration-none d-block py-1 sidebar-link`}
                     >
                       <FaArrowRight />
