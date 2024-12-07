@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
@@ -81,42 +81,53 @@ const DepartmentsAll = () => {
             type="text"
             placeholder={t("department.all.search")}
             value={query}
-            onChange={(e) => setQuery(e.target.value)} // Обновляем запрос для фильтрации
+            onChange={(e) => setQuery(e.target.value)}
+            className="search"
           />
           <div className="searchAddBtn">
-            <Button type="button">
+            {/* <Button type="button">
               <Link to="/departments/add">{t("department.all.add")}</Link>
-            </Button>
+              <div>
+                <Button type="button" className="searchAddBtn">
+                  <Link to="/departments/add">{t('department.all.add')}</Link>
+                </Button>
+              </div> */}
+            <Link to="/departments/add">
+              <Button type="button">{t("department.all.add")}</Button>
+            </Link>
           </div>
         </div>
-      </div>
-      <hr className="navigation-underline" />
+        <hr className="navigation-underline" />
 
-      {/* Show loading indicator or DataTable */}
-      {isLoading ? (
-        <div>{t("department.all.loading")}</div> // Loading message
-      ) : isError ? (
-        <div>{t("department.all.error")}</div> // Error message
-      ) : (
-        <DataTable
-          withAction
-          headItems={headItems}
-          tableProps={{ striped: true, bordered: true, hover: true }}
-          items={items}
-          actionItems={[
-            {
-              text: <FaEdit />,
-              variant: "warning",
-              onClick: (id) => handleEdit(id),
-            },
-            {
-              text: <FaRegTrashAlt />,
-              variant: "danger",
-              onClick: (id) => handleDelete(id),
-            },
-          ]}
-        />
-      )}
+        {/* Show loading indicator or DataTable */}
+        {isLoading ? (
+          // <div>{t("department.all.loading")}</div> // Loading message
+          <div>
+            <Spinner animation="border" /> {t("department.all.loading")}
+          </div>
+        ) : isError ? (
+          <div>{t("department.all.error")}</div> // Error message
+        ) : (
+          <DataTable
+            withAction
+            headItems={headItems}
+            tableProps={{ striped: true, bordered: true, hover: true }}
+            items={items}
+            actionItems={[
+              {
+                text: <FaEdit />,
+                variant: "warning",
+                onClick: (id) => handleEdit(id),
+              },
+              {
+                text: <FaRegTrashAlt />,
+                variant: "danger",
+                onClick: (id) => handleDelete(id),
+              },
+            ]}
+          />
+        )}
+      </div>
     </div>
   );
 };
