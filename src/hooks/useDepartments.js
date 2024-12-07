@@ -21,30 +21,30 @@ export const useFetchDepartments = () => {
   const query = useQuery({
     queryKey: ["departments"],
     queryFn: fetchDepartments,
-    onError: (error) => {
-      console.error("Error fetching departments:", error);
-    },
-    onSuccess: (data) => {
-      const { data: departments, meta } = data;
-      dispatch(setDepartment(departments));
-      dispatch(setDepartmentMeta(meta));
-    },
+    // onError: (error) => {
+    //   console.error("Error fetching departments:", error);
+    // },
+    // onSuccess: (data) => {
+    //   const { data: departments, meta } = data;
+    //   dispatch(setDepartment(departments));
+    //   dispatch(setDepartmentMeta(meta));
+    // },
   });
 
-  // useEffect(() => {
-  //   if (query.data) {
-  //     const { data: departments, meta } = query.data;
-  //     dispatch(setDepartment(departments));
-  //     dispatch(setDepartmentMeta(meta));
-  //   }
-  // }, [query.data, dispatch]);
+  useEffect(() => {
+    if (query.data) {
+      const { data: departments, meta } = query.data;
+      dispatch(setDepartment(departments));
+      dispatch(setDepartmentMeta(meta));
+    }
+  }, [query.data, dispatch]);
 
-  // return query;
-  return {
-    ...query,
-    departments: query.data?.data || [], // Extract departments
-    meta: query.data?.meta || {}, // Extract meta
-  };
+  return query;
+  // return {
+  //   ...query,
+  //   departments: query.data?.data || [], // Extract departments
+  //   meta: query.data?.meta || {}, // Extract meta
+  // };
 };
 
 // export const useFetchDepartmentById = (id) => {
