@@ -1,101 +1,105 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const visitorSlice = createSlice({
-  name: 'visitors',
-  initialState: [
-    {
-      id: '2',
-      name: 'Admin',
-      phone: '555 555 555',
-      fin: 'edhrfjr',
-      email: 'user',
-      address: 'B',
-      tag: 'person non grata',
-      reason: '',
-    },
-    {
-      id: '3',
-      name: 'Person',
-      phone: '555 555 555',
-      fin: 'jtydjrt',
-      email: 'user',
-      address: 'C',
-      tag: 'true',
-      reason: '',
-    },
-    {
-      id: '4',
-      name: 'Kuku',
-      phone: '555 555 555',
-      fin: 'jtukfjd',
-      email: 'user',
-      address: 'D',
-      tag: 'true',
-      reason: '',
-    },
-  ],
+  name: "visitors",
+  initialState: {
+    data: [
+      {
+        id: "2",
+        name: "Admin",
+        phone: "555 555 555",
+        fin: "edhrfjr",
+        email: "user",
+        address: "B",
+        tag: "person non grata",
+        reason: "",
+      },
+      {
+        id: "3",
+        name: "Person",
+        phone: "555 555 555",
+        fin: "jtydjrt",
+        email: "user",
+        address: "C",
+        tag: "true",
+        reason: "",
+      },
+      {
+        id: "4",
+        name: "Kuku",
+        phone: "555 555 555",
+        fin: "jtukfjd",
+        email: "user",
+        address: "D",
+        tag: "true",
+        reason: "",
+      },
+    ],
+    loading: false,
+    meta: {},
+  },
 
   reducers: {
     setVisitors(state, action) {
-      return [...action.payload];
+      state.data = action.payload;
+    },
+    setLoading(state, action) {
+      state.loading = action.payload;
+    },
+    setVisitorMeta(state, action) {
+      state.meta = action.payload;
     },
     addVisitor: (state, action) => {
-      return [
-        ...state,
-        { ...action.payload, createdAt: new Date().toISOString() },
-      ];
+      state.data.push({
+        ...action.payload,
+        createdAt: new Date().toISOString(),
+      });
     },
     deleteVisitor: (state, action) => {
-      return state.filter((visitor) => visitor.id !== action.payload.id);
+      state.data = state.data.filter(
+        (visitor) => visitor.id !== action.payload.id,
+      );
     },
     editVisitor: (state, action) => {
-      return state.map((visitor) =>
+      state.data = state.data.map((visitor) =>
         visitor.id === action.payload.id
           ? {
               ...visitor,
               ...action.payload.data,
               updatedAt: new Date().toISOString(),
             }
-          : visitor
+          : visitor,
       );
     },
     filterVisitor: (state, action) => {
-      return state.filter((visitor) => {
-        return visitor.name
-          .toLowerCase()
-          .includes(action.payload.toLowerCase());
-      });
+      state.data = state.data.filter((visitor) =>
+        visitor.name.toLowerCase().includes(action.payload.toLowerCase()),
+      );
     },
     updateVisitor: (state, action) => {
-      const { id, personNonGrata, reason } = action.payload;
-      const visitorIndex = state.findIndex((visitor) => visitor.id === id);
+      const { id, tag, reason } = action.payload;
+      const visitorIndex = state.data.findIndex((visitor) => visitor.id === id);
 
-      if (visitorIndex === -1) return state;
+      if (visitorIndex === -1) return;
 
-      return [
-        ...state.slice(0, visitorIndex),
-        {
-          ...state[visitorIndex],
-          personNonGrata,
-          reason,
-          updatedAt: new Date().toISOString(),
-        },
-        ...state.slice(visitorIndex + 1),
-      ];
+      state.data[visitorIndex] = {
+        ...state.data[visitorIndex],
+        tag,
+        reason,
+        updatedAt: new Date().toISOString(),
+      };
     },
     updatePersona: (state, action) => {
       const { id, reason } = action.payload;
-      const visitorIndex = state.findIndex((visitor) => visitor.id === id);
+      const visitorIndex = state.data.findIndex((visitor) => visitor.id === id);
 
-      return [
-        ...state.slice(0, visitorIndex),
-        {
-          ...state[visitorIndex],
-          reason,
-          updatedAt: new Date().toISOString(),
-        },
-        ...state.slice(visitorIndex + 1),
-      ];
+      if (visitorIndex === -1) return;
+
+      state.data[visitorIndex] = {
+        ...state.data[visitorIndex],
+        reason,
+        updatedAt: new Date().toISOString(),
+      };
     },
   },
 });
@@ -107,6 +111,9 @@ export const {
   filterVisitor,
   updateVisitor,
   updatePersona,
+  setVisitors,
+  setLoading,
+  setVisitorMeta,
 } = visitorSlice.actions;
 
 export default visitorSlice.reducer;

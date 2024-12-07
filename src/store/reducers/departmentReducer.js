@@ -1,43 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const departmentSlice = createSlice({
-  name: 'departments',
+  name: "departments",
   initialState: {
-    departmentsData: [],
+    data: [],
     loading: false,
     meta: {},
   },
   reducers: {
     addDepartment: (state, action) => {
-      const updatedState = [...state.departmentsData, action.payload];
-      console.log('State after adding department:', updatedState);
-      return {
-        ...state,
-        departmentsData: updatedState,
-      };
+      const updatedState = [...state, action.payload];
+      console.log("State after adding department:", updatedState);
+      return updatedState;
     },
     deleteDepartment: (state, action) => {
-      return {
-        ...state,
-        departmentsData: state.departmentsData.filter(
-          (department) => department.id !== action.payload.id
-        ),
-      };
+      return state.filter((department) => department.id !== action.payload.id);
     },
     editDepartment: (state, action) => {
-      return {
-        ...state,
-        departmentsData: state.departmentsData.map((department) =>
-          department.id === action.payload.id
-            ? { ...department, ...action.payload.data }
-            : department
-        ),
-      };
+      return state.map((department) =>
+        department.id === action.payload.id
+          ? { ...department, ...action.payload.data }
+          : department,
+      );
     },
-    setDepartment: (state, action) => {
+    setDepartments: (state, action) => {
       return {
         ...state,
-        departmentsData: action.payload,
+        data: action.payload,
       };
     },
     setLoading: (state, action) => {
@@ -59,7 +48,7 @@ export const {
   addDepartment,
   deleteDepartment,
   editDepartment,
-  setDepartment,
+  setDepartments,
   setLoading,
   setDepartmentMeta,
 } = departmentSlice.actions;
