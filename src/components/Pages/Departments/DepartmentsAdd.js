@@ -1,24 +1,23 @@
-import { Formik, Form } from 'formik';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { Formik, Form } from "formik";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
-import { AppPaths } from '../../../constants/appPaths';
-import { useAddDepartment } from '../../../hooks/useDepartments';
+import { AppPaths } from "../../../constants/appPaths";
+import { useAddDepartment } from "../../../hooks/useDepartments";
 
-import Breadcrumb from '../Breadcrumb';
-import FormField from '../FormField';
-import { DepartmentValidationSchema } from '../InputValidation';
-
-import './style.scss';
+import Breadcrumb from "../Breadcrumb";
+import FormField from "../FormField";
+import { DepartmentValidationSchema } from "../InputValidation";
+import "./style.scss";
 
 const DepartmentsAdd = () => {
   const { data: departments } = useSelector((state) => state.offices);
   const { t } = useTranslation();
-  const { mutateAsync, isPending } = useAddDepartment(); // Using mutateAsync here
+  const { mutateAsync, isPending } = useAddDepartment();
 
-  const offices = useSelector((state) => state.offices.data); // Assuming office data comes from Redux store
+  const offices = useSelector((state) => state.offices.data);
 
   const parentOptions = departments.map((department) => ({
     value: department.id,
@@ -30,22 +29,22 @@ const DepartmentsAdd = () => {
     const newDepartment = { ...values, id: uniqueId };
 
     const existingDepartment = departments.find(
-      (department) => department.name === newDepartment.name
+      (department) => department.name === newDepartment.name,
     );
 
     if (existingDepartment) {
       setSubmitting(false);
-      return toast.error(t('department.add.departmentExists'));
+      return toast.error(t("department.add.departmentExists"));
     }
 
     try {
-      await mutateAsync(newDepartment); // Using mutateAsync for the async call
-      toast.success(t('department.add.success'));
+      await mutateAsync(newDepartment);
+      toast.success(t("department.add.success"));
       resetForm();
     } catch (error) {
-      toast.error(t('department.add.error'));
+      toast.error(t("department.add.error"));
     } finally {
-      setSubmitting(false); // Ensure this is called even if there is an error
+      setSubmitting(false);
     }
   };
 
@@ -54,12 +53,12 @@ const DepartmentsAdd = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t('breadcrumb.dashboard'), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
             {
-              label: t('breadcrumb.departments'),
+              label: t("breadcrumb.departments"),
               to: AppPaths.departments.all,
             },
-            { label: t('breadcrumb.addDepartment') },
+            { label: t("breadcrumb.addDepartment") },
           ]}
         />
       </div>
@@ -67,30 +66,34 @@ const DepartmentsAdd = () => {
 
       <Formik
         initialValues={{
-          name: '',
-          phone: '',
-          parent: '',
-          office: '',
+          name: "",
+          phone: "",
+          parent: "",
+          office: "",
         }}
         validationSchema={DepartmentValidationSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form className="department-add-form">
-            <FormField label={t('department.add.name')} name="name" />
             <FormField
-              label={t('department.add.phone')}
+              label={t("department.add.name")}
+              name="name"
+              className="form-control"
+            />
+            <FormField
+              label={t("department.add.phone")}
               name="phone"
               type="tel"
             />
             <FormField
-              label={t('department.add.parent')}
+              label={t("department.add.parent")}
               name="parent"
               as="select"
               options={parentOptions}
             />
             <FormField
-              label={t('department.add.office')}
+              label={t("department.add.office")}
               name="office"
               as="select"
               options={offices.map((office) => ({
@@ -105,8 +108,8 @@ const DepartmentsAdd = () => {
               disabled={isSubmitting || isPending}
             >
               {isSubmitting
-                ? t('department.add.submitting')
-                : t('department.add.submit')}
+                ? t("department.add.submitting")
+                : t("department.add.submit")}
             </button>
           </Form>
         )}

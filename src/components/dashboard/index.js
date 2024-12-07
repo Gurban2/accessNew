@@ -1,22 +1,22 @@
-import React from 'react';
-import { Button, Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import './dashboardStyle.css';
+import React from "react";
+import { Button, Container } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "./dashboardStyle.scss";
 
 const Dashboard = () => {
   const { data: offices } = useSelector((state) => state.offices);
   const departments = useSelector(
-    (state) => state.departments.departmentsData || []
+    (state) => state.departments.departmentsData || [],
   );
   const visitors = useSelector((state) => state.visitors);
   const navigate = useNavigate();
 
-  const handleViewAllOffices = () => navigate('/offices/all');
-  const handleViewAllDepartments = () => navigate('/departments/list');
+  const handleViewAllOffices = () => navigate("/offices/all");
+  const handleViewAllDepartments = () => navigate("/departments/list");
 
-  const handleViewAllVisitors = () => navigate('/visitors/all');
+  const handleViewAllVisitors = () => navigate("/visitors/all");
 
   return (
     <Container fluid>
