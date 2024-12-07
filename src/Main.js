@@ -9,7 +9,7 @@ import AllPermissions from "./components/Pages/UserPermissions/AllPermissions";
 
 // Other components and paths imports
 import { AppPaths } from "./constants/appPaths";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 
