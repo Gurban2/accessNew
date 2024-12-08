@@ -61,7 +61,7 @@ const VisitorsAdd = () => {
           avatar: values.photo,
           items,
           visiting_now: values.visiting_now ? 1 : 0,
-          visit_time: format(new Date(values.visit_time), "y-mm-dd hh:mm"),
+          visit_time: format(new Date(values.visit_time), "y-M-d hh:mm"),
         },
       ],
     };
