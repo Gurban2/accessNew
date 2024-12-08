@@ -1,7 +1,7 @@
-import apiClient from './index';
+import apiClient from "./index";
 
-export const fetchOffices = async () => {
-  const response = await apiClient.get('/offices');
+export const fetchOffices = async (queryParams) => {
+  const response = await apiClient.get("/offices", { params: queryParams });
   return response.data;
 };
 
@@ -11,7 +11,7 @@ export const fetchOffice = async (id) => {
 };
 
 export const addOffice = async (office) => {
-  const response = await apiClient.post('/offices', office);
+  const response = await apiClient.post("/offices", office);
   return response.data;
 };
 

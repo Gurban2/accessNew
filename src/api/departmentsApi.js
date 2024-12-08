@@ -1,17 +1,18 @@
-import apiClient from './index';
+import apiClient from "./index";
 
-export const fetchDepartments = async () => {
-  const response = await apiClient.get('/departments');
+export const fetchDepartments = async (queryParams) => {
+  const response = await apiClient.get("/departments", { params: queryParams });
   return response.data;
 };
 
 export const fetchDepartment = async (id) => {
+  console.log({ id });
   const response = await apiClient.get(`/departments/${id}`);
   return response.data;
 };
 
 export const addDepartment = async (department) => {
-  const response = await apiClient.post('/departments', department);
+  const response = await apiClient.post("/departments", department);
   return response.data;
 };
 
@@ -26,6 +27,6 @@ export const deleteDepartment = async (id) => {
 };
 
 export const fetchPersonaNonGratas = async () => {
-  const response = await apiClient.get('/persona-non-gratas');
+  const response = await apiClient.get("/persona-non-gratas");
   return response.data;
 };

@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './LangSwitcher.scss';
-import useLanguage from '../../hooks/useLanguage';
+import React, { useState, useEffect, useRef } from "react";
+import "./LangSwitcher.scss";
+import useLanguage from "../../hooks/useLanguage";
 
 const LANGUAGES = [
-  { code: 'en', flag: 'https://flagcdn.com/w40/gb.png' },
-  { code: 'az', flag: 'https://flagcdn.com/w40/az.png' },
+  { code: "en", flag: "https://flagcdn.com/w40/gb.png" },
+  { code: "az", flag: "https://flagcdn.com/w40/az.png" },
 ];
 
 const LangSwitcher = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { selectedLanguage, changeLanguage } = useLanguage();
+  const { selectedLanguage, changeLanguage } = useLanguage("az");
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (e) => {
@@ -25,12 +25,12 @@ const LangSwitcher = () => {
 
   useEffect(() => {
     if (showDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
 

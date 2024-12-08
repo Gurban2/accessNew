@@ -19,11 +19,14 @@ export const DepartmentValidationSchema = Yup.object({
     .trim()
     .min(3, "Department name must be at least 3 characters.")
     .required("Department name is required."),
+  address: Yup.string()
+    .trim()
+    .min(5, "Address must be at least 5 characters.")
+    .required("Address is required."),
   phone: Yup.string()
     .matches(/^\d+$/, "Phone must contain only digits.")
     .required("Phone number is required."),
-  parent: Yup.string().required("Parent department is required."),
-  office: Yup.string().required("Office selection is required."),
+  office_id: Yup.string().required("Office selection is required."),
 });
 
 export const VisitorValidationSchema = Yup.object({

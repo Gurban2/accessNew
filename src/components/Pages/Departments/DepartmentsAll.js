@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -13,26 +12,21 @@ import {
 import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
+import Pager from "../../../modules/Pager";
+import Search from "../../../modules/Search";
 
 const DepartmentsAll = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // Состояние для поиска
-  const [query, setQuery] = useState("");
-
-  // Загружаем департаменты с фильтрацией по запросу
-  const {
-    data: departments,
-    isLoading,
-    isError,
-    refetch,
-  } = useFetchDepartments(query);
+  const { data, isLoading } = useFetchDepartments();
+  const departments = data?.data;
+  const meta = data?.meta;
 
   const { mutateAsync: deleteDepartment } = useDeleteDepartment();
 
   const handleDelete = async (id) => {
-    if (window.confirm(t("department.deleteConfirm"))) {
+    if (window.confirm(t("department.all.deleteConfirm"))) {
       try {
         await deleteDepartment(id);
         toast.success("Department successfully deleted");
@@ -46,23 +40,22 @@ const DepartmentsAll = () => {
     navigate(`/departments/edit/${id}`);
   };
 
-  // Head items для DataTable
   const headItems = [
     "#",
     t("department.all.name"),
     t("department.all.phone"),
+    t("department.all.address"),
     t("department.all.office"),
     t("department.all.actions"),
   ];
 
-  const items = Array.isArray(departments)
-    ? departments.map((department, index) => ({
-        id: department.id,
-        departmentName: department.name,
-        phone: department.phone,
-        office: department.office,
-      }))
-    : [];
+  const items = departments?.map((department, index) => ({
+    id: department.id,
+    departmentName: department.name,
+    phone: department.phone,
+    address: department.address,
+    office: department.office,
+  }));
 
   return (
     <div className="departments-all-container">
@@ -77,46 +70,39 @@ const DepartmentsAll = () => {
           ]}
         />
         <div className="search-add-departments">
-          <input
-            type="text"
-            placeholder={t("department.all.search")}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)} // Обновляем запрос для фильтрации
+          <Search
+            path={AppPaths.departments.all}
+            placeholder={t("department.all.searchPlaceholder")}
           />
-          <div className="searchAddBtn">
-            <Button type="button">
-              <Link to="/departments/add">{t("department.all.add")}</Link>
-            </Button>
-          </div>
         </div>
       </div>
       <hr className="navigation-underline" />
 
-      {/* Show loading indicator or DataTable */}
-      {isLoading ? (
-        <div>{t("department.all.loading")}</div> // Loading message
-      ) : isError ? (
-        <div>{t("department.all.error")}</div> // Error message
-      ) : (
-        <DataTable
-          withAction
-          headItems={headItems}
-          tableProps={{ striped: true, bordered: true, hover: true }}
-          items={items}
-          actionItems={[
-            {
-              text: <FaEdit />,
-              variant: "warning",
-              onClick: (id) => handleEdit(id),
-            },
-            {
-              text: <FaRegTrashAlt />,
-              variant: "danger",
-              onClick: (id) => handleDelete(id),
-            },
-          ]}
-        />
-      )}
+      <DataTable
+        isLoading={isLoading}
+        withAction
+        headItems={headItems}
+        tableProps={{ striped: true, bordered: true, hover: true }}
+        items={items}
+        actionItems={[
+          {
+            text: <FaEdit />,
+            variant: "warning",
+            onClick: (id) => handleEdit(id),
+          },
+          {
+            text: <FaRegTrashAlt />,
+            variant: "danger",
+            onClick: (id) => handleDelete(id),
+          },
+        ]}
+      />
+
+      <Pager
+        currentPage={meta?.current_page}
+        hasNext={meta?.has_next}
+        totalPage={meta?.total_page}
+      />
     </div>
   );
 };

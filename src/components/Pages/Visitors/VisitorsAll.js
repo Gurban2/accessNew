@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaEye, FaRegTrashAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -9,31 +9,20 @@ import Avatar from "../../../modules/Avatar";
 import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
 import { useDeleteVisitor, useFetchVisitors } from "../../../hooks/useVisitors";
-import { Button } from "react-bootstrap";
+import Search from "../../../modules/Search";
+import Pager from "../../../modules/Pager";
 
 const VisitorsAll = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const { data, isLoading } = useFetchVisitors();
   const { mutateAsync } = useDeleteVisitor();
 
   const visitors = data?.data;
-
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredVisitors = useMemo(() => {
-    const query = searchQuery.toLowerCase();
-    return visitors?.filter(
-      (visitor) =>
-        visitor.name.toLowerCase().includes(query) ||
-        visitor.phone.toLowerCase().includes(query) ||
-        visitor.fin.toLowerCase().includes(query),
-    );
-  }, [searchQuery, visitors]);
+  const meta = data?.meta;
 
   const handleDelete = async (id) => {
-    // TODO: Change to Modal (qurban)
     if (window.confirm(t("visitorDeleteConfirm"))) {
       try {
         await mutateAsync(id);
@@ -63,7 +52,7 @@ const VisitorsAll = () => {
     t("actions"),
   ];
 
-  const items = filteredVisitors?.map((visitor, index) => ({
+  const items = visitors?.map((visitor, index) => ({
     id: visitor.id,
     avatar: <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />,
     fin: visitor.fin,
@@ -80,14 +69,6 @@ const VisitorsAll = () => {
     ),
   }));
 
-  if (isLoading) {
-    return <p>{t("loading")}</p>;
-  }
-
-  if (!visitors || visitors.length === 0) {
-    return <p>{t("noVisitorsFound")}</p>; // Display a message when no visitors are found
-  }
-
   return (
     <div className="visitors-all-container">
       <div className="visitors-wrapper d-row d-flex justify-content-between">
@@ -98,23 +79,16 @@ const VisitorsAll = () => {
           ]}
         />
         <div className="search-bar">
-          <input
-            type="text"
-            placeholder={t("Search Visitors")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+          <Search
+            path={AppPaths.visitors.all}
+            placeholder={t("visitorAll.searchPlaceholder")}
           />
-
-          <Button variant="primary" className="search">
-            <Link to={AppPaths.visitors.add}>{t("Add Visitor")}</Link>
-          </Button>
         </div>
       </div>
       <DataTable
         isLoading={isLoading}
         withAction
         headItems={headItems}
-        tableProps={{ striped: true, bordered: true, hover: true }}
         items={items}
         actionItems={[
           {
@@ -137,6 +111,12 @@ const VisitorsAll = () => {
             onClick: (id) => handleDelete(id),
           },
         ]}
+      />
+
+      <Pager
+        currentPage={meta?.current_page}
+        hasNext={meta?.has_next}
+        totalPage={meta?.total_page}
       />
     </div>
   );

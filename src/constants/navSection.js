@@ -3,16 +3,12 @@ import {
   FaBuilding,
   FaChartBar,
   FaUser,
-  FaUserCheck,
   FaUsers,
   FaUserTimes,
 } from "react-icons/fa";
 import { AppPaths } from "./appPaths";
 
-// import dashboard from "../assets/icons/dashboard/dashboard.svg";
-
 const sections = [
-  // { title: "Dashboard", icon: dashboard, path: AppPaths.offices.dashboard },
   {
     title: "officesDepartments",
     departments: [
@@ -65,14 +61,6 @@ const sections = [
         items: [
           { label: "all", path: AppPaths.users.permissions.list },
           { label: "add", path: AppPaths.users.permissions.addUser },
-        ],
-      },
-      {
-        title: "permissions",
-        icon: <FaUserCheck />,
-        items: [
-          { label: "all", path: AppPaths.users.permissions.all },
-          { label: "add", path: AppPaths.users.permissions.add },
         ],
       },
     ],

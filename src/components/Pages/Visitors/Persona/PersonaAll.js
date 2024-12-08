@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  updatePersona,
-  updateVisitor,
-} from "../../../../store/reducers/visitorReducer";
+import { updatePersona } from "../../../../store/reducers/visitorReducer";
 import Avatar from "../../../../modules/Avatar";
+import { useFetchVisitors } from "../../../../hooks/useVisitors";
+import DataTable from "../../../../modules/DataTable";
 
 const PersonaAll = () => {
-  const visitors = useSelector((state) => state.visitors || []);
+  const { data, isLoading } = useFetchVisitors();
+  const visitors = data?.data || [];
   const dispatch = useDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,19 +17,13 @@ const PersonaAll = () => {
   const [selectedVisitorId, setSelectedVisitorId] = useState(null);
 
   const personNonGrataVisitors = visitors.filter(
-    (visitor) => visitor.personNonGrata,
+    (visitor) => visitor.is_blocked,
   );
 
   const handleEdit = (id, currentReason) => {
     setSelectedVisitorId(id);
     setReason(currentReason);
     setIsPopupOpen(true);
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this Persona?")) {
-      dispatch(updateVisitor({ id, reason: "", personNonGrata: "false" }));
-    }
   };
 
   const handleConfirmEdit = () => {
@@ -44,68 +37,33 @@ const PersonaAll = () => {
     setReason("");
   };
 
+  const headItems = ["#", "Photo", "Fin", "Name", "Reason", "Actions"];
+
+  const items = personNonGrataVisitors.map((visitor, index) => ({
+    id: visitor.id,
+    photo: <Avatar size="50px" src={visitor.avatar} alt={visitor.name} />,
+    fin: visitor.fin,
+    name: visitor.name,
+    reason: visitor.reason,
+    actions: (
+      <Button
+        variant="warning"
+        onClick={() => handleEdit(visitor.id, visitor.reason)}
+      >
+        Add Reason
+      </Button>
+    ),
+  }));
+
   return (
     <div className="persona-all-container">
       <h1 className="persona-all-title">
         Personas Marked as &quot;Non Grata&quot;
       </h1>
-      {personNonGrataVisitors.length > 0 ? (
-        <>
-          <Button type="button">
-            <Link to="/persona/add">Add Persona</Link>
-          </Button>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Photo</th>
-                <th>Fin</th>
-                <th>Reason</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {personNonGrataVisitors.map((visitor, index) => (
-                <tr key={visitor.id}>
-                  <td>{index + 1}</td>
-                  <td>
-                    <Avatar
-                      size="50px"
-                      src={visitor.avatar}
-                      alt={visitor.name}
-                    />
-                  </td>
-                  <td>{visitor.name}</td>
-                  <td>{visitor.fin}</td>
-                  <td>{visitor.reason || "No reason provided"}</td>
-                  <td>
-                    <button
-                      className="btn btn-warning btn-sm"
-                      onClick={() => handleEdit(visitor.id, visitor.reason)}
-                    >
-                      Edit
-                    </button>{" "}
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleDelete(visitor.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <p style={{ color: "red", fontStyle: "italic", marginTop: "20px" }}>
-            These users are marked as &quot;Person Non Grata.&quot;
-          </p>
-        </>
-      ) : (
-        <p className="no-personas">
-          No &quot;Person Non Grata&quot; users found.
-        </p>
-      )}
+      <Button type="button">
+        <Link to="/persona/add">Add Persona</Link>
+      </Button>
+      <DataTable headItems={headItems} items={items} isLoading={isLoading} />
 
       {isPopupOpen && (
         <div

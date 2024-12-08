@@ -12,21 +12,17 @@ import {
 import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
 import sections from "../../constants/navSection";
 import LogoutButton from "../LogoutButton";
-// import {useAuth} from '../../contexts/auth/AuthContext';
-// import { logout } from '../../api/authApi';
 import "./Sidebar.scss";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/reducers/authReducer";
-// import { t } from "i18next";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { t } = useTranslation();
-  const [show, setShow] = useState(false); // Offcanvas visibility for mobile
-  const [activeHover, setActiveHover] = useState(null); // Tracks hovered icon for pop-out menu
-  const [openSubmenu, setOpenSubmenu] = useState({}); // Tracks open submenus
+  const [show, setShow] = useState(false);
+  const [activeHover, setActiveHover] = useState(null);
+  const [openSubmenu, setOpenSubmenu] = useState({});
   const [isMouseOn, setIsMouseOn] = useState(false);
 
-  // const { logout } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -65,7 +61,6 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
         onMouseLeave={() => setIsMouseOn(false)}
         onMouseOver={() => setIsMouseOn(true)}
       >
-        {/* Navbar for small screens */}
         <Navbar
           bg="dark"
           variant="dark"
@@ -78,7 +73,6 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
         </Navbar>
 
-        {/* Mobile Sidebar (Offcanvas) */}
         <Offcanvas
           show={show}
           onHide={handleClose}
@@ -104,14 +98,12 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           </Offcanvas.Body>
         </Offcanvas>
 
-        {/* Sidebar for large screens */}
         <div
           className={`d-none sidebar-content d-lg-flex flex-column position-relative bg-dark text-white vh-100s 
         ${hideSidebar ? "collapsed-sidebar" : ""}
         `}
           style={{
             width: hideSidebar ? "80px" : "250px",
-            // transition: "width 0.3s ease-in-out",
           }}
         >
           {!hideSidebar && (
@@ -139,7 +131,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           </Nav>
           <LogoutButton
             text={hideSidebar ? null : "Sign out"}
-            onClick={handleLogout} // Call handleLogout on sign out
+            onClick={handleLogout}
           />
         </div>
       </div>
@@ -160,7 +152,6 @@ const SidebarSection = ({
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
-  // Safely check if departments is an array before mapping
   const departments = Array.isArray(section.departments)
     ? section.departments
     : [];
@@ -171,7 +162,6 @@ const SidebarSection = ({
       onMouseEnter={() => isCollapsed && setActiveHover(section.title)}
       onMouseLeave={() => isCollapsed && setActiveHover(null)}
     >
-      {/* Main Section Link */}
       <Nav.Link
         className={`text-white d-flex align-items-center justify-content-between active-section`}
       >
@@ -180,7 +170,6 @@ const SidebarSection = ({
         </div>
       </Nav.Link>
 
-      {/* Expand Submenu for Expanded View */}
       <Collapse in={true}>
         <div className="sidebar-collapse-submenu">
           {departments.map((department, departmentIndex) => (

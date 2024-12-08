@@ -1,20 +1,21 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
-import Item from './Item';
-import './styles.scss';
-import LoadingTable from '../Loading/Table';
+import React from "react";
+import { Button } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import Item from "./Item";
+import "./styles.scss";
+import LoadingTable from "../Loading/Table";
 
 const DataTable = ({
   headItems,
   items,
-  tableProps,
+  tableProps = { striped: true, bordered: true, hover: true },
   actionItems,
   isLoading,
 }) => {
   if (!items || isLoading) {
     return <LoadingTable />;
   }
+
   return (
     <Table {...tableProps} className="data-table">
       <thead>
@@ -25,6 +26,14 @@ const DataTable = ({
         </tr>
       </thead>
       <tbody>
+        {items.length === 0 && (
+          <tr>
+            <td colSpan={headItems.length} className="text-center">
+              No data available
+            </td>
+          </tr>
+        )}
+
         {items.map((item) => (
           <tr key={item.id}>
             <Item data={item} />

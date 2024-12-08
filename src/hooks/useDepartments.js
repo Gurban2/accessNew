@@ -14,13 +14,15 @@ import {
   setDepartmentMeta,
   setDepartments,
 } from "../store/reducers/departmentReducer";
+import useQueryParams from "./useQueryParams";
 
 export const useFetchDepartments = () => {
   const dispatch = useDispatch();
+  const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
-    queryKey: ["departments"],
-    queryFn: fetchDepartments,
+    queryKey: ["departments", queryParamsKey],
+    queryFn: () => fetchDepartments(queryParams),
   });
 
   useEffect(() => {

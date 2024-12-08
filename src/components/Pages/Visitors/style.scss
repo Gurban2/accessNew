@@ -2,6 +2,9 @@
   justify-content: center;
   height: 100vh;
   background-color: var(--background-color);
+  .form-group {
+    flex: 0 0 calc(50% - 0.25rem);
+  }
 
   .visitor-add-title {
     margin-bottom: 20px;
@@ -12,10 +15,6 @@
 
   .visitor-wrapper {
     display: flex;
-  }
-
-  .mb-3 {
-    margin-bottom: 10px !important;
   }
 
   .form-container {
@@ -35,12 +34,6 @@
     font-size: 1rem;
     margin-bottom: 0;
     font-weight: var(--font-weight-bold);
-  }
-
-  .col-md-3 {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
   }
 
   .form-control {
@@ -129,6 +122,89 @@
     .visitor-view-card {
       width: 100%;
       padding: 15px;
+    }
+  }
+}
+
+.visitor-view-container {
+  padding: 10px;
+
+  .visitor-view-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    // gap: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .visitor-photo {
+      flex: 1 1 150px;
+      max-width: 150px;
+
+      .visitor-photo-img {
+        width: 100%;
+        // height: auto;
+        border-radius: 5px;
+        border: 1px solid var(--border-color-light);
+        // object-fit: cover;
+      }
+
+      .visitor-photo-frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 150px;
+        background-color: var(--background-secondary);
+        border-radius: 5px;
+        color: var(--text-muted);
+        font-size: 14px;
+        text-align: center;
+        border: 1px dashed var(--border-color-light);
+      }
+    }
+
+    .visitor-info {
+      // flex: 2 1 300px;
+      display: flex;
+      flex-direction: column;
+      p {
+        margin: 10px 0;
+        color: var(--text-color-primary);
+        display: flex;
+        gap: 10px;
+
+        strong {
+          color: var(--text-color-secondary);
+          font-weight: 600;
+        }
+      }
+    }
+
+    .btn-view-visitor {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      display: inline-block;
+      text-align: center;
+
+      &-secondary {
+        background-color: var(--btn-secondary-bg);
+        color: var(--btn-secondary-text);
+        border: 1px solid var(--btn-secondary-border);
+
+        &:hover {
+          background-color: var(--btn-secondary-hover-bg);
+          color: var(--btn-secondary-hover-text);
+        }
+      }
     }
   }
 }

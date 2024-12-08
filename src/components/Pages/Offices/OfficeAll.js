@@ -1,9 +1,7 @@
-import React, { useMemo } from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -11,27 +9,20 @@ import { useDeleteOffice, useFetchOffices } from "../../../hooks/useOffices";
 import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
+import Search from "../../../modules/Search";
+import Pager from "../../../modules/Pager";
 
 const OfficeAll = () => {
-  const { isLoading } = useFetchOffices();
+  const { data, isLoading } = useFetchOffices();
   const { mutateAsync } = useDeleteOffice();
-  const { data: offices } = useSelector((state) => state.offices);
+  const offices = data?.data;
+  const meta = data?.meta;
 
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const filteredOffices = useMemo(() => {
-    const query = ""; // TODO: Get the search query from the search input (Qurban)
-    return offices?.filter(
-      (office) =>
-        office.name.toLowerCase().includes(query) ||
-        office.phone.toLowerCase().includes(query) ||
-        office.address.toLowerCase().includes(query),
-    );
-  }, [offices]);
-
   const handleDelete = async (id) => {
-    if (window.confirm(t("office.add.deleteConfirm"))) {
+    if (window.confirm(t("office.all.deleteConfirm"))) {
       try {
         await mutateAsync(id);
         toast.success("Office successfully deleted");
@@ -45,7 +36,6 @@ const OfficeAll = () => {
     navigate(`/offices/edit/${id}`);
   };
 
-  // Head items for the DataTable
   const headItems = [
     "#",
     t("office.add.officeName"),
@@ -54,7 +44,7 @@ const OfficeAll = () => {
     t("office.all.actions"),
   ];
 
-  const items = filteredOffices?.map((office, index) => ({
+  const items = offices?.map((office, index) => ({
     id: office.id,
     name: office.name,
     address: office.address,
@@ -70,11 +60,7 @@ const OfficeAll = () => {
             { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
           ]}
         />
-        <div className="searchAddBtn">
-          <Button type="button" className="search">
-            <Link to={AppPaths.offices.add}>{t("office.add.add")}</Link>
-          </Button>
-        </div>
+        <Search path={AppPaths.offices.all} placeholder="Search Office" />
       </div>
       <hr className="navigation-underline" />
 
@@ -96,6 +82,12 @@ const OfficeAll = () => {
             onClick: handleDelete,
           },
         ]}
+      />
+
+      <Pager
+        currentPage={meta?.current_page}
+        hasNext={meta?.has_next}
+        totalPage={meta?.total_page}
       />
     </div>
   );

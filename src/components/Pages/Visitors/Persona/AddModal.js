@@ -1,12 +1,12 @@
-import { Form, InputGroup } from 'react-bootstrap';
-import Modal from '../../../../modules/Modal';
+import { Form, InputGroup } from "react-bootstrap";
+import Modal from "../../../../modules/Modal";
 
 const AddModal = ({ onChange, reason, onConfirm, onCancel }) => {
   return (
     <Modal
       onConfirm={onConfirm}
       onCancel={onCancel}
-      btnText={'Add to Person Non Grata'}
+      btnText={"Add to Person Non Grata"}
       title="Provide Reason"
     >
       <InputGroup>
