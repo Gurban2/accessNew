@@ -1,21 +1,32 @@
-import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
+import { Formik, Form as FormikForm, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
+
 import { AppPaths } from "../../../constants/appPaths";
 import Capture from "../../../modules/Capture";
 import Breadcrumb from "../Breadcrumb";
 import { VisitorValidationSchema } from "../InputValidation";
+import {
+  useAddVisitor,
+  useFetchDocumentTypes,
+} from "../../../hooks/useVisitors";
+import LoadingForm from "../../../modules/Loading/Form";
+import FormField from "../FormField";
 import "./style.scss";
-import { useAddVisitor } from "../../../hooks/useVisitors";
 
 const VisitorsAdd = () => {
   const { t } = useTranslation();
 
   const { mutateAsync } = useAddVisitor();
+  const { data: documentTypesData, isLoading: isLoadingDocumentTypes } =
+    useFetchDocumentTypes();
+  const documentTypes = documentTypesData?.data;
+
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
 
@@ -44,14 +55,30 @@ const VisitorsAdd = () => {
       items,
     });
     const newFormData = {
-      visitors: [{ ...values, avatar: values.photo, items }],
+      visitors: [
+        {
+          ...values,
+          avatar: values.photo,
+          items,
+          visiting_now: values.visiting_now ? 1 : 0,
+          visit_time: format(new Date(values.visit_time), "y-mm-dd hh:mm"),
+        },
+      ],
     };
     console.log({ newFormData });
-    await mutateAsync(newFormData);
-    setSubmitting(false);
-    toast.success(t("visitorAdd.success"));
-    navigate("/visitors/all");
+    try {
+      await mutateAsync(newFormData);
+      setSubmitting(false);
+      toast.success(t("visitorAdd.success"));
+      navigate("/visitors/all");
+    } catch (error) {
+      toast.error(t("visitorAdd.error"));
+    }
   };
+
+  if (isLoadingDocumentTypes) {
+    return <LoadingForm />;
+  }
 
   return (
     <div className="visitor-add-container">
@@ -71,7 +98,9 @@ const VisitorsAdd = () => {
           email: "",
           address: "",
           photo: "",
-          // TODO: meet time (qurban)
+          doc_type: "id",
+          visit_time: "",
+          visiting_now: false,
         }}
         validationSchema={VisitorValidationSchema}
         onSubmit={handleSubmit}
@@ -93,77 +122,61 @@ const VisitorsAdd = () => {
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={6} controlId="fin">
-                <Form.Label className="form-label-head">
-                  {t("visitorAdd.fin")}
-                </Form.Label>
-                <Field
-                  type="text"
-                  name="fin"
-                  placeholder={t("visitorAdd.enterFin")}
-                  className="form-control"
-                />
-                <ErrorMessage name="fin" component="div" className="error" />
-              </Form.Group>
-              <Form.Group as={Col} xs={12} md={6} controlId="email">
-                <Form.Label className="form-label-head">
-                  {t("visitorAdd.email")}
-                </Form.Label>
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder={t("visitorAdd.enterEmail")}
-                  className="form-control"
-                />
-                <ErrorMessage name="email" component="div" className="error" />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={6} controlId="name">
-                <Form.Label className="form-label-head">
-                  {t("visitorAdd.name")}
-                </Form.Label>
-                <Field
-                  type="text"
-                  name="name"
-                  placeholder={t("visitorAdd.enterName")}
-                  className="form-control"
-                />
-                <ErrorMessage name="name" component="div" className="error" />
-              </Form.Group>
-              <Form.Group as={Col} xs={12} md={6} controlId="phone">
-                <Form.Label className="form-label-head">
-                  {t("visitorAdd.phone")}
-                </Form.Label>
-                <Field
-                  type="tel"
-                  name="phone"
-                  placeholder={t("visitorAdd.enterPhone")}
-                  className="form-control"
-                />
-                <ErrorMessage name="phone" component="div" className="error" />
-              </Form.Group>
-            </Row>
+            <div className="d-flex flex-wrap gap-2">
+              <FormField
+                label={t("department.add.doc_type")}
+                name="doc_type"
+                as="select"
+                options={Object.entries(documentTypes)?.map(([value, key]) => ({
+                  label: key,
+                  value: value,
+                }))}
+              />
+              <FormField
+                label={t("visitorAdd.fin")}
+                name="fin"
+                type="text"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitorAdd.name")}
+                name="name"
+                type="text"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitorAdd.phone")}
+                name="phone"
+                type="text"
+                className="form-control"
+              />
 
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={6} controlId="address">
-                <Form.Label className="form-label-head">
-                  {t("visitorAdd.address")}
-                </Form.Label>
-                <Field
-                  type="text"
-                  name="address"
-                  placeholder={t("visitorAdd.enterAddress")}
-                  className="form-control"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className="error"
-                />
-              </Form.Group>
-            </Row>
+              <FormField
+                label={t("visitorAdd.email")}
+                name="email"
+                type="email"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitorAdd.address")}
+                name="address"
+                type="text"
+                className="form-control"
+              />
+
+              <FormField
+                label={t("visitorAdd.visitTime")}
+                name="visit_time"
+                type="datetime-local"
+                className="form-control"
+              />
+
+              <Form.Check
+                type="checkbox"
+                label={t("visitorAdd.visitingNow")}
+                name="visiting_now"
+              />
+            </div>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="additem">
                 <Button variant="warning" onClick={handleAddItem}>

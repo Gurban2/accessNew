@@ -11,13 +11,15 @@ import {
 } from "../api/officesApi";
 
 import { setOfficeMeta, setOffices } from "../store/reducers/officeReducer";
+import useQueryParams from "./useQueryParams";
 
 export const useFetchOffices = () => {
   const dispatch = useDispatch();
+  const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
-    queryKey: ["offices"],
-    queryFn: fetchOffices,
+    queryKey: ["offices", queryParamsKey],
+    queryFn: () => fetchOffices(queryParams),
   });
 
   useEffect(() => {

@@ -1,32 +1,24 @@
-import React, { useState, useMemo } from "react";
-import { Form, Alert } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Alert } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import AddModal from "./AddModal";
 import DataTable from "../../../../modules/DataTable";
 import { updateVisitor } from "../../../../store/reducers/visitorReducer";
 
 import "./style.scss";
+import { useFetchVisitors } from "../../../../hooks/useVisitors";
+import { Avatar } from "@mui/material";
+import Search from "../../../../modules/Search";
+import { AppPaths } from "../../../../constants/appPaths";
 
 const PersonaAdd = () => {
-  const [inputValue, setInputValue] = useState("");
+  const { data, isLoading } = useFetchVisitors();
+  const visitors = data?.data || [];
+
   const [reason, setReason] = useState("");
-  // const [selectedVisitor, setSelectedVisitor] = useState(null);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-  const visitors = useSelector((state) =>
-    state.visitors.filter((v) => !v.personNonGrata),
-  );
-
-  const matchedVisitors = useMemo(() => {
-    return visitors.filter((visitor) =>
-      visitor.name.toLowerCase().includes(inputValue.toLowerCase()),
-    );
-  }, [inputValue, visitors]);
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
 
   const handleConfirmAdd = (id) => {
     if (!reason.trim()) {
@@ -43,7 +35,6 @@ const PersonaAdd = () => {
         }),
       );
 
-      setInputValue("");
       setReason("");
       setError(""); // Clear error after successful update
     } catch (error) {
@@ -52,50 +43,48 @@ const PersonaAdd = () => {
     }
   };
 
-  const headItems = ["ID", "Name", "Phone", "Fin", "Actions"];
+  const headItems = [
+    "ID",
+    "Photo",
+    "Fin",
+    "Name",
+    "Email",
+    "Address",
+    "Phone",
+    "Actions",
+  ];
 
-  const items = matchedVisitors.map((visitor) => ({
+  const items = visitors.map((visitor) => ({
     id: visitor.id,
-    name: visitor.name,
-    phone: visitor.phone,
+    photo: <Avatar size="50px" src={visitor.avatar} alt={visitor.name} />,
     fin: visitor.fin,
+    name: visitor.name,
+    email: visitor.email,
+    address: visitor.address,
+    phone: visitor.phone,
     action: (
       <AddModal
         onChange={(e) => setReason(e.target.value)}
         reason={reason}
         onConfirm={() => handleConfirmAdd(visitor.id)}
-        // onCancel={() => (null)}
       />
     ),
   }));
 
   return (
     <div className="persona-add-container">
-      <Form>
-        <Form.Group controlId="searchVisitor">
-          <Form.Label>Search Visitor</Form.Label>
-          <Form.Control
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Search by name"
-          />
-        </Form.Group>
-      </Form>
-
       {error && <Alert variant="danger">{error}</Alert>}
-
-      {/* Display matched visitors as a DataTable */}
+      <Search
+        path={AppPaths.visitors.persona.add}
+        placeholder="Search visitor"
+        text="Search Visitor"
+      />
       <DataTable
         withAction
         headItems={headItems}
-        tableProps={{ striped: true, bordered: true, hover: true }}
         items={items}
+        isLoading={isLoading}
       />
-
-      {/* {selectedVisitor && (
-        
-      )} */}
     </div>
   );
 };

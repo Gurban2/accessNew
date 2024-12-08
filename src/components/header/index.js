@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"; // Import Link for navigation
 import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 import { AppPaths } from "../../constants/appPaths";
-import { isUser } from "../../helpers/isUser";
+import { isLoggedIn } from "../../helpers/userHelpers";
 
 const ref = React.createRef();
-const Header = ({ userName, isCollapsedSideBar }) => {
+const Header = ({ isCollapsedSideBar }) => {
   useEffect(() => {
     const header = ref.current;
     const placeholder = document.createElement("div");
@@ -51,7 +51,7 @@ const Header = ({ userName, isCollapsedSideBar }) => {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="me-3">
-              {isUser() ? (
+              {isLoggedIn() ? (
                 <Button
                   onClick={handleLogout}
                   variant="link"

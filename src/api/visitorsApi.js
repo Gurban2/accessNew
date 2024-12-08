@@ -1,8 +1,8 @@
 import apiClient from "./index";
 
 // Fetch all visitors
-export const fetchVisitors = async () => {
-  const response = await apiClient.get("/visitors");
+export const fetchVisitors = async (queryString) => {
+  const response = await apiClient.get("/visitors", { params: queryString });
   return response.data;
 };
 
@@ -27,5 +27,10 @@ export const updateVisitor = async (id, visitor) => {
 // Delete a visitor
 export const deleteVisitor = async (id) => {
   const response = await apiClient.delete(`/visitors/${id}`);
+  return response.data;
+};
+
+export const fetchDocumentTypes = async () => {
+  const response = await apiClient.get("/visitors/get/document-types");
   return response.data;
 };

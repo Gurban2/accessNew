@@ -1,54 +1,43 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { editDepartment } from "../../../store/reducers/departmentReducer";
 import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
+import { useFetchOffices } from "../../../hooks/useOffices";
+import {
+  useFetchDepartmentById,
+  useUpdateDepartment,
+} from "../../../hooks/useDepartments";
+import { Button } from "react-bootstrap";
+import { Formik, Form } from "formik";
+import FormField from "../FormField";
+import { DepartmentValidationSchema } from "../InputValidation";
+import { useTranslation } from "react-i18next";
+import LoadingForm from "../../../modules/Loading/Form";
+import { AppPaths } from "../../../constants/appPaths";
 
 const DepartmentEdit = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: offices } = useSelector((state) => state.offices);
+  const { data: officesData, isLoading: isOfficesLoading } = useFetchOffices();
+  const { data, isLoading } = useFetchDepartmentById(id);
+  const { mutateAsync, isPending } = useUpdateDepartment();
+  const department = data?.data;
+  const offices = officesData?.data;
 
-  const department = useSelector((state) =>
-    state.departments.departmentsData.find(
-      (department) => department.id === id,
-    ),
-  );
-
-  const [formData, setFormData] = React.useState({
-    name: "",
-    phone: "",
-    office: "",
-  });
-
-  useEffect(() => {
-    if (department) {
-      setFormData({
-        name: department.name,
-        phone: department.phone,
-        office: department.office,
-      });
-    } else {
-      navigate("/departments/all");
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      await mutateAsync({ id, department: values });
+      toast.success(t("department.add.success"));
+      navigate(AppPaths.departments.all);
+    } catch (error) {
+      toast.error(t("department.add.error"));
     }
-  }, []);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(editDepartment({ id: department.id, data: formData }));
-    toast.success("Department successfully edited");
-    navigate("/departments/all");
-  };
-
-  if (!department) {
-    return <p>Department not found</p>;
+  if (isOfficesLoading || isLoading) {
+    return <LoadingForm />;
   }
 
   return (
@@ -64,52 +53,51 @@ const DepartmentEdit = () => {
       </div>
       <hr className="navigation-underline" />
       <h1 className="department-add">Edit Department</h1>
-      <form className="department-add-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Department Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <Formik
+        initialValues={{
+          name: department?.name || "",
+          address: department?.address || "",
+          phone: department?.phone || "",
+          office_id: department?.office_id || "",
+        }}
+        validationSchema={DepartmentValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="department-add-form">
+            <FormField
+              label={t("department.add.name")}
+              name="name"
+              className="form-control"
+            />
+            <FormField
+              label={t("department.add.address")}
+              name="address"
+              className="form-control"
+            />
+            <FormField
+              label={t("department.add.phone")}
+              name="phone"
+              type="tel"
+            />
+            <FormField
+              label={t("department.add.office")}
+              name="office_id"
+              as="select"
+              options={offices.map((office) => ({
+                value: office.id,
+                label: office.name,
+              }))}
+            />
 
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="office">Office</label>
-          <select
-            name="office"
-            value={formData.office}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              Select office
-            </option>
-            {offices.map((office) => (
-              <option key={office.id} value={office.name}>
-                {office.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button type="submit" className="submit-button">
-          Save Changes
-        </button>
-      </form>
+            <Button type="submit" disabled={isSubmitting || isPending}>
+              {isSubmitting
+                ? t("department.add.submitting")
+                : t("department.add.submit")}
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

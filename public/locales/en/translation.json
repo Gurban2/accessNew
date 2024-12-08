@@ -28,7 +28,8 @@
     "actions": "Actions",
     "view": "View",
     "deleteConfirm": "Are you sure you want to delete this Visitor?",
-    "errorDeleting": "Error deleting visitor"
+    "errorDeleting": "Error deleting visitor",
+    "searchPlaceholder": "Search visitor"
   },
 
   "visitor": {
@@ -112,8 +113,8 @@
       "actions": "Actions",
       "edit": "Edit",
       "delete": "Delete",
-      "search":"Search office",
-      "loading":"Loading..."
+      "search": "Search office",
+      "loading": "Loading..."
     },
     "edit": {
       "title": "Edit Office",
@@ -136,7 +137,8 @@
       "deleteConfirm": "Are you sure you want to delete this department?",
       "add": "Add Department",
       "search": "Search Department",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "searchPlaceholder": "Search department..."
     },
     "add": {
       "name": "Department Name",
@@ -145,6 +147,8 @@
       "add": "Add Department",
       "submitting": "Submit",
       "office": "Office",
+      "address": "Address",
+      "error": "Error occurred while adding visitor",
       "submit": "Submit"
     }
   },

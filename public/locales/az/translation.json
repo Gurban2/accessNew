@@ -28,7 +28,8 @@
     "actions": "Əməliyyatlar",
     "view": "Baxış",
     "deleteConfirm": "Bu Ziyarətçini silmək istədiyinizdən əminsiniz?",
-    "errorDeleting": "Ziyarətçi silinərkən səhv baş verdi"
+    "errorDeleting": "Ziyarətçi silinərkən səhv baş verdi",
+    "searchPlaceholder": "Ziyarətçi axtar"
   },
 
   "visitor": {
@@ -112,8 +113,8 @@
       "actions": "Əməliyyatlar",
       "edit": "Redaktə Et",
       "delete": "Sil",
-      "search":"Ofis axtar",
-      "loading":"Yüklənir..."
+      "search": "Ofis axtar",
+      "loading": "Yüklənir..."
     },
     "edit": {
       "title": "Ofisi Redaktə Et",
@@ -136,19 +137,21 @@
       "deleteConfirm": "Bu şöbəni silmək istədiyinizdən əminsiniz?",
       "add": "Şöbə əlavə et",
       "search": "Şöbə axtarın",
-      "loading": "Yüklənir..."
+      "loading": "Yüklənir...",
+      "searchPlaceholder": "Şöbə axtarın..."
     },
     "add": {
       "name": "Şöbə adı",
       "phone": "Telefon",
-      "parent": "Əsas şöbə",
+      "address": "Ünvan",
       "add": "Şöbə əlavə et",
       "submitting": "Göndərilir...",
       "submit": "Göndər",
-
-      "office": "Ofis"
+      "office": "Ofis",
+      "error": "Şöbə əlavə edilərkən səhv baş verdi"
     }
   },
+
   "breadcrumb": {
     "dashboard": "İdarəetmə Paneli",
     "visitors": "Ziyarətçilər",

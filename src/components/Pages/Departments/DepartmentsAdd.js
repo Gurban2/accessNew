@@ -1,7 +1,6 @@
 import { Formik, Form } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -11,34 +10,21 @@ import Breadcrumb from "../Breadcrumb";
 import FormField from "../FormField";
 import { DepartmentValidationSchema } from "../InputValidation";
 import "./style.scss";
+import { useFetchOffices } from "../../../hooks/useOffices";
+import LoadingForm from "../../../modules/Loading/Form";
+import { Button } from "react-bootstrap";
 
 const DepartmentsAdd = () => {
-  const { data: departments } = useSelector((state) => state.offices);
   const { t } = useTranslation();
   const { mutateAsync, isPending } = useAddDepartment();
 
-  const offices = useSelector((state) => state.offices.data);
+  const { data, isLoading } = useFetchOffices();
 
-  const parentOptions = departments.map((department) => ({
-    value: department.id,
-    label: department.name,
-  }));
+  const offices = data?.data || [];
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    const uniqueId = Date.now().toString();
-    const newDepartment = { ...values, id: uniqueId };
-
-    const existingDepartment = departments.find(
-      (department) => department.name === newDepartment.name,
-    );
-
-    if (existingDepartment) {
-      setSubmitting(false);
-      return toast.error(t("department.add.departmentExists"));
-    }
-
     try {
-      await mutateAsync(newDepartment);
+      await mutateAsync(values);
       toast.success(t("department.add.success"));
       resetForm();
     } catch (error) {
@@ -47,6 +33,10 @@ const DepartmentsAdd = () => {
       setSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return <LoadingForm />;
+  }
 
   return (
     <div className="department-add-container">
@@ -67,9 +57,9 @@ const DepartmentsAdd = () => {
       <Formik
         initialValues={{
           name: "",
+          address: "",
           phone: "",
-          parent: "",
-          office: "",
+          office_id: "",
         }}
         validationSchema={DepartmentValidationSchema}
         onSubmit={handleSubmit}
@@ -82,19 +72,19 @@ const DepartmentsAdd = () => {
               className="form-control"
             />
             <FormField
+              label={t("department.add.address")}
+              name="address"
+              className="form-control"
+            />
+            <FormField
               label={t("department.add.phone")}
               name="phone"
               type="tel"
             />
             <FormField
-              label={t("department.add.parent")}
-              name="parent"
-              as="select"
-              options={parentOptions}
-            />
-            <FormField
               label={t("department.add.office")}
-              name="office"
+              name="office_id"
+              emptyValue={t("department.add.office")}
               as="select"
               options={offices.map((office) => ({
                 value: office.id,
@@ -102,15 +92,11 @@ const DepartmentsAdd = () => {
               }))}
             />
 
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isSubmitting || isPending}
-            >
+            <Button type="submit" disabled={isSubmitting || isPending}>
               {isSubmitting
                 ? t("department.add.submitting")
                 : t("department.add.submit")}
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>

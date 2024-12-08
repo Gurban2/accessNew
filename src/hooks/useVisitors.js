@@ -8,16 +8,19 @@ import {
   deleteVisitor,
   fetchVisitor,
   updateVisitor,
+  fetchDocumentTypes,
 } from "../api/visitorsApi";
 
 import { setVisitors, setVisitorsMeta } from "../store/reducers/visitorReducer";
+import useQueryParams from "./useQueryParams";
 
 export const useFetchVisitors = () => {
   const dispatch = useDispatch();
+  const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
-    queryKey: ["visitors"],
-    queryFn: fetchVisitors,
+    queryKey: ["visitors", queryParamsKey],
+    queryFn: () => fetchVisitors(queryParams),
   });
 
   useEffect(() => {
@@ -69,5 +72,12 @@ export const useDeleteVisitor = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] }); // Refresh visitors list
     },
+  });
+};
+
+export const useFetchDocumentTypes = () => {
+  return useQuery({
+    queryKey: ["documentTypes"],
+    queryFn: fetchDocumentTypes,
   });
 };
