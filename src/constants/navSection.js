@@ -39,6 +39,7 @@ const sections = [
         items: [
           { label: "all", path: AppPaths.visitors.all },
           { label: "add", path: AppPaths.visitors.add },
+          { label: "Report", path: AppPaths.visitors.complaint },
         ],
       },
       {
