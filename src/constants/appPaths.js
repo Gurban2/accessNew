@@ -27,7 +27,7 @@ export const AppPaths = {
   visitors: {
     add: "/visitors/add",
     all: "/visitors/all",
-    report: "/visitors/report",
+    complaint: "/visitors/report",
     edit: "/visitors/edit/:id",
     view: "/visitors/view/:id",
     persona: {

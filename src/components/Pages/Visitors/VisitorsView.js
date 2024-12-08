@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { shallowEqual, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useFetchComplaints } from "../../../hooks/useComplaints";
 
 import { AppPaths } from "../../../constants/appPaths";
 import Breadcrumb from "../Breadcrumb";
-import "./style.scss";
 import Avatar from "../../../modules/Avatar";
+import ReportModal from "./VisitorsModal/ReportModal";
+import "./Style_visitor_view/view.scss";
 
 const VisitorsView = () => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const { data: complaints, isLoading: complaintsLoading } =
+    useFetchComplaints();
+
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const [description, setDescription] = useState("");
+  const [isBlocked, setIsBlocked] = useState(false);
 
   const visitor = useSelector(
     (state) =>
@@ -21,13 +29,23 @@ const VisitorsView = () => {
   );
 
   if (!visitor) {
-    return <div>{t("loading")}</div>; // Use translation for loading
+    return <div>{t("loading")}</div>;
   }
+
+  const toggleReportModal = () => setIsReportOpen((prev) => !prev);
+
+  const handleBlockUser = () => {
+    setIsBlocked(true);
+  };
+
+  const handleSubmitReport = () => {
+    console.log(`Report submitted: ${description}`);
+    setIsReportOpen(false);
+  };
 
   return (
     <div className="visitor-view-container">
       <div className="offices-wrapper d-row">
-        {/* TODO: report and persona buttons */}
         <Breadcrumb
           paths={[
             { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
@@ -40,6 +58,18 @@ const VisitorsView = () => {
         <div className="visitor-photo">
           <Avatar size="128px" src={visitor.avatar} alt={visitor.name} />
         </div>
+        <button
+          onClick={handleBlockUser}
+          className={`icon-btn ${isBlocked ? "blocked" : ""}`}
+        >
+          {isBlocked ? t("visitorView.blocked") : t("visitorView.block")}
+        </button>
+        <ReportModal
+          onClose={toggleReportModal}
+          description={description}
+          setDescription={setDescription}
+          id={visitor.id}
+        />
         <div className="visitor-info">
           <p>
             <strong>{t("name")}:</strong> {visitor.name}
@@ -56,9 +86,8 @@ const VisitorsView = () => {
           <p>
             <strong>{t("address")}:</strong> {visitor.address}
           </p>
-
-          {/* TODO: show items (qurban) */}
         </div>
+        <div className="modal-actions"></div>
       </div>
     </div>
   );

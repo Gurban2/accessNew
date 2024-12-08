@@ -22,7 +22,7 @@ import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
-import VisitorReport from "./components/Pages/Visitors/VisitorsReport";
+import ComplaintsAll from "./components/Pages/Visitors/ComplaintsAll";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 
 import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
@@ -73,8 +73,8 @@ function Main() {
             <Route path={AppPaths.visitors.edit} element={<VisitorEdit />} />
             <Route path={AppPaths.visitors.view} element={<VisitorView />} />
             <Route
-              path={AppPaths.visitors.report}
-              element={<VisitorReport />}
+              path={AppPaths.visitors.complaint}
+              element={<ComplaintsAll />}
             />
             <Route
               path={AppPaths.visitors.persona.add}

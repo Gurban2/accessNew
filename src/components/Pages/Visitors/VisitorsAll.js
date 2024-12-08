@@ -100,13 +100,13 @@ const VisitorsAll = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder={t("searchVisitors")}
+            placeholder={t("Search Visitors")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 
-          <Button variant="primary">
-            <Link to={AppPaths.visitors.add}>{t("addVisitor")}</Link>
+          <Button variant="primary" className="search">
+            <Link to={AppPaths.visitors.add}>{t("Add Visitor")}</Link>
           </Button>
         </div>
       </div>
