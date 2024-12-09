@@ -8,13 +8,17 @@ import { AppPaths } from "../../../constants/appPaths";
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./VisitorsModal/ReportModal";
+import ComplaintsList from "./ComplaintsList";
 import "./Style_visitor_view/view.scss";
 
 const VisitorsView = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { data: complaints, isLoading: complaintsLoading } =
-    useFetchComplaints();
+  const {
+    data: complaints,
+    refetch: refetchComplaints,
+    isLoading: complaintsLoading,
+  } = useFetchComplaints();
 
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [description, setDescription] = useState("");
@@ -32,15 +36,13 @@ const VisitorsView = () => {
     return <div>{t("loading")}</div>;
   }
 
+  // Check if complaints data is loaded
+  const complaintsData = complaints?.data || [];
+
   const toggleReportModal = () => setIsReportOpen((prev) => !prev);
 
   const handleBlockUser = () => {
     setIsBlocked(true);
-  };
-
-  const handleSubmitReport = () => {
-    console.log(`Report submitted: ${description}`);
-    setIsReportOpen(false);
   };
 
   return (
@@ -69,6 +71,7 @@ const VisitorsView = () => {
           description={description}
           setDescription={setDescription}
           id={visitor.id}
+          onUpdateComplaints={refetchComplaints} // Передаем обновление жалоб
         />
         <div className="visitor-info">
           <p>
@@ -87,6 +90,10 @@ const VisitorsView = () => {
             <strong>{t("address")}:</strong> {visitor.address}
           </p>
         </div>
+        <ComplaintsList
+          complaints={complaintsData}
+          complaintsLoading={complaintsLoading}
+        />
         <div className="modal-actions"></div>
       </div>
     </div>

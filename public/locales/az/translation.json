@@ -91,9 +91,11 @@
     "showMore":"Daha çox",
     "blocked":"Bloklanıb",
     "block":"Bloklan",
-    "report":"Şikayət",
-    "submit": "Əlavə Et"
-
+    "report":"Şikayət et",
+    "submit": "Əlavə et",
+    "complaints": "Şikayətlər",
+    "success": "Şikayət uğurla əlavə olundu",
+    "error": "Xəta"
   },
 
   "office": {

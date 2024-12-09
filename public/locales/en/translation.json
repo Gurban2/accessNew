@@ -77,7 +77,7 @@
     "date": "Date",
     "description": "Description",
     "profile": "Profile Page"
-     },
+    },
 
   "visitorView": {
     "noPhoto": "No photo available",
@@ -92,7 +92,10 @@
     "blocked":"Blocked",
     "block":"Block",
     "report":"Report",
-    "submit": "Submit"
+    "submit": "Submit",
+    "complaints": "Complaints",
+    "success": "success",
+    "error": "error"
   },
 
   "office": {
