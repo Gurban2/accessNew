@@ -176,5 +176,35 @@
     "addOffice": "Office",
     "departments": "Departments",
     "addDepartment": "Add Department"
+  },
+  "login": {
+    "welcome": "Welcome to our application!",
+    "loginWithEmail": "Login with Email",
+    "forgotPassword": "Forgot Password",
+    "enterEmailForReset": "Enter your email to receive a reset link",
+    "enterResetTokenAndNewPassword": "Enter reset token and new password",
+    "enterEmail": "Enter Email",
+    "enterPassword": "Enter Password",
+    "keepMeLoggedIn": "Keep me logged in",
+    "forgotPasswordLink": "Forgot Password?",
+    "sendResetLink": "Send Reset Link",
+    "resetPassword": "Reset Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "loggingIn": "Logging in...",
+    "loginButton": "Login",
+    "resetPasswordButton": "Reset Password",
+    "sendResetLinkButton": "Send Reset Link",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "pleaseEnterEmailAndPassword": "Please enter both email and password.",
+    "pleaseEnterEmailAddress": "Please enter an email address.",
+    "pleaseCheckYourEmail": "Please check your email for the reset link.",
+    "passwordResetSuccess": "Password reset successfully!",
+    "invalidEmailOrPassword": "Invalid email or password. Please try again.",
+    "emailAlreadyInUse": "This email is already in use.",
+    "emailNotFound": "Email address not found.",
+    "checkYourEmailForResetLink": "Please check your email for the reset link."
   }
+
+
 }

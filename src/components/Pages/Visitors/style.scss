@@ -138,7 +138,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    // gap: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     .visitor-photo {
@@ -147,10 +146,8 @@
 
       .visitor-photo-img {
         width: 100%;
-        // height: auto;
         border-radius: 5px;
         border: 1px solid var(--border-color-light);
-        // object-fit: cover;
       }
 
       .visitor-photo-frame {
@@ -169,7 +166,6 @@
     }
 
     .visitor-info {
-      // flex: 2 1 300px;
       display: flex;
       flex-direction: column;
       p {

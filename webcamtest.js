@@ -9,7 +9,7 @@
           onCapture={(imageSrc) => handleCapture(imageSrc, setFieldValue)}
           onCancel={() => {
             setUseWebcam(false);
-            setPhotoPreview(null); // Clear photo preview when canceled
+            setPhotoPreview(null);
           }}
         />
       </div>

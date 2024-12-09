@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null, // This will hold user data after login
-    isAuthenticated: false, // This will be true after successful login
-    error: null, // This will hold any error message if login fails
+    user: null,
+    isAuthenticated: false,
+    error: null,
   },
   reducers: {
     loginSuccess(state, action) {
@@ -14,18 +14,18 @@ const authSlice = createSlice({
         role: action.payload.role,
         email: action.payload.email,
         name: action.payload.name,
-      }; // Store the user data
-      state.isAuthenticated = true; // Set the user as authenticated
-      state.error = null; // Clear any previous errors
+      };
+      state.isAuthenticated = true;
+      state.error = null;
     },
     loginFailure(state, action) {
-      state.error = action.payload; // Set the error message from the payload
-      state.isAuthenticated = false; // Set the user as not authenticated
+      state.error = action.payload;
+      state.isAuthenticated = false;
     },
     logout(state) {
-      state.user = null; // Clear user data
-      state.isAuthenticated = false; // Set authenticated flag to false
-      state.error = null; // Clear any error messages
+      state.user = null;
+      state.isAuthenticated = false;
+      state.error = null;
     },
   },
 });

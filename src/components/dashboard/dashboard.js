@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { data: offices } = useSelector((state) => state.offices) || [];
   const departments =
     useSelector((state) => state.departments.departmentsData) || [];
-  const visitors = useSelector((state) => state.visitors) || []; // Ensure it's an array
+  const visitors = useSelector((state) => state.visitors) || [];
 
   const sortedOffices = [...offices].sort((a, b) => b.id - a.id).slice(-3);
   const sortedDepartments = [...departments]
@@ -29,7 +29,6 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
-      {/* Visitors Section */}
       <Section
         title="Visitors Overview"
         data={sortedVisitors}
@@ -39,7 +38,6 @@ const Dashboard = () => {
         onViewAll={() => handleViewAll(AppPaths.visitors.all)}
       />
 
-      {/* Offices Section */}
       <Section
         title="Offices Overview"
         data={sortedOffices}
@@ -49,7 +47,6 @@ const Dashboard = () => {
         onViewAll={() => handleViewAll(AppPaths.offices.all)}
       />
 
-      {/* Departments Section */}
       <Section
         title="Departments Overview"
         data={sortedDepartments}
@@ -62,7 +59,6 @@ const Dashboard = () => {
   );
 };
 
-// Reusable Section Component
 const Section = ({
   title,
   data,
@@ -91,7 +87,6 @@ const Section = ({
   </div>
 );
 
-// Helper to render table rows
 const renderTableRows = (data, fields, noDataMessage) => {
   if (data.length === 0) {
     return (

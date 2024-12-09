@@ -1,6 +1,5 @@
 import apiClient from "./index";
 
-// Fetch all complaints
 export const fetchComplaints = async () => {
   try {
     const response = await apiClient.get("/complaints");
@@ -11,7 +10,6 @@ export const fetchComplaints = async () => {
   }
 };
 
-// Fetch a specific complaint by ID
 export const fetchComplaint = async (id) => {
   try {
     const response = await apiClient.get(`/complaints/${id}`);
@@ -22,7 +20,6 @@ export const fetchComplaint = async (id) => {
   }
 };
 
-// Add a new complaint
 export const addComplaint = async (complaint) => {
   try {
     const response = await apiClient.post("/complaints", complaint);
@@ -33,7 +30,6 @@ export const addComplaint = async (complaint) => {
   }
 };
 
-// Update an existing complaint
 export const updateComplaint = async (id, complaint) => {
   try {
     const response = await apiClient.put(`/complaints/${id}`, complaint);

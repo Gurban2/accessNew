@@ -1,17 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const pngReducer = createSlice({
-  name: 'personas',
+  name: "personas",
   initialState: [],
   reducers: {
     addPersona: (state, action) => {
       const existingPersona = state.find(
         (persona) =>
-          persona.name.toLowerCase() === action.payload.name.toLowerCase()
+          persona.name.toLowerCase() === action.payload.name.toLowerCase(),
       );
       if (existingPersona) {
-        // Instead of alert, set an error state in your component
-        return state; // Do not change the state if the persona already exists
+        return state;
       } else {
         return [...state, action.payload];
       }

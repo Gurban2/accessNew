@@ -70,7 +70,7 @@ export const useDeleteVisitor = () => {
   return useMutation({
     mutationFn: deleteVisitor,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["visitors"] }); // Refresh visitors list
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
     },
   });
 };

@@ -28,7 +28,6 @@ const staffSlice = createSlice({
         alert("Already exists");
         return state;
       }
-      // Add time when adding a new visitor
       const updatedState = [
         ...state,
         { ...action.payload, createdAt: new Date().toISOString() },
@@ -45,7 +44,7 @@ const staffSlice = createSlice({
               ...staff,
               ...action.payload.data,
               updatedAt: new Date().toISOString(),
-            } // Add time when editing
+            }
           : staff,
       );
     },
@@ -62,7 +61,7 @@ const staffSlice = createSlice({
           ...state[staffIndex],
           personNonGrata,
           reason,
-          updatedAt: new Date().toISOString(), // Add time when updating the visitor's status
+          updatedAt: new Date().toISOString(),
         };
       }
     },
@@ -73,7 +72,7 @@ const staffSlice = createSlice({
         state[staffIndex] = {
           ...state[staffIndex],
           reason,
-          updatedAt: new Date().toISOString(), // Add time when updating reason
+          updatedAt: new Date().toISOString(),
         };
       }
     },
