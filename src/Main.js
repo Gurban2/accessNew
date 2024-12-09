@@ -22,7 +22,7 @@ import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
-import ComplaintsAll from "./components/Pages/Visitors/ComplaintsAll";
+import ComplaintsAll from "./components/Pages/Visitors/Complaints/ComplaintsAll";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 
 import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
