@@ -72,7 +72,7 @@ const VisitorsAdd = () => {
       toast.success(t("visitorAdd.success"));
       navigate(AppPaths.visitors.all);
     } catch (error) {
-      toast.error(t("visitorAdd.error"));
+      toast.error(t("visitor.Add.error"));
     }
   };
 

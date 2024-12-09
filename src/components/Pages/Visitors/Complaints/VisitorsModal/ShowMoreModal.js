@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../../../../modules/Modal";
+import Modal from "../../../../../modules/Modal";
 import { useTranslation } from "react-i18next";
 
 const ShowMoreModal = ({

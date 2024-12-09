@@ -88,12 +88,20 @@
     "email": "Elektron ünvan",
     "address": "Ünvan",
     "description": "Təsvir",
-    "showMore":"Daha çox",
-    "blocked":"Bloklanıb",
-    "block":"Bloklan",
-    "report":"Şikayət",
-    "submit": "Əlavə Et"
-
+    "showMore": "Daha çox",
+    "blocked": "Bloklanıb",
+    "block": "Bloklan",
+    "report": "Şikayət et",
+    "submit": "Əlavə et",
+    "complaints": "Şikayətlər",
+    "success": "Şikayət uğurla əlavə olundu",
+    "error": "Xəta",
+    "loading": "Yüklənir...",
+    "noComplaints": "Şikayət yoxdur",
+    "visitor": "Ziyarətçi",
+    "reportedBy": "Şikayət edən",
+    "createdAt": "Yaradılma tarixi",
+    "unknown": "Naməlum"
   },
 
   "office": {
