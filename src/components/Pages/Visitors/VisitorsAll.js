@@ -42,11 +42,13 @@ const VisitorsAll = () => {
 
   const headItems = [
     "#",
-    t("fin"),
     t("photo"),
+    t("doc_type"),
+    t("fin"),
     t("name"),
     t("email"),
     t("phone"),
+    t("visit_time"),
     t("visitStartDate"),
     t("visitEndDate"),
     t("actions"),
@@ -55,10 +57,12 @@ const VisitorsAll = () => {
   const items = visitors?.map((visitor, index) => ({
     id: visitor.id,
     avatar: <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />,
+    docType: visitor.doc_type,
     fin: visitor.fin,
     name: visitor.name,
     email: visitor.email,
     phone: visitor.phone,
+    visitTime: format(new Date(visitor.visit_time * 1000), "dd MMM yy HH:mm"),
     visitStartDate: format(
       new Date(visitor.visit_start_date * 1000),
       "dd MMM yy HH:mm",
@@ -74,7 +78,7 @@ const VisitorsAll = () => {
       <div className="visitors-wrapper d-row d-flex justify-content-between">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
             { label: t("breadcrumb.visitors") },
           ]}
         />

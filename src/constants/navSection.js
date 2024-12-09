@@ -46,21 +46,21 @@ const sections = [
         title: "personaNonGrata",
         icon: <FaUserTimes />,
         items: [
-          { label: "all", path: AppPaths.visitors.persona.all },
-          { label: "add", path: AppPaths.visitors.persona.add },
+          { label: "all", path: AppPaths.persona.all },
+          { label: "add", path: AppPaths.persona.add },
         ],
       },
     ],
   },
   {
-    title: "usersPermissions",
+    title: "users",
     departments: [
       {
         title: "users",
         icon: <FaUsers />,
         items: [
-          { label: "all", path: AppPaths.users.permissions.list },
-          { label: "add", path: AppPaths.users.permissions.addUser },
+          { label: "all", path: AppPaths.users.all },
+          { label: "add", path: AppPaths.users.add },
         ],
       },
     ],

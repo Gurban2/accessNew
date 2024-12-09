@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../../api/authApi";
 import "./style.scss";
 import { toast } from "react-toastify";
+import { AppPaths } from "../../../constants/appPaths";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/");
+      navigate(AppPaths.dashboard);
     }
 
     // eslint-disable-next-line
@@ -32,7 +33,7 @@ const Login = () => {
     setLoading(true);
     try {
       await login(email, password, dispatch);
-      navigate("/");
+      navigate(AppPaths.dashboard);
     } catch (err) {
       toast.error("Invalid email or password. Please try again.");
     } finally {

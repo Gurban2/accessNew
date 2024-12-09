@@ -48,7 +48,7 @@ const VisitorsView = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
             { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
             { label: t("visitorView.viewVisitor") },
           ]}

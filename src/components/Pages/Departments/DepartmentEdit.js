@@ -45,8 +45,8 @@ const DepartmentEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: "Dashboard", to: "/" },
-            { label: "Departments", to: "/departments/list" },
+            { label: "Dashboard", to: AppPaths.dashboard },
+            { label: "Departments", to: AppPaths.departments.all },
             { label: "Department - Edit" },
           ]}
         />

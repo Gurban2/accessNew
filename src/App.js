@@ -17,6 +17,7 @@ import store from "./store";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
+import { AppPaths } from "./constants/appPaths";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,7 @@ function App() {
           <ToastContainer position="top-right" />
           <Router>
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path={AppPaths.login} element={<Login />} />
               <Route path="*" element={<PrivateRoute element={<Main />} />} />
             </Routes>
           </Router>
@@ -42,7 +43,7 @@ function App() {
 function PrivateRoute({ element }) {
   const isAuthenticated = localStorage.getItem("token") !== null;
 
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  return isAuthenticated ? element : <Navigate to={AppPaths.login} />;
 }
 
 export default App;

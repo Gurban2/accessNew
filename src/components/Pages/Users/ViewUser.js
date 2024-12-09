@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const AllPermissions = () => {
+const ViewUser = () => {
   return (
     <h1 className="user-permissions-all">
       User & Permissions - all Permissions
@@ -8,4 +8,4 @@ const AllPermissions = () => {
   );
 };
 
-export default AllPermissions;
+export default ViewUser;

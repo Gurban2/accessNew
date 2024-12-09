@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useFetchOfficeById, useUpdateOffice } from '../../../hooks/useOffices';
-import LoadingForm from '../../../modules/Loading/Form';
-import Breadcrumb from '../Breadcrumb';
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useFetchOfficeById, useUpdateOffice } from "../../../hooks/useOffices";
+import LoadingForm from "../../../modules/Loading/Form";
+import Breadcrumb from "../Breadcrumb";
 
-import './style.scss';
+import "./style.scss";
+import { AppPaths } from "../../../constants/appPaths";
 
 const OfficeEdit = () => {
   const { t } = useTranslation();
@@ -18,9 +19,9 @@ const OfficeEdit = () => {
   const office = data?.data;
 
   const [formData, setFormData] = React.useState({
-    name: '',
-    address: '',
-    phone: '',
+    name: "",
+    address: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -42,10 +43,10 @@ const OfficeEdit = () => {
 
     try {
       await updateOffice({ id, office: formData });
-      toast.success(t('office.edit.success'));
-      navigate('/offices/all');
+      toast.success(t("office.edit.success"));
+      navigate(AppPaths.offices.all);
     } catch (error) {
-      toast.error('Error editing office');
+      toast.error("Error editing office");
     }
   };
 
@@ -54,7 +55,7 @@ const OfficeEdit = () => {
   }
 
   if (!office) {
-    return <p>{t('office.edit.notFound')}</p>; // Используем перевод
+    return <p>{t("office.edit.notFound")}</p>;
   }
 
   return (
@@ -62,18 +63,17 @@ const OfficeEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t('breadcrumb.dashboard'), to: '/' },
-            { label: t('breadcrumb.offices'), to: '/offices/all' },
-            { label: t('office.edit.breadcrumb') }, // Используем перевод
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
+            { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
+            { label: t("office.edit.breadcrumb") },
           ]}
         />
       </div>
       <hr className="navigation-underline" />
-      <h1 className="offices-add">{t('office.edit.title')}</h1>{' '}
-      {/* Используем перевод */}
+      <h1 className="offices-add">{t("office.edit.title")}</h1>{" "}
       <form className="offices-add-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">{t('office.edit.officeName')}</label>
+          <label htmlFor="name">{t("office.edit.officeName")}</label>
           <input
             type="text"
             name="name"
@@ -82,7 +82,7 @@ const OfficeEdit = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="address">{t('office.edit.address')}</label>
+          <label htmlFor="address">{t("office.edit.address")}</label>
           <input
             type="text"
             name="address"
@@ -91,7 +91,7 @@ const OfficeEdit = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phone">{t('office.edit.phone')}</label>
+          <label htmlFor="phone">{t("office.edit.phone")}</label>
           <input
             type="text"
             name="phone"
@@ -100,7 +100,7 @@ const OfficeEdit = () => {
           />
         </div>
         <button type="submit" className="submit-button">
-          {t('office.edit.saveChanges')} {/* Используем перевод */}
+          {t("office.edit.saveChanges")}
         </button>
       </form>
     </div>

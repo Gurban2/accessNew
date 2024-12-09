@@ -61,7 +61,7 @@ const VisitorsAdd = () => {
           avatar: values.photo,
           items,
           visiting_now: values.visiting_now ? 1 : 0,
-          visit_time: format(new Date(values.visit_time), "y-M-d hh:mm"),
+          visit_time: format(new Date(values.visit_time), "yyyy-MM-dd HH:mm"),
         },
       ],
     };
@@ -70,7 +70,7 @@ const VisitorsAdd = () => {
       await mutateAsync(newFormData);
       setSubmitting(false);
       toast.success(t("visitorAdd.success"));
-      navigate("/visitors/all");
+      navigate(AppPaths.visitors.all);
     } catch (error) {
       toast.error(t("visitorAdd.error"));
     }
@@ -84,7 +84,7 @@ const VisitorsAdd = () => {
     <div className="visitor-add-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
           { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
           { label: t("breadcrumb.addVisitor"), to: AppPaths.visitors.add },
         ]}

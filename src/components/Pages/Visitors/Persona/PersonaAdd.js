@@ -75,7 +75,7 @@ const PersonaAdd = () => {
     <div className="persona-add-container">
       {error && <Alert variant="danger">{error}</Alert>}
       <Search
-        path={AppPaths.visitors.persona.add}
+        path={AppPaths.persona.add}
         placeholder="Search visitor"
         text="Search Visitor"
       />

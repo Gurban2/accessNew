@@ -43,7 +43,7 @@ const DepartmentsAdd = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
             {
               label: t("breadcrumb.departments"),
               to: AppPaths.departments.all,

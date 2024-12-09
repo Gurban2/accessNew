@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import AddUser from "./components/Pages/UserPermissions/AddUser";
-import ListUsers from "./components/Pages/UserPermissions/ListUsers";
-import AddPermissions from "./components/Pages/UserPermissions/AddPermissions";
-import AllPermissions from "./components/Pages/UserPermissions/AllPermissions";
+import AddUser from "./components/Pages/Users/AddUser";
+import ListUsers from "./components/Pages/Users/ListUsers";
+import ViewUser from "./components/Pages/Users/ViewUser";
 
 import { AppPaths } from "./constants/appPaths";
 import Dashboard from "./components/dashboard/dashboard";
@@ -43,7 +42,7 @@ function Main() {
         <Header isCollapsedSideBar={isCollapsedSideBar} />
         <div className="content">
           <Routes>
-            <Route path={AppPaths.dashboard.home} element={<Dashboard />} />
+            <Route path={AppPaths.dashboard} element={<Dashboard />} />
             <Route
               path={AppPaths.departments.add}
               element={<ProtectedRoute element={<DepartmentsAdd />} />}
@@ -77,29 +76,14 @@ function Main() {
               element={<ComplaintsAll />}
             />
             <Route
-              path={AppPaths.visitors.persona.add}
+              path={AppPaths.persona.add}
               element={<ProtectedRoute element={<PersonaAdd />} />}
             />
-            <Route
-              path={AppPaths.visitors.persona.all}
-              element={<PersonaAll />}
-            />
-            <Route
-              path={AppPaths.users.permissions.addUser}
-              element={<AddUser />}
-            />
-            <Route
-              path={AppPaths.users.permissions.list}
-              element={<ListUsers />}
-            />
-            <Route
-              path={AppPaths.users.permissions.add}
-              element={<AddPermissions />}
-            />
-            <Route
-              path={AppPaths.users.permissions.all}
-              element={<AllPermissions />}
-            />
+            <Route path={AppPaths.persona.all} element={<PersonaAll />} />
+
+            <Route path={AppPaths.users.add} element={<AddUser />} />
+            <Route path={AppPaths.users.all} element={<ListUsers />} />
+            <Route path={AppPaths.users.edit} element={<ViewUser />} />
           </Routes>
         </div>
       </div>
