@@ -24,8 +24,16 @@ export const deleteVisitor = async (id) => {
   const response = await apiClient.delete(`/visitors/${id}`);
   return response.data;
 };
-
+export const blockVisitor = async (id) => {
+  const response = await apiClient.post(`/persona-non-gratas/${id}`);
+  return response.data;
+};
 export const fetchDocumentTypes = async () => {
   const response = await apiClient.get("/visitors/get/document-types");
+  return response.data;
+};
+
+export const fetchVisitorComplaints = async (id) => {
+  const response = await apiClient.get(`/visitors/${id}/complaints`);
   return response.data;
 };

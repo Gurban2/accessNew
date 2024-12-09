@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { shallowEqual, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useFetchComplaints } from "../../../hooks/useComplaints";
+import {
+  useFetchVisitorComplaints,
+  useBlockVisitor,
+} from "../../../hooks/useVisitors";
 import { AppPaths } from "../../../constants/appPaths";
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
@@ -18,12 +21,12 @@ const VisitorsView = () => {
     data: complaints,
     refetch: refetchComplaints,
     isLoading: complaintsLoading,
-  } = useFetchComplaints();
+  } = useFetchVisitorComplaints(id);
 
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [description, setDescription] = useState("");
-  const [isBlocked, setIsBlocked] = useState(false);
-  const [radioValue, setRadioValue] = useState("blocked");
+  const { mutate: blockVisitor, isLoading: blockingLoading } =
+    useBlockVisitor();
 
   const visitor = useSelector(
     (state) =>
@@ -42,7 +45,7 @@ const VisitorsView = () => {
   const toggleReportModal = () => setIsReportOpen((prev) => !prev);
 
   const handleBlockUser = () => {
-    setIsBlocked(true);
+    blockVisitor(visitor.id);
   };
 
   return (
@@ -58,7 +61,6 @@ const VisitorsView = () => {
       </div>
       <div className="visitor-view-card">
         <div className="visitor-view-card-header">
-          {" "}
           <div className="visitor-photo">
             <Avatar size="128px" src={visitor.avatar} alt={visitor.name} />
           </div>
@@ -83,11 +85,15 @@ const VisitorsView = () => {
             <ButtonGroup aria-label="Basic example">
               <ToggleButton
                 type="radio"
-                variant={isBlocked ? "outline-danger" : "outline-success"}
+                variant={
+                  visitor.isBlocked ? "outline-danger" : "outline-success"
+                }
                 onClick={handleBlockUser}
-                checked={radioValue === "blocked"}
+                disabled={blockingLoading}
               >
-                {isBlocked ? t("visitorView.blocked") : t("visitorView.block")}
+                {visitor.isBlocked
+                  ? t("visitorView.blocked")
+                  : t("visitorView.block")}
               </ToggleButton>
             </ButtonGroup>
             <ReportModal
@@ -105,8 +111,6 @@ const VisitorsView = () => {
             complaints={complaintsData}
             complaintsLoading={complaintsLoading}
           />
-
-          <div className="modal-actions"></div>
         </div>
       </div>
     </div>

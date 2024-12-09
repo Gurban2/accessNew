@@ -8,7 +8,9 @@ import {
   deleteVisitor,
   fetchVisitor,
   updateVisitor,
+  blockVisitor,
   fetchDocumentTypes,
+  fetchVisitorComplaints,
 } from "../api/visitorsApi";
 
 import { setVisitors, setVisitorsMeta } from "../store/reducers/visitorReducer";
@@ -51,6 +53,12 @@ export const useAddVisitor = () => {
     },
   });
 };
+export const useFetchVisitorComplaints = (id) => {
+  return useQuery({
+    queryKey: ["visitorComplaint", id],
+    queryFn: () => fetchVisitorComplaints(id),
+  });
+};
 
 export const useUpdateVisitor = () => {
   const queryClient = useQueryClient();
@@ -60,6 +68,27 @@ export const useUpdateVisitor = () => {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", variables.id] });
+    },
+  });
+};
+
+export const useBlockVisitor = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => blockVisitor(id), // Функция для выполнения мутации
+    onSuccess: (_, id) => {
+      // console.log(id);
+
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
+      // console.log(queryClient);
+    },
+    onError: (error) => {
+      // Колбэк для обработки ошибок
+      console.error("Error blocking visitor:", error);
+
+      // Дополнительная информация об ошибке
+      alert(`Failed to block visitor: ${error.message}`);
     },
   });
 };
