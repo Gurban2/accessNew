@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux"; // Import useDispatch
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -13,7 +13,7 @@ import { OfficeValidationSchema } from "../InputValidation";
 import "./style.scss";
 
 const OfficeAdd = () => {
-  const { data: offices } = useSelector((state) => state.offices); // Get the state from the store
+  const { data: offices } = useSelector((state) => state.offices);
   const { mutateAsync, isPending } = useAddOffice();
   const { t } = useTranslation();
 
@@ -42,7 +42,7 @@ const OfficeAdd = () => {
   };
 
   const breadCrumbs = [
-    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard }, // Локализуем заголовки хлебных крошек
+    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
     { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
     { label: t("breadcrumb.addOffice"), to: AppPaths.offices.add },
   ];
@@ -51,7 +51,7 @@ const OfficeAdd = () => {
     <Formik
       initialValues={{ name: "", address: "", phone: "" }}
       validationSchema={OfficeValidationSchema}
-      onSubmit={handleSubmit} // Use the handleSubmit function to dispatch the action
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <div className="offices-add-container">

@@ -2,7 +2,7 @@ import {
   loginSuccess,
   loginFailure,
   logout as logoutAction,
-} from "../store/reducers/authReducer"; // import necessary actions
+} from "../store/reducers/authReducer";
 import apiClient from "../api/index";
 
 export const login = async (email, password, dispatch) => {

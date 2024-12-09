@@ -36,7 +36,7 @@ const PersonaAdd = () => {
       );
 
       setReason("");
-      setError(""); // Clear error after successful update
+      setError("");
     } catch (error) {
       setError("Failed to update. Please try again.");
       console.log(error);
