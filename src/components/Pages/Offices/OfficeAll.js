@@ -56,7 +56,7 @@ const OfficeAll = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home },
+            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
             { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
           ]}
         />
@@ -68,7 +68,6 @@ const OfficeAll = () => {
         isLoading={isLoading}
         withAction
         headItems={headItems}
-        tableProps={{ striped: true, bordered: true, hover: true }}
         items={items}
         actionItems={[
           {

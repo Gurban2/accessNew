@@ -3,6 +3,7 @@ import { Container, Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./dashboardStyle.scss";
+import { AppPaths } from "../../constants/appPaths";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Dashboard = () => {
         fields={["fin", "name", "phone", "email", "address"]}
         headers={["#", "Fin", "Name", "Phone", "Email", "Address"]}
         noDataMessage="No visitors available"
-        onViewAll={() => handleViewAll("/visitors/all")}
+        onViewAll={() => handleViewAll(AppPaths.visitors.all)}
       />
 
       {/* Offices Section */}
@@ -45,7 +46,7 @@ const Dashboard = () => {
         fields={["name", "address", "phone"]}
         headers={["#", "Office Name", "Address", "Phone Number"]}
         noDataMessage="No offices available"
-        onViewAll={() => handleViewAll("/offices/all")}
+        onViewAll={() => handleViewAll(AppPaths.offices.all)}
       />
 
       {/* Departments Section */}
@@ -55,7 +56,7 @@ const Dashboard = () => {
         fields={["name", "phone", "office"]}
         headers={["#", "Department Name", "Phone", "Office"]}
         noDataMessage="No departments available"
-        onViewAll={() => handleViewAll("/departments/list")}
+        onViewAll={() => handleViewAll(AppPaths.departments.all)}
       />
     </Container>
   );

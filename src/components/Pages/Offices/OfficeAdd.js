@@ -42,7 +42,7 @@ const OfficeAdd = () => {
   };
 
   const breadCrumbs = [
-    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard.home }, // Локализуем заголовки хлебных крошек
+    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard }, // Локализуем заголовки хлебных крошек
     { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
     { label: t("breadcrumb.addOffice"), to: AppPaths.offices.add },
   ];

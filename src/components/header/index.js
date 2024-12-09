@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { Navbar, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Navbar, Container } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
 import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 import { AppPaths } from "../../constants/appPaths";
 import { isLoggedIn } from "../../helpers/userHelpers";
+import LogoutButton from "../LogoutButton";
+import { logout } from "../../api/authApi";
 
 const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     const header = ref.current;
     const placeholder = document.createElement("div");
@@ -35,9 +38,9 @@ const Header = ({ isCollapsedSideBar }) => {
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = AppPaths.login;
+  const handleLogout = async () => {
+    await logout();
+    navigate(AppPaths.login);
   };
 
   return (
@@ -52,13 +55,7 @@ const Header = ({ isCollapsedSideBar }) => {
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="me-3">
               {isLoggedIn() ? (
-                <Button
-                  onClick={handleLogout}
-                  variant="link"
-                  to={AppPaths.logout}
-                >
-                  Logout
-                </Button>
+                <LogoutButton onClick={handleLogout} />
               ) : (
                 <Link to={AppPaths.login}>Login</Link>
               )}

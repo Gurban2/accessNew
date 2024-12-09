@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux"; // Correct import for useSelector
+import { AppPaths } from "../constants/appPaths";
 
 const ProtectedRoute = ({ element, permissionGroup }) => {
   const { user } = useSelector((state) => state.auth);
@@ -11,7 +12,7 @@ const ProtectedRoute = ({ element, permissionGroup }) => {
   ) {
     return element;
   }
-  return <Navigate to="/" />;
+  return <Navigate to={AppPaths.dashboard} />;
 };
 
 export default ProtectedRoute;

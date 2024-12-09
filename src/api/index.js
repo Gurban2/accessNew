@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AppPaths } from "../constants/appPaths";
 
 const apiClient = axios.create({
   baseURL: "https://access-api.zenstore.az/api",
@@ -23,7 +24,7 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       localStorage.removeItem("token");
-      window.location = "/login";
+      window.location = AppPaths.login;
     }
     return Promise.reject(error);
   },

@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./dashboardStyle.scss";
+import { AppPaths } from "../../constants/appPaths";
 
 const Dashboard = () => {
   const { data: offices } = useSelector((state) => state.offices);
@@ -13,10 +14,10 @@ const Dashboard = () => {
   const visitors = useSelector((state) => state.visitors);
   const navigate = useNavigate();
 
-  const handleViewAllOffices = () => navigate("/offices/all");
-  const handleViewAllDepartments = () => navigate("/departments/list");
+  const handleViewAllOffices = () => navigate(AppPaths.offices.all);
+  const handleViewAllDepartments = () => navigate(AppPaths.departments.all);
 
-  const handleViewAllVisitors = () => navigate("/visitors/all");
+  const handleViewAllVisitors = () => navigate(AppPaths.visitors.all);
 
   return (
     <Container fluid>

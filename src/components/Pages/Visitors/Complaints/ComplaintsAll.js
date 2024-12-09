@@ -2,9 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useFetchComplaints } from "../../../../hooks/useComplaints";
-import DataTable from "../../../../modules/DataTable";
-import Breadcrumb from "../../Breadcrumb";
+import { useFetchComplaints } from "../../../hooks/useComplaints";
+import DataTable from "../../../modules/DataTable";
+import Breadcrumb from "../Breadcrumb";
+import { AppPaths } from "../../../constants/appPaths";
 
 const ComplaintsAll = () => {
   const { t } = useTranslation();
@@ -44,7 +45,7 @@ const ComplaintsAll = () => {
     <div className="complaints-all-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: "/dashboard" },
+          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
           { label: t("breadcrumb.visitorComplaint") },
         ]}
       />

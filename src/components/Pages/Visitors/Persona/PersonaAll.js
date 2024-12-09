@@ -6,6 +6,7 @@ import { updatePersona } from "../../../../store/reducers/visitorReducer";
 import Avatar from "../../../../modules/Avatar";
 import { useFetchVisitors } from "../../../../hooks/useVisitors";
 import DataTable from "../../../../modules/DataTable";
+import { AppPaths } from "../../../../constants/appPaths";
 
 const PersonaAll = () => {
   const { data, isLoading } = useFetchVisitors();
@@ -39,7 +40,7 @@ const PersonaAll = () => {
 
   const headItems = ["#", "Photo", "Fin", "Name", "Reason", "Actions"];
 
-  const items = personNonGrataVisitors.map((visitor, index) => ({
+  const items = personNonGrataVisitors.map((visitor) => ({
     id: visitor.id,
     photo: <Avatar size="50px" src={visitor.avatar} alt={visitor.name} />,
     fin: visitor.fin,
@@ -61,7 +62,7 @@ const PersonaAll = () => {
         Personas Marked as &quot;Non Grata&quot;
       </h1>
       <Button type="button">
-        <Link to="/persona/add">Add Persona</Link>
+        <Link to={AppPaths.persona.add}>Add Persona</Link>
       </Button>
       <DataTable headItems={headItems} items={items} isLoading={isLoading} />
 

@@ -13,8 +13,8 @@ import { NavLink, useLocation, Link, useNavigate } from "react-router-dom";
 import sections from "../../constants/navSection";
 import LogoutButton from "../LogoutButton";
 import "./Sidebar.scss";
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/reducers/authReducer";
+import { AppPaths } from "../../constants/appPaths";
+import { logout } from "../../api/authApi";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { t } = useTranslation();
@@ -24,8 +24,6 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const [isMouseOn, setIsMouseOn] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -40,10 +38,9 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
     return isCollapsed && !isMouseOn;
   }, [isCollapsed, isMouseOn]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(logout());
-    navigate("/login");
+  const handleLogout = async () => {
+    await logout();
+    navigate(AppPaths.login);
   };
 
   return (
@@ -67,7 +64,10 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           expand="lg"
           className="d-lg-none w-100"
         >
-          <Navbar.Brand href="/" className="fw-bold text-white cursor-pointer">
+          <Navbar.Brand
+            href={AppPaths.dashboard}
+            className="fw-bold text-white cursor-pointer"
+          >
             <FaHome /> Dashboard
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
@@ -109,7 +109,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           {!hideSidebar && (
             <Navbar.Brand
               as={Link}
-              to="/"
+              to={AppPaths.dashboard}
               className="fw-bold text-white cursor-pointer mb-3 ms-2"
             >
               <FaHome /> {t("dashboard")}
