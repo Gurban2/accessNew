@@ -8,6 +8,7 @@ import { isLoggedIn } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
 import { logout } from "../../api/authApi";
 import NotificationBell from "../Notifications/NotificationBell";
+
 import "./header.scss";
 
 const ref = React.createRef();
@@ -56,20 +57,20 @@ const Header = ({ isCollapsedSideBar }) => {
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text className="me-3" style={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center' }}>
-            {isLoggedIn() ? (
-              <LogoutButton onClick={handleLogout} />
-            ) : (
-              <Link to={AppPaths.login}>Login</Link>
-            )}
-            <NotificationBell />
-          </Navbar.Text>
+            <Navbar.Text className="me-3" style={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center' }}>
+              {isLoggedIn() ? (
+                <LogoutButton onClick={handleLogout} />
+              ) : (
+                <Link to={AppPaths.login}>Login</Link>
+              )}
+              <NotificationBell />
+            </Navbar.Text>
 
-        </Navbar.Collapse>
+          </Navbar.Collapse>
 
-        <LangSwitcher />
-      </Container>
-    </Navbar>
+          <LangSwitcher />
+        </Container>
+      </Navbar>
     </div >
   );
 };
