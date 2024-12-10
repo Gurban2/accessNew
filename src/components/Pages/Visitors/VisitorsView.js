@@ -68,7 +68,7 @@ const VisitorsView = () => {
               <strong>{t("phone")}:</strong> {visitor.phone}
             </p>
             <p>
-              <strong>{t("fin")}:</strong> {visitor.fin}
+              <strong>{t("fin")}:</strong> {visitor.doc_id}
             </p>
             <p>
               <strong>{t("email")}:</strong> {visitor.email}
@@ -89,6 +89,8 @@ const VisitorsView = () => {
               setDescription={setDescription}
               id={visitor.id}
               onUpdateComplaints={refetchComplaints}
+              blockVisitor={blockVisitor}
+              isLoading={blockingLoading}
             />
           </div>
         </div>

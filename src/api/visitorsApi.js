@@ -24,7 +24,7 @@ export const deleteVisitor = async (id) => {
   const response = await apiClient.delete(`/visitors/${id}`);
   return response.data;
 };
-export const blockVisitor = async (id) => {
+export const blockVisitorApi = async (id) => {
   const response = await apiClient.post(`/persona-non-gratas/${id}`);
   return response.data;
 };

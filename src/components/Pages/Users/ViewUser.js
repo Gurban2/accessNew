@@ -53,7 +53,7 @@ const ViewUser = () => {
       <h1 className="user-add-title">{t("user.edit.title")}</h1>
       <Formik
         initialValues={{
-          fin: user.fin,
+          doc_id: user.doc_id,
           name: user.name,
           phone: user.phone,
           email: user.email,
@@ -69,11 +69,11 @@ const ViewUser = () => {
             )}
             <Field
               type="text"
-              name="fin"
+              name="doc_id"
               placeholder={t("user.add.enterFin")}
               className="form-control"
-              value={values.fin}
-              onChange={(e) => setFieldValue("fin", e.target.value)}
+              value={values.doc_id}
+              onChange={(e) => setFieldValue("doc_id", e.target.value)}
             />
 
             <Field
