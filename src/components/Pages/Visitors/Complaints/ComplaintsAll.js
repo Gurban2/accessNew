@@ -45,8 +45,8 @@ const ComplaintsAll = () => {
     <div className="complaints-all-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-          { label: t("breadcrumb.visitorComplaint") },
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.visitorComplaint") },
         ]}
       />
       <DataTable

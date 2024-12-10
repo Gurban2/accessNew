@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import Item from "./Item";
 import "./styles.scss";
@@ -8,7 +8,7 @@ import LoadingTable from "../Loading/Table";
 const DataTable = ({
   headItems,
   items,
-  tableProps = { striped: true, bordered: true, hover: true },
+  tableProps = { striped: false, bordered: true, hover: true },
   actionItems,
   isLoading,
 }) => {
@@ -17,47 +17,60 @@ const DataTable = ({
   }
 
   return (
-    <Table {...tableProps} className="data-table">
-      <thead>
-        <tr>
-          {headItems.map((item) => (
-            <th key={item}>{item}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {items.length === 0 && (
+    <div className="data-table-container">
+      <Table {...tableProps} className="data-table">
+        <thead>
           <tr>
-            <td colSpan={headItems.length} className="text-center">
-              No data available
-            </td>
+            {headItems.map((item) => (
+              <th key={item} className="table-header">
+                {item}
+              </th>
+            ))}
           </tr>
-        )}
-
-        {items.map((item) => (
-          <tr key={item.id}>
-            <Item data={item} />
-
-            {actionItems && (
-              <td>
-                <div className="data-table-actions">
-                  {actionItems.map((action, index) => (
-                    <Button
-                      type="button"
-                      variant={action.variant}
-                      key={index}
-                      onClick={() => action.onClick(item)}
-                    >
-                      {action.text}
-                    </Button>
-                  ))}
-                </div>
+        </thead>
+        <tbody>
+          {items.length === 0 && (
+            <tr>
+              <td colSpan={headItems.length} className="text-center no-data">
+                No data available
               </td>
-            )}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+            </tr>
+          )}
+
+          {items.map((item, index) => (
+            <tr
+              key={item.id}
+              className={index % 2 === 0 ? "even-row" : "odd-row"}
+            >
+              <Item data={item} />
+
+              {actionItems && (
+                <td className="table-actions">
+                  <div className="action-buttons">
+                    {actionItems.map((action, idx) => (
+                      <OverlayTrigger
+                        key={idx}
+                        overlay={<Tooltip>{action.tooltip}</Tooltip>}
+                        placement="top"
+                      >
+                        <Button
+                          type="button"
+                          variant={action.variant}
+                          onClick={() => action.onClick(item)}
+                          className="action-button"
+                        >
+                          {action.text}
+                        </Button>
+                      </OverlayTrigger>
+                    ))}
+                  </div>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

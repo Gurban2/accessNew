@@ -71,9 +71,9 @@ const VisitorsEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
-            { label: t("breadcrumb.addVisitor") },
+            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+            { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
+            { label: t("breadcrumbs.addVisitor") },
           ]}
         />
       </div>

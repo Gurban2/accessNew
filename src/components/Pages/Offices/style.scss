@@ -102,73 +102,9 @@
   max-width: 800px;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid var(--border-color);
-}
-
-.table th {
-  background-color: var(--primary-color);
-  color: var(--card-bg);
-}
-
-.table tr:nth-child(even) {
-  background-color: var(--breadcrumb-bg);
-}
-
-.table tr:hover {
-  background-color: var(--table-hover);
-}
-
 .searchAddBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-}
-
-.p-1 {
-  padding: 2px 4px;
-  max-width: 120px;
-  width: 120px;
-}
-
-input {
-  padding: 2px 3px !important;
-}
-
-.d-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: -webkit-fill-available;
-}
-
-.d-row-left {
-  display: flex;
-}
-
-.p-2 {
-  padding: 2px 5px !important;
-  font-size: var(--font-size-base);
-  background-color: var(--primary-color);
-  border: 0;
-  border-radius: 2px;
-}
-
-.p-2:hover {
-  background-color: var(--success-color);
-  border: 0;
-}
-
-.navigation-underline {
-  width: 100%;
-  padding: 0;
 }

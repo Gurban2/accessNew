@@ -57,7 +57,15 @@ const Header = ({ isCollapsedSideBar }) => {
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className="me-3" style={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center' }}>
+            <Navbar.Text
+              className="me-3"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
               {isLoggedIn() ? (
                 <LogoutButton onClick={handleLogout} />
               ) : (
@@ -65,13 +73,12 @@ const Header = ({ isCollapsedSideBar }) => {
               )}
               <NotificationBell />
             </Navbar.Text>
-
           </Navbar.Collapse>
 
           <LangSwitcher />
         </Container>
       </Navbar>
-    </div >
+    </div>
   );
 };
 

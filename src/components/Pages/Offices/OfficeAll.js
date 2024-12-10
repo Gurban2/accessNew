@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -11,6 +11,7 @@ import Breadcrumb from "../Breadcrumb";
 import "./style.scss";
 import Search from "../../../modules/Search";
 import Pager from "../../../modules/Pager";
+import { Button } from "react-bootstrap";
 
 const OfficeAll = () => {
   const { data, isLoading } = useFetchOffices();
@@ -38,9 +39,9 @@ const OfficeAll = () => {
 
   const headItems = [
     "#",
-    t("office.add.officeName"),
-    t("office.add.address"),
-    t("office.all.phoneNumber"),
+    t("office.all.name"),
+    t("office.all.address"),
+    t("office.all.phone"),
     t("office.all.actions"),
   ];
 
@@ -52,15 +53,21 @@ const OfficeAll = () => {
   }));
 
   return (
-    <div className="offices-all-container">
-      <div className="offices-wrapper d-row">
-        <Breadcrumb
-          paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
-          ]}
+    <div className="user-container">
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
+        ]}
+      />
+      <div className="head-wrapper">
+        <Search
+          path={AppPaths.offices.all}
+          placeholder={t("office.all.searchPlaceholder")}
         />
-        <Search path={AppPaths.offices.all} placeholder="Search Office" />
+        <Button type="button" variant="primary" className="add-btn">
+          <Link to={AppPaths.offices.add}>{t("office.all.add")}</Link>
+        </Button>
       </div>
       <hr className="navigation-underline" />
 
@@ -73,11 +80,13 @@ const OfficeAll = () => {
           {
             text: <FaEdit />,
             variant: "warning",
+            tooltip: t("office.all.edit"),
             onClick: handleEdit,
           },
           {
             text: <FaRegTrashAlt />,
             variant: "danger",
+            tooltip: t("office.all.delete"),
             onClick: handleDelete,
           },
         ]}

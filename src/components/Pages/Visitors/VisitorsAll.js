@@ -78,8 +78,8 @@ const VisitorsAll = () => {
       <div className="visitors-wrapper d-row d-flex justify-content-between">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumb.visitors") },
+            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+            { label: t("breadcrumbs.visitors") },
           ]}
         />
         <div className="search-bar">

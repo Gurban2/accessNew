@@ -1,14 +1,21 @@
 // Example usage in a React component
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setNotifications, setLoading, setError, markAsRead } from "../../store/reducers/notificationReducer";
+import {
+  setNotifications,
+  setLoading,
+  setError,
+  markAsRead,
+} from "../../store/reducers/notificationReducer";
 import { fetchNotifications } from "../../api/notificationApi"; // Assume you have an API function
 
 const NotificationList = () => {
   const dispatch = useDispatch();
-  const { data: notifications, loading, error } = useSelector(
-    (state) => state.notifications
-  );
+  const {
+    data: notifications,
+    loading,
+    error,
+  } = useSelector((state) => state.notifications);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +43,7 @@ const NotificationList = () => {
             {notification.message} -{" "}
             {!notification.read && (
               <button
-                onClick={() =>
-                  dispatch(markAsRead({ id: notification.id }))
-                }
+                onClick={() => dispatch(markAsRead({ id: notification.id }))}
               >
                 Mark as Read
               </button>

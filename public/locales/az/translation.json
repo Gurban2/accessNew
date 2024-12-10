@@ -1,174 +1,159 @@
 {
-  "welcome": "Tətbiqimizə xoş gəlmisiniz!",
-  "description": "Təsvir",
-  "dashboard": "İdarəetmə Paneli",
-  "officesDepartments": "Ofislər və Şöbələr",
-  "offices": "Ofislər",
-  "departments": "Şöbələr",
-  "visitors": "Ziyarətçilər",
-  "personaNonGrata": "Persona Non Grata",
-  "all": "Hamısı",
-  "add": "Əlavə et",
-  "usersPermissions": "İstifadəçilər və İcazələr",
-  "users": "İstifadəçilər",
-  "permissions": "İcazələr",
-  "visitorDeleteConfirm": "Bu Ziyarətçini silmək istədiyinizdən əminsiniz?",
-  "errorDeletingVisitor": "Ziyarətçi silinərkən səhv baş verdi",
-  "photo": "Şəkil",
-  "name": "Ad",
-  "phone": "Telefon",
-  "fin": "FIN",
-  "actions": "Əməliyyatlar",
-  "view": "Baxış",
-  "loading": "Yüklənir...",
-  "visitorAll": {
-    "title": "Bütün Ziyarətçilər",
-    "loading": "Yüklənir...",
-    "actions": "Əməliyyatlar",
-    "view": "Baxış",
-    "deleteConfirm": "Bu Ziyarətçini silmək istədiyinizdən əminsiniz?",
-    "errorDeleting": "Ziyarətçi silinərkən səhv baş verdi",
-    "searchPlaceholder": "Ziyarətçi axtar"
-  },
-  "visitor": {
-    "add": {
-      "success": "Ziyarətçi uğurla yeniləndi",
-      "submitting": "Göndərilir...",
-      "submit": "Göndər",
-      "error": "Ziyarətçi əlavə edilərkən səhv baş verdi"
-    },
-    "edit": {
-      "title": "Ziyarətçini Redaktə Et",
-      "success": "Ziyarətçi uğurla yeniləndi"
-    }
-  },
-  "visitorAdd": {
-    "title": "Ziyarətçi Əlavə Et",
-    "success": "Ziyarətçi uğurla əlavə olundu",
-    "submitting": "Göndərilir...",
-    "submit": "Göndər",
-    "reset": "Təmizlə",
+  "general": {
+    "welcome": "Tətbiqimizə xoş gəlmisiniz!",
+    "description": "Təsvir",
     "name": "Ad",
-    "enterName": "Adı daxil edin",
     "phone": "Telefon",
-    "enterPhone": "Telefon nömrəsini daxil edin",
-    "fin": "FIN",
-    "enterFin": "FIN daxil edin",
     "email": "E-poçt",
-    "enterEmail": "E-poçtu daxil edin",
-    "address": "Ünvan",
-    "enterAddress": "Ünvanı daxil edin",
-    "description": "Təsvir",
-    "enterDescription": "Təsviri daxil edin",
-    "addItem": "Məhsul Əlavə Et",
-    "itemName": "Məhsul Adı",
-    "itemDescription": "Məhsul Təsviri",
-    "addPhoto": "Şəkil əlavə et"
-  },
-  "visitorComplaint": {
-    "loading": "Yüklənir",
-    "noComplaintsFound": "Şikayət tapılmadı",
-    "photo": "Foto",
-    "name": "Ad",
-    "date": "Tarix",
-    "description": "Təsvir",
-    "profile": "Profil səhifəsi"
-  },
-  "visitorView": {
-    "noPhoto": "Şəkil yoxdu",
-    "viewVisitor": "Ziyarətçi",
-    "name": "Ad",
-    "phone": "Telefon",
-    "fin": "FIN",
-    "email": "Elektron ünvan",
-    "address": "Ünvan",
-    "description": "Təsvir",
-    "showMore": "Daha çox",
-    "blocked": "Bloklanıb",
-    "block": "Bloklan",
-    "report": "Şikayət et",
-    "submit": "Əlavə et",
-    "complaints": "Şikayətlər",
-    "success": "Şikayət uğurla əlavə olundu",
-    "error": "Xəta",
+    "actions": "Əməliyyatlar",
     "loading": "Yüklənir...",
-    "noComplaints": "Şikayət yoxdur",
-    "visitor": "Ziyarətçi",
-    "reportedBy": "Şikayət edən",
-    "createdAt": "Yaradılma tarixi",
-    "unknown": "Naməlum"
+    "submit": "Göndər",
+    "success": "Əməliyyat uğurla tamamlandı!",
+    "error": "Xəta baş verdi"
   },
-  "office": {
-    "add": {
-      "add": "Ofis əlavə et",
-      "success": "Ofis uğurla əlavə olundu",
-      "officeExists": "Bu adla ofis artıq mövcuddur",
-      "officeName": "Ofis adı",
-      "address": "Ünvan",
-      "phone": "Telefon",
-      "submitting": "Göndərilir...",
-      "submit": "Göndər"
-    },
-    "all": {
-      "title": "Bütün Ofislər",
-      "searchPlaceholder": "Ofis axtarın...",
-      "deleteConfirm": "Bu ofisi silmək istədiyinizdən əminsinizmi?",
-      "noOffices": "Mövcud ofis yoxdur",
-      "officeName": "Ofisin Adı",
-      "address": "Ünvan",
-      "phoneNumber": "Telefon Nömrəsi",
-      "departments": "Şöbələr",
-      "actions": "Əməliyyatlar",
-      "edit": "Redaktə Et",
-      "delete": "Sil",
-      "search": "Ofis axtar",
-      "loading": "Yüklənir..."
-    },
-    "edit": {
-      "title": "Ofisi Redaktə Et",
-      "success": "Ofis uğurla redaktə edildi",
-      "notFound": "Ofis tapılmadı",
-      "officeName": "Ofisin Adı",
-      "address": "Ünvan",
-      "phone": "Telefon",
-      "saveChanges": "Dəyişiklikləri Yadda Saxla",
-      "breadcrumb": "Ofis - Redaktə"
-    }
-  },
-  "department": {
-    "all": {
-      "name": "Şöbə adı",
-      "phone": "Telefon",
-      "office": "Ofis",
-      "actions": "Əməliyyatlar",
-      "deleteConfirm": "Bu şöbəni silmək istədiyinizdən əminsiniz?",
-      "add": "Şöbə əlavə et",
-      "search": "Şöbə axtarın",
-      "loading": "Yüklənir...",
-      "searchPlaceholder": "Şöbə axtarın..."
-    },
-    "add": {
-      "name": "Şöbə adı",
-      "phone": "Telefon",
-      "address": "Ünvan",
-      "add": "Şöbə əlavə et",
-      "submitting": "Göndərilir...",
-      "submit": "Göndər",
-      "office": "Ofis",
-      "error": "Şöbə əlavə edilərkən səhv baş verdi"
-    }
-  },
-  "breadcrumb": {
+
+  "navigation": {
     "dashboard": "İdarəetmə Paneli",
+    "officesDepartments": "Ofislər və Şöbələr",
+    "offices": "Ofislər",
+    "departments": "Şöbələr",
+    "visitors": "Ziyarətçilər",
+    "personaNonGrata": "Persona Non Grata",
+    "usersPermissions": "İstifadəçilər və İcazələr",
+    "users": "İstifadəçilər",
+    "permissions": "İcazələr",
+    "all": "Hamısı",
+    "add": "Əlavə et",
+    "report": "Şikayət"
+  },
+
+  "breadcrumbs": {
+    "dashboard": "İdarəetmə Paneli",
+    "users": "İstifadəçilər",
+    "addUser": "İstifadəçi Əlavə Et",
+    "editUser": "İstifadəçini Redaktə Et",
+    "deleteUser": "İstifadəçini Sil",
+    "offices": "Ofislər",
+    "addOffice": "Ofis Əlavə Et",
+    "editOffice": "Ofisi Redaktə Et",
+    "deleteOffice": "Ofisi Sil",
+    "departments": "Şöbələr",
+    "addDepartment": "Şöbə Əlavə Et",
+    "editDepartment": "Şöbəni Redaktə Et",
+    "deleteDepartment": "Şöbəni Sil",
     "visitors": "Ziyarətçilər",
     "addVisitor": "Ziyarətçi Əlavə Et",
     "editVisitor": "Ziyarətçini Redaktə Et",
-    "visitorComplaint": "Ziyarətçi Hesabatı",
-    "offices": "Ofislər",
-    "addOffice": "Ofis əlavə et",
-    "departments": "Şöbələr",
-    "addDepartment": "Şöbə əlavə et"
+    "deleteVisitor": "Ziyarətçini Sil",
+    "showVisitor": "Ziyarətçi Məlumatları"
   },
+
+  "user": {
+    "all": {
+      "title": "İstifadəçilər",
+      "add": "İstifadəçi Əlavə Et",
+      "searchPlaceholder": "İstifadəçi axtar",
+      "name": "Ad",
+      "office": "Ofis",
+      "department": "Şöbə",
+      "phone": "Telefon",
+      "email": "E-poçt",
+      "role": "Rol",
+      "actions": "Əməliyyatlar",
+      "edit": "Redaktə Et",
+      "delete": "Sil",
+      "deleteConfirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
+      "deleteSuccess": "İstifadəçi uğurla silindi.",
+      "deleteError": "İstifadəçini silmək alınmadı."
+    },
+    "add": {
+      "title": "İstifadəçi Əlavə Et",
+      "name": "Ad",
+      "username": "İstifadəçi adı",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "role": "Rol",
+      "department": "Şöbə",
+      "office": "Ofis",
+      "password": "Şifrə",
+      "confirmPassword": "Şifrəni Təsdiq Et",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+      "success": "İstifadəçi uğurla əlavə olundu!",
+      "error": "İstifadəçi əlavə edilərkən xəta baş verdi.",
+      "roleSelect": "Rol seçin",
+      "departmentSelect": "Şöbə seçin",
+      "officeSelect": "Ofis seçin"
+    },
+    "edit": {
+      "title": "İstifadəçini Redaktə Et",
+      "name": "Ad",
+      "username": "İstifadəçi adı",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "role": "Rol",
+      "department": "Şöbə",
+      "office": "Ofis",
+      "password": "Şifrə",
+      "confirmPassword": "Şifrəni Təsdiq Et",
+      "active": "Aktiv",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+      "success": "İstifadəçi uğurla yeniləndi!",
+      "error": "İstifadəçi yenilənərkən xəta baş verdi."
+    },
+    "delete": {
+      "confirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
+      "success": "İstifadəçi uğurla silindi!",
+      "error": "İstifadəçi silinərkən xəta baş verdi."
+    }
+  },
+
+  "visitor": {
+    "all": {
+      "title": "Bütün Ziyarətçilər",
+      "searchPlaceholder": "Ziyarətçi axtar",
+      "loading": "Ziyarətçilər yüklənir...",
+      "deleteConfirm": "Bu ziyarətçini silmək istədiyinizdən əminsiniz?",
+      "errorDeleting": "Ziyarətçi silinərkən xəta baş verdi"
+    },
+    "view": {
+      "title": "Ziyarətçi Məlumatları",
+      "noPhoto": "Şəkil mövcud deyil"
+    }
+  },
+
+  "office": {
+    "all": {
+      "title": "Ofislər",
+      "add": "Ofis Əlavə Et",
+      "searchPlaceholder": "Ofis axtar",
+      "name": "Ad",
+      "address": "Ünvan",
+      "phone": "Telefon",
+      "actions": "Əməliyyatlar",
+      "edit": "Redaktə Et",
+      "delete": "Sil",
+      "deleteConfirm": "Bu ofisi silmək istədi yinizdən əminsiniz?"
+    },
+    "add": {
+      "title": "Ofis Əlavə Et",
+      "name": "Ofisin adı",
+      "address": "Ünvan",
+      "phone": "Telefon",
+      "submit": "Göndər"
+    }
+  },
+  "department": {
+    "add": {
+      "title": "Şöbə Əlavə Et",
+      "name": "Şöbənin adı",
+      "address": "Ünvan",
+      "phone": "Telefon",
+      "submit": "Göndər"
+    }
+  },
+
   "login": {
     "welcome": "Tətbiqimizə xoş gəlmisiniz!",
     "loginWithEmail": "E-poçt ilə daxil olun",

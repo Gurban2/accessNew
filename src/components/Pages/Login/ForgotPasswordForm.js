@@ -2,14 +2,12 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-
 const ForgotPasswordForm = ({
   forgotPasswordEmail,
   setForgotPasswordEmail,
   handleForgotPassword,
-  setShowForgotPassword
+  setShowForgotPassword,
 }) => {
-
   const { t } = useTranslation();
 
   return (

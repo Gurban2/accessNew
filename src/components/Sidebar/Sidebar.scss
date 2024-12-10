@@ -11,14 +11,12 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  
   .collapsed-sidebar {
     width: 80px;
     padding-top: 3.5rem;
     padding-top: 0;
   }
 
-  
   .submenu-popout {
     top: 0;
     left: 65px;
@@ -29,14 +27,12 @@
     padding: 20px !important;
   }
 
-
   .submenu-popout a {
     padding: 0.5rem;
     border-radius: 3px;
     color: var(--link-default) !important;
     text-decoration: none;
   }
-
 
   .nav-link,
   .sidebar-link {
@@ -101,14 +97,13 @@
     background: var(--link-hover) !important;
     border-radius: 5px;
     border-radius: 0;
-    color: var(--link-color) !important;
+    color: var(--white) !important;
 
     h4 {
-      color: var(--link-color) !important;
+      color: var(--white) !important;
     }
   }
 
-  
   .active + .collapse {
     background: var(--white);
 
@@ -117,7 +112,6 @@
     }
   }
 
-
   .icon-rotate {
     transition: transform 0.3s ease;
   }
@@ -125,7 +119,6 @@
     transform: rotate(90deg);
   }
 
-  
   h4 {
     color: var(--text-color-secondary) !important;
     font-size: 18px;
@@ -133,7 +126,6 @@
     margin-bottom: 1rem;
   }
 
-  
   .divider {
     border-top: 1px solid var(--divider-color) !important;
     margin: 1rem 0;

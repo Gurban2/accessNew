@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './BreadcrumpStyle.scss';
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router-dom";
+import "./BreadcrumpStyle.scss";
 
 const Breadcrumb = ({ paths }) => {
   return (
@@ -13,7 +13,7 @@ const Breadcrumb = ({ paths }) => {
           ) : (
             <span>{path.label}</span>
           )}
-          {index < paths.length - 1 && ' > '}
+          {index < paths.length - 1 && " > "}
         </span>
       ))}
     </nav>
@@ -25,7 +25,7 @@ Breadcrumb.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       to: PropTypes.string,
-    })
+    }),
   ).isRequired,
 };
 

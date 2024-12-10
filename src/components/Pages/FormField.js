@@ -2,7 +2,8 @@ import { Field, ErrorMessage } from "formik";
 import React from "react";
 
 const FormField = ({
-  label,
+  label = "",
+  placeholder = "",
   name,
   type = "text",
   as = "input",
@@ -29,7 +30,7 @@ const FormField = ({
         type={type}
         id={name}
         name={name}
-        placeholder={`${label.toLowerCase()}`}
+        placeholder={`${placeholder.toLowerCase()}`}
         className="form-control"
       />
     )}

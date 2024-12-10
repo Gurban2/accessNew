@@ -62,9 +62,9 @@ const DepartmentsAll = () => {
       <div className="departments-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
+            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
             {
-              label: t("breadcrumb.departments"),
+              label: t("breadcrumbs.departments"),
               to: AppPaths.departments.all,
             },
           ]}

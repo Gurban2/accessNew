@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { fetchNotifications } from '../api/notificationApi'; // Import the fetch function from your API
+import { useState, useEffect } from "react";
+import { fetchNotifications } from "../api/notificationApi"; // Import the fetch function from your API
 
 const useNotifications = () => {
   const [notifications, setNotifications] = useState([]); // Initialize with an empty array
@@ -29,8 +29,8 @@ const useNotifications = () => {
   const handleMarkAsRead = (id) => {
     setNotifications((prevNotifications) =>
       prevNotifications.map((notification) =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
+        notification.id === id ? { ...notification, read: true } : notification,
+      ),
     );
   };
 

@@ -17,14 +17,14 @@ const notificationSlice = createSlice({
     // Action to delete a notification
     deleteNotification: (state, action) => {
       state.data = state.data.filter(
-        (notification) => notification.id !== action.payload.id
+        (notification) => notification.id !== action.payload.id,
       );
     },
 
     // Action to mark a notification as read
     markAsRead: (state, action) => {
       const index = state.data.findIndex(
-        (notification) => notification.id === action.payload.id
+        (notification) => notification.id === action.payload.id,
       );
       if (index !== -1) {
         state.data[index].read = true;

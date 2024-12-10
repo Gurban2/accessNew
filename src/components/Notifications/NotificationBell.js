@@ -9,13 +9,13 @@ const NotificationBell = () => {
     { id: 2, message: "You have a new friend request", read: false },
     { id: 3, message: "Your order has been shipped", read: true },
   ]);
-  
+
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const handleNotificationClick = (id) => {
     // Mark notification as read when clicked
     const updatedNotifications = notifications.map((notification) =>
-      notification.id === id ? { ...notification, read: true } : notification
+      notification.id === id ? { ...notification, read: true } : notification,
     );
     // Update notifications state (in real use case, would use setState or Redux)
     console.log(updatedNotifications);
@@ -24,7 +24,11 @@ const NotificationBell = () => {
   return (
     <div className="notification-bell">
       <Dropdown className="notification-dropdown" align="end">
-        <Dropdown.Toggle variant="link" id="dropdown-notifications" className="notification-toggle">
+        <Dropdown.Toggle
+          variant="link"
+          id="dropdown-notifications"
+          className="notification-toggle"
+        >
           <FaBell size={24} />
           {unreadCount > 0 && (
             <Badge pill bg="danger" className="notification-badge">
@@ -39,7 +43,7 @@ const NotificationBell = () => {
               ? `You have ${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}.`
               : "No new notifications."}
           </Dropdown.ItemText>
-          
+
           <Dropdown.Divider />
           {notifications.map((notification) => (
             <Dropdown.Item

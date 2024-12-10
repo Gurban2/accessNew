@@ -1,5 +1,5 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import '/src/variables.scss';
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "/src/variables.scss";
 
 body {
   font-family: Rubik, Helvetica, Arial, serif !important;
@@ -23,7 +23,6 @@ body {
     margin-left: 80px;
   }
 }
-
 
 .content {
   padding: 0 20px;
@@ -79,7 +78,6 @@ input::placeholder {
   opacity: 1;
 }
 
-
 input:focus::placeholder {
   color: #aaa;
 }
@@ -90,7 +88,13 @@ input:focus {
   box-shadow: none !important;
 }
 
-
 textarea::placeholder {
   color: #666;
+}
+
+.navigation-underline {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0;
+  border: 2px solid var(--border-color) !important;
 }

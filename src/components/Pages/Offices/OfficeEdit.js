@@ -63,8 +63,8 @@ const OfficeEdit = () => {
       <div className="offices-wrapper d-row">
         <Breadcrumb
           paths={[
-            { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
+            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+            { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
             { label: t("office.edit.breadcrumb") },
           ]}
         />

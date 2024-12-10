@@ -10,57 +10,57 @@ import { AppPaths } from "./appPaths";
 
 const sections = [
   {
-    title: "officesDepartments",
+    title: "navigation.officesDepartments",
     departments: [
       {
-        title: "offices",
+        title: "navigation.offices",
         icon: <FaChartBar />,
         items: [
-          { label: "all", path: AppPaths.offices.all },
-          { label: "add", path: AppPaths.offices.add },
+          { label: "navigation.all", path: AppPaths.offices.all },
+          { label: "navigation.add", path: AppPaths.offices.add },
         ],
       },
       {
-        title: "departments",
+        title: "navigation.departments",
         icon: <FaBuilding />,
         items: [
-          { label: "all", path: AppPaths.departments.all },
-          { label: "add", path: AppPaths.departments.add },
+          { label: "navigation.all", path: AppPaths.departments.all },
+          { label: "navigation.add", path: AppPaths.departments.add },
         ],
       },
     ],
   },
   {
-    title: "visitors",
+    title: "navigation.visitors",
     departments: [
       {
-        title: "visitors",
+        title: "navigation.visitors",
         icon: <FaUser />,
         items: [
-          { label: "all", path: AppPaths.visitors.all },
-          { label: "add", path: AppPaths.visitors.add },
-          { label: "Report", path: AppPaths.visitors.complaint },
+          { label: "navigation.all", path: AppPaths.visitors.all },
+          { label: "navigation.add", path: AppPaths.visitors.add },
+          { label: "navigation.report", path: AppPaths.visitors.complaint },
         ],
       },
       {
-        title: "personaNonGrata",
+        title: "navigation.personaNonGrata",
         icon: <FaUserTimes />,
         items: [
-          { label: "all", path: AppPaths.persona.all },
-          { label: "add", path: AppPaths.persona.add },
+          { label: "navigation.all", path: AppPaths.persona.all },
+          { label: "navigation.add", path: AppPaths.persona.add },
         ],
       },
     ],
   },
   {
-    title: "users",
+    title: "navigation.users",
     departments: [
       {
-        title: "users",
+        title: "navigation.users",
         icon: <FaUsers />,
         items: [
-          { label: "all", path: AppPaths.users.all },
-          { label: "add", path: AppPaths.users.add },
+          { label: "navigation.all", path: AppPaths.users.all },
+          { label: "navigation.add", path: AppPaths.users.add },
         ],
       },
     ],

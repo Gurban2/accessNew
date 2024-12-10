@@ -98,7 +98,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container" style={{ backgroundImage: `url('/assets/images/auth-bg.jpg')` }}>
+    <div
+      className="login-container"
+      style={{ backgroundImage: `url('/assets/images/auth-bg.jpg')` }}
+    >
       <div className="login-card">
         <div className="login-form">
           {(showForgotPassword || token) && (
@@ -168,7 +171,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="login-image"
+        <div
+          className="login-image"
           style={{
             backgroundImage: `url('/assets/images/login.png')`,
           }}

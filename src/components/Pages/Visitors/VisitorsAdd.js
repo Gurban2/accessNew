@@ -84,9 +84,9 @@ const VisitorsAdd = () => {
     <div className="visitor-add-container">
       <Breadcrumb
         paths={[
-          { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-          { label: t("breadcrumb.visitors"), to: AppPaths.visitors.all },
-          { label: t("breadcrumb.addVisitor"), to: AppPaths.visitors.add },
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
+          { label: t("breadcrumbs.addVisitor"), to: AppPaths.visitors.add },
         ]}
       />
       <hr className="navigation-underline" />
