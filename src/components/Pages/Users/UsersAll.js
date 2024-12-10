@@ -1,17 +1,20 @@
 import React from "react";
-import { Breadcrumb, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import DataTable from "../../../modules/DataTable";
-import "./style.scss";
 import { useDeleteUser, useFetchUsers } from "../../../hooks/useUser";
 import Search from "../../../modules/Search";
 import { AppPaths } from "../../../constants/appPaths";
 import Pager from "../../../modules/Pager";
-import { toast } from "react-toastify";
+import "./style.scss";
+import Breadcrumb from "../Breadcrumb";
 
 const UsersAll = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useFetchUsers();
   const { mutateAsync: deleteUser } = useDeleteUser();
   const users = data?.data || [];
@@ -20,12 +23,12 @@ const UsersAll = () => {
   const navigate = useNavigate();
 
   const handleDelete = async ({ id }) => {
-    if (window.confirm("Are you sure you want to delete this User?")) {
+    if (window.confirm(t("user.all.deleteConfirm"))) {
       try {
         await deleteUser(id);
-        toast.success("User deleted successfully");
+        toast.success(t("user.all.deleteSuccess"));
       } catch (error) {
-        toast.error("Failed to delete User");
+        toast.error(t("user.all.deleteError"));
       }
     }
   };
@@ -36,13 +39,13 @@ const UsersAll = () => {
 
   const headItems = [
     "#",
-    "Name",
-    "Office",
-    "Department",
-    "Phone",
-    "Email",
-    "Role",
-    "Actions",
+    t("user.all.name"),
+    t("user.all.office"),
+    t("user.all.department"),
+    t("user.all.phone"),
+    t("user.all.email"),
+    t("user.all.role"),
+    t("user.all.actions"),
   ];
 
   const items = users.map((user) => ({
@@ -56,22 +59,22 @@ const UsersAll = () => {
   }));
 
   return (
-    <div className="user-all-container">
-      <div className="user-wrapper d-row">
-        <Breadcrumb
-          paths={[
-            { label: "Dashboard", to: AppPaths.dashboard },
-            { label: "Users", to: AppPaths.users.all },
-          ]}
+    <div className="user-container">
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.users") },
+        ]}
+      />
+
+      <div className="head-wrapper">
+        <Search
+          path={AppPaths.users.all}
+          placeholder={t("user.all.searchPlaceholder")}
         />
-
-        <div>
-          <Button type="button">
-            <Link to={AppPaths.users.add}>Add Users</Link>
-          </Button>
-
-          <Search path={AppPaths.users.all} placeholder={"Search user"} />
-        </div>
+        <Button type="button" variant="primary" className="add-btn">
+          <Link to={AppPaths.users.add}>{t("user.all.add")}</Link>
+        </Button>
       </div>
       <hr className="navigation-underline" />
       <DataTable
@@ -83,11 +86,13 @@ const UsersAll = () => {
           {
             text: <FaEdit />,
             variant: "warning",
+            tooltip: t("user.all.edit"),
             onClick: handleEdit,
           },
           {
             text: <FaRegTrashAlt />,
             variant: "danger",
+            tooltip: t("user.all.delete"),
             onClick: handleDelete,
           },
         ]}

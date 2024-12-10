@@ -68,7 +68,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
             href={AppPaths.dashboard}
             className="fw-bold text-white cursor-pointer"
           >
-            <FaHome /> Dashboard
+            <FaHome /> {t("navigation.dashboard")}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
         </Navbar>
@@ -112,7 +112,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               to={AppPaths.dashboard}
               className="fw-bold text-white cursor-pointer mb-3 ms-2"
             >
-              <FaHome /> {t("dashboard")}
+              <FaHome /> {t("navigation.dashboard")}
             </Navbar.Brand>
           )}
           <Nav className="flex-column">
@@ -143,7 +143,6 @@ const SidebarSection = ({
   section,
   sectionIndex,
   isCollapsed,
-  activeHover,
   setActiveHover,
   openSubmenu,
   toggleSubmenu,

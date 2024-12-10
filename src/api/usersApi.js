@@ -26,6 +26,6 @@ export const deleteUser = async (id) => {
 };
 
 export const fetchRoles = async () => {
-  const response = await apiClient.get("/user/roles");
+  const response = await apiClient.get("/users/roles");
   return response.data;
 };

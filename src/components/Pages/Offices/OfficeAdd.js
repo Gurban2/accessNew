@@ -42,9 +42,9 @@ const OfficeAdd = () => {
   };
 
   const breadCrumbs = [
-    { label: t("breadcrumb.dashboard"), to: AppPaths.dashboard },
-    { label: t("breadcrumb.offices"), to: AppPaths.offices.all },
-    { label: t("breadcrumb.addOffice"), to: AppPaths.offices.add },
+    { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+    { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
+    { label: t("breadcrumbs.addOffice"), to: AppPaths.offices.add },
   ];
 
   return (
