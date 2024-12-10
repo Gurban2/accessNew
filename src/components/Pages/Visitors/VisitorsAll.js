@@ -22,7 +22,7 @@ const VisitorsAll = () => {
   const visitors = data?.data;
   const meta = data?.meta;
 
-  const handleDelete = async (id) => {
+  const handleDelete = async ({ id }) => {
     if (window.confirm(t("visitorDeleteConfirm"))) {
       try {
         await mutateAsync(id);
@@ -32,11 +32,11 @@ const VisitorsAll = () => {
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = ({ id }) => {
     navigate(`/visitors/edit/${id}`);
   };
 
-  const handleView = (id) => {
+  const handleView = ({ id }) => {
     navigate(`/visitors/view/${id}`);
   };
 
@@ -102,17 +102,17 @@ const VisitorsAll = () => {
               </>
             ),
             variant: "info",
-            onClick: (id) => handleView(id),
+            onClick: handleView,
           },
           {
             text: <FaEdit />,
             variant: "warning",
-            onClick: (id) => handleEdit(id),
+            onClick: handleEdit,
           },
           {
             text: <FaRegTrashAlt />,
             variant: "danger",
-            onClick: (id) => handleDelete(id),
+            onClick: handleDelete,
           },
         ]}
       />

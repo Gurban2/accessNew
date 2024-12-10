@@ -88,12 +88,12 @@ const DepartmentsAll = () => {
           {
             text: <FaEdit />,
             variant: "warning",
-            onClick: (id) => handleEdit(id),
+            onClick: ({ id }) => handleEdit(id),
           },
           {
             text: <FaRegTrashAlt />,
             variant: "danger",
-            onClick: (id) => handleDelete(id),
+            onClick: ({ id }) => handleDelete(id),
           },
         ]}
       />

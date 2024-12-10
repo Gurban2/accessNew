@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import AddUser from "./components/Pages/Users/AddUser";
-import ListUsers from "./components/Pages/Users/ListUsers";
+import UsersAll from "./components/Pages/Users/UsersAll";
 import ViewUser from "./components/Pages/Users/ViewUser";
 
 import { AppPaths } from "./constants/appPaths";
@@ -82,7 +82,7 @@ function Main() {
             <Route path={AppPaths.persona.all} element={<PersonaAll />} />
 
             <Route path={AppPaths.users.add} element={<AddUser />} />
-            <Route path={AppPaths.users.all} element={<ListUsers />} />
+            <Route path={AppPaths.users.all} element={<UsersAll />} />
             <Route path={AppPaths.users.edit} element={<ViewUser />} />
           </Routes>
         </div>

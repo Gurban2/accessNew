@@ -11,7 +11,7 @@ import { AppPaths } from "../../../constants/appPaths";
 import Pager from "../../../modules/Pager";
 import { toast } from "react-toastify";
 
-const ListUsers = () => {
+const UsersAll = () => {
   const { data, isLoading } = useFetchUsers();
   const { mutateAsync: deleteUser } = useDeleteUser();
   const users = data?.data || [];
@@ -19,7 +19,7 @@ const ListUsers = () => {
 
   const navigate = useNavigate();
 
-  const handleDelete = async (id) => {
+  const handleDelete = async ({ id }) => {
     if (window.confirm("Are you sure you want to delete this User?")) {
       try {
         await deleteUser(id);
@@ -30,15 +30,26 @@ const ListUsers = () => {
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = ({ id }) => {
     navigate(`/users/edit/${id}`);
   };
 
-  const headItems = ["#", "Name", "Phone", "Email", "Role", "Actions"];
+  const headItems = [
+    "#",
+    "Name",
+    "Office",
+    "Department",
+    "Phone",
+    "Email",
+    "Role",
+    "Actions",
+  ];
 
   const items = users.map((user) => ({
     id: user.id,
-    name: user.name,
+    name: user.username,
+    office: user.office,
+    department: user.department,
     phone: user.phone,
     email: user.email,
     role: user.role,
@@ -85,10 +96,10 @@ const ListUsers = () => {
       <Pager
         currentPage={meta?.current_page}
         hasNext={meta?.has_next}
-        totalPage={2 || meta?.total_page}
+        totalPage={meta?.total_page}
       />
     </div>
   );
 };
 
-export default ListUsers;
+export default UsersAll;

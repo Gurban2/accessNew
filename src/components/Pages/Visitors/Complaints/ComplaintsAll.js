@@ -2,10 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useFetchComplaints } from "../../../hooks/useComplaints";
-import DataTable from "../../../modules/DataTable";
-import Breadcrumb from "../Breadcrumb";
-import { AppPaths } from "../../../constants/appPaths";
+import { useFetchComplaints } from "../../../../hooks/useComplaints";
+import DataTable from "../../../../modules/DataTable";
+import Breadcrumb from "../../Breadcrumb";
+import { AppPaths } from "../../../../constants/appPaths";
 
 const ComplaintsAll = () => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ const ComplaintsAll = () => {
   const complaints = data?.data;
   console.log(complaints);
 
-  const handleView = (id) => {
+  const handleView = ({ id }) => {
     const complaint = complaints.find((c) => c.id === id);
     console.log(complaint);
     navigate(`/visitors/view/${complaint.visitor_id}`);
@@ -53,7 +53,7 @@ const ComplaintsAll = () => {
         isLoading={isLoading}
         headItems={headItems}
         items={items}
-        actionItems={[{ text: <FaEye />, onClick: (id) => handleView(id) }]}
+        actionItems={[{ text: <FaEye />, onClick: handleView }]}
       />
     </div>
   );

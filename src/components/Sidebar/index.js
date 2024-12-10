@@ -205,9 +205,9 @@ const SidebarSection = ({
                     <NavLink
                       key={item.label}
                       to={item.path}
-                      className={`${
-                        pathname === item.path ? "active" : ""
-                      } text-white text-decoration-none d-block py-1 sidebar-link`}
+                      className={({ isActive }) =>
+                        `text-white text-decoration-none d-block py-1 sidebar-link ${pathname === item.path ? "active" : ""}`
+                      }
                     >
                       <FaArrowRight />
                       <h4> {t(item.label)}</h4>

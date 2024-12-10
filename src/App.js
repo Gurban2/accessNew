@@ -18,6 +18,7 @@ import store from "./store";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import { AppPaths } from "./constants/appPaths";
+import { isLoggedIn } from "./helpers/userHelpers";
 
 const queryClient = new QueryClient();
 
@@ -41,9 +42,7 @@ function App() {
 }
 
 function PrivateRoute({ element }) {
-  const isAuthenticated = localStorage.getItem("token") !== null;
-
-  return isAuthenticated ? element : <Navigate to={AppPaths.login} />;
+  return isLoggedIn() ? element : <Navigate to={AppPaths.login} />;
 }
 
 export default App;
