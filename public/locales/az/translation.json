@@ -21,7 +21,6 @@
   "actions": "Əməliyyatlar",
   "view": "Baxış",
   "loading": "Yüklənir...",
-
   "visitorAll": {
     "title": "Bütün Ziyarətçilər",
     "loading": "Yüklənir...",
@@ -31,7 +30,6 @@
     "errorDeleting": "Ziyarətçi silinərkən səhv baş verdi",
     "searchPlaceholder": "Ziyarətçi axtar"
   },
-
   "visitor": {
     "add": {
       "success": "Ziyarətçi uğurla yeniləndi",
@@ -44,7 +42,6 @@
       "success": "Ziyarətçi uğurla yeniləndi"
     }
   },
-
   "visitorAdd": {
     "title": "Ziyarətçi Əlavə Et",
     "success": "Ziyarətçi uğurla əlavə olundu",
@@ -68,7 +65,6 @@
     "itemDescription": "Məhsul Təsviri",
     "addPhoto": "Şəkil əlavə et"
   },
-
   "visitorComplaint": {
     "loading": "Yüklənir",
     "noComplaintsFound": "Şikayət tapılmadı",
@@ -78,7 +74,6 @@
     "description": "Təsvir",
     "profile": "Profil səhifəsi"
   },
-
   "visitorView": {
     "noPhoto": "Şəkil yoxdu",
     "viewVisitor": "Ziyarətçi",
@@ -103,7 +98,6 @@
     "createdAt": "Yaradılma tarixi",
     "unknown": "Naməlum"
   },
-
   "office": {
     "add": {
       "add": "Ofis əlavə et",
@@ -141,7 +135,6 @@
       "breadcrumb": "Ofis - Redaktə"
     }
   },
-
   "department": {
     "all": {
       "name": "Şöbə adı",
@@ -165,7 +158,6 @@
       "error": "Şöbə əlavə edilərkən səhv baş verdi"
     }
   },
-
   "breadcrumb": {
     "dashboard": "İdarəetmə Paneli",
     "visitors": "Ziyarətçilər",
@@ -178,31 +170,46 @@
     "addDepartment": "Şöbə əlavə et"
   },
   "login": {
-  "welcome": "Tətbiqimizə xoş gəlmisiniz!",
-  "loginWithEmail": "E-poçt ilə daxil olun",
-  "forgotPassword": "Şifrəni unutdunuz?",
-  "enterEmailForReset": "Şifrəni sıfırlamaq üçün e-poçt ünvanınızı daxil edin",
-  "enterResetTokenAndNewPassword": "Şifrəni sıfırlamaq üçün token və yeni şifrəni daxil edin",
-  "enterEmail": "E-poçt ünvanını daxil edin",
-  "enterPassword": "Şifrəni daxil edin",
-  "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
-  "forgotPasswordLink": "Şifrəni unutdunuz?",
-  "sendResetLink": "Sıfırlama linkini göndər",
-  "resetPassword": "Şifrəni sıfırlamaq",
-  "newPassword": "Yeni Şifrə",
-  "confirmNewPassword": "Yeni Şifrəni Təsdiq Et",
-  "loggingIn": "Daxil olunur...",
-  "loginButton": "Daxil ol",
-  "resetPasswordButton": "Şifrəni sıfırlayın",
-  "sendResetLinkButton": "Sıfırlama linkini göndər",
-  "passwordsDoNotMatch": "Şifrələr uyğun gəlmir.",
-  "pleaseEnterEmailAndPassword": "Zəhmət olmasa, həm e-poçt, həm də şifrə daxil edin.",
-  "pleaseEnterEmailAddress": "Zəhmət olmasa, e-poçt ünvanını daxil edin.",
-  "pleaseCheckYourEmail": "Zəhmət olmasa, e-poçt ünvanınızı yoxlayın.",
-  "passwordResetSuccess": "Şifrə uğurla sıfırlandı!",
-  "invalidEmailOrPassword": "Yanlış e-poçt və ya şifrə. Zəhmət olmasa, yenidən cəhd edin.",
-  "emailAlreadyInUse": "Bu e-poçt artıq istifadə olunur.",
-  "emailNotFound": "E-poçt ünvanı tapılmadı.",
-  "checkYourEmailForResetLink": "Şifrə sıfırlama linkini əldə etmək üçün e-poçt ünvanınızı yoxlayın."
-}
+    "welcome": "Tətbiqimizə xoş gəlmisiniz!",
+    "loginWithEmail": "E-poçt ilə daxil olun",
+    "forgotPassword": "Şifrəni unutdunuz?",
+    "enterEmailForReset": "Şifrəni sıfırlamaq üçün e-poçt ünvanınızı daxil edin",
+    "enterResetTokenAndNewPassword": "Şifrəni sıfırlamaq üçün token və yeni şifrəni daxil edin",
+    "enterEmail": "E-poçt ünvanını daxil edin",
+    "enterPassword": "Şifrəni daxil edin",
+    "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
+    "forgotPasswordLink": "Şifrəni unutdunuz?",
+    "sendResetLink": "Sıfırlama linkini göndər",
+    "resetPassword": "Şifrəni sıfırlamaq",
+    "newPassword": "Yeni Şifrə",
+    "confirmNewPassword": "Yeni Şifrəni Təsdiq Et",
+    "loggingIn": "Daxil olunur...",
+    "loginButton": "Daxil ol",
+    "resetPasswordButton": "Şifrəni sıfırlayın",
+    "sendResetLinkButton": "Sıfırlama linkini göndər",
+    "passwordsDoNotMatch": "Şifrələr uyğun gəlmir.",
+    "pleaseEnterEmailAndPassword": "Zəhmət olmasa, həm e-poçt, həm də şifrə daxil edin.",
+    "pleaseEnterEmailAddress": "Zəhmət olmasa, e-poçt ünvanını daxil edin.",
+    "pleaseCheckYourEmail": "Zəhmət olmasa, e-poçt ünvanınızı yoxlayın.",
+    "passwordResetSuccess": "Şifrə uğurla sıfırlandı!",
+    "invalidEmailOrPassword": "Yanlış e-poçt və ya şifrə. Zəhmət olmasa, yenidən cəhd edin.",
+    "emailAlreadyInUse": "Bu e-poçt artıq istifadə olunur.",
+    "emailNotFound": "E-poçt ünvanı tapılmadı.",
+    "checkYourEmailForResetLink": "Şifrə sıfırlama linkini əldə etmək üçün e-poçt ünvanınızı yoxlayın.",
+    "backToLogin": "Geri"
+  },
+  "error": {
+    "forbidden": {
+      "title": "403",
+      "message": "Qadağan olunub",
+      "description": "Bu səhifəyə giriş icazəniz yoxdur.",
+      "goHome": "Ana səhifəyə qayıt"
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Səhifə tapılmadı",
+      "description": "Axtardığınız səhifə mövcud deyil.",
+      "goHome": "Ana səhifəyə qayıt"
+    }
+  }
 }

@@ -1,0 +1,68 @@
+.notification-bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -16px;
+    
+  
+    .notification-dropdown {
+      position: relative;
+    }
+  
+    .notification-toggle {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      font-size: 0;  // To remove any extra spacing around the bell
+  
+      .dropdown-toggle::after {
+        display: none; // Remove the arrow icon that Bootstrap adds
+      }
+  
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        font-size: 0.75rem;
+      }
+    }
+  
+    .notification-menu {
+      min-width: 200px;
+      padding: 10px;
+      font-size: 0.9rem;
+      
+      right: 0;
+      left: auto;
+
+      .dropdown-item {
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 10px;
+  
+        &.unread {
+          background-color: #f8f9fa;
+          font-weight: bold;
+        }
+  
+        &.read {
+          background-color: #e9ecef;
+          color: gray;
+        }
+  
+        &:hover {
+          background-color: #f1f3f5;
+        }
+      }
+  
+      .dropdown-item-text {
+        padding: 10px;
+        font-size: 0.85rem;
+        text-align: center;
+      }
+    }
+  }
+  
