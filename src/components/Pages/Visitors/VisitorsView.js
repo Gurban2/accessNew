@@ -11,7 +11,7 @@ import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./Complaints/VisitorsModal/ReportModal";
 import ComplaintsList from "./Complaints/ComplaintsList";
-import { ToggleButton, ButtonGroup } from "react-bootstrap";
+import VisitorBlockButton from "./Persona/VisitorBlockButton";
 import "./Style_visitor_view/view.scss";
 
 const VisitorsView = () => {
@@ -43,10 +43,6 @@ const VisitorsView = () => {
   const complaintsData = complaints?.data || [];
 
   const toggleReportModal = () => setIsReportOpen((prev) => !prev);
-
-  const handleBlockUser = () => {
-    blockVisitor(visitor.id);
-  };
 
   return (
     <div className="visitor-view-container">
@@ -82,20 +78,11 @@ const VisitorsView = () => {
             </p>
           </div>
           <div className="visitor-view-card-header-btns">
-            <ButtonGroup aria-label="Basic example">
-              <ToggleButton
-                type="radio"
-                variant={
-                  visitor.isBlocked ? "outline-danger" : "outline-success"
-                }
-                onClick={handleBlockUser}
-                disabled={blockingLoading}
-              >
-                {visitor.isBlocked
-                  ? t("visitorView.blocked")
-                  : t("visitorView.block")}
-              </ToggleButton>
-            </ButtonGroup>
+            <VisitorBlockButton
+              visitor={visitor}
+              blockVisitor={blockVisitor}
+              isLoading={blockingLoading}
+            />
             <ReportModal
               onClose={toggleReportModal}
               description={description}

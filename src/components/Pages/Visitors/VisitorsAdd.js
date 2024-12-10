@@ -94,7 +94,7 @@ const VisitorsAdd = () => {
         initialValues={{
           name: "",
           phone: "",
-          fin: "",
+          doc_id: "",
           email: "",
           address: "",
           photo: "",
@@ -133,8 +133,8 @@ const VisitorsAdd = () => {
                 }))}
               />
               <FormField
-                label={t("visitorAdd.fin")}
-                name="fin"
+                label={t("visitorAdd.doc_id")}
+                name="doc_id"
                 type="text"
                 className="form-control"
               />
