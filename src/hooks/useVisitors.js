@@ -77,17 +77,12 @@ export const useBlockVisitor = () => {
   return useMutation({
     mutationFn: (id) => blockVisitor(id), // Функция для выполнения мутации
     onSuccess: (_, id) => {
-      // console.log(id);
-
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", id] });
-      // console.log(queryClient);
     },
     onError: (error) => {
-      // Колбэк для обработки ошибок
       console.error("Error blocking visitor:", error);
 
-      // Дополнительная информация об ошибке
       alert(`Failed to block visitor: ${error.message}`);
     },
   });
