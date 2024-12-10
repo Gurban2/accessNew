@@ -8,7 +8,7 @@ import {
   deleteVisitor,
   fetchVisitor,
   updateVisitor,
-  blockVisitor,
+  blockVisitorApi,
   fetchDocumentTypes,
   fetchVisitorComplaints,
 } from "../api/visitorsApi";
@@ -75,7 +75,7 @@ export const useUpdateVisitor = () => {
 export const useBlockVisitor = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id) => blockVisitor(id), // Функция для выполнения мутации
+    mutationFn: (id) => blockVisitorApi(id), // Функция для выполнения мутации
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", id] });
