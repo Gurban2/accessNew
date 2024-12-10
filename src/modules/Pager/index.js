@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Pagination from "react-bootstrap/Pagination";
 import { useSearchParams } from "react-router-dom";
 
@@ -16,11 +16,26 @@ const Pager = ({ currentPage, hasNext, totalPage }) => {
     }
   }, [currentPage, setSearchParams, searchParams]);
 
-  const handlePageChange = (page) => {
-    const updatedParams = new URLSearchParams(searchParams);
-    updatedParams.set("page", page.toString());
-    setSearchParams(updatedParams);
-  };
+  const handlePageChange = useCallback(
+    (page) => {
+      const updatedParams = new URLSearchParams(searchParams);
+      updatedParams.set("page", page.toString());
+      setSearchParams(updatedParams);
+    },
+    [searchParams, setSearchParams],
+  );
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(searchParams);
+    const page = queryParams.get("page");
+
+    if (page) {
+      const pageNumber = parseInt(page, 10);
+      if (pageNumber !== currentPageNumber) {
+        handlePageChange(pageNumber);
+      }
+    }
+  }, [searchParams, currentPageNumber, handlePageChange]);
 
   const handleNext = () => {
     if (hasNext) {

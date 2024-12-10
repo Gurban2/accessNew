@@ -46,7 +46,7 @@ const DataTable = ({
                       type="button"
                       variant={action.variant}
                       key={index}
-                      onClick={() => action.onClick(item.id)}
+                      onClick={() => action.onClick(item)}
                     >
                       {action.text}
                     </Button>

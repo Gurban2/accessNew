@@ -21,7 +21,7 @@ const OfficeAll = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleDelete = async (id) => {
+  const handleDelete = async ({ id }) => {
     if (window.confirm(t("office.all.deleteConfirm"))) {
       try {
         await mutateAsync(id);
@@ -32,7 +32,7 @@ const OfficeAll = () => {
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = ({ id }) => {
     navigate(`/offices/edit/${id}`);
   };
 

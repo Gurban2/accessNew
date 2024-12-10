@@ -15,7 +15,7 @@ const ComplaintsAll = () => {
   const complaints = data?.data;
   console.log(complaints);
 
-  const handleView = (id) => {
+  const handleView = ({ id }) => {
     const complaint = complaints.find((c) => c.id === id);
     console.log(complaint);
     navigate(`/visitors/view/${complaint.visitor_id}`);
@@ -53,7 +53,7 @@ const ComplaintsAll = () => {
         isLoading={isLoading}
         headItems={headItems}
         items={items}
-        actionItems={[{ text: <FaEye />, onClick: (id) => handleView(id) }]}
+        actionItems={[{ text: <FaEye />, onClick: handleView }]}
       />
     </div>
   );
