@@ -8,19 +8,17 @@
   top: 0;
   padding-top: 60px;
   background: var(--sidebar-bg);
-
-  // hide scrollbar
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  /* Collapsed Sidebar */
+  
   .collapsed-sidebar {
     width: 80px;
     padding-top: 3.5rem;
     padding-top: 0;
   }
 
-  /* Pop-Out Menu */
+  
   .submenu-popout {
     top: 0;
     left: 65px;
@@ -31,7 +29,7 @@
     padding: 20px !important;
   }
 
-  /* Submenu Links */
+
   .submenu-popout a {
     padding: 0.5rem;
     border-radius: 3px;
@@ -39,7 +37,7 @@
     text-decoration: none;
   }
 
-  /* Sidebar Links */
+
   .nav-link,
   .sidebar-link {
     color: var(--text-color-secondary) !important;
@@ -110,7 +108,7 @@
     }
   }
 
-  /* Active Section */
+  
   .active + .collapse {
     background: var(--white);
 
@@ -119,7 +117,7 @@
     }
   }
 
-  /* Arrow Icon Rotation */
+
   .icon-rotate {
     transition: transform 0.3s ease;
   }
@@ -127,7 +125,7 @@
     transform: rotate(90deg);
   }
 
-  /* Sidebar Titles */
+  
   h4 {
     color: var(--text-color-secondary) !important;
     font-size: 18px;
@@ -135,7 +133,7 @@
     margin-bottom: 1rem;
   }
 
-  /* Divider */
+  
   .divider {
     border-top: 1px solid var(--divider-color) !important;
     margin: 1rem 0;

@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import './LoadingTable.scss'; // Add your styles here
+import PropTypes from "prop-types";
+import React from "react";
+import "./LoadingTable.scss";
 
 const LoadingTable = ({ rows = 5, columns = 4 }) => {
   return (
@@ -34,7 +34,6 @@ const LoadingTable = ({ rows = 5, columns = 4 }) => {
   );
 };
 
-// Prop Types for better usability
 LoadingTable.propTypes = {
   rows: PropTypes.number,
   columns: PropTypes.number,

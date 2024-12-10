@@ -26,10 +26,10 @@ const ComplaintsAll = () => {
 
   const headItems = [
     t("#"),
-    t("visitorComplaint.photo"), // "Photo"
-    t("visitorComplaint.name"), // "Name"
-    t("visitorComplaint.date"), // "Date"
-    t("visitorComplaint.description"), // "Description"
+    t("visitorComplaint.photo"),
+    t("visitorComplaint.name"),
+    t("visitorComplaint.date"),
+    t("visitorComplaint.description"),
     t("visitorComplaint.profile"),
   ];
 

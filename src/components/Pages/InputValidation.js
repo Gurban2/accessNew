@@ -31,30 +31,18 @@ export const DepartmentValidationSchema = Yup.object({
 
 export const VisitorValidationSchema = Yup.object({
   name: Yup.string()
-    .min(3, "Name must be at least 3 characters.") // Минимальная длина имени
+    .min(3, "Name must be at least 3 characters.")
     .required("Name is required"),
   phone: Yup.string()
-    .matches(/^\d+$/, "Phone must contain only digits") // Проверка на цифры
+    .matches(/^\d+$/, "Phone must contain only digits")
     .required("Phone is required"),
   fin: Yup.string()
-    .min(3, "Fin must be at least 3 characters.") // Минимальная длина для фин
+    .min(3, "Fin must be at least 3 characters.")
     .required("Fin is required"),
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
   address: Yup.string()
-    .min(5, "Address must be at least 5 characters.") // Минимальная длина для адреса
+    .min(5, "Address must be at least 5 characters.")
     .required("Address is required"),
-  // description: Yup.string()
-  //   .min(5, 'Description must be at least 5 characters.') // Минимальная длина описания
-  //   .required('Description is required'),
-  // photo: Yup.mixed()
-  //   .required("Photo is required")
-  //   .test("fileType", "Unsupported file format", (value) => {
-  //     if (value) {
-  //       const fileType = value.type;
-  //       return fileType === "image/jpeg" || fileType === "image/png";
-  //     }
-  //     return true;
-  //   }),
 });

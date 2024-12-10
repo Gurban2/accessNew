@@ -23,7 +23,7 @@ const ReportModal = ({
         visitor_id: id,
       };
       await mutateAsync(newReportData);
-      onUpdateComplaints(); // Обновляем жалобы
+      onUpdateComplaints();
       toast.success(t("visitorView.success"));
       onClose();
     } catch (error) {

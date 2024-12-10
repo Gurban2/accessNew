@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux"; // Correct import for useSelector
+import { useSelector } from "react-redux";
 import { AppPaths } from "../constants/appPaths";
 
 const ProtectedRoute = ({ element, permissionGroup }) => {

@@ -21,7 +21,6 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
-      {/* Visitors Section */}
       <div className="visitors">
         <h4>Visitors Overview</h4>
         <Table striped bordered hover>
@@ -38,7 +37,6 @@ const Dashboard = () => {
             {Array.isArray(visitors) && visitors.length > 0 ? (
               visitors.slice(-3).map((visitor, index) => (
                 <tr key={visitor.id}>
-                  {/* Simple calculation for row index */}
                   <td>{visitors.length - 3 + index + 1}</td>
                   <td>{visitor.name}</td>
                   <td>{visitor.phone}</td>
@@ -60,8 +58,6 @@ const Dashboard = () => {
         </div>
       </div>
       <hr />
-      {/* Offices Section */}
-
       <div className="offices">
         <h4>Offices Overview</h4>
         <Table striped bordered hover>
@@ -77,7 +73,6 @@ const Dashboard = () => {
             {Array.isArray(offices) && offices.length > 0 ? (
               offices.slice(-3).map((office, index) => (
                 <tr key={office.id}>
-                  {/* Simple calculation for row index */}
                   <td>{offices.length - 3 + index + 1}</td>
                   <td>{office.name}</td>
                   <td>{office.address}</td>
@@ -98,7 +93,6 @@ const Dashboard = () => {
         </div>
       </div>
       <hr />
-      {/* Departments Section */}
       <div className="departments">
         <h4>Departments Overview</h4>
         <Table striped bordered hover>
@@ -114,7 +108,6 @@ const Dashboard = () => {
             {Array.isArray(departments) && departments.length > 0 ? (
               departments.slice(-3).map((department, index) => (
                 <tr key={department.id}>
-                  {/* Simple calculation for row index */}
                   <td>{departments.length - 3 + index + 1}</td>
                   <td>{department.name}</td>
                   <td>{department.phone}</td>
