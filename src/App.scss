@@ -16,7 +16,7 @@ body {
 }
 
 .main {
-  flex-grow: 1; /* Main content will take up remaining space */
+  flex-grow: 1;
   margin-left: 250px;
 
   &--full {
@@ -24,7 +24,7 @@ body {
   }
 }
 
-/* Navbar/Sidebar styles */
+
 .content {
   padding: 0 20px;
   background-color: var(--background-color);
@@ -75,13 +75,13 @@ a {
 }
 
 input::placeholder {
-  color: #888; /* Replace with your desired color */
-  opacity: 1; /* Ensures full opacity */
+  color: #888;
+  opacity: 1;
 }
 
-/* Change Placeholder Color on Focus */
+
 input:focus::placeholder {
-  color: #aaa; /* Adjust as needed for focused state */
+  color: #aaa;
 }
 
 input:focus {
@@ -90,7 +90,7 @@ input:focus {
   box-shadow: none !important;
 }
 
-/* Additional Styling for Specific Input Types */
+
 textarea::placeholder {
   color: #666;
 }

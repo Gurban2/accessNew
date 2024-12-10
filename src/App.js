@@ -10,7 +10,7 @@ import {
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
-import Main from "./Main"; // Import the Main component
+import Main from "./Main";
 import Login from "./components/Pages/Login/Login";
 import { AuthProvider } from "./contexts/auth/AuthContext";
 import store from "./store";

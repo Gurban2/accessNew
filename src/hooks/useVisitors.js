@@ -8,7 +8,9 @@ import {
   deleteVisitor,
   fetchVisitor,
   updateVisitor,
+  blockVisitor,
   fetchDocumentTypes,
+  fetchVisitorComplaints,
 } from "../api/visitorsApi";
 
 import { setVisitors, setVisitorsMeta } from "../store/reducers/visitorReducer";
@@ -51,6 +53,12 @@ export const useAddVisitor = () => {
     },
   });
 };
+export const useFetchVisitorComplaints = (id) => {
+  return useQuery({
+    queryKey: ["visitorComplaint", id],
+    queryFn: () => fetchVisitorComplaints(id),
+  });
+};
 
 export const useUpdateVisitor = () => {
   const queryClient = useQueryClient();
@@ -64,13 +72,29 @@ export const useUpdateVisitor = () => {
   });
 };
 
+export const useBlockVisitor = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => blockVisitor(id), // Функция для выполнения мутации
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
+    },
+    onError: (error) => {
+      console.error("Error blocking visitor:", error);
+
+      alert(`Failed to block visitor: ${error.message}`);
+    },
+  });
+};
+
 export const useDeleteVisitor = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: deleteVisitor,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["visitors"] }); // Refresh visitors list
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
     },
   });
 };

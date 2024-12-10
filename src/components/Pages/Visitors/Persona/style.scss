@@ -71,7 +71,7 @@
   .photo-preview {
     overflow: hidden;
     border-radius: 50%;
-    border: 2px solid #ccc; // Optional, for a border around the image
+    border: 2px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,11 +88,11 @@
     display: flex;
     min-width: 50px;
     height: 50px;
-    max-width: 60px; // Adjust the size as needed
-    max-height: 60px; // Adjust the size as needed
+    max-width: 60px;
+    max-height: 60px;
     overflow: hidden;
     border-radius: 50%;
-    border: 2px var(--border-color); // Optional, for a border around the image
+    border: 2px var(--border-color);
     background-color: var(--link-color);
     justify-content: center;
     align-items: center;
@@ -109,7 +109,6 @@
     height: 60px;
     overflow: hidden;
     border-radius: 50%;
-    // border: 2px dashed #ccc;
     background-color: #f7f7f7;
     font-size: 1rem;
     justify-content: center;
@@ -136,7 +135,7 @@
     }
   }
 }
-// //////  VIEW////////////////////////////////////////
+//////////VIEW//////////
 .visitor-view-container {
   padding: 10px;
 
@@ -149,7 +148,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    // gap: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     .visitor-photo {
@@ -158,10 +156,8 @@
 
       .visitor-photo-img {
         width: 100%;
-        // height: auto;
         border-radius: 5px;
         border: 1px solid var(--border-color-light);
-        // object-fit: cover;
       }
 
       .visitor-photo-frame {
@@ -180,7 +176,6 @@
     }
 
     .visitor-info {
-      // flex: 2 1 300px;
       display: flex;
       flex-direction: column;
       p {
@@ -220,146 +215,3 @@
   }
 }
 
-// Form container for adding visitors
-// .visitor-add-form {
-//   background-color: var(--card-bg);
-//   // padding: 20px 30px;
-//   border-radius: 8px;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-//   overflow-y: auto;
-//   box-sizing: border-box;
-
-//   .form-group {
-//     margin-bottom: 15px;
-//   }
-
-//   label {
-//     display: block;
-//     margin-bottom: 5px;
-//     font-weight: var(--font-weight-bold);
-//     color: var(--text-color);
-//   }
-
-//   input,
-//   select,
-//   textarea {
-//     width: 100%;
-//     padding: 10px;
-//     border: 1px solid var(--border-color);
-//     border-radius: 4px;
-//     font-size: var(--font-size-base);
-//     background-color: var(--background-color);
-//     transition: border-color 0.3s, background-color 0.3s;
-//   }
-
-//   input:focus,
-//   select:focus,
-//   textarea:focus {
-//     border-color: var(--primary-color);
-//     outline: none;
-//     background-color: #fff;
-//   }
-
-//   .submit-button,
-//   .cancel-button {
-//     background-color: var(--primary-color);
-//     color: white;
-//     padding: 10px 15px;
-//     border: none;
-//     border-radius: 4px;
-//     font-size: var(--font-size-base);
-//     cursor: pointer;
-//     width: 100%;
-//     text-align: center;
-//     transition: background-color 0.3s ease;
-//   }
-
-//   .cancel-button {
-//     background-color: var(--secondary-color);
-//     color: white;
-//   }
-
-//   // ы
-//   // Adjust styling for photo input and webcam preview
-
-//   .webcam-container {
-//     width: 250px;
-//     height: 250px;
-//     overflow: hidden;
-//     position: relative;
-
-//     video {
-//       width: 100%;
-//       height: 100%;
-//       object-fit: cover;
-//       /* This ensures the webcam video fills the container */
-//     }
-//   }
-
-//   .plus-icon {
-//     color: #007bff;
-//   }
-
-//   .capture-button,
-//   .cancel-webcam,
-//   .webcam-button {
-//     // padding: 4px 6px;
-//     // font-size: var(--font-size-base);
-//     // background-color: var(--primary-color);
-//     // color: white;
-//     // border: none;
-//     // border-radius: 2px;
-//     // cursor: pointer;
-//     // transition: background-color 0.3s;
-
-//     display: block;
-//     width: 100%;
-//     padding: 0.375rem 0.75rem;
-//     font-size: 1rem;
-//     font-weight: 400;
-//     line-height: 1.5;
-//     color: var(--bs-body-color);
-//     appearance: none;
-//     background-color: var(--bs-body-bg);
-//     background-clip: padding-box;
-//     border: var(--bs-border-width) solid var(--bs-border-color);
-//     border-radius: var(--bs-border-radius);
-//     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-//   }
-
-//   .capture-button:hover,
-//   .cancel-webcam:hover,
-//   .webcam-button:hover {
-//     background-color: var(--secondary-color);
-//   }
-
-//   // Form labels and buttons inside the form container
-//   .form-container {
-//   }
-
-// .form-label {
-//   font-weight: var(--font-weight-bold);
-//   font-size: 16px !important;
-//   color: var(--text-color);
-// }
-
-//   .form-label-head {
-//     font-weight: var(--font-weight-bold);
-//     font-size: 14px !important;
-//     color: var(--text-color);
-//     margin-bottom: 6px !important;
-//   }
-
-//   .actions {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     gap: 10px;
-//     padding-top: 10px;
-//   }
-// }
-
-// Form elements styling
-
-// Responsive Styling for smaller screens

@@ -67,7 +67,7 @@ export const useDeleteOffice = () => {
   return useMutation({
     mutationFn: deleteOffice,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["offices"] }); // Refresh offices
+      queryClient.invalidateQueries({ queryKey: ["offices"] });
     },
   });
 };

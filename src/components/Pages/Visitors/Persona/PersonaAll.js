@@ -43,7 +43,7 @@ const PersonaAll = () => {
   const items = personNonGrataVisitors.map((visitor) => ({
     id: visitor.id,
     photo: <Avatar size="50px" src={visitor.avatar} alt={visitor.name} />,
-    fin: visitor.fin,
+    doc_id: visitor.doc_id,
     name: visitor.name,
     reason: visitor.reason,
     actions: (

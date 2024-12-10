@@ -1,11 +1,11 @@
 .loading-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: 20px; /* Spacing between fields */
-  background: #ffffff; /* White background */
-  padding: 20px; /* Padding around the form */
-  border-radius: 8px; /* Optional: Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .loading-form-field {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
+import { Link, useNavigate } from "react-router-dom";
 import "./header.scss";
 import LangSwitcher from "../../modules/LangSwitcher";
 import { AppPaths } from "../../constants/appPaths";
