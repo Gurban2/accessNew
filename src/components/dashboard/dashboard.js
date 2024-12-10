@@ -23,10 +23,6 @@ const Dashboard = () => {
 
   const handleViewAll = (path) => navigate(path);
 
-  console.log({
-    sortedVisitors,
-  });
-
   return (
     <Container fluid>
       <Section

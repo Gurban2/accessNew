@@ -21,7 +21,6 @@
   "actions": "Actions",
   "view": "View",
   "loading": "Loading...",
-
   "visitorAll": {
     "title": "All Visitors",
     "loading": "Loading...",
@@ -31,7 +30,6 @@
     "errorDeleting": "Error deleting visitor",
     "searchPlaceholder": "Search visitor"
   },
-
   "visitor": {
     "add": {
       "success": "Visitor successfully updated",
@@ -44,7 +42,6 @@
       "success": "Visitor successfully updated"
     }
   },
-
   "visitorAdd": {
     "title": "Add Visitor",
     "success": "Visitor successfully added",
@@ -68,7 +65,6 @@
     "itemDescription": "Item Description",
     "addPhoto": "Add Photo"
   },
-
   "visitorComplaint": {
     "loading": "Loading",
     "noComplaintsFound": "No Complaints found",
@@ -77,33 +73,31 @@
     "date": "Date",
     "description": "Description",
     "profile": "Profile Page"
-    },
-
-    "visitorView": {
-      "noPhoto": "No photo available",
-      "viewVisitor": "View Visitor",
-      "name": "Name",
-      "phone": "Phone",
-      "fin": "FIN",
-      "email": "Email",
-      "address": "Address",
-      "description": "Description",
-      "showMore": "Show More",
-      "blocked": "Blocked",
-      "block": "Block",
-      "report": "Report",
-      "submit": "Submit",
-      "complaints": "Complaints",
-      "success": "success",
-      "error": "error",
-      "loading": "Loading...",
-      "noComplaints": "No complaints available",
-      "visitor": "Visitor",
-      "reportedBy": "Reported by",
-      "createdAt": "Created at",
-      "unknown": "Unknown"
-    },
-
+  },
+  "visitorView": {
+    "noPhoto": "No photo available",
+    "viewVisitor": "View Visitor",
+    "name": "Name",
+    "phone": "Phone",
+    "fin": "FIN",
+    "email": "Email",
+    "address": "Address",
+    "description": "Description",
+    "showMore": "Show More",
+    "blocked": "Blocked",
+    "block": "Block",
+    "report": "Report",
+    "submit": "Submit",
+    "complaints": "Complaints",
+    "success": "success",
+    "error": "error",
+    "loading": "Loading...",
+    "noComplaints": "No complaints available",
+    "visitor": "Visitor",
+    "reportedBy": "Reported by",
+    "createdAt": "Created at",
+    "unknown": "Unknown"
+  },
   "office": {
     "add": {
       "add": "New Office",
@@ -141,7 +135,6 @@
       "breadcrumb": "Office - Edit"
     }
   },
-
   "department": {
     "all": {
       "name": "Department Name",
@@ -166,7 +159,7 @@
       "submit": "Submit"
     }
   },
-   "breadcrumb": {
+  "breadcrumb": {
     "dashboard": "Dashboard",
     "visitors": "Visitors",
     "addVisitor": "Add Visitor",
@@ -203,8 +196,21 @@
     "invalidEmailOrPassword": "Invalid email or password. Please try again.",
     "emailAlreadyInUse": "This email is already in use.",
     "emailNotFound": "Email address not found.",
-    "checkYourEmailForResetLink": "Please check your email for the reset link."
+    "checkYourEmailForResetLink": "Please check your email for the reset link.",
+    "backToLogin": "Back"
+  },
+  "error": {
+    "forbidden": {
+      "title": "403",
+      "message": "Forbidden",
+      "description": "You do not have permission to access this page.",
+      "goHome": "Go to Home"
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Page Not Found",
+      "description": "The page you are looking for does not exist.",
+      "goHome": "Go to Home"
+    }
   }
-
-
 }
