@@ -144,7 +144,6 @@
       "submit": "Göndər"
     }
   },
-
   "department": {
     "add": {
       "title": "Şöbə Əlavə Et",
@@ -157,15 +156,45 @@
 
   "login": {
     "welcome": "Tətbiqimizə xoş gəlmisiniz!",
-    "email": "E-poçt ünvanını daxil edin",
-    "password": "Şifrəni daxil edin",
+    "loginWithEmail": "E-poçt ilə daxil olun",
     "forgotPassword": "Şifrəni unutdunuz?",
-    "submit": "Daxil ol"
+    "enterEmailForReset": "Şifrəni sıfırlamaq üçün e-poçt ünvanınızı daxil edin",
+    "enterResetTokenAndNewPassword": "Şifrəni sıfırlamaq üçün token və yeni şifrəni daxil edin",
+    "enterEmail": "E-poçt ünvanını daxil edin",
+    "enterPassword": "Şifrəni daxil edin",
+    "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
+    "forgotPasswordLink": "Şifrəni unutdunuz?",
+    "sendResetLink": "Sıfırlama linkini göndər",
+    "resetPassword": "Şifrəni sıfırlamaq",
+    "newPassword": "Yeni Şifrə",
+    "confirmNewPassword": "Yeni Şifrəni Təsdiq Et",
+    "loggingIn": "Daxil olunur...",
+    "loginButton": "Daxil ol",
+    "resetPasswordButton": "Şifrəni sıfırlayın",
+    "sendResetLinkButton": "Sıfırlama linkini göndər",
+    "passwordsDoNotMatch": "Şifrələr uyğun gəlmir.",
+    "pleaseEnterEmailAndPassword": "Zəhmət olmasa, həm e-poçt, həm də şifrə daxil edin.",
+    "pleaseEnterEmailAddress": "Zəhmət olmasa, e-poçt ünvanını daxil edin.",
+    "pleaseCheckYourEmail": "Zəhmət olmasa, e-poçt ünvanınızı yoxlayın.",
+    "passwordResetSuccess": "Şifrə uğurla sıfırlandı!",
+    "invalidEmailOrPassword": "Yanlış e-poçt və ya şifrə. Zəhmət olmasa, yenidən cəhd edin.",
+    "emailAlreadyInUse": "Bu e-poçt artıq istifadə olunur.",
+    "emailNotFound": "E-poçt ünvanı tapılmadı.",
+    "checkYourEmailForResetLink": "Şifrə sıfırlama linkini əldə etmək üçün e-poçt ünvanınızı yoxlayın.",
+    "backToLogin": "Geri"
   },
-
-  "errors": {
-    "general": "Xəta baş verdi",
-    "loading": "Yüklənmə zamanı xəta baş verdi",
-    "invalidCredentials": "Yanlış e-poçt və ya şifrə"
+  "error": {
+    "forbidden": {
+      "title": "403",
+      "message": "Qadağan olunub",
+      "description": "Bu səhifəyə giriş icazəniz yoxdur.",
+      "goHome": "Ana səhifəyə qayıt"
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Səhifə tapılmadı",
+      "description": "Axtardığınız səhifə mövcud deyil.",
+      "goHome": "Ana səhifəyə qayıt"
+    }
   }
 }

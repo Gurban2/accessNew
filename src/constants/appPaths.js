@@ -33,4 +33,9 @@ export const AppPaths = {
     add: "/persona/add",
     all: "/persona",
   },
+
+  errors: {
+    notfound: "*",
+    forbidden: "/403",
+  },
 };

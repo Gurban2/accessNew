@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "../../../../../modules/Modal";
 import { useTranslation } from "react-i18next";
 import { useAddComplaint } from "../../../../../hooks/useComplaints";
+import VisitorBlockButton from "../../Persona/VisitorBlockButton";
 import { toast } from "react-toastify";
 
 import "./ReportModal.scss";
@@ -17,6 +18,11 @@ const ReportModal = ({
   const { mutateAsync } = useAddComplaint();
 
   const submitReport = async () => {
+    if (!description.trim()) {
+      toast.error(t("visitorView.emptyDescriptionError"));
+      return;
+    }
+
     try {
       const newReportData = {
         description,
@@ -43,6 +49,7 @@ const ReportModal = ({
         onChange={(e) => setDescription(e.target.value)}
         placeholder={t("visitorView.report")}
       ></textarea>
+      <div className="modal-buttons"></div>
     </Modal>
   );
 };

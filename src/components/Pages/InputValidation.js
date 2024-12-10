@@ -36,7 +36,7 @@ export const VisitorValidationSchema = Yup.object({
   phone: Yup.string()
     .matches(/^\d+$/, "Phone must contain only digits")
     .required("Phone is required"),
-  fin: Yup.string()
+  doc_id: Yup.string()
     .min(3, "Fin must be at least 3 characters.")
     .required("Fin is required"),
   email: Yup.string()

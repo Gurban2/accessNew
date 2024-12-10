@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { FaArrowRight, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../api/authApi";
-import { toast } from "react-toastify";
-import { AppPaths } from "../../../constants/appPaths";
 import { forgotPassword } from "../../../api/forgotPasswordApi";
 import { resetPassword } from "../../../api/resetPasswordApi";
+import { toast } from "react-toastify";
+import { AppPaths } from "../../../constants/appPaths";
 import { useTranslation } from "react-i18next";
+import LangSwitcher from "../../../modules/LangSwitcher";
+import { FaArrowLeft } from "react-icons/fa";
+
+import LoginForm from "./LoginForm";
+import ForgotPasswordForm from "./ForgotPasswordForm";
+import ResetPasswordForm from "./ResetPasswordForm";
+
 import "./style.scss";
 
 const Login = () => {
@@ -21,7 +26,7 @@ const Login = () => {
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [token, setToken] = useState("");
-  const [password_confirmation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,8 +34,7 @@ const Login = () => {
     if (localStorage.getItem("token")) {
       navigate(AppPaths.dashboard);
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [navigate]);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -48,11 +52,6 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    handleLogin();
-  };
-
   const handleForgotPassword = async () => {
     if (!forgotPasswordEmail) {
       toast.error(t("login.pleaseEnterEmailAddress"));
@@ -63,7 +62,7 @@ const Login = () => {
       await forgotPassword(forgotPasswordEmail);
       toast.success(t("login.pleaseCheckYourEmail"));
       setForgotPasswordEmail("");
-      setShowForgotPassword(false);
+      setShowForgotPassword(true);
       toast.info(t("login.checkYourEmailForResetLink"));
       setToken("123456");
       setEmail(forgotPasswordEmail);
@@ -76,33 +75,27 @@ const Login = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
-    if (!email || !token || !password || !password_confirmation) {
+    if (!email || !token || !password || !passwordConfirmation) {
       toast.error(t("login.pleaseEnterEmailAndPassword"));
       return;
     }
-    if (password !== password_confirmation) {
+    if (password !== passwordConfirmation) {
       toast.error(t("login.passwordsDoNotMatch"));
       return;
     }
     setLoading(true);
 
     try {
-      await resetPassword(email, token, password, password_confirmation);
+      await resetPassword(email, token, password, passwordConfirmation);
       toast.success(t("login.passwordResetSuccess"));
       setShowForgotPassword(false);
+      setToken("");
     } catch (error) {
       toast.error(error.message || t("login.invalidEmailOrPassword"));
     } finally {
       setLoading(false);
     }
   };
-
-  const formTitle =
-    showForgotPassword && !token
-      ? t("login.forgotPassword")
-      : showForgotPassword && token
-        ? t("login.resetPassword")
-        : t("login.welcome");
 
   return (
     <div
@@ -111,144 +104,69 @@ const Login = () => {
     >
       <div className="login-card">
         <div className="login-form">
+          {(showForgotPassword || token) && (
+            <div className="back-button">
+              <FaArrowLeft />
+              <a href="" onClick={() => setShowForgotPassword(false)}>
+                {t("login.backToLogin")}
+              </a>
+            </div>
+          )}
           <div className="form-content">
             <div className="form-header">
-              <h4 className="form-subtitle">{formTitle}</h4>
+              <div className="form-lang">
+                <LangSwitcher />
+              </div>
+              <h4 className="form-subtitle">
+                {showForgotPassword && !token
+                  ? t("login.forgotPassword")
+                  : showForgotPassword && token
+                    ? t("login.resetPassword")
+                    : t("login.welcome")}
+              </h4>
               <h1 className="form-title">
-                {formTitle === t("login.welcome")
-                  ? t("login.loginWithEmail")
-                  : formTitle === t("login.forgotPassword")
-                    ? t("login.enterEmailForReset")
-                    : t("login.enterResetTokenAndNewPassword")}
+                {showForgotPassword && !token
+                  ? t("login.enterEmailForReset")
+                  : showForgotPassword && token
+                    ? t("login.enterResetTokenAndNewPassword")
+                    : t("login.loginWithEmail")}
               </h1>
             </div>
             <div className="form-body">
               {!showForgotPassword ? (
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>{t("login.enterEmail")}</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder={t("login.enterEmail")}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      autoFocus
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>{t("login.enterPassword")}</Form.Label>
-                    <div className="password-input-container">
-                      <Form.Control
-                        type={passwordVisible ? "text" : "password"}
-                        placeholder={t("login.enterPassword")}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                      <div
-                        className="password-toggle-icon"
-                        onClick={() => setPasswordVisible(!passwordVisible)}
-                      >
-                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-                      </div>
-                    </div>
-                  </Form.Group>
-
-                  <Form.Group className="d-flex justify-content-between align-items-center mb-4">
-                    <Form.Check
-                      type="checkbox"
-                      label={t("login.keepMeLoggedIn")}
-                      checked={keepLoggedIn}
-                      onChange={(e) => setKeepLoggedIn(e.target.checked)}
-                    />
-                    <div className="forgot-password-link">
-                      <a href="#" onClick={() => setShowForgotPassword(true)}>
-                        {t("login.forgotPasswordLink")}
-                      </a>
-                    </div>
-                  </Form.Group>
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    className="submit-button w-100"
-                    disabled={loading}
-                  >
-                    <span>
-                      {loading ? t("login.loggingIn") : t("login.loginButton")}
-                    </span>
-                    <FaArrowRight />
-                  </Button>
-                </Form>
-              ) : showForgotPassword && !token ? (
-                <Form>
-                  <Form.Group className="mb-3" controlId="forgotPasswordEmail">
-                    <Form.Label>{t("login.enterEmail")}</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder={t("login.enterEmail")}
-                      value={forgotPasswordEmail}
-                      onChange={(e) => setForgotPasswordEmail(e.target.value)}
-                    />
-                  </Form.Group>
-                  <Button
-                    variant="primary"
-                    className="w-100"
-                    onClick={handleForgotPassword}
-                  >
-                    {t("login.sendResetLink")}
-                  </Button>
-                </Form>
+                <LoginForm
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
+                  passwordVisible={passwordVisible}
+                  setPasswordVisible={setPasswordVisible}
+                  loading={loading}
+                  handleSubmit={handleLogin}
+                  keepLoggedIn={keepLoggedIn}
+                  setKeepLoggedIn={setKeepLoggedIn}
+                  setShowForgotPassword={setShowForgotPassword}
+                />
+              ) : token ? (
+                <ResetPasswordForm
+                  email={email}
+                  setEmail={setEmail}
+                  token={token}
+                  setToken={setToken}
+                  password={password}
+                  setPassword={setPassword}
+                  passwordConfirmation={passwordConfirmation}
+                  setPasswordConfirmation={setPasswordConfirmation}
+                  handleResetPassword={handleResetPassword}
+                  setShowForgotPassword={setShowForgotPassword}
+                />
               ) : (
-                <Form>
-                  <Form.Group className="mb-3" controlId="resetEmail">
-                    <Form.Label>{t("login.enterEmail")}</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder={t("login.enterEmail")}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="resetToken">
-                    <Form.Label>
-                      {t("login.enterResetTokenAndNewPassword")}
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder={t("login.enterResetTokenAndNewPassword")}
-                      value={token}
-                      onChange={(e) => setToken(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="newPassword">
-                    <Form.Label>{t("login.newPassword")}</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder={t("login.newPassword")}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="confirmPassword">
-                    <Form.Label>{t("login.confirmNewPassword")}</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder={t("login.confirmNewPassword")}
-                      value={password_confirmation}
-                      onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Button
-                    variant="primary"
-                    className="w-100"
-                    onClick={handleResetPassword}
-                  >
-                    {t("login.resetPasswordButton")}
-                  </Button>
-                </Form>
+                <ForgotPasswordForm
+                  forgotPasswordEmail={forgotPasswordEmail}
+                  setForgotPasswordEmail={setForgotPasswordEmail}
+                  handleForgotPassword={handleForgotPassword}
+                  setShowForgotPassword={setShowForgotPassword}
+                />
               )}
             </div>
           </div>

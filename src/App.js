@@ -14,11 +14,12 @@ import Main from "./Main";
 import Login from "./components/Pages/Login/Login";
 import { AuthProvider } from "./contexts/auth/AuthContext";
 import store from "./store";
+import { AppPaths } from "./constants/appPaths";
+import { isLoggedIn } from "./helpers/userHelpers";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
-import { AppPaths } from "./constants/appPaths";
-import { isLoggedIn } from "./helpers/userHelpers";
+import Forbidden from "./components/Pages/Errors/403Error";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
             <Routes>
               <Route path={AppPaths.login} element={<Login />} />
               <Route path="*" element={<PrivateRoute element={<Main />} />} />
+              <Route path="/403" element={<Forbidden />} />
             </Routes>
           </Router>
         </Provider>

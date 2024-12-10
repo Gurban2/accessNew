@@ -58,7 +58,7 @@ const VisitorsAll = () => {
     id: visitor.id,
     avatar: <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />,
     docType: visitor.doc_type,
-    fin: visitor.fin,
+    doc_id: visitor.doc_id,
     name: visitor.name,
     email: visitor.email,
     phone: visitor.phone,

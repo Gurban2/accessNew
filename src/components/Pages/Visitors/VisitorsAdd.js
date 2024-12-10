@@ -133,7 +133,7 @@ const VisitorsAdd = () => {
                 }))}
               />
               <FormField
-                label={t("visitorAdd.doc_id")}
+                label={t("visitorAdd.fin")}
                 name="doc_id"
                 type="text"
                 className="form-control"

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { AppPaths } from "./constants/appPaths";
 
 import UsersAdd from "./components/Pages/Users/UsersAdd";
 import UsersAll from "./components/Pages/Users/UsersAll";
 import UsersEdit from "./components/Pages/Users/UsersEdit";
 
-import { AppPaths } from "./constants/appPaths";
 import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
@@ -18,16 +18,17 @@ import DepartmentEdit from "./components/Pages/Departments/DepartmentEdit";
 import DepartmentsAdd from "./components/Pages/Departments/DepartmentsAdd";
 import DepartmentsAll from "./components/Pages/Departments/DepartmentsAll";
 
+import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
+import PersonaAll from "./components/Pages/Visitors/Persona/PersonaAll";
+
 import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import ComplaintsAll from "./components/Pages/Visitors/Complaints/ComplaintsAll";
 import VisitorView from "./components/Pages/Visitors/VisitorsView";
 
-import PersonaAdd from "./components/Pages/Visitors/Persona/PersonaAdd";
-import PersonaAll from "./components/Pages/Visitors/Persona/PersonaAll";
-
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./components/Pages/Errors/404Error";
 
 function Main() {
   const [isCollapsedSideBar, setIsCollapsedSideBar] = useState(false);
@@ -79,11 +80,18 @@ function Main() {
               path={AppPaths.persona.add}
               element={<ProtectedRoute element={<PersonaAdd />} />}
             />
+            {/* <Route
+              path={AppPaths.persona.add}
+              element={<ProtectedRoute element={<PersonaAdd />} permissionGroup={['admin', 'manager']} />}
+            /> */}
+
             <Route path={AppPaths.persona.all} element={<PersonaAll />} />
 
             <Route path={AppPaths.users.add} element={<UsersAdd />} />
             <Route path={AppPaths.users.all} element={<UsersAll />} />
             <Route path={AppPaths.users.edit} element={<UsersEdit />} />
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>

@@ -203,7 +203,6 @@
       "actions": "Actions"
     }
   },
-
   "login": {
     "welcome": "Welcome to our application!",
     "email": "Enter your email",
@@ -218,14 +217,33 @@
       "confirmPassword": "Confirm New Password",
       "resetButton": "Reset Password",
       "success": "Password reset successfully!"
-    }
+    },
+    "loginButton": "Login",
+    "resetPasswordButton": "Reset Password",
+    "sendResetLinkButton": "Send Reset Link",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "pleaseEnterEmailAndPassword": "Please enter both email and password.",
+    "pleaseEnterEmailAddress": "Please enter an email address.",
+    "pleaseCheckYourEmail": "Please check your email for the reset link.",
+    "passwordResetSuccess": "Password reset successfully!",
+    "invalidEmailOrPassword": "Invalid email or password. Please try again.",
+    "emailAlreadyInUse": "This email is already in use.",
+    "emailNotFound": "Email address not found.",
+    "checkYourEmailForResetLink": "Please check your email for the reset link.",
+    "backToLogin": "Back"
   },
-
-  "errors": {
-    "general": "An error occurred",
-    "loading": "Error occurred while loading data",
-    "notFound": "Resource not found",
-    "invalidInput": "Invalid input provided",
-    "invalidCredentials": "Invalid email or password"
+  "error": {
+    "forbidden": {
+      "title": "403",
+      "message": "Forbidden",
+      "description": "You do not have permission to access this page.",
+      "goHome": "Go to Home"
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Page Not Found",
+      "description": "The page you are looking for does not exist.",
+      "goHome": "Go to Home"
+    }
   }
 }

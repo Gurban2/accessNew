@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import "./header.scss";
+
 import LangSwitcher from "../../modules/LangSwitcher";
 import { AppPaths } from "../../constants/appPaths";
 import { isLoggedIn } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
 import { logout } from "../../api/authApi";
+import NotificationBell from "../Notifications/NotificationBell";
+
+import "./header.scss";
 
 const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
@@ -52,15 +55,26 @@ const Header = ({ isCollapsedSideBar }) => {
         <Container>
           <Navbar.Brand href="#home">Access Store</Navbar.Brand>
           <Navbar.Toggle />
+
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className="me-3">
+            <Navbar.Text
+              className="me-3"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
               {isLoggedIn() ? (
                 <LogoutButton onClick={handleLogout} />
               ) : (
                 <Link to={AppPaths.login}>Login</Link>
               )}
+              <NotificationBell />
             </Navbar.Text>
           </Navbar.Collapse>
+
           <LangSwitcher />
         </Container>
       </Navbar>
