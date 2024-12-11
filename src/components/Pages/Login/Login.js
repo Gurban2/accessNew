@@ -36,7 +36,8 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!email || !password) {
       toast.error(t("login.pleaseEnterEmailAndPassword"));
       return;
@@ -44,6 +45,8 @@ const Login = () => {
     setLoading(true);
     try {
       await login(email, password, dispatch);
+      console.log(true);
+
       navigate(AppPaths.dashboard);
     } catch (err) {
       toast.error(t("login.invalidEmailOrPassword"));
