@@ -16,14 +16,24 @@ import { Button } from "react-bootstrap";
 const VisitorsAll = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const { data, isLoading } = useFetchVisitors();
+  const { data, isLoading, error } = useFetchVisitors();
   const { mutateAsync } = useDeleteVisitor();
 
-  const visitors = data?.data;
+  // Handle any errors while fetching visitors
+  if (error) {
+    console.error(t("errorFetchingVisitors"), error);
+    return <div>{t("errorFetchingVisitorsMessage")}</div>;
+  }
+
+  const visitors = data?.data || [];
   const meta = data?.meta;
 
-  const handleDelete = async ({ id }) => {
+  // Filter out blocked visitors
+  const filteredVisitors = visitors.filter((visitor) => !visitor.is_blocked);
+
+  console.log(filteredVisitors, visitors);
+
+  const handleDelete = async (id) => {
     if (window.confirm(t("visitorDeleteConfirm"))) {
       try {
         await mutateAsync(id);
@@ -33,11 +43,11 @@ const VisitorsAll = () => {
     }
   };
 
-  const handleEdit = ({ id }) => {
+  const handleEdit = (id) => {
     navigate(`/visitors/edit/${id}`);
   };
 
-  const handleView = ({ id }) => {
+  const handleView = (id) => {
     navigate(`/visitors/view/${id}`);
   };
 
@@ -52,26 +62,31 @@ const VisitorsAll = () => {
     t("visit_time"),
     t("visitStartDate"),
     t("visitEndDate"),
-    t("actions"),
   ];
 
-  const items = visitors?.map((visitor, index) => ({
+  // Transform visitors data for display in the table
+  const items = visitors.map((visitor, index) => ({
     id: visitor.id,
-    avatar: <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />,
-    docType: visitor.doc_type,
-    doc_id: visitor.doc_id,
+    avatar: visitor.avatar ? (
+      <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />
+    ) : (
+      <div className="avatar-placeholder">N/A</div>
+    ),
+    docType: visitor.doc_type || "N/A",
+    doc_id: visitor.doc_id || "N/A",
     name: visitor.name,
-    email: visitor.email,
-    phone: visitor.phone,
-    visitTime: format(new Date(visitor.visit_time * 1000), "dd MMM yy HH:mm"),
-    visitStartDate: format(
-      new Date(visitor.visit_start_date * 1000),
-      "dd MMM yy HH:mm",
-    ),
-    visit_end_date: format(
-      new Date(visitor.visit_end_date * 1000),
-      "dd MMM yy HH:mm",
-    ),
+    email: visitor.email || "N/A",
+    phone: visitor.phone || "N/A",
+    visitTime: visitor.visit_time
+      ? format(new Date(visitor.visit_time * 1000), "dd MMM yy HH:mm")
+      : "N/A",
+    visitStartDate: visitor.visit_start_date
+      ? format(new Date(visitor.visit_start_date * 1000), "dd MMM yy HH:mm")
+      : "N/A",
+    visit_end_date: visitor.visit_end_date
+      ? format(new Date(visitor.visit_end_date * 1000), "dd MMM yy HH:mm")
+      : "N/A",
+    className: visitor.is_blocked ? "blocked" : "",
   }));
 
   return (
