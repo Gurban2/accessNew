@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import {
   fetchVisitors,
   addVisitor,
@@ -74,15 +73,25 @@ export const useUpdateVisitor = () => {
 
 export const useBlockVisitor = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (id) => blockVisitorApi(id), // Функция для выполнения мутации
+    mutationFn: (id) => blockVisitorApi(id), // Function to block the visitor
     onSuccess: (_, id) => {
+      // Invalidate all visitor-related queries
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", id] });
+
+      // Remove the blocked visitor from the list in the cache
+      const visitors = queryClient.getQueryData(["visitors"]);
+      if (visitors) {
+        queryClient.setQueryData(["visitors"], {
+          ...visitors,
+          data: visitors.data.filter((visitor) => visitor.id !== id),
+        });
+      }
     },
     onError: (error) => {
       console.error("Error blocking visitor:", error);
-
       alert(`Failed to block visitor: ${error.message}`);
     },
   });
