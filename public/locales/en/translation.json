@@ -159,6 +159,8 @@
       "searchPlaceholder": "Search visitor...",
       "noVisitors": "No visitors available",
       "name": "Name",
+      "photo": "Photo",
+      "docType": "Document Type",
       "phone": "Phone",
       "fin": "FIN",
       "email": "Email",
@@ -205,7 +207,29 @@
     },
     "edit": {
       "title": "Edit Visitor",
-      "success": "Visitor successfully updated!"
+      "success": "Visitor successfully updated!",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "reset": "Reset",
+      "name": "Name",
+      "phone": "Phone",
+      "fin": "FIN",
+      "email": "Email",
+      "address": "Address",
+      "description": "Description",
+      "addItem": "Add Item",
+      "itemName": "Item Name",
+      "itemDescription": "Item Description",
+      "visitTime": "Visit Time"
+    },
+
+    "complaint": {
+      "title": "Visitor Complaint",
+      "success": "Complaint successfully added!",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "reset": "Reset",
+      "description": "Description"
     }
   },
 

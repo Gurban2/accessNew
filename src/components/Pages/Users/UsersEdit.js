@@ -64,6 +64,8 @@ const UsersEdit = () => {
           { label: t("breadcrumbs.editUser") },
         ]}
       />
+      <hr className="navigation-underline" />
+
       <Formik
         initialValues={{
           name: user.name,

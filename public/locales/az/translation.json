@@ -161,6 +161,9 @@
       "add": "Ziyarətçi Əlavə Et",
       "searchPlaceholder": "Ziyarətçi axtar",
       "name": "Ad",
+      "photo": "Şəkil",
+      "docType": "Sənəd Növü",
+      "fin": "Fin",
       "phone": "Telefon",
       "email": "E-poçt",
       "actions": "Əməliyyatlar",
@@ -171,9 +174,50 @@
       "deleteSuccess": "Ziyarətçi uğurla silindi.",
       "deleteError": "Ziyarətçini silmək alınmadı."
     },
+    "add": {
+      "title": "Ziyarətçi Əlavə Et",
+      "name": "Ad",
+      "photo": "Şəkil",
+      "docType": "Sənəd Növü",
+      "fin": "Fin",
+      "phone": "Telefon",
+      "email": "E-poçt",
+      "submit": "Göndər",
+      "submitting": "Göndərilir...",
+      "success": "Ziyarətçi uğurla əlavə olundu!",
+      "error": "Ziyarətçi əlavə edilərkən xəta baş verdi."
+    },
+    "edit": {
+      "title": "Ziyarətçini Redaktə Et",
+      "name": "Ad",
+      "photo": "Şəkil",
+      "docType": "Sənəd Növü",
+      "fin": "Fin",
+      "phone": "Telefon",
+      "email": "E-poçt",
+      "submit": "Göndər",
+      "submitting": "Göndərilir...",
+      "success": "Ziyarətçi uğurla yeniləndi!",
+      "error": "Ziyarətçi yenilənərkən xəta baş verdi.",
+      "addItem": "Əşyaları Əlavə Et",
+      "itemName": "Əşya Adı",
+      "itemDescription": "Əşya Təsviri",
+      "visitTime": "Ziyarət Vaxtı"
+    },
     "view": {
       "title": "Ziyarətçi Məlumatları",
-      "noPhoto": "Şəkil mövcud deyil"
+      "name": "Ad",
+      "photo": "Şəkil",
+      "docType": "Sənəd Növü",
+      "fin": "Fin",
+      "phone": "Telefon",
+      "email": "E-poçt",
+      "actions": "Əməliyyatlar",
+      "edit": "Redaktə Et",
+      "delete": "Sil",
+      "deleteConfirm": "Bu ziyarətçini silmək istədiyinizdən əminsiniz?",
+      "deleteSuccess": "Ziyarətçi uğurla silindi.",
+      "deleteError": "Ziyarətçini silmək alınmadı."
     }
   },
 
