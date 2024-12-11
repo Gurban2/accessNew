@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaEye, FaRegTrashAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 import { AppPaths } from "../../../constants/appPaths";
@@ -11,6 +11,7 @@ import Breadcrumb from "../Breadcrumb";
 import { useDeleteVisitor, useFetchVisitors } from "../../../hooks/useVisitors";
 import Search from "../../../modules/Search";
 import Pager from "../../../modules/Pager";
+import { Button } from "react-bootstrap";
 
 const VisitorsAll = () => {
   const navigate = useNavigate();
@@ -74,20 +75,23 @@ const VisitorsAll = () => {
   }));
 
   return (
-    <div className="visitors-all-container">
-      <div className="visitors-wrapper d-row d-flex justify-content-between">
-        <Breadcrumb
-          paths={[
-            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumbs.visitors") },
-          ]}
+    <div className="user-container">
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.visitors") },
+        ]}
+      />
+
+      <div className="head-wrapper">
+        <Search
+          path={AppPaths.visitors.all}
+          placeholder={t("visitorAll.searchPlaceholder")}
         />
-        <div className="search-bar">
-          <Search
-            path={AppPaths.visitors.all}
-            placeholder={t("visitorAll.searchPlaceholder")}
-          />
-        </div>
+
+        <Button type="button" variant="primary" className="add-btn">
+          <Link to={AppPaths.visitors.add}>{t("visitors.all.add")}</Link>
+        </Button>
       </div>
       <DataTable
         isLoading={isLoading}
@@ -96,22 +100,21 @@ const VisitorsAll = () => {
         items={items}
         actionItems={[
           {
-            text: (
-              <>
-                <FaEye /> {t("view")}
-              </>
-            ),
+            text: <FaEye />,
             variant: "info",
+            tooltip: t("visitors.all.view"),
             onClick: handleView,
           },
           {
             text: <FaEdit />,
             variant: "warning",
+            tooltip: t("visitors.all.edit"),
             onClick: handleEdit,
           },
           {
             text: <FaRegTrashAlt />,
             variant: "danger",
+            tooltip: t("visitors.all.delete"),
             onClick: handleDelete,
           },
         ]}

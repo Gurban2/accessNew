@@ -39,19 +39,17 @@ const DepartmentsAdd = () => {
   }
 
   return (
-    <div className="department-add-container">
-      <div className="offices-wrapper d-row">
-        <Breadcrumb
-          paths={[
-            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-            {
-              label: t("breadcrumbs.departments"),
-              to: AppPaths.departments.all,
-            },
-            { label: t("breadcrumbs.addDepartment") },
-          ]}
-        />
-      </div>
+    <div className="user-container">
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          {
+            label: t("breadcrumbs.departments"),
+            to: AppPaths.departments.all,
+          },
+          { label: t("breadcrumbs.addDepartment") },
+        ]}
+      />
       <hr className="navigation-underline" />
 
       <Formik
@@ -61,42 +59,45 @@ const DepartmentsAdd = () => {
           phone: "",
           office_id: "",
         }}
-        validationSchema={DepartmentValidationSchema}
+        validationSchema={DepartmentValidationSchema(t)}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="department-add-form">
-            <FormField
-              label={t("department.add.name")}
-              name="name"
-              className="form-control"
-            />
-            <FormField
-              label={t("department.add.address")}
-              name="address"
-              className="form-control"
-            />
-            <FormField
-              label={t("department.add.phone")}
-              name="phone"
-              type="tel"
-            />
-            <FormField
-              label={t("department.add.office")}
-              name="office_id"
-              emptyValue={t("department.add.office")}
-              as="select"
-              options={offices.map((office) => ({
-                value: office.id,
-                label: office.name,
-              }))}
-            />
-
-            <Button type="submit" disabled={isSubmitting || isPending}>
-              {isSubmitting
-                ? t("department.add.submitting")
-                : t("department.add.submit")}
-            </Button>
+          <Form className="add-form">
+            <div className="form-wrapper">
+              <FormField
+                label={t("department.add.name")}
+                name="name"
+                className="form-control"
+              />
+              <FormField
+                label={t("department.add.office")}
+                name="office_id"
+                emptyValue={t("department.add.officeSelect")}
+                as="select"
+                options={offices.map((office) => ({
+                  value: office.id,
+                  label: office.name,
+                }))}
+              />
+              <FormField
+                label={t("department.add.address")}
+                name="address"
+                className="form-control"
+              />
+              <FormField
+                label={t("department.add.phone")}
+                name="phone"
+                type="tel"
+              />
+            </div>
+            <div className="form-footer">
+              <Button type="submit" disabled={isSubmitting || isPending}>
+                {isSubmitting
+                  ? t("department.add.submitting")
+                  : t("department.add.submit")}
+              </Button>
+            </div>
           </Form>
         )}
       </Formik>

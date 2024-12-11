@@ -73,13 +73,14 @@ const AddUser = () => {
           { label: "Add User" },
         ]}
       />
+      <hr className="navigation-underline" />
       <Formik
         initialValues={initialValues}
-        validationSchema={UserValidationSchema}
+        validationSchema={UserValidationSchema(t)}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="users-add-form">
+          <Form className="add-form">
             <div className="form-wrapper">
               <FormField label={t("user.add.name")} name="name" />
 

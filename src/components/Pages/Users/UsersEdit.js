@@ -7,10 +7,7 @@ import { toast } from "react-toastify";
 import { AppPaths } from "../../../constants/appPaths";
 import Breadcrumb from "../Breadcrumb";
 
-import "./style.scss";
-
 import { UserValidationSchema } from "../InputValidation";
-
 import LoadingForm from "../../../modules/Loading/Form";
 import {
   useFetchRoles,
@@ -40,7 +37,10 @@ const UsersEdit = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await mutateAsync({ id: user.id, user: values });
+      await mutateAsync({
+        id: user.id,
+        user: { ...values, active: values.active ? 1 : 0 },
+      });
       setSubmitting(false);
       toast.success(t("user.edit.success"));
       navigate(AppPaths.users.all);
@@ -77,12 +77,11 @@ const UsersEdit = () => {
           department_id: user.department_id,
           active: user.active,
         }}
-        validationSchema={UserValidationSchema}
+        validationSchema={UserValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors }) => (
-          <FormikForm className="users-add-form">
-            {console.log({ errors })}
+        {({ isSubmitting }) => (
+          <FormikForm className="add-form">
             <div className="form-wrapper">
               <FormField label={t("user.edit.name")} name="name" />
               <FormField label={t("user.edit.username")} name="username" />

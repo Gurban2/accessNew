@@ -22,9 +22,18 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log({ error: error.response.status });
     if (error.response.status === 401) {
       localStorage.removeItem("token");
       window.location = AppPaths.login;
+    } else if (error.response.status === 403) {
+      window.location = AppPaths.forbidden;
+    } else if (
+      error.response.status === 404 ||
+      error.response.status === 500 ||
+      error.response.status === 502
+    ) {
+      window.location = AppPaths.errors.notfound;
     }
     return Promise.reject(error);
   },

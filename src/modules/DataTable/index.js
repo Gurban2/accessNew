@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import Item from "./Item";
 import "./styles.scss";
 import LoadingTable from "../Loading/Table";
+import { useTranslation } from "react-i18next";
 
 const DataTable = ({
   headItems,
@@ -12,6 +13,7 @@ const DataTable = ({
   actionItems,
   isLoading,
 }) => {
+  const { t } = useTranslation();
   if (!items || isLoading) {
     return <LoadingTable />;
   }
@@ -32,7 +34,7 @@ const DataTable = ({
           {items.length === 0 && (
             <tr>
               <td colSpan={headItems.length} className="text-center no-data">
-                No data available
+                {t("noDataFound")}
               </td>
             </tr>
           )}

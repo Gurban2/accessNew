@@ -102,7 +102,7 @@ const VisitorsAdd = () => {
           visit_time: "",
           visiting_now: false,
         }}
-        validationSchema={VisitorValidationSchema}
+        validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, isSubmitting, resetForm, values }) => (

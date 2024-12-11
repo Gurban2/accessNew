@@ -1,6 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import {
   fetchVisitors,
@@ -13,25 +11,15 @@ import {
   fetchVisitorComplaints,
 } from "../api/visitorsApi";
 
-import { setVisitors, setVisitorsMeta } from "../store/reducers/visitorReducer";
 import useQueryParams from "./useQueryParams";
 
 export const useFetchVisitors = () => {
-  const dispatch = useDispatch();
   const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
     queryKey: ["visitors", queryParamsKey],
     queryFn: () => fetchVisitors(queryParams),
   });
-
-  useEffect(() => {
-    if (query.data) {
-      const { data: visitors, meta } = query.data;
-      dispatch(setVisitors(visitors));
-      dispatch(setVisitorsMeta(meta));
-    }
-  }, [query.data, dispatch]);
 
   return query;
 };

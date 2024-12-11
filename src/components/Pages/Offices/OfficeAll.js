@@ -26,9 +26,9 @@ const OfficeAll = () => {
     if (window.confirm(t("office.all.deleteConfirm"))) {
       try {
         await mutateAsync(id);
-        toast.success("Office successfully deleted");
+        toast.success(t("office.all.deleteSuccess"));
       } catch (error) {
-        toast.error("An error occurred while deleting the office");
+        toast.error(t("office.all.deleteError"));
       }
     }
   };

@@ -86,7 +86,7 @@ const VisitorsEdit = () => {
           email: visitor.email,
           address: visitor.address,
         }}
-        validationSchema={VisitorValidationSchema}
+        validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, isSubmitting, errors, values }) => (
