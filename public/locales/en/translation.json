@@ -46,6 +46,52 @@
     "addDepartment": "Add Department"
   },
 
+  "dashboard": {
+    "sections": {
+      "visitors": {
+        "title": "Visitors Overview",
+        "headers": {
+          "doc_id": "Fin",
+          "name": "Name",
+          "phone": "Phone",
+          "email": "Email"
+        },
+        "noData": "No visitors available"
+      },
+      "offices": {
+        "title": "Offices Overview",
+        "headers": {
+          "name": "Office Name",
+          "address": "Address",
+          "phone": "Phone Number"
+        },
+        "noData": "No offices available"
+      },
+      "departments": {
+        "title": "Departments Overview",
+        "headers": {
+          "name": "Department Name",
+          "phone": "Phone",
+          "office": "Office"
+        },
+        "noData": "No departments available"
+      },
+      "users": {
+        "title": "Users Overview",
+        "headers": {
+          "name": "Name",
+          "email": "Email",
+          "role": "Role",
+          "department": "Department"
+        },
+        "noData": "No users available"
+      }
+    },
+    "actions": {
+      "openFullList": "Open Full List"
+    }
+  },
+
   "user": {
     "all": {
       "title": "Users",
@@ -111,9 +157,23 @@
     "all": {
       "title": "All Visitors",
       "searchPlaceholder": "Search visitor...",
-      "loading": "Loading visitors...",
+      "noVisitors": "No visitors available",
+      "name": "Name",
+      "photo": "Photo",
+      "docType": "Document Type",
+      "phone": "Phone",
+      "fin": "FIN",
+      "email": "Email",
+      "address": "Address",
+      "description": "Description",
+      "blocked": "Blocked",
+      "actions": "Actions",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
       "deleteConfirm": "Are you sure you want to delete this visitor?",
-      "errorDeleting": "Error occurred while deleting visitor."
+      "deleteSuccess": "Visitor deleted successfully.",
+      "deleteError": "Error occurred while deleting visitor."
     },
     "view": {
       "title": "View Visitor",
@@ -147,7 +207,29 @@
     },
     "edit": {
       "title": "Edit Visitor",
-      "success": "Visitor successfully updated!"
+      "success": "Visitor successfully updated!",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "reset": "Reset",
+      "name": "Name",
+      "phone": "Phone",
+      "fin": "FIN",
+      "email": "Email",
+      "address": "Address",
+      "description": "Description",
+      "addItem": "Add Item",
+      "itemName": "Item Name",
+      "itemDescription": "Item Description",
+      "visitTime": "Visit Time"
+    },
+
+    "complaint": {
+      "title": "Visitor Complaint",
+      "success": "Complaint successfully added!",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "reset": "Reset",
+      "description": "Description"
     }
   },
 
@@ -172,12 +254,21 @@
       "phoneNumber": "Phone Number",
       "departments": "Departments",
       "actions": "Actions",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "deleteError": "Error occurred while deleting office.",
+      "deleteSuccess": "Office deleted successfully.",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "edit": {
       "title": "Edit Office",
-      "success": "Office successfully edited!",
-      "error": "Error occurred while editing office."
+      "name": "Office Name",
+      "address": "Address",
+      "phone": "Phone",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "success": "Office successfully updated!",
+      "error": "Error occurred while updating office."
     }
   },
 
@@ -187,6 +278,8 @@
       "name": "Department Name",
       "address": "Address",
       "phone": "Phone",
+      "office": "Office",
+      "officeSelect": "Select Office",
       "submitting": "Submitting...",
       "submit": "Submit",
       "success": "Department successfully added!",
@@ -199,10 +292,28 @@
       "noDepartments": "No departments available",
       "name": "Department Name",
       "address": "Address",
+      "phoneNumber": "Phone Number",
+      "actions": "Actions",
+      "loading": "Loading...",
+      "deleteError": "Error occurred while deleting department.",
+      "deleteSuccess": "Department deleted successfully.",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "edit": {
+      "title": "Edit Department",
+      "name": "Department Name",
+      "address": "Address",
       "phone": "Phone",
-      "actions": "Actions"
+      "office": "Office",
+      "officeSelect": "Select Office",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "success": "Department successfully updated!",
+      "error": "Error occurred while updating department."
     }
   },
+
   "login": {
     "welcome": "Welcome to our application!",
     "email": "Enter your email",
@@ -232,6 +343,7 @@
     "checkYourEmailForResetLink": "Please check your email for the reset link.",
     "backToLogin": "Back"
   },
+
   "error": {
     "forbidden": {
       "title": "403",
@@ -245,5 +357,40 @@
       "description": "The page you are looking for does not exist.",
       "goHome": "Go to Home"
     }
-  }
+  },
+
+  "validations": {
+    "required": {
+      "officeName": "Office name is required.",
+      "address": "Address is required.",
+      "phone": "Phone number is required.",
+      "departmentName": "Department name is required.",
+      "officeSelection": "Office selection is required.",
+      "name": "Name is required.",
+      "username": "Username is required.",
+      "email": "Email is required.",
+      "role": "Role is required.",
+      "department": "Department is required.",
+      "password": "Password is required.",
+      "passwordConfirmation": "Password confirmation is required."
+    },
+    "minLength": {
+      "officeName": "Office name must be at least 3 characters.",
+      "address": "Address must be at least 5 characters.",
+      "departmentName": "Department name must be at least 3 characters.",
+      "name": "Name must be at least 3 characters.",
+      "username": "Username must be at least 3 characters.",
+      "password": "Password must be at least 8 characters.",
+      "fin": "Fin must be at least 3 characters."
+    },
+    "pattern": {
+      "phone": "Phone must contain only digits.",
+      "email": "Invalid email format."
+    },
+    "match": {
+      "password": "Passwords must match."
+    }
+  },
+
+  "noDataFound": "No data found"
 }

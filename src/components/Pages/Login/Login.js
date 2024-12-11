@@ -110,7 +110,10 @@ const Login = () => {
           {(showForgotPassword || token) && (
             <div className="back-button">
               <FaArrowLeft />
-              <a href="" onClick={() => setShowForgotPassword(false)}>
+              <a
+                href={AppPaths.forgotPassword}
+                onClick={() => setShowForgotPassword(false)}
+              >
                 {t("login.backToLogin")}
               </a>
             </div>

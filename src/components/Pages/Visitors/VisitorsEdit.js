@@ -1,6 +1,6 @@
-import { Formik, Field, Form as FormikForm } from "formik";
+import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Row, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -17,6 +17,9 @@ import {
   useUpdateVisitor,
 } from "../../../hooks/useVisitors";
 import LoadingForm from "../../../modules/Loading/Form";
+import FormField from "../FormField";
+import Capture from "../../../modules/Capture";
+import { format, parseISO } from "date-fns";
 
 const VisitorsEdit = () => {
   const { t } = useTranslation();
@@ -51,33 +54,49 @@ const VisitorsEdit = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await mutateAsync({ id: visitor.id, visitor: values });
+      const formattedVisitTime = format(
+        new Date(values.visit_time),
+        "yyyy-MM-dd HH:mm",
+      );
+
+      await mutateAsync({
+        id: visitor.id,
+        visitor: values,
+        visiting_now: values.visiting_now ? 1 : 0,
+        visit_time: formattedVisitTime,
+      });
       dispatch(editVisitor({ id: visitor.id, data: values }));
       setSubmitting(false);
-      toast.success(t("visitor.add.success"));
+      toast.success(t("visitors.edit.success"));
       navigate(AppPaths.visitors.view.replace(":id", visitor.id));
     } catch (error) {
-      toast.error(t("visitor.add.error"));
-      console.error(t("errorAddingVisitor"), error);
+      toast.error(t("visitors.edit.error"));
+    } finally {
+      setSubmitting(false);
     }
+  };
+
+  const handleCapture = (imageSrc, setFieldValue) => {
+    setFieldValue("avatar", imageSrc);
   };
 
   if (isLoading) {
     return <LoadingForm />;
   }
 
+  console.log({ visitor });
+
   return (
-    <div className="visitor-add-container">
-      <div className="offices-wrapper d-row">
-        <Breadcrumb
-          paths={[
-            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
-            { label: t("breadcrumbs.addVisitor") },
-          ]}
-        />
-      </div>
-      <h1 className="visitor-add-title">{t("visitor.edit.title")}</h1>
+    <div className="user-container">
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
+          { label: t("breadcrumbs.addVisitor") },
+        ]}
+      />
+      <hr className="navigation-underline" />
+
       <Formik
         initialValues={{
           doc_id: visitor.doc_id,
@@ -85,70 +104,87 @@ const VisitorsEdit = () => {
           phone: visitor.phone,
           email: visitor.email,
           address: visitor.address,
+          visit_time: format(new Date(visitor.visit_time), "yyyy-MM-dd HH:mm"),
+          visiting_now: visitor.visiting_now,
+          avatar: visitor.avatar,
         }}
-        validationSchema={VisitorValidationSchema}
+        validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, isSubmitting, errors, values }) => (
-          <FormikForm className="form-container">
-            {Object.keys(errors).length > 0 && (
-              <div className="error">{Object.values(errors).join(", ")}</div>
-            )}
-            <Field
-              type="text"
-              name="doc_id"
-              placeholder={t("visitor.add.enterFin")}
-              className="form-control"
-              value={values.doc_id}
-              onChange={(e) => setFieldValue("doc_id", e.target.value)}
-            />
-
-            <Field
-              type="text"
-              name="name"
-              placeholder={t("visitor.add.enterName")}
-              className="form-control"
-              value={values.name}
-              onChange={(e) => setFieldValue("name", e.target.value)}
-            />
-            <Field
-              type="tel"
-              name="phone"
-              placeholder={t("visitor.add.enterPhone")}
-              className="form-control"
-              value={values.phone}
-              onChange={(e) => setFieldValue("phone", e.target.value)}
-            />
-
-            <Field
-              type="email"
-              name="email"
-              placeholder={t("visitor.add.enterEmail")}
-              className="form-control"
-              value={values.email}
-              onChange={(e) => setFieldValue("email", e.target.value)}
-            />
-
-            <Field
-              type="text"
-              name="address"
-              placeholder={t("visitor.add.enterAddress")}
-              className="form-control"
-              value={values.address}
-              onChange={(e) => setFieldValue("address", e.target.value)}
-            />
-
+          <FormikForm className="add-form">
             <Row className="mb-3">
-              <Button variant="warning" onClick={handleAddItem}>
-                {t("visitorAdd.addItem")}
-              </Button>
+              <Form.Group as={Col} xs={12} md={3} controlId="photo">
+                <Capture
+                  photo={values.avatar}
+                  onConfirm={(imageSrc) =>
+                    handleCapture(imageSrc, setFieldValue)
+                  }
+                  btnText={t("visitors.edit.addPhoto")}
+                />
+                <Form.Label className="form-label-head">
+                  {t("visitors.edit.addPhoto")}
+                </Form.Label>
+                <ErrorMessage name="avatar" component="div" className="error" />
+              </Form.Group>
             </Row>
+            <div className="form-wrapper">
+              <FormField
+                label={t("visitors.edit.fin")}
+                name="doc_id"
+                type="text"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitors.edit.name")}
+                name="name"
+                type="text"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitors.edit.phone")}
+                name="phone"
+                type="text"
+                className="form-control"
+              />
+
+              <FormField
+                label={t("visitors.edit.email")}
+                name="email"
+                type="email"
+                className="form-control"
+              />
+              <FormField
+                label={t("visitors.edit.address")}
+                name="address"
+                type="text"
+                className="form-control"
+              />
+
+              <FormField
+                label={t("visitors.edit.visitTime")}
+                name="visit_time"
+                type="datetime-local"
+                className="form-control"
+              />
+
+              <Form.Check
+                type="checkbox"
+                label={t("visitors.edit.visitingNow")}
+                name="visiting_now"
+              />
+            </div>
+            <div className="form-footer">
+              <Button variant="warning" onClick={handleAddItem}>
+                {t("visitors.edit.addItem")}
+              </Button>
+            </div>
             {items?.length > 0 && (
               <Table bordered className="mb-3">
                 <thead>
                   <tr>
-                    <th>{t("visitorAdd.itemName")}</th>
-                    <th>{t("visitorAdd.itemDescription")}</th>
+                    <th>{t("visitors.edit.itemName")}</th>
+                    <th>{t("visitors.edit.itemDescription")}</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -158,7 +194,6 @@ const VisitorsEdit = () => {
                       <td>
                         <Field
                           type="text"
-                          placeholder={t("visitorAdd.itemName")}
                           value={item.name}
                           onChange={(e) =>
                             handleItemChange(index, "name", e.target.value)
@@ -168,7 +203,6 @@ const VisitorsEdit = () => {
                       <td>
                         <Field
                           type="text"
-                          placeholder={t("visitorAdd.itemDescription")}
                           value={item.desc}
                           onChange={(e) =>
                             handleItemChange(index, "desc", e.target.value)
@@ -192,8 +226,8 @@ const VisitorsEdit = () => {
 
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting
-                ? t("visitor.add.submitting")
-                : t("visitor.add.submit")}
+                ? t("visitors.edit.submitting")
+                : t("visitors.edit.submit")}
             </Button>
           </FormikForm>
         )}

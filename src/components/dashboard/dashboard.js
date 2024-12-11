@@ -1,55 +1,104 @@
 import React from "react";
-import { Container, Table, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./dashboardStyle.scss";
 import { AppPaths } from "../../constants/appPaths";
+import DataTable from "../../modules/DataTable";
+import { useFetchOffices } from "../../hooks/useOffices";
+import { useFetchDepartments } from "../../hooks/useDepartments";
+import { useFetchVisitors } from "../../hooks/useVisitors";
+import { useFetchUsers } from "../../hooks/useUser";
+import LoadingTable from "../../modules/Loading/Table";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { data: officeData, isLoading: isOfficesLoading } = useFetchOffices();
+  const offices = officeData?.data || [];
 
-  const { data: offices } = useSelector((state) => state.offices) || [];
-  const departments =
-    useSelector((state) => state.departments.departmentsData) || [];
-  const visitors = useSelector((state) => state.visitors) || [];
+  const { data: departmentsData, isLoading: isDepartmentsLoading } =
+    useFetchDepartments();
+  const departments = departmentsData?.data || [];
 
-  const sortedOffices = [...offices].sort((a, b) => b.id - a.id).slice(-3);
-  const sortedDepartments = [...departments]
-    .sort((a, b) => b.id - a.id)
-    .slice(-3);
-  const sortedVisitors = [...visitors.data]
-    .sort((a, b) => b.id - a.id)
-    .slice(-3);
+  const { data: visitorsData, isLoading: isVisitorsLoading } =
+    useFetchVisitors();
+  const visitors = visitorsData?.data || [];
+
+  const { data: usersData, isLoading: isUsersLoading } = useFetchUsers();
+  const users = usersData?.data || [];
+
+  if (
+    isOfficesLoading ||
+    isDepartmentsLoading ||
+    isVisitorsLoading ||
+    isUsersLoading
+  ) {
+    return <LoadingTable />;
+  }
+
+  const sortedOffices = offices.sort((a, b) => b.id - a.id).slice(-3);
+  const sortedDepartments = departments.sort((a, b) => b.id - a.id).slice(-3);
+  const sortedVisitors = visitors.sort((a, b) => b.id - a.id).slice(-3);
+  const sortedUsers = users.sort((a, b) => b.id - a.id).slice(-3);
 
   const handleViewAll = (path) => navigate(path);
 
   return (
     <Container fluid>
       <Section
-        title="Visitors Overview"
+        title={t("dashboard.sections.visitors.title")}
         data={sortedVisitors}
-        fields={["fin", "name", "phone", "email", "address"]}
-        headers={["#", "Fin", "Name", "Phone", "Email", "Address"]}
-        noDataMessage="No visitors available"
+        fields={["doc_id", "name", "phone", "email"]}
+        headers={[
+          t("dashboard.sections.visitors.headers.doc_id"),
+          t("dashboard.sections.visitors.headers.name"),
+          t("dashboard.sections.visitors.headers.phone"),
+          t("dashboard.sections.visitors.headers.email"),
+        ]}
+        noDataMessage={t("dashboard.sections.visitors.noData")}
         onViewAll={() => handleViewAll(AppPaths.visitors.all)}
       />
 
       <Section
-        title="Offices Overview"
+        title={t("dashboard.sections.offices.title")}
         data={sortedOffices}
         fields={["name", "address", "phone"]}
-        headers={["#", "Office Name", "Address", "Phone Number"]}
-        noDataMessage="No offices available"
+        headers={[
+          t("dashboard.sections.offices.headers.name"),
+          t("dashboard.sections.offices.headers.address"),
+          t("dashboard.sections.offices.headers.phone"),
+        ]}
+        noDataMessage={t("dashboard.sections.offices.noData")}
         onViewAll={() => handleViewAll(AppPaths.offices.all)}
       />
 
       <Section
-        title="Departments Overview"
+        title={t("dashboard.sections.departments.title")}
         data={sortedDepartments}
         fields={["name", "phone", "office"]}
-        headers={["#", "Department Name", "Phone", "Office"]}
-        noDataMessage="No departments available"
+        headers={[
+          t("dashboard.sections.departments.headers.name"),
+          t("dashboard.sections.departments.headers.phone"),
+          t("dashboard.sections.departments.headers.office"),
+        ]}
+        noDataMessage={t("dashboard.sections.departments.noData")}
         onViewAll={() => handleViewAll(AppPaths.departments.all)}
+      />
+
+      <Section
+        title={t("dashboard.sections.users.title")}
+        data={sortedUsers}
+        fields={["name", "email", "role", "office", "department"]}
+        headers={[
+          t("dashboard.sections.users.headers.name"),
+          t("dashboard.sections.users.headers.email"),
+          t("dashboard.sections.users.headers.role"),
+          t("dashboard.sections.departments.headers.office"),
+          t("dashboard.sections.users.headers.department"),
+        ]}
+        noDataMessage={t("dashboard.sections.users.noData")}
+        onViewAll={() => handleViewAll(AppPaths.users.all)}
       />
     </Container>
   );
@@ -62,43 +111,31 @@ const Section = ({
   fields,
   noDataMessage,
   onViewAll,
-}) => (
-  <div className="dashboard-section">
-    <div className="section-header">
-      <h4>{title}</h4>
-      <Button variant="primary p-1 " onClick={onViewAll}>
-        Open Full List
-      </Button>
-    </div>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          {headers.map((header, index) => (
-            <th key={index}>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>{renderTableRows(data, fields, noDataMessage)}</tbody>
-    </Table>
-  </div>
-);
+}) => {
+  const { t } = useTranslation();
 
-const renderTableRows = (data, fields, noDataMessage) => {
-  if (data.length === 0) {
-    return (
-      <tr>
-        <td colSpan={fields.length}>{noDataMessage}</td>
-      </tr>
-    );
-  }
-  return data.map((item, index) => (
-    <tr key={item.id || index}>
-      <td>{index + 1}</td>
-      {fields.map((field, fieldIndex) => (
-        <td key={fieldIndex}>{item[field]}</td>
-      ))}
-    </tr>
-  ));
+  const items = data.map((item) => ({
+    ...fields.reduce((acc, field) => {
+      acc[field] = item[field];
+      return acc;
+    }, {}),
+  }));
+
+  return (
+    <div className="dashboard-section">
+      <div className="section-header">
+        <h4>{title}</h4>
+        <Button onClick={onViewAll}>
+          {t("dashboard.actions.openFullList")}
+        </Button>
+      </div>
+      <DataTable
+        headItems={headers}
+        items={items}
+        noDataMessage={noDataMessage}
+      />
+    </div>
+  );
 };
 
 export default Dashboard;

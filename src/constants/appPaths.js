@@ -35,7 +35,7 @@ export const AppPaths = {
   },
 
   errors: {
-    notfound: "*",
+    notfound: "/404",
     forbidden: "/403",
   },
 };

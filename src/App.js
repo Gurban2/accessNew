@@ -21,7 +21,15 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import Forbidden from "./components/Pages/Errors/403Error";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0,
+      staleTime: 10 * 60 * 1000,
+    },
+  },
+});
 
 function App() {
   return (

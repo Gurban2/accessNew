@@ -1,6 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import {
   fetchOffices,
@@ -10,25 +8,15 @@ import {
   updateOffice,
 } from "../api/officesApi";
 
-import { setOfficeMeta, setOffices } from "../store/reducers/officeReducer";
 import useQueryParams from "./useQueryParams";
 
 export const useFetchOffices = () => {
-  const dispatch = useDispatch();
   const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
     queryKey: ["offices", queryParamsKey],
     queryFn: () => fetchOffices(queryParams),
   });
-
-  useEffect(() => {
-    if (query.data) {
-      const { data: offices, meta } = query.data;
-      dispatch(setOffices(offices));
-      dispatch(setOfficeMeta(meta));
-    }
-  }, [query.data, dispatch]);
 
   return query;
 };
@@ -55,8 +43,9 @@ export const useUpdateOffice = () => {
 
   return useMutation({
     mutationFn: (data) => updateOffice(data.id, data.office),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["offices"] });
+      queryClient.invalidateQueries({ queryKey: ["offices", variables.id] });
     },
   });
 };

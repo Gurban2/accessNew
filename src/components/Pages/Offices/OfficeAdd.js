@@ -35,7 +35,7 @@ const OfficeAdd = () => {
       resetForm();
       toast.success(t("office.add.success"));
     } catch (error) {
-      toast.error("An error occurred while adding the office");
+      toast.error("office.add.error");
     }
 
     setSubmitting(false);
@@ -44,53 +44,45 @@ const OfficeAdd = () => {
   const breadCrumbs = [
     { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
     { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
-    { label: t("breadcrumbs.addOffice"), to: AppPaths.offices.add },
+    { label: t("breadcrumbs.addOffice") },
   ];
 
   return (
-    <Formik
-      initialValues={{ name: "", address: "", phone: "" }}
-      validationSchema={OfficeValidationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <div className="offices-add-container">
-          <div className="offices-wrapper d-row">
-            <Breadcrumb paths={breadCrumbs} />
-          </div>
-          <hr className="navigation-underline" />
-
-          <Form className="offices-add-form">
-            <FormField
-              label={t("office.add.officeName")}
-              name="name"
-              placeholder={t("office.add.OfficeName")}
-            />
-            <FormField
-              label={t("office.add.address")}
-              name="address"
-              placeholder={t("office.add.Address")}
-            />
-            <FormField
-              label={t("office.add.phone")}
-              name="phone"
-              type="tel"
-              placeholder={t("office.add.phone")}
-            />
-            <Button
-              type="submit"
-              disabled={isSubmitting || isPending}
-              variant="primary"
-              className="btn-primary"
-            >
-              {isSubmitting || isPending
-                ? t("office.add.submitting")
-                : t("office.add.submit")}
-            </Button>
+    <div className="user-container">
+      <Breadcrumb paths={breadCrumbs} />
+      <hr className="navigation-underline" />
+      <Formik
+        initialValues={{ name: "", address: "", phone: "" }}
+        validationSchema={OfficeValidationSchema(t)}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="add-form">
+            <div className="form-wrapper">
+              <FormField label={t("office.add.name")} name="name" />
+              <FormField label={t("office.add.address")} name="address" />
+              <FormField
+                label={t("office.add.phone")}
+                name="phone"
+                type="tel"
+              />
+            </div>
+            <div className="form-footer">
+              <Button
+                type="submit"
+                disabled={isSubmitting || isPending}
+                variant="primary"
+                className="btn-primary"
+              >
+                {isSubmitting || isPending
+                  ? t("office.add.submitting")
+                  : t("office.add.submit")}
+              </Button>
+            </div>
           </Form>
-        </div>
-      )}
-    </Formik>
+        )}
+      </Formik>
+    </div>
   );
 };
 

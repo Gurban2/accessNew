@@ -1,74 +1,77 @@
 import * as Yup from "yup";
 
-export const OfficeValidationSchema = Yup.object({
-  name: Yup.string()
-    .trim()
-    .min(3, "Office name must be at least 3 characters.")
-    .required("Office name is required."),
-  address: Yup.string()
-    .trim()
-    .min(5, "Address must be at least 5 characters.")
-    .required("Address is required."),
-  phone: Yup.string()
-    .matches(/^\d+$/, "Phone must contain only digits.")
-    .required("Phone number is required."),
-});
-
-export const DepartmentValidationSchema = Yup.object({
-  name: Yup.string()
-    .trim()
-    .min(3, "Department name must be at least 3 characters.")
-    .required("Department name is required."),
-  address: Yup.string()
-    .trim()
-    .min(5, "Address must be at least 5 characters.")
-    .required("Address is required."),
-  phone: Yup.string()
-    .matches(/^\d+$/, "Phone must contain only digits.")
-    .required("Phone number is required."),
-  office_id: Yup.string().required("Office selection is required."),
-});
-
-export const VisitorValidationSchema = Yup.object({
-  name: Yup.string()
-    .min(3, "Name must be at least 3 characters.")
-    .required("Name is required"),
-  phone: Yup.string()
-    .matches(/^\d+$/, "Phone must contain only digits")
-    .required("Phone is required"),
-  doc_id: Yup.string()
-    .min(3, "Fin must be at least 3 characters.")
-    .required("Fin is required"),
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  address: Yup.string()
-    .min(5, "Address must be at least 5 characters.")
-    .required("Address is required"),
-});
-
-export const UserValidationSchema = () =>
+export const OfficeValidationSchema = (t) =>
   Yup.object({
     name: Yup.string()
-      .min(3, "Name must be at least 3 characters.")
-      .required("Name is required"),
-    username: Yup.string()
-      .min(3, "Username must be at least 3 characters.")
-      .required("Username is required"),
+      .trim()
+      .min(3, t("validations.minLength.officeName"))
+      .required(t("validations.required.officeName")),
+    address: Yup.string()
+      .trim()
+      .min(5, t("validations.minLength.address"))
+      .required(t("validations.required.address")),
     phone: Yup.string()
-      .matches(/^\d+$/, "Phone must contain only digits")
-      .required("Phone is required"),
+      .matches(/^\d+$/, t("validations.pattern.phone"))
+      .required(t("validations.required.phone")),
+  });
+
+export const DepartmentValidationSchema = (t) =>
+  Yup.object({
+    name: Yup.string()
+      .trim()
+      .min(3, t("validations.minLength.departmentName"))
+      .required(t("validations.required.departmentName")),
+    address: Yup.string()
+      .trim()
+      .min(5, t("validations.minLength.address"))
+      .required(t("validations.required.address")),
+    phone: Yup.string()
+      .matches(/^\d+$/, t("validations.pattern.phone"))
+      .required(t("validations.required.phone")),
+    office_id: Yup.string().required(t("validations.required.officeSelection")),
+  });
+
+export const VisitorValidationSchema = (t) =>
+  Yup.object({
+    name: Yup.string()
+      .min(3, t("validations.minLength.name"))
+      .required(t("validations.required.name")),
+    phone: Yup.string()
+      .matches(/^\d+$/, t("validations.pattern.phone"))
+      .required(t("validations.required.phone")),
+    doc_id: Yup.string()
+      .min(3, t("validations.minLength.fin"))
+      .required(t("validations.required.fin")),
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    role_id: Yup.string().required("Role is required"),
-    office_id: Yup.string().required("Office is required"),
-    department_id: Yup.string().required("Department is required"),
+      .email(t("validations.pattern.email"))
+      .required(t("validations.required.email")),
+    address: Yup.string()
+      .min(5, t("validations.minLength.address"))
+      .required(t("validations.required.address")),
+  });
+
+export const UserValidationSchema = (t) =>
+  Yup.object({
+    name: Yup.string()
+      .min(3, t("validations.minLength.name"))
+      .required(t("validations.required.name")),
+    username: Yup.string()
+      .min(3, t("validations.minLength.username"))
+      .required(t("validations.required.username")),
+    phone: Yup.string()
+      .matches(/^\d+$/, t("validations.pattern.phone"))
+      .required(t("validations.required.phone")),
+    email: Yup.string()
+      .email(t("validations.pattern.email"))
+      .required(t("validations.required.email")),
+    role_id: Yup.string().required(t("validations.required.role")),
+    office_id: Yup.string().required(t("validations.required.office")),
+    department_id: Yup.string().required(t("validations.required.department")),
     password: Yup.string()
-      .min(8, "Password must be at least 8 characters.")
-      .required("Password is required"),
+      .min(8, t("validations.minLength.password"))
+      .required(t("validations.required.password")),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Password confirmation is required"),
+      .oneOf([Yup.ref("password"), null], t("validations.match.password"))
+      .required(t("validations.required.passwordConfirmation")),
     active: Yup.boolean(),
   });

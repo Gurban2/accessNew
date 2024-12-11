@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,45 +8,29 @@ import Breadcrumb from "../Breadcrumb";
 
 import "./style.scss";
 import { AppPaths } from "../../../constants/appPaths";
+import { Form, Formik } from "formik";
+import { OfficeValidationSchema } from "../InputValidation";
+import FormField from "../FormField";
+import { Button } from "react-bootstrap";
 
 const OfficeEdit = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { mutateAsync: updateOffice } = useUpdateOffice();
+  const { mutateAsync: updateOffice, isPending } = useUpdateOffice();
   const { data, isLoading } = useFetchOfficeById(id);
   const navigate = useNavigate();
 
   const office = data?.data;
 
-  const [formData, setFormData] = React.useState({
-    name: "",
-    address: "",
-    phone: "",
-  });
-
-  useEffect(() => {
-    if (office) {
-      setFormData({
-        name: office.name,
-        address: office.address,
-        phone: office.phone,
-      });
-    }
-  }, [office]);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await updateOffice({ id, office: formData });
+      await updateOffice({ id, office: values });
       toast.success(t("office.edit.success"));
       navigate(AppPaths.offices.all);
     } catch (error) {
-      toast.error("Error editing office");
+      toast.error(t("office.edit.error"));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -55,54 +39,54 @@ const OfficeEdit = () => {
   }
 
   if (!office) {
-    return <p>{t("office.edit.notFound")}</p>;
+    return navigate(AppPaths.errors.notfound);
   }
 
+  const breadCrumbs = [
+    { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+    { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
+    { label: t("breadcrumbs.editOffice") },
+  ];
+
   return (
-    <div className="offices-add-container">
-      <div className="offices-wrapper d-row">
-        <Breadcrumb
-          paths={[
-            { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-            { label: t("breadcrumbs.offices"), to: AppPaths.offices.all },
-            { label: t("office.edit.breadcrumb") },
-          ]}
-        />
-      </div>
+    <div className="user-container">
+      <Breadcrumb paths={breadCrumbs} />
       <hr className="navigation-underline" />
-      <h1 className="offices-add">{t("office.edit.title")}</h1>{" "}
-      <form className="offices-add-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">{t("office.edit.officeName")}</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">{t("office.edit.address")}</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">{t("office.edit.phone")}</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="submit-button">
-          {t("office.edit.saveChanges")}
-        </button>
-      </form>
+      <Formik
+        initialValues={{
+          name: office.name,
+          address: office.address,
+          phone: office.phone,
+        }}
+        validationSchema={OfficeValidationSchema(t)}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="add-form">
+            <div className="form-wrapper">
+              <FormField label={t("office.add.name")} name="name" />
+              <FormField label={t("office.add.address")} name="address" />
+              <FormField
+                label={t("office.add.phone")}
+                name="phone"
+                type="tel"
+              />
+            </div>
+            <div className="form-footer">
+              <Button
+                type="submit"
+                disabled={isSubmitting || isPending}
+                variant="primary"
+                className="btn-primary"
+              >
+                {isSubmitting || isPending
+                  ? t("office.add.submitting")
+                  : t("office.add.submit")}
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
