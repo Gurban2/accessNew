@@ -11,7 +11,6 @@
     "success": "Əməliyyat uğurla tamamlandı!",
     "error": "Xəta baş verdi"
   },
-
   "navigation": {
     "dashboard": "İdarəetmə Paneli",
     "officesDepartments": "Ofislər və Şöbələr",
@@ -26,7 +25,6 @@
     "add": "Əlavə et",
     "report": "Şikayət"
   },
-
   "breadcrumbs": {
     "dashboard": "İdarəetmə Paneli",
     "users": "İstifadəçilər",
@@ -47,7 +45,6 @@
     "deleteVisitor": "Ziyarətçini Sil",
     "showVisitor": "Ziyarətçi Məlumatları"
   },
-
   "dashboard": {
     "sections": {
       "visitors": {
@@ -93,7 +90,6 @@
       "openFullList": "Tam Siyahını Aç"
     }
   },
-
   "user": {
     "all": {
       "title": "İstifadəçilər",
@@ -154,12 +150,11 @@
       "error": "İstifadəçi silinərkən xəta baş verdi."
     }
   },
-
   "visitors": {
     "all": {
       "title": "Ziyarətçilər",
       "add": "Ziyarətçi Əlavə Et",
-      "searchPlaceholder": "Ziyarətçi axtar",
+      "searchPlaceholder": "Ziyarətçi axtar...",
       "name": "Ad",
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
@@ -179,11 +174,18 @@
       "name": "Ad",
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
-      "fin": "Fin",
+      "doc_id": "Sənəd ID-si",
       "phone": "Telefon",
       "email": "E-poçt",
+      "address": "Ünvan",
+      "visitTime": "Ziyarət Vaxtı",
+      "visitingNow": "Indi Ziyarət edir",
+      "addItem": "Əşyaları Əlavə Et",
+      "itemName": "Əşya Adı",
+      "itemDescription": "Əşya Təsviri",
       "submit": "Göndər",
       "submitting": "Göndərilir...",
+      "reset": "Təmizlə",
       "success": "Ziyarətçi uğurla əlavə olundu!",
       "error": "Ziyarətçi əlavə edilərkən xəta baş verdi."
     },
@@ -192,7 +194,7 @@
       "name": "Ad",
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
-      "fin": "Fin",
+      "doc_id": "Fin",
       "phone": "Telefon",
       "email": "E-poçt",
       "submit": "Göndər",
@@ -202,7 +204,10 @@
       "addItem": "Əşyaları Əlavə Et",
       "itemName": "Əşya Adı",
       "itemDescription": "Əşya Təsviri",
-      "visitTime": "Ziyarət Vaxtı"
+      "visitTime": "Ziyarət Vaxtı",
+      "addPhoto": "Səkil əlavə et",
+      "address": "Ünvan",
+      "visitingNow": "Indi Ziyarət edir"
     },
     "view": {
       "title": "Ziyarətçi Məlumatları",
@@ -220,7 +225,6 @@
       "deleteError": "Ziyarətçini silmək alınmadı."
     }
   },
-
   "office": {
     "all": {
       "title": "Ofislər",
@@ -257,7 +261,6 @@
       "error": "Ofis yenilənərkən xəta baş verdi."
     }
   },
-
   "department": {
     "add": {
       "title": "Şöbə Əlavə Et",
@@ -278,6 +281,7 @@
       "name": "Ad",
       "address": "Ünvan",
       "phone": "Telefon",
+      "office": "Ofis",
       "actions": "Əməliyyatlar",
       "edit": "Redaktə Et",
       "delete": "Sil",
@@ -298,23 +302,23 @@
       "error": "Şöbə yenilənərkən xəta baş verdi."
     }
   },
-
   "login": {
     "welcome": "Tətbiqimizə xoş gəlmisiniz!",
     "loginWithEmail": "E-poçt ilə daxil olun",
+    "email": "E-poçt ünvanını daxil edin",
+    "password": "Şifrəni daxil edin",
+    "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
     "forgotPassword": "Şifrəni unutdunuz?",
+    "loginButton": "Daxil ol",
+    "loggingIn": "Daxil olunur...",
+
     "enterEmailForReset": "Şifrəni sıfırlamaq üçün e-poçt ünvanınızı daxil edin",
     "enterResetTokenAndNewPassword": "Şifrəni sıfırlamaq üçün token və yeni şifrəni daxil edin",
-    "enterEmail": "E-poçt ünvanını daxil edin",
-    "enterPassword": "Şifrəni daxil edin",
-    "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
     "forgotPasswordLink": "Şifrəni unutdunuz?",
     "sendResetLink": "Sıfırlama linkini göndər",
     "resetPassword": "Şifrəni sıfırlamaq",
     "newPassword": "Yeni Şifrə",
     "confirmNewPassword": "Yeni Şifrəni Təsdiq Et",
-    "loggingIn": "Daxil olunur...",
-    "loginButton": "Daxil ol",
     "resetPasswordButton": "Şifrəni sıfırlayın",
     "sendResetLinkButton": "Sıfırlama linkini göndər",
     "passwordsDoNotMatch": "Şifrələr uyğun gəlmir.",
@@ -328,7 +332,6 @@
     "checkYourEmailForResetLink": "Şifrə sıfırlama linkini əldə etmək üçün e-poçt ünvanınızı yoxlayın.",
     "backToLogin": "Geri"
   },
-
   "error": {
     "forbidden": {
       "title": "403",
@@ -343,21 +346,21 @@
       "goHome": "Ana səhifəyə qayıt"
     }
   },
-
   "validations": {
     "required": {
       "officeName": "Ofis adı mütləq daxil edilməlidir.",
       "address": "Ünvan mütləq daxil edilməlidir.",
       "phone": "Telefon nömrəsi mütləq daxil edilməlidir.",
       "departmentName": "Şöbə adı mütləq daxil edilməlidir.",
-      "officeSelection": "Ofis seçimi mütləqdir.",
+      "office": "Ofis seçimi mütləqdir.",
       "name": "Ad mütləq daxil edilməlidir.",
       "username": "İstifadəçi adı mütləq daxil edilməlidir.",
       "email": "E-poçt mütləq daxil edilməlidir.",
       "role": "Rol mütləq daxil edilməlidir.",
       "department": "Şöbə mütləq daxil edilməlidir.",
       "password": "Şifrə mütləq daxil edilməlidir.",
-      "passwordConfirmation": "Şifrə təsdiqi mütləqdir."
+      "passwordConfirmation": "Şifrə təsdiqi mütləqdir.",
+      "doc_id": "Sənəd ID-si mütləq daxil edilməlidir."
     },
     "minLength": {
       "officeName": "Ofis adı ən azı 3 simvoldan ibarət olmalıdır.",
@@ -366,7 +369,7 @@
       "name": "Ad ən azı 3 simvoldan ibarət olmalıdır.",
       "username": "İstifadəçi adı ən azı 3 simvoldan ibarət olmalıdır.",
       "password": "Şifrə ən azı 8 simvoldan ibarət olmalıdır.",
-      "fin": "Fin ən azı 3 simvoldan ibarət olmalıdır."
+      "doc_id": "Sənəd ID-si ən azı 5 simvoldan ibarət olmalıdır."
     },
     "pattern": {
       "phone": "Telefon yalnız rəqəmlərdən ibarət olmalıdır.",
@@ -376,6 +379,7 @@
       "password": "Şifrələr uyğun gəlməlidir."
     }
   },
-
-  "noDataFound": "Məlumat tapılmadı"
+  "noDataFound": "Məlumat tapılmadı",
+  "noComplaintsFound": "Heç bir Şikayət tapilmadi",
+  "loading": "Yüklənir..."
 }

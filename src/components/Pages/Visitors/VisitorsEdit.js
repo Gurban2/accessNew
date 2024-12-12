@@ -92,7 +92,7 @@ const VisitorsEdit = () => {
         paths={[
           { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
           { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
-          { label: t("breadcrumbs.addVisitor") },
+          { label: t("breadcrumbs.editVisitor") },
         ]}
       />
       <hr className="navigation-underline" />

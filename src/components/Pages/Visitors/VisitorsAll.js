@@ -80,7 +80,7 @@ const VisitorsAll = () => {
       <div className="head-wrapper">
         <Search
           path={AppPaths.visitors.all}
-          placeholder={t("visitorAll.searchPlaceholder")}
+          placeholder={t("visitors.all.searchPlaceholder")}
         />
 
         <Button type="button" variant="primary" className="add-btn">
