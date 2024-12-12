@@ -22,7 +22,7 @@ const VisitorsView = () => {
   const { id } = useParams();
 
   const { data: visitorData } = useFetchVisitorById(id);
-  const { data: visitData, error, refetch } = useStartVisit(id);
+  const { data: visitData, error, refetch } = useStartVisit(false, id);
   const visitInfo = visitData;
 
   const visitor = visitorData?.data;
