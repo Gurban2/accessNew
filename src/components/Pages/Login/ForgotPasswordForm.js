@@ -13,10 +13,10 @@ const ForgotPasswordForm = ({
   return (
     <Form>
       <Form.Group className="mb-3" controlId="forgotPasswordEmail">
-        <Form.Label>{t("login.enterEmail")}</Form.Label>
+        <Form.Label>{t("login.forgot.email")}</Form.Label>
         <Form.Control
           type="email"
-          placeholder={t("login.enterEmail")}
+          placeholder={t("login.forgot.email")}
           value={forgotPasswordEmail}
           onChange={(e) => setForgotPasswordEmail(e.target.value)}
         />
@@ -27,7 +27,7 @@ const ForgotPasswordForm = ({
         className="w-100"
         onClick={handleForgotPassword}
       >
-        {t("login.sendResetLinkButton")}
+        {t("login.forgot.sendResetLinkButton")}
       </Button>
     </Form>
   );
