@@ -22,7 +22,7 @@ const ComplaintsAll = () => {
   };
 
   if (isLoading) return <p>{t("loading")}</p>;
-  if (!complaints?.length) return <p>{t("no Complaints found")}</p>;
+  if (!complaints?.length) return <p>{t("noComplaintsFound")}</p>;
 
   const headItems = [
     t("#"),

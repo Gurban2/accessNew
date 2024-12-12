@@ -69,10 +69,10 @@ const VisitorsAdd = () => {
     try {
       await mutateAsync(newFormData);
       setSubmitting(false);
-      toast.success(t("visitorAdd.success"));
+      toast.success(t("visitors.add.success"));
       navigate(AppPaths.visitors.all);
     } catch (error) {
-      toast.error(t("visitor.Add.error"));
+      toast.error(t("visitors.add.error"));
     }
   };
 
@@ -114,17 +114,17 @@ const VisitorsAdd = () => {
                   onConfirm={(imageSrc) =>
                     handleCapture(imageSrc, setFieldValue)
                   }
-                  btnText={t("visitorAdd.addPhoto")}
+                  btnText={t("visitors.add.photo")}
                 />
                 <Form.Label className="form-label-head">
-                  {t("visitorAdd.addPhoto")}
+                  {t("visitors.add.photo")}
                 </Form.Label>
                 <ErrorMessage name="photo" component="div" className="error" />
               </Form.Group>
             </Row>
             <div className="d-flex flex-wrap gap-2">
               <FormField
-                label={t("department.add.doc_type")}
+                label={t("visitors.add.docType")}
                 name="doc_type"
                 as="select"
                 options={Object.entries(documentTypes)?.map(([value, key]) => ({
@@ -133,39 +133,39 @@ const VisitorsAdd = () => {
                 }))}
               />
               <FormField
-                label={t("visitorAdd.fin")}
+                label={t("visitors.add.doc_id")}
                 name="doc_id"
                 type="text"
                 className="form-control"
               />
               <FormField
-                label={t("visitorAdd.name")}
+                label={t("visitors.add.name")}
                 name="name"
                 type="text"
                 className="form-control"
               />
               <FormField
-                label={t("visitorAdd.phone")}
+                label={t("visitors.add.phone")}
                 name="phone"
                 type="text"
                 className="form-control"
               />
 
               <FormField
-                label={t("visitorAdd.email")}
+                label={t("visitors.add.email")}
                 name="email"
                 type="email"
                 className="form-control"
               />
               <FormField
-                label={t("visitorAdd.address")}
+                label={t("visitors.add.address")}
                 name="address"
                 type="text"
                 className="form-control"
               />
 
               <FormField
-                label={t("visitorAdd.visitTime")}
+                label={t("visitors.add.visitTime")}
                 name="visit_time"
                 type="datetime-local"
                 className="form-control"
@@ -173,14 +173,14 @@ const VisitorsAdd = () => {
 
               <Form.Check
                 type="checkbox"
-                label={t("visitorAdd.visitingNow")}
+                label={t("visitors.add.visitingNow")}
                 name="visiting_now"
               />
             </div>
             <Row className="mb-3">
               <Form.Group as={Col} xs={12} md={6} controlId="additem">
                 <Button variant="warning" onClick={handleAddItem}>
-                  {t("visitorAdd.addItem")}
+                  {t("visitors.add.addItem")}
                 </Button>
               </Form.Group>
             </Row>
@@ -188,8 +188,8 @@ const VisitorsAdd = () => {
               <Table bordered className="mb-3">
                 <thead>
                   <tr>
-                    <th>{t("visitorAdd.itemName")}</th>
-                    <th>{t("visitorAdd.itemDescription")}</th>
+                    <th>{t("visitors.add.itemName")}</th>
+                    <th>{t("visitors.add.itemDescription")}</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -199,7 +199,7 @@ const VisitorsAdd = () => {
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder={t("visitorAdd.itemName")}
+                          placeholder={t("visitors.add.itemName")}
                           value={item.name}
                           onChange={(e) =>
                             handleItemChange(index, "name", e.target.value)
@@ -209,7 +209,7 @@ const VisitorsAdd = () => {
                       <td>
                         <Form.Control
                           type="text"
-                          placeholder={t("visitorAdd.itemDescription")}
+                          placeholder={t("visitors.add.itemDescription")}
                           value={item.desc}
                           onChange={(e) =>
                             handleItemChange(index, "desc", e.target.value)
@@ -233,8 +233,8 @@ const VisitorsAdd = () => {
             <div className="form-actions">
               <Button variant="primary" type="submit" disabled={isSubmitting}>
                 {isSubmitting
-                  ? t("visitorAdd.submitting")
-                  : t("visitorAdd.submit")}
+                  ? t("visitors.add.submitting")
+                  : t("visitors.add.submit")}
               </Button>
               <Button
                 variant="secondary"
@@ -244,7 +244,7 @@ const VisitorsAdd = () => {
                   setItems([]);
                 }}
               >
-                {t("visitorAdd.reset")}
+                {t("visitors.add.reset")}
               </Button>
             </div>
           </FormikForm>

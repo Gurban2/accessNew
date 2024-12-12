@@ -60,12 +60,11 @@ const Login = () => {
       toast.error(t("login.pleaseEnterEmailAddress"));
       return;
     }
-
     try {
       await forgotPassword(forgotPasswordEmail);
       toast.success(t("login.pleaseCheckYourEmail"));
       setForgotPasswordEmail("");
-      setShowForgotPassword(true);
+      setShowForgotPassword(false);
       toast.info(t("login.checkYourEmailForResetLink"));
       setToken("123456");
       setEmail(forgotPasswordEmail);
