@@ -10,9 +10,12 @@ import { logout } from "../../api/authApi";
 import NotificationBell from "../Notifications/NotificationBell";
 
 import "./header.scss";
+import { useDispatch } from "react-redux";
 
 const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   useEffect(() => {
     const header = ref.current;
@@ -42,7 +45,8 @@ const Header = ({ isCollapsedSideBar }) => {
   }, []);
 
   const handleLogout = async () => {
-    await logout();
+    await logout(dispatch);
+    window.localStorage.removeItem("token");
     navigate(AppPaths.login);
   };
 

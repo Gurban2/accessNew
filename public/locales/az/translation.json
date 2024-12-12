@@ -154,7 +154,7 @@
     "all": {
       "title": "Ziyarətçilər",
       "add": "Ziyarətçi Əlavə Et",
-      "searchPlaceholder": "Ziyarətçi axtar...",
+      "searchPlaceholder": "Ad, Fin və ya Telefon axtar",
       "name": "Ad",
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
@@ -174,7 +174,7 @@
       "name": "Ad",
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
-      "doc_id": "Sənəd ID-si",
+      "doc_id": "Sənəd nömrəsi",
       "phone": "Telefon",
       "email": "E-poçt",
       "address": "Ünvan",
@@ -217,12 +217,24 @@
       "fin": "Fin",
       "phone": "Telefon",
       "email": "E-poçt",
+      "address": "Ünvan",
       "actions": "Əməliyyatlar",
       "edit": "Redaktə Et",
       "delete": "Sil",
       "deleteConfirm": "Bu ziyarətçini silmək istədiyinizdən əminsiniz?",
       "deleteSuccess": "Ziyarətçi uğurla silindi.",
-      "deleteError": "Ziyarətçini silmək alınmadı."
+      "deleteError": "Ziyarətçini silmək alınmadı.",
+      "report": "Şikayət Et",
+      "submit": "Göndər",
+      "submitting": "Göndərilir...",
+      "successReport": "Şikayətiniz uğurla göndərildi!",
+      "errorReposrt": "Şikayət göndərilmədi.",
+      "emptyDescriptionError": "Zəhmət olmasa, şikayətinizə təsvir əlavə edin.",
+      "complaints": "Şikayətlər",
+      "noComplaints": "Heç bir şikayət tapılmadı.",
+      "unknown": "Bilinmir",
+      "reporter": "Bildirən",
+      "complainedAt": "Şikayət Tarixi"
     }
   },
   "office": {
@@ -372,7 +384,7 @@
       "department": "Şöbə mütləq daxil edilməlidir.",
       "password": "Şifrə mütləq daxil edilməlidir.",
       "passwordConfirmation": "Şifrə təsdiqi mütləqdir.",
-      "doc_id": "Sənəd ID-si mütləq daxil edilməlidir."
+      "doc_id": "Sənəd nömrəsi ən azı 3 simvoldan ibarət olmalıdır."
     },
     "minLength": {
       "officeName": "Ofis adı ən azı 3 simvoldan ibarət olmalıdır.",
@@ -381,7 +393,7 @@
       "name": "Ad ən azı 3 simvoldan ibarət olmalıdır.",
       "username": "İstifadəçi adı ən azı 3 simvoldan ibarət olmalıdır.",
       "password": "Şifrə ən azı 8 simvoldan ibarət olmalıdır.",
-      "doc_id": "Sənəd ID-si ən azı 5 simvoldan ibarət olmalıdır."
+      "doc_id": "Sənəd nömrəsi ən azı 3 simvoldan ibarət olmalıdır."
     },
     "pattern": {
       "phone": "Telefon yalnız rəqəmlərdən ibarət olmalıdır.",

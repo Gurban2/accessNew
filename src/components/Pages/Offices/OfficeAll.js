@@ -38,7 +38,6 @@ const OfficeAll = () => {
   };
 
   const headItems = [
-    "#",
     t("office.all.name"),
     t("office.all.address"),
     t("office.all.phone"),

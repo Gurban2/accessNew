@@ -42,7 +42,6 @@ const DepartmentsAll = () => {
   };
 
   const headItems = [
-    "#",
     t("department.all.name"),
     t("department.all.phone"),
     t("department.all.address"),

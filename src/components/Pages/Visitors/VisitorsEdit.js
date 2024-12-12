@@ -1,6 +1,6 @@
-import { Formik, Field, Form as FormikForm, ErrorMessage } from "formik";
-import React, { useEffect, useState } from "react";
-import { Button, Col, Form, Row, Table } from "react-bootstrap";
+import { Formik, Form as FormikForm, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -11,44 +11,30 @@ import Breadcrumb from "../Breadcrumb";
 
 import "./style.scss";
 import { VisitorValidationSchema } from "../InputValidation";
-import { FaRegTrashAlt } from "react-icons/fa";
 import {
+  useFetchDocumentTypes,
   useFetchVisitorById,
   useUpdateVisitor,
 } from "../../../hooks/useVisitors";
 import LoadingForm from "../../../modules/Loading/Form";
 import FormField from "../FormField";
 import Capture from "../../../modules/Capture";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
+import ItemsTable from "./ItemsTable";
 
 const VisitorsEdit = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const { data, isLoading } = useFetchVisitorById(id);
+  const [items, setItems] = useState([]);
   const visitor = data?.data;
-  const [items, setItems] = useState(visitor?.items || []);
+
+  const { data: documentTypesData, isLoading: isLoadingDocumentTypes } =
+    useFetchDocumentTypes();
+  const documentTypes = documentTypesData?.data;
+
   const { mutateAsync } = useUpdateVisitor();
 
-  useEffect(() => {
-    if (visitor) {
-      setItems(visitor.items);
-    }
-  }, [visitor]);
-
-  const handleAddItem = () => {
-    setItems([...items, { name: "", desc: "" }]);
-  };
-
-  const handleItemChange = (index, field, value) => {
-    const updatedItems = [...items];
-    updatedItems[index][field] = value;
-    setItems(updatedItems);
-  };
-
-  const handleRemoveItem = (index) => {
-    const updatedItems = items.filter((_, i) => i !== index);
-    setItems(updatedItems);
-  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,7 +47,7 @@ const VisitorsEdit = () => {
 
       await mutateAsync({
         id: visitor.id,
-        visitor: values,
+        visitor: { ...values, items },
         visiting_now: values.visiting_now ? 1 : 0,
         visit_time: formattedVisitTime,
       });
@@ -80,12 +66,13 @@ const VisitorsEdit = () => {
     setFieldValue("avatar", imageSrc);
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingDocumentTypes) {
     return <LoadingForm />;
   }
 
-  console.log({ visitor });
-
+  const handleItemsUpdate = (data) => {
+    setItems(data);
+  };
   return (
     <div className="user-container">
       <Breadcrumb
@@ -99,13 +86,16 @@ const VisitorsEdit = () => {
 
       <Formik
         initialValues={{
+          doc_type: visitor.doc_type,
           doc_id: visitor.doc_id,
           name: visitor.name,
           phone: visitor.phone,
           email: visitor.email,
           address: visitor.address,
-          visit_time: format(new Date(visitor.visit_time), "yyyy-MM-dd HH:mm"),
-          visiting_now: visitor.visiting_now,
+          visit_time: format(
+            new Date(visitor.visit_time * 1000),
+            "yyyy-MM-dd HH:mm",
+          ),
           avatar: visitor.avatar,
         }}
         validationSchema={VisitorValidationSchema(t)}
@@ -122,13 +112,19 @@ const VisitorsEdit = () => {
                   }
                   btnText={t("visitors.edit.addPhoto")}
                 />
-                <Form.Label className="form-label-head">
-                  {t("visitors.edit.addPhoto")}
-                </Form.Label>
                 <ErrorMessage name="avatar" component="div" className="error" />
               </Form.Group>
             </Row>
             <div className="form-wrapper">
+              <FormField
+                label={t("visitors.add.docType")}
+                name="doc_type"
+                as="select"
+                options={Object.entries(documentTypes)?.map(([value, key]) => ({
+                  label: key,
+                  value: value,
+                }))}
+              />
               <FormField
                 label={t("visitors.edit.fin")}
                 name="doc_id"
@@ -167,68 +163,18 @@ const VisitorsEdit = () => {
                 type="datetime-local"
                 className="form-control"
               />
-
-              <Form.Check
-                type="checkbox"
-                label={t("visitors.edit.visitingNow")}
-                name="visiting_now"
-              />
             </div>
+            <ItemsTable
+              initialItems={visitor?.items}
+              onItemsUpdate={handleItemsUpdate}
+            />
             <div className="form-footer">
-              <Button variant="warning" onClick={handleAddItem}>
-                {t("visitors.edit.addItem")}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting
+                  ? t("visitors.edit.submitting")
+                  : t("visitors.edit.submit")}
               </Button>
             </div>
-            {items?.length > 0 && (
-              <Table bordered className="mb-3">
-                <thead>
-                  <tr>
-                    <th>{t("visitors.edit.itemName")}</th>
-                    <th>{t("visitors.edit.itemDescription")}</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item, index) => (
-                    <tr key={index}>
-                      <td>
-                        <Field
-                          type="text"
-                          value={item.name}
-                          onChange={(e) =>
-                            handleItemChange(index, "name", e.target.value)
-                          }
-                        />
-                      </td>
-                      <td>
-                        <Field
-                          type="text"
-                          value={item.desc}
-                          onChange={(e) =>
-                            handleItemChange(index, "desc", e.target.value)
-                          }
-                        />
-                      </td>
-                      <td>
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          onClick={() => handleRemoveItem(index)}
-                        >
-                          <FaRegTrashAlt />
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            )}
-
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting
-                ? t("visitors.edit.submitting")
-                : t("visitors.edit.submit")}
-            </Button>
           </FormikForm>
         )}
       </Formik>

@@ -66,19 +66,6 @@
   gap: 12px;
 }
 
-.offices-add-form input,
-.search {
-  border: 0 !important;
-  border-bottom: 1px solid var(--input-border) !important;
-  border-left: 1px solid var(--input-border) !important;
-  border-radius: 2px;
-  padding: 6px 3px !important;
-  font-size: var(--font-size-base);
-  background-color: var(--background-color);
-  letter-spacing: 0.02rem;
-  transition: ease-in-out 0.2s;
-}
-
 .offices-all-container {
   display: flex;
   flex-direction: column;

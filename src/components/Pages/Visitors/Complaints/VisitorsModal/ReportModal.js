@@ -2,13 +2,12 @@ import React from "react";
 import Modal from "../../../../../modules/Modal";
 import { useTranslation } from "react-i18next";
 import { useAddComplaint } from "../../../../../hooks/useComplaints";
-import VisitorBlockButton from "../../Persona/VisitorBlockButton";
 import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
 
 import "./ReportModal.scss";
 
 const ReportModal = ({
-  onClose,
   description,
   setDescription,
   id,
@@ -19,7 +18,7 @@ const ReportModal = ({
 
   const submitReport = async () => {
     if (!description.trim()) {
-      toast.error(t("visitorView.emptyDescriptionError"));
+      toast.error(t("visitors.view.emptyDescriptionError"));
       return;
     }
 
@@ -30,25 +29,30 @@ const ReportModal = ({
       };
       await mutateAsync(newReportData);
       onUpdateComplaints();
-      toast.success(t("visitorView.success"));
-      onClose();
+      toast.success(t("visitors.view.success"));
     } catch (error) {
-      toast.error(t("visitorView.reportError"));
+      console.error(error);
+      toast.error(t("visitors.view.reportError"));
     }
   };
 
   return (
     <Modal
-      btnText={t("visitorView.report")}
-      onClose={onClose}
+      btnText={t("visitors.view.report")}
       onConfirm={submitReport}
+      title={t("visitors.view.report")}
     >
-      <h3>{t("visitorView.report")}</h3>
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder={t("visitorView.report")}
-      ></textarea>
+      <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label></Form.Label>
+          <Form.Control
+            as="textarea"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={3}
+          />
+        </Form.Group>
+      </Form>
       <div className="modal-buttons"></div>
     </Modal>
   );

@@ -15,8 +15,10 @@ import LogoutButton from "../LogoutButton";
 import "./Sidebar.scss";
 import { AppPaths } from "../../constants/appPaths";
 import { logout } from "../../api/authApi";
+import { useDispatch } from "react-redux";
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const [activeHover, setActiveHover] = useState(null);
@@ -39,7 +41,8 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   }, [isCollapsed, isMouseOn]);
 
   const handleLogout = async () => {
-    await logout();
+    await logout(dispatch);
+    window.localStorage.removeItem("token");
     navigate(AppPaths.login);
   };
 

@@ -83,28 +83,11 @@ select {
   background-color: #fff;
   color: var(--text-color) !important;
 }
-.search {
-  padding: 6px 3px !important;
-  font-size: var(--font-size-sm);
-  background-color: var(--background-color);
-  letter-spacing: 0.02rem;
-  transition: ease-in-out 0.2s;
-  color: var(--primary-color) !important ;
-}
 
 .searchAddBt,
 .btn-primary a {
   font-size: var(--font-size-base);
   padding: 2px 3px !important;
-}
-
-[type='button']:not(:disabled),
-[type='reset']:not(:disabled),
-[type='submit']:not(:disabled),
-button:not(:disabled) {
-  cursor: pointer;
-  border-radius: 2px !important;
-  border-color: var(--border-color);
 }
 
 .submit-button {

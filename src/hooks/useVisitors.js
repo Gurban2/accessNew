@@ -8,6 +8,8 @@ import {
   blockVisitorApi,
   fetchDocumentTypes,
   fetchVisitorComplaints,
+  fetchInfoByDoc,
+  startVisit,
 } from "../api/visitorsApi";
 
 import useQueryParams from "./useQueryParams";
@@ -98,5 +100,29 @@ export const useFetchDocumentTypes = () => {
   return useQuery({
     queryKey: ["documentTypes"],
     queryFn: fetchDocumentTypes,
+  });
+};
+
+export const useInfoByDoc = () => {
+  return useMutation({
+    mutationFn: fetchInfoByDoc,
+  });
+};
+
+export const useStartVisit = (enabled = false, id) => {
+  const queryClient = useQueryClient();
+
+  return useQuery({
+    queryKey: ["startVisit"],
+    queryFn: () => startVisit(id),
+    enabled: enabled,
+    onSuccess: () => {
+      console.log("Visit started");
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
+    },
+    onError: (error) => {
+      console.error("Error starting visit:", error);
+      alert(`Failed to start visit: ${error.message}`);
+    },
   });
 };

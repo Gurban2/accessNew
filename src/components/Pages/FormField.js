@@ -9,12 +9,19 @@ const FormField = ({
   as = "input",
   options = [],
   emptyValue,
+  fieldProps = {},
 }) => {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
       {as === "select" ? (
-        <Field as="select" id={name} name={name} className="form-control">
+        <Field
+          {...fieldProps}
+          as="select"
+          id={name}
+          name={name}
+          className="form-control"
+        >
           {emptyValue && (
             <option value="" disabled>
               {emptyValue.toLowerCase()}
@@ -28,6 +35,7 @@ const FormField = ({
         </Field>
       ) : (
         <Field
+          {...fieldProps}
           type={type}
           id={name}
           name={name}
