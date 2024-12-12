@@ -364,6 +364,12 @@
       "goHome": "Go to Home"
     }
   },
+  "webcam": {
+    "capturePhoto": "Capture Photo",
+    "reset": "Reset",
+    "close": "Close",
+    "confirm": "Confirm"
+  },
   "validations": {
     "required": {
       "officeName": "Office name is required.",

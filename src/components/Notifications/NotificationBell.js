@@ -13,12 +13,9 @@ const NotificationBell = () => {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const handleNotificationClick = (id) => {
-    // Mark notification as read when clicked
     const updatedNotifications = notifications.map((notification) =>
       notification.id === id ? { ...notification, read: true } : notification,
     );
-    // Update notifications state (in real use case, would use setState or Redux)
-    console.log(updatedNotifications);
   };
 
   return (

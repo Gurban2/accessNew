@@ -13,11 +13,9 @@ const ComplaintsAll = () => {
   const navigate = useNavigate();
 
   const complaints = data?.data;
-  console.log(complaints);
 
   const handleView = ({ id }) => {
     const complaint = complaints.find((c) => c.id === id);
-    console.log(complaint);
     navigate(`/visitors/view/${complaint.visitor_id}`);
   };
 

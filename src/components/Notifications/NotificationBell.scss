@@ -16,10 +16,10 @@
       border: none;
       background-color: transparent;
       padding: 0;
-      font-size: 0;  // To remove any extra spacing around the bell
+      font-size: 0;
   
       .dropdown-toggle::after {
-        display: none; // Remove the arrow icon that Bootstrap adds
+        display: none;
       }
   
       .notification-badge {

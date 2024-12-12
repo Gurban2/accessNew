@@ -77,10 +77,7 @@ const PersonaAdd = () => {
     ),
   }));
 
-  // Update search value and prevent immediate page redirection
-  const handleSearchChange = (value) => {
-    // You can perform additional filtering or data fetching here
-  };
+  const handleSearchChange = (value) => {};
 
   return (
     <div className="persona-add-container">
@@ -89,7 +86,7 @@ const PersonaAdd = () => {
         path={AppPaths.persona.add}
         placeholder="Search visitor"
         text="Search Visitor"
-        onSearch={handleSearchChange} // Updated to handle search logic
+        onSearch={handleSearchChange}
       />
       <DataTable
         withAction

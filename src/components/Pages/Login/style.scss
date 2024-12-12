@@ -4,13 +4,6 @@ $background-light: #f8f9fa;
 $text-color-dark: #343a40;
 
 .login-container {
-  // background-size: cover;
-  // background-position: center;
-  // height: 100vh;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // padding: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +17,6 @@ $text-color-dark: #343a40;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  // flex-wrap: nowrap;
   width: 100%;
   max-width: 1200px;
   height: 70%;
@@ -118,15 +110,14 @@ $text-color-dark: #343a40;
   }
 
   .back-button {
-    // display: flex;
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
     font-size: 1rem;
     color: $primary-color;
     margin-bottom: 10px;
     text-decoration: none;
-    display: inline-flex;
-
+    
     svg {
       margin-right: 5px;
       color: $primary-color;

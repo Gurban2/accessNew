@@ -1,4 +1,3 @@
-// Example usage in a React component
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +6,7 @@ import {
   setError,
   markAsRead,
 } from "../../store/reducers/notificationReducer";
-import { fetchNotifications } from "../../api/notificationApi"; // Assume you have an API function
+import { fetchNotifications } from "../../api/notificationApi";
 
 const NotificationList = () => {
   const dispatch = useDispatch();
@@ -21,8 +20,8 @@ const NotificationList = () => {
     const fetchData = async () => {
       dispatch(setLoading(true));
       try {
-        const response = await fetchNotifications(); // API call to fetch notifications
-        dispatch(setNotifications(response.data)); // Assuming response has a data field with notifications
+        const response = await fetchNotifications();
+        dispatch(setNotifications(response.data));
       } catch (err) {
         dispatch(setError("Failed to fetch notifications"));
       } finally {
