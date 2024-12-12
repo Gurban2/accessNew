@@ -80,11 +80,6 @@ function Main() {
               path={AppPaths.persona.add}
               element={<ProtectedRoute element={<PersonaAdd />} />}
             />
-            {/* <Route
-              path={AppPaths.persona.add}
-              element={<ProtectedRoute element={<PersonaAdd />} permissionGroup={['admin', 'manager']} />}
-            /> */}
-
             <Route path={AppPaths.persona.all} element={<PersonaAll />} />
 
             <Route path={AppPaths.users.add} element={<UsersAdd />} />

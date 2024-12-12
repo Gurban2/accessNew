@@ -310,7 +310,7 @@
     "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
     "forgotPasswordLink": "Şifrəni unutdunuz?",
     "loginButton": "Daxil ol",
-    "loggingIn": "Daxil olunur...",    
+    "loggingIn": "Daxil olunur...",
     "forgot": {
       "forgotPassword": "Şifrəni unutdunuz?",
       "enterEmailForReset": "Şifrəni sıfırlamaq üçün e-poçt ünvanınızı daxil edin",
@@ -351,6 +351,12 @@
       "description": "Axtardığınız səhifə mövcud deyil.",
       "goHome": "Ana səhifəyə qayıt"
     }
+  },
+  "webcam": {
+    "capturePhoto": "Səkil Çək",
+    "reset": "Yenilə",
+    "close": "Bağla",
+    "confirm": "Qəbul et"
   },
   "validations": {
     "required": {

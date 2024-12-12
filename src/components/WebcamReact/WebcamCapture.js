@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
-import { Button } from 'react-bootstrap';
-import Webcam from 'react-webcam';
-import './style.scss';
+import React, { useRef } from "react";
+import { Button } from "react-bootstrap";
+import Webcam from "react-webcam";
+import "./style.scss";
+import { useTranslation } from "react-i18next";
 
 const WebcamCapture = ({ onCapture }) => {
+  const { t } = useTranslation();
   const webcamRef = useRef(null);
 
   const handleCapture = () => {
@@ -26,7 +28,7 @@ const WebcamCapture = ({ onCapture }) => {
           onClick={handleCapture}
           className="capture-button"
         >
-          Capture Photo
+          {t("webcam.capturePhoto")}
         </Button>
       </div>
     </div>

@@ -37,7 +37,11 @@ function App() {
       <AuthProvider>
         <Provider store={store}>
           <ToastContainer position="top-right" />
-          <Router>
+          <Router
+            future={{
+              v7_startTransition: true,
+            }}
+          >
             <Routes>
               <Route path={AppPaths.login} element={<Login />} />
               <Route path="*" element={<PrivateRoute element={<Main />} />} />

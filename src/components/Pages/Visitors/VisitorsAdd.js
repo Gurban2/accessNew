@@ -65,7 +65,6 @@ const VisitorsAdd = () => {
         },
       ],
     };
-    console.log({ newFormData });
     try {
       await mutateAsync(newFormData);
       setSubmitting(false);
