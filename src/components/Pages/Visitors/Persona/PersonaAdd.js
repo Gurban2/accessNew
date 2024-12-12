@@ -25,6 +25,7 @@ const PersonaAdd = () => {
 
   const handleOpenModal = (visitor) => {
     setSelectedVisitor(visitor);
+    setReason("");
     setModalOpen(true);
   };
 
@@ -33,6 +34,7 @@ const PersonaAdd = () => {
     setReason("");
     setError("");
   };
+  console.log(reason);
 
   const handleConfirmBlock = () => {
     if (!reason.trim()) {
@@ -77,11 +79,6 @@ const PersonaAdd = () => {
     ),
   }));
 
-  // Update search value and prevent immediate page redirection
-  const handleSearchChange = (value) => {
-    // You can perform additional filtering or data fetching here
-  };
-
   return (
     <div className="persona-add-container">
       {error && <Alert variant="danger">{error}</Alert>}
@@ -89,7 +86,7 @@ const PersonaAdd = () => {
         path={AppPaths.persona.add}
         placeholder="Search visitor"
         text="Search Visitor"
-        onSearch={handleSearchChange} // Updated to handle search logic
+        // onSearch={handleSearchChange}
       />
       <DataTable
         withAction

@@ -20,6 +20,7 @@ const PersonaAll = () => {
   const personNonGrataVisitors = visitors.filter(
     (visitor) => visitor.is_blocked,
   );
+  console.log(personNonGrataVisitors);
 
   const handleEdit = (id, currentReason) => {
     setSelectedVisitorId(id);

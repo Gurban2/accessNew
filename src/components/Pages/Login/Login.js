@@ -7,7 +7,7 @@ import { resetPassword } from "../../../api/resetPasswordApi";
 import { toast } from "react-toastify";
 import { AppPaths } from "../../../constants/appPaths";
 import { useTranslation } from "react-i18next";
-// import LangSwitcher from "../../../modules/LangSwitcher";
+
 import { FaArrowLeft } from "react-icons/fa";
 
 import LoginForm from "./LoginForm";
