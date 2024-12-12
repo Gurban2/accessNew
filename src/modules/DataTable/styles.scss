@@ -45,8 +45,10 @@
 }
 
 .table-actions {
-  display: flex !important;
-  gap: 8px !important;
+  .action-buttons {
+    display: flex !important;
+    gap: 8px !important;
+  }
 
   .action-button {
     display: flex !important;
@@ -58,6 +60,7 @@
     border-radius: 4px !important;
     color: var(--white) !important;
     transition: background-color 0.2s ease !important;
+    padding: 0 14px !important;
 
     &.btn-warning {
       background-color: var(--secondary-color) !important;

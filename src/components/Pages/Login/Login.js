@@ -45,7 +45,6 @@ const Login = () => {
     setLoading(true);
     try {
       await login(email, password, dispatch);
-      console.log(true);
 
       navigate(AppPaths.dashboard);
     } catch (err) {
@@ -98,6 +97,8 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  console.log({ showForgotPassword });
 
   return (
     <div

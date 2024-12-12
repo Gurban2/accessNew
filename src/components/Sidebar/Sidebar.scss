@@ -94,13 +94,13 @@
   }
 
   .sidebar-link.active {
-    background: var(--link-hover) !important;
+    background: var(--sidebar-hover-bg) !important;
     border-radius: 5px;
     border-radius: 0;
-    color: var(--white) !important;
+    color: var(--link-color) !important;
 
     h4 {
-      color: var(--white) !important;
+      color: var(--link-color) !important;
     }
   }
 
@@ -170,7 +170,7 @@
   }
 
   .submenu-title {
-    color: var(--link-hover) !important;
+    color: var(--primary-hover) !important;
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 1rem !important;

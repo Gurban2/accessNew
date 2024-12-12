@@ -24,7 +24,7 @@ const DataTable = ({
         <thead>
           <tr>
             {headItems.map((item) => (
-              <th key={item} className="table-header">
+              <th key={"head-item" + item} className="table-header">
                 {item}
               </th>
             ))}
@@ -38,10 +38,9 @@ const DataTable = ({
               </td>
             </tr>
           )}
-
           {items.map((item, index) => (
             <tr
-              key={item.id}
+              key={item.id || index}
               className={index % 2 === 0 ? "even-row" : "odd-row"}
             >
               <Item data={item} />
