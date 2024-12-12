@@ -9,12 +9,12 @@ import {
   useFetchVisitors,
 } from "../../../../hooks/useVisitors";
 import { AppPaths } from "../../../../constants/appPaths";
-import { toast } from "react-toastify"; // Импортируем toast из react-toastify
+import { toast } from "react-toastify";
 import "./style.scss";
 
 const PersonaAdd = () => {
   const { data, isLoading } = useFetchVisitors();
-  const visitors = data?.data || [];
+  const visitors = data?.data?.filter((visitor) => !visitor.is_blocked) || [];
   const { mutate: blockVisitor, isLoading: blockingLoading } =
     useBlockVisitor();
 
@@ -31,7 +31,9 @@ const PersonaAdd = () => {
   const handleCloseModal = () => {
     setModalOpen(false);
     setReason("");
+    setError("");
   };
+
   const handleConfirmBlock = () => {
     if (!reason.trim()) {
       setError("Reason cannot be empty.");
@@ -41,8 +43,8 @@ const PersonaAdd = () => {
       { id: selectedVisitor.id, reason },
       {
         onSuccess: () => {
-          setModalOpen(false);
-          setReason("");
+          toast.success("Visitor blocked successfully.");
+          handleCloseModal();
         },
         onError: (err) => setError(err.message),
       },
@@ -75,6 +77,11 @@ const PersonaAdd = () => {
     ),
   }));
 
+  // Update search value and prevent immediate page redirection
+  const handleSearchChange = (value) => {
+    // You can perform additional filtering or data fetching here
+  };
+
   return (
     <div className="persona-add-container">
       {error && <Alert variant="danger">{error}</Alert>}
@@ -82,6 +89,7 @@ const PersonaAdd = () => {
         path={AppPaths.persona.add}
         placeholder="Search visitor"
         text="Search Visitor"
+        onSearch={handleSearchChange} // Updated to handle search logic
       />
       <DataTable
         withAction
@@ -101,6 +109,7 @@ const PersonaAdd = () => {
             className="form-control"
             rows="4"
           />
+          {error && <Alert variant="danger">{error}</Alert>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
