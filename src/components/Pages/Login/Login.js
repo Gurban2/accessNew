@@ -39,7 +39,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error(t("login.pleaseEnterEmailAndPassword"));
+      toast.error(t("login.toast.pleaseEnterEmailAndPassword"));
       return;
     }
     setLoading(true);
@@ -48,7 +48,7 @@ const Login = () => {
 
       navigate(AppPaths.dashboard);
     } catch (err) {
-      toast.error(t("login.invalidEmailOrPassword"));
+      toast.error(t("login.toast.invalidEmailOrPassword"));
     } finally {
       setLoading(false);
     }
@@ -56,20 +56,20 @@ const Login = () => {
 
   const handleForgotPassword = async () => {
     if (!forgotPasswordEmail) {
-      toast.error(t("login.pleaseEnterEmailAddress"));
+      toast.error(t("login.toast.pleaseEnterEmailAddress"));
       return;
     }
     try {
       await forgotPassword(forgotPasswordEmail);
-      toast.success(t("login.pleaseCheckYourEmail"));
+      toast.success(t("login.toast.pleaseCheckYourEmail"));
       setForgotPasswordEmail("");
       setShowForgotPassword(false);
-      toast.info(t("login.checkYourEmailForResetLink"));
+      toast.info(t("login.toast.checkYourEmailForResetLink"));
       setToken("123456");
       setEmail(forgotPasswordEmail);
       setShowForgotPassword(true);
     } catch (error) {
-      toast.error(error.message || t("login.invalidEmailOrPassword"));
+      toast.error(error.message || t("login.toast.invalidEmailOrPassword"));
     }
   };
 
@@ -77,22 +77,22 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !token || !password || !passwordConfirmation) {
-      toast.error(t("login.pleaseEnterEmailAndPassword"));
+      toast.error(t("login.toast.pleaseEnterEmailAndPassword"));
       return;
     }
     if (password !== passwordConfirmation) {
-      toast.error(t("login.passwordsDoNotMatch"));
+      toast.error(t("login.toast.passwordsDoNotMatch"));
       return;
     }
     setLoading(true);
 
     try {
       await resetPassword(email, token, password, passwordConfirmation);
-      toast.success(t("login.passwordResetSuccess"));
+      toast.success(t("login.toast.passwordResetSuccess"));
       setShowForgotPassword(false);
       setToken("");
     } catch (error) {
-      toast.error(error.message || t("login.invalidEmailOrPassword"));
+      toast.error(error.message || t("login.toast.invalidEmailOrPassword"));
     } finally {
       setLoading(false);
     }
@@ -120,21 +120,19 @@ const Login = () => {
           )}
           <div className="form-content">
             <div className="form-header">
-              {/* <div className="form-lang">
-                <LangSwitcher />
-              </div> */}
+              <div className="form-lang">{/* <LangSwitcher /> */}</div>
               <h4 className="form-subtitle">
                 {showForgotPassword && !token
-                  ? t("login.forgotPassword")
+                  ? t("login.forgot.forgotPassword")
                   : showForgotPassword && token
-                    ? t("login.resetPassword")
+                    ? t("login.reset.title")
                     : t("login.welcome")}
               </h4>
               <h1 className="form-title">
                 {showForgotPassword && !token
-                  ? t("login.enterEmailForReset")
+                  ? t("login.forgot.enterEmailForReset")
                   : showForgotPassword && token
-                    ? t("login.enterResetTokenAndNewPassword")
+                    ? t("login.reset.enterResetTokenAndNewPassword")
                     : t("login.loginWithEmail")}
               </h1>
             </div>

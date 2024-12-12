@@ -65,13 +65,11 @@ export const useBlockVisitor = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id) => blockVisitorApi(id), // Function to block the visitor
+    mutationFn: (id) => blockVisitorApi(id),
     onSuccess: (_, id) => {
-      // Invalidate all visitor-related queries
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", id] });
 
-      // Remove the blocked visitor from the list in the cache
       const visitors = queryClient.getQueryData(["visitors"]);
       if (visitors) {
         queryClient.setQueryData(["visitors"], {

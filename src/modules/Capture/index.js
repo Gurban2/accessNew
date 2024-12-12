@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
-import WebcamCapture from '../../components/WebcamReact';
-import Modal from '../Modal';
+import React, { useState } from "react";
+import { FaPlus } from "react-icons/fa";
+import WebcamCapture from "../../components/WebcamReact";
+import Modal from "../Modal";
+import { useTranslation } from "react-i18next";
 
 const Capture = ({ btnText, onConfirm, btnClassName, photo }) => {
   const [showModal, setShowModal] = useState(false);
   const [useWebcam, setUseWebcam] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
+  const { t } = useTranslation();
 
   const handleWebcamCapture = (imageSrc) => {
     setPhotoPreview(imageSrc);
@@ -52,14 +54,14 @@ const Capture = ({ btnText, onConfirm, btnClassName, photo }) => {
 
         {photoPreview && (
           <div>
-            <img src={photoPreview} alt="Preview" style={{ width: '100%' }} />
+            <img src={photoPreview} alt="Preview" style={{ width: "100%" }} />
             <div className="mt-3">
               <button
                 type="button"
                 onClick={reset}
                 className="btn btn-secondary"
               >
-                Reset
+                {t("webcam.reset")}
               </button>
             </div>
           </div>
