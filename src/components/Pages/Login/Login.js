@@ -7,7 +7,7 @@ import { resetPassword } from "../../../api/resetPasswordApi";
 import { toast } from "react-toastify";
 import { AppPaths } from "../../../constants/appPaths";
 import { useTranslation } from "react-i18next";
-import LangSwitcher from "../../../modules/LangSwitcher";
+// import LangSwitcher from "../../../modules/LangSwitcher";
 import { FaArrowLeft } from "react-icons/fa";
 
 import LoginForm from "./LoginForm";
@@ -120,9 +120,9 @@ const Login = () => {
           )}
           <div className="form-content">
             <div className="form-header">
-              <div className="form-lang">
+              {/* <div className="form-lang">
                 <LangSwitcher />
-              </div>
+              </div> */}
               <h4 className="form-subtitle">
                 {showForgotPassword && !token
                   ? t("login.forgotPassword")

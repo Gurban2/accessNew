@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import LangSwitcher from "../../modules/LangSwitcher";
+// import LangSwitcher from "../../modules/LangSwitcher";
 import { AppPaths } from "../../constants/appPaths";
 import { isLoggedIn } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
@@ -75,7 +75,7 @@ const Header = ({ isCollapsedSideBar }) => {
             </Navbar.Text>
           </Navbar.Collapse>
 
-          <LangSwitcher />
+          {/* <LangSwitcher /> */}
         </Container>
       </Navbar>
     </div>

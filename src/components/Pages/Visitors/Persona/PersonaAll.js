@@ -46,7 +46,11 @@ const PersonaAll = () => {
     doc_id: visitor.doc_id,
     name: visitor.name,
     reason: visitor.reason,
-    actions: (
+    actions: visitor.is_blocked ? (
+      <Button variant="warning" disabled>
+        Blocked
+      </Button>
+    ) : (
       <Button
         variant="warning"
         onClick={() => handleEdit(visitor.id, visitor.reason)}
