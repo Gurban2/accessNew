@@ -319,35 +319,36 @@
     "email": "Enter your email",
     "password": "Enter your password",
     "keepMeLoggedIn": "Keep Me Logged In",
-    "forgotPasswordLink": "Forgot Password !",    
+    "forgotPasswordLink": "Forgot Password !",
     "loginButton": "Login",
     "loggingIn": "Logging in...",
-    
-        
     "forgotPassword": {
-      "title": "Forgot Password?"
-      
+      "forgotPassword": "Forgot Password?",
+      "enterEmailForReset": "Enter your email to reset password",
+      "sendResetLinkButton": "Send Reset Link",
+      "email": "Enter your email"
     },
-    "resetPassword": {
+    "reset": {
       "title": "Reset Password",
-      "emailPlaceholder": "Enter your email to receive a reset link",
+      "enterResetTokenAndNewPassword": "Enter your email to receive a reset link",
+      "email": "Enter your email",
       "newPassword": "New Password",
-      "confirmPassword": "Confirm New Password",
-      "resetButton": "Reset Password",
-      "success": "Password reset successfully!"
+      "confirmNewPassword": "Confirm New Password",
+      "resetPasswordButton": "Reset Password"
     },
-    
-    "sendResetLinkButton": "Send Reset Link",
-    "passwordsDoNotMatch": "Passwords do not match.",
-    "pleaseEnterEmailAndPassword": "Please enter both email and password.",
-    "pleaseEnterEmailAddress": "Please enter an email address.",
-    "pleaseCheckYourEmail": "Please check your email for the reset link.",
-    "passwordResetSuccess": "Password reset successfully!",
-    "invalidEmailOrPassword": "Invalid email or password. Please try again.",
-    "emailAlreadyInUse": "This email is already in use.",
-    "emailNotFound": "Email address not found.",
-    "checkYourEmailForResetLink": "Please check your email for the reset link.",
+    "toast": {
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "pleaseEnterEmailAndPassword": "Please enter both email and password.",
+      "pleaseEnterEmailAddress": "Please enter an email address.",
+      "pleaseCheckYourEmail": "Please check your email for the reset link.",
+      "passwordResetSuccess": "Password reset successfully!",
+      "invalidEmailOrPassword": "Invalid email or password. Please try again.",
+      "emailAlreadyInUse": "This email is already in use.",
+      "emailNotFound": "Email address not found.",
+      "checkYourEmailForResetLink": "Please check your email for the reset link."
+    },
     "backToLogin": "Back"
+    
   },
   "error": {
     "forbidden": {
