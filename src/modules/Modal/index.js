@@ -57,12 +57,14 @@ const Modal = ({
         </CoreModal.Header>
         <CoreModal.Body>{children}</CoreModal.Body>
         <CoreModal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            {t("webcam.close")}
-          </Button>
-          <Button variant="primary" onClick={handleConfirm}>
-            {t("webcam.confirm")}
-          </Button>
+          <div className="w-100 d-flex align-items-center gap-2 justify-content-end">
+            <Button variant="danger" onClick={handleClose}>
+              {t("general.close")}
+            </Button>
+            <Button variant="success" onClick={handleConfirm}>
+              {t("general.confirm")}
+            </Button>
+          </div>
         </CoreModal.Footer>
       </CoreModal>
     </>

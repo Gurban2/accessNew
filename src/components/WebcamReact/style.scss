@@ -5,9 +5,8 @@
   gap: 10px;
 
   &-preview {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 250px;
+    border-radius: 12px;
     border: 2px var(--border-color);
     background-color: var(--link-color);
   }

@@ -1,6 +1,8 @@
 .logout {
   display: flex;
+  border-radius: 12px;
   justify-content: center;
+  align-items: center;
   margin-top: auto;
   align-self: center;
   gap: 12px;
@@ -14,13 +16,13 @@
 
   &-icon {
     display: flex;
-    transform: rotate(180deg);
     cursor: pointer;
   }
 
   &-text {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
+    text-transform: uppercase;
     border-radius: 4px;
     cursor: pointer;
   }

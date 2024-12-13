@@ -9,7 +9,8 @@
     "loading": "Yüklənir...",
     "submit": "Göndər",
     "success": "Əməliyyat uğurla tamamlandı!",
-    "error": "Xəta baş verdi"
+    "error": "Xəta baş verdi",
+    "logout": "Çıxış"
   },
   "navigation": {
     "dashboard": "İdarəetmə Paneli",
@@ -167,7 +168,9 @@
       "delete": "Sil",
       "deleteConfirm": "Bu ziyarətçini silmək istədiyinizdən əminsiniz?",
       "deleteSuccess": "Ziyarətçi uğurla silindi.",
-      "deleteError": "Ziyarətçini silmək alınmadı."
+      "deleteError": "Ziyarətçini silmək alınmadı.",
+      "visitTime": "Ziyarət Vaxtı",
+      "visitTimeCount": "Ziyarət müddəti"
     },
     "add": {
       "title": "Ziyarətçi Əlavə Et",
@@ -409,6 +412,14 @@
     "match": {
       "password": "Şifrələr uyğun gəlməlidir."
     }
+  },
+
+  "visitorBlockModal": {
+    "title": "Ziyarətçi Blokla",
+    "description": "Bu ziyarətçini bloklamaq istədiyinizdən əminsiniz?",
+    "success": "Ziyarətçi uğurla bloklanmışdır.",
+    "error": "Ziyarətçi bloklanarkən xəta baş verdi.",
+    "confirm": "Bloklamaq"
   },
   "noDataFound": "Məlumat tapılmadı",
   "noComplaintsFound": "Heç bir Şikayət tapilmadi",
