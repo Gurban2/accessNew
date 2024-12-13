@@ -10,6 +10,7 @@ import {
   fetchVisitorComplaints,
   fetchInfoByDoc,
   startVisit,
+  endVisit,
 } from "../api/visitorsApi";
 
 import useQueryParams from "./useQueryParams";
@@ -109,20 +110,28 @@ export const useInfoByDoc = () => {
   });
 };
 
-export const useStartVisit = (enabled = false, id) => {
+export const useStartVisit = () => {
   const queryClient = useQueryClient();
 
-  return useQuery({
+  return useMutation({
     queryKey: ["startVisit"],
-    queryFn: () => startVisit(id),
-    enabled: enabled,
-    onSuccess: () => {
-      console.log("Visit started");
+    mutationFn: startVisit,
+    onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
     },
-    onError: (error) => {
-      console.error("Error starting visit:", error);
-      alert(`Failed to start visit: ${error.message}`);
+  });
+};
+
+export const useEndVisit = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    queryKey: ["endVisit"],
+    mutationFn: endVisit,
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
     },
   });
 };

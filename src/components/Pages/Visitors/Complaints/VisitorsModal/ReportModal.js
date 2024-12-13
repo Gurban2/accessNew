@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 
 import "./ReportModal.scss";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const ReportModal = ({
   description,
@@ -38,9 +39,11 @@ const ReportModal = ({
 
   return (
     <Modal
-      btnText={t("visitors.view.report")}
+      btnText={<FaExclamationTriangle />}
       onConfirm={submitReport}
       title={t("visitors.view.report")}
+      btnProps={{ variant: "warning" }}
+      tooltip={t("visitors.view.report")}
     >
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

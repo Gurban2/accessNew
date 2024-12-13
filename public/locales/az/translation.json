@@ -218,6 +218,7 @@
       "phone": "Telefon",
       "email": "E-poçt",
       "address": "Ünvan",
+      "items": "Əşyalar",
       "actions": "Əməliyyatlar",
       "edit": "Redaktə Et",
       "delete": "Sil",
@@ -234,7 +235,13 @@
       "noComplaints": "Heç bir şikayət tapılmadı.",
       "unknown": "Bilinmir",
       "reporter": "Bildirən",
-      "complainedAt": "Şikayət Tarixi"
+      "complainedAt": "Şikayət Tarixi",
+      "startVisit": "Ziyarəti Başlat",
+      "endVisit": "Ziyarəti Bitir",
+      "startVisitError": "Ziyarəti başlatmaq alınmadı.",
+      "startVisitSuccess": "Ziyarət uğurla başladı.",
+      "endVisitError": "Ziyarəti bitirmək alınmadı.",
+      "endVisitSuccess": "Ziyarət uğurla başa çatdı."
     }
   },
   "office": {

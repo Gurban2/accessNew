@@ -23,7 +23,6 @@ const LoginForm = ({
         <Form.Label>{t("login.email")}</Form.Label>
         <Form.Control
           type="email"
-          placeholder={t("login.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoFocus
@@ -35,7 +34,6 @@ const LoginForm = ({
         <div className="password-input-container">
           <Form.Control
             type={passwordVisible ? "text" : "password"}
-            placeholder={t("login.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

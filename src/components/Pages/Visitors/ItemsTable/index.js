@@ -4,7 +4,11 @@ import DataTable from "../../../../modules/DataTable";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-const ItemsTable = ({ initialItems = [], onItemsUpdate }) => {
+const ItemsTable = ({
+  initialItems = [],
+  onItemsUpdate = () => {},
+  canAdd = true,
+}) => {
   const { t } = useTranslation();
   const [items, setItems] = useState(initialItems);
 
@@ -28,15 +32,18 @@ const ItemsTable = ({ initialItems = [], onItemsUpdate }) => {
     setItems(updatedItems);
   };
 
+  const initialHeadItems = [t("general.name"), t("general.description")];
+
+  const headItems = canAdd
+    ? initialHeadItems.concat(t("actions"))
+    : initialHeadItems;
+
   return (
     <>
       {items?.length > 0 && (
         <DataTable
-          headItems={[
-            t("visitors.add.itemName"),
-            t("visitors.add.itemDescription"),
-            "",
-          ]}
+          tableProps={{ bordered: true }}
+          headItems={headItems}
           items={items.map((item, index) => ({
             id: item.uuid,
             name: (
@@ -44,6 +51,7 @@ const ItemsTable = ({ initialItems = [], onItemsUpdate }) => {
                 key={"item-name" + index}
                 type="text"
                 value={item.name}
+                disabled={!canAdd}
                 onChange={(e) =>
                   handleItemChange(index, "name", e.target.value)
                 }
@@ -54,6 +62,7 @@ const ItemsTable = ({ initialItems = [], onItemsUpdate }) => {
               <Form.Control
                 key={"item-desc" + index}
                 type="text"
+                disabled={!canAdd}
                 value={item.desc}
                 onChange={(e) =>
                   handleItemChange(index, "desc", e.target.value)
@@ -61,20 +70,25 @@ const ItemsTable = ({ initialItems = [], onItemsUpdate }) => {
               />
             ),
           }))}
-          withActions
-          actionItems={[
-            {
-              text: <FaRegTrashAlt />,
-              variant: "danger",
-              tooltip: t("delete"),
-              onClick: handleRemoveItem,
-            },
-          ]}
+          actionItems={
+            canAdd
+              ? [
+                  {
+                    text: <FaRegTrashAlt />,
+                    variant: "danger",
+                    tooltip: t("delete"),
+                    onClick: handleRemoveItem,
+                  },
+                ]
+              : null
+          }
         />
       )}
-      <Button variant="success" onClick={handleAddItem}>
-        {t("visitors.edit.addItem")}
-      </Button>
+      {canAdd && (
+        <Button variant="success" onClick={handleAddItem}>
+          {t("visitors.edit.addItem")}
+        </Button>
+      )}
     </>
   );
 };

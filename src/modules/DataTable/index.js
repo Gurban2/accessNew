@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import Item from "./Item";
 import "./styles.scss";
 import LoadingTable from "../Loading/Table";
 import { useTranslation } from "react-i18next";
+import ActionButton from "../ActionButton";
 
 const DataTable = ({
   headItems,
@@ -49,20 +49,11 @@ const DataTable = ({
                 <td className="table-actions">
                   <div className="action-buttons">
                     {actionItems.map((action, idx) => (
-                      <OverlayTrigger
+                      <ActionButton
                         key={idx}
-                        overlay={<Tooltip>{action.tooltip}</Tooltip>}
-                        placement="top"
-                      >
-                        <Button
-                          type="button"
-                          variant={action.variant}
-                          onClick={() => action.onClick(item)}
-                          className="action-button"
-                        >
-                          {action.text}
-                        </Button>
-                      </OverlayTrigger>
+                        {...action}
+                        onClick={() => action.onClick(item)}
+                      />
                     ))}
                   </div>
                 </td>
