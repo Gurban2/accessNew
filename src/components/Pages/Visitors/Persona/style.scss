@@ -51,7 +51,6 @@
     background-color: var(--card-bg);
     color: var(--text-color);
     border: 1px solid var(--border-color);
-    // border-radius: 2px;
     font-size: var(--font-size-base);
     padding: 4px !important;
     margin-bottom: 10px;
@@ -95,7 +94,7 @@
   }
 
   .photo-input-icon {
-    color: var(--link-hover);
+    color: var(--primary-hover);
   }
 
   .photo-placeholder {
@@ -130,7 +129,7 @@
     }
   }
 }
-//////////VIEW//////////
+
 .visitor-view-container {
   padding: 10px;
 

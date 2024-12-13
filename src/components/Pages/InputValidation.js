@@ -40,8 +40,8 @@ export const VisitorValidationSchema = (t) =>
       .matches(/^\d+$/, t("validations.pattern.phone"))
       .required(t("validations.required.phone")),
     doc_id: Yup.string()
-      .min(3, t("validations.minLength.fin"))
-      .required(t("validations.required.fin")),
+      .min(3, t("validations.minLength.doc_id"))
+      .required(t("validations.required.doc_id")),
     email: Yup.string()
       .email(t("validations.pattern.email"))
       .required(t("validations.required.email")),

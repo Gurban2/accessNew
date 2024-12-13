@@ -25,7 +25,7 @@ import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import ComplaintsAll from "./components/Pages/Visitors/Complaints/ComplaintsAll";
-import VisitorView from "./components/Pages/Visitors/VisitorsView";
+import VisitorsView from "./components/Pages/Visitors/VisitorsView";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/Errors/404Error";
@@ -71,7 +71,7 @@ function Main() {
             <Route path={AppPaths.visitors.add} element={<VisitorAdd />} />
             <Route path={AppPaths.visitors.all} element={<VisitorAll />} />
             <Route path={AppPaths.visitors.edit} element={<VisitorEdit />} />
-            <Route path={AppPaths.visitors.view} element={<VisitorView />} />
+            <Route path={AppPaths.visitors.view} element={<VisitorsView />} />
             <Route
               path={AppPaths.visitors.complaint}
               element={<ComplaintsAll />}
@@ -80,11 +80,6 @@ function Main() {
               path={AppPaths.persona.add}
               element={<ProtectedRoute element={<PersonaAdd />} />}
             />
-            {/* <Route
-              path={AppPaths.persona.add}
-              element={<ProtectedRoute element={<PersonaAdd />} permissionGroup={['admin', 'manager']} />}
-            /> */}
-
             <Route path={AppPaths.persona.all} element={<PersonaAll />} />
 
             <Route path={AppPaths.users.add} element={<UsersAdd />} />

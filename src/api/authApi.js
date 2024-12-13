@@ -29,9 +29,7 @@ export const login = async (email, password, dispatch) => {
 
 export const logout = async (dispatch) => {
   try {
-    const token = localStorage.getItem("token");
-    console.log("Token:", token);
-    await apiClient.get(`/auth/logout/${token}`);
+    await apiClient.get(`/auth/logout`);
     dispatch(logoutAction());
   } catch (error) {
     console.error("Logout error:", error);

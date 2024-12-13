@@ -68,9 +68,9 @@ const AddUser = () => {
     <div className="user-container">
       <Breadcrumb
         paths={[
-          { label: "Dashboard", to: AppPaths.dashboard },
-          { label: "Users", to: AppPaths.users.all },
-          { label: "Add User" },
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          { label: t("breadcrumbs.users"), to: AppPaths.users.all },
+          { label: t("breadcrumbs.addUser") },
         ]}
       />
       <hr className="navigation-underline" />

@@ -6,7 +6,6 @@ export const fetchDepartments = async (queryParams) => {
 };
 
 export const fetchDepartment = async (id) => {
-  console.log({ id });
   const response = await apiClient.get(`/departments/${id}`);
   return response.data;
 };

@@ -15,7 +15,9 @@ const Search = ({ path, placeholder, text }) => {
         replace: true,
       });
     } else {
-      navigate(path, { replace: true });
+      navigate(path, {
+        replace: true,
+      });
     }
   }, [debounceValue, navigate, path]);
 
@@ -23,9 +25,9 @@ const Search = ({ path, placeholder, text }) => {
     setInputValue(e.target.value);
   };
   return (
-    <Form>
+    <Form className="search">
       <Form.Group controlId="searchVisitor">
-        <Form.Label>{text}</Form.Label>
+        {text && <Form.Label>{text}</Form.Label>}
         <Form.Control
           type="text"
           value={inputValue}

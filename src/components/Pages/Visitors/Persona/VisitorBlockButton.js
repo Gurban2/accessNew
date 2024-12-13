@@ -7,7 +7,7 @@ import VisitorConfirmationModal from "../Complaints/VisitorsModal/VisitorConfirm
 const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
-  const [actionSuccess, setActionSuccess] = useState(false); // Для отслеживания успешного выполнения действия
+  const [actionSuccess, setActionSuccess] = useState(false);
 
   if (!visitor) {
     return null;
@@ -25,7 +25,7 @@ const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
     try {
       await blockVisitor(visitor.id);
       toast.success(t("visitorView.success"));
-      setActionSuccess(true); // Установим состояние успеха
+      setActionSuccess(true);
     } catch (error) {
       toast.error(t("visitorView.reportError"));
     } finally {

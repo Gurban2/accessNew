@@ -9,7 +9,6 @@ const authSlice = createSlice({
   },
   reducers: {
     loginSuccess(state, action) {
-      console.log({ payload: action.payload });
       state.user = {
         role: action.payload.role,
         email: action.payload.email,

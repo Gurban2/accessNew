@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import "./style.scss";
+import { format } from "date-fns";
 
 const ComplaintsList = ({ complaints, complaintsLoading, onToggle }) => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const ComplaintsList = ({ complaints, complaintsLoading, onToggle }) => {
         onClick={toggleExpand}
         style={{ cursor: "pointer" }}
       >
-        {t("visitorView.complaints")}
+        {t("visitors.view.complaints")}
       </h5>
       {isExpanded && (
         <div>
@@ -30,22 +31,22 @@ const ComplaintsList = ({ complaints, complaintsLoading, onToggle }) => {
           ) : complaints.length > 0 ? (
             complaints.map((complaint) => (
               <Card key={complaint.id} className="mb-3">
-                <Card.Header>{`${t("visitorView.visitor")}: ${complaint.visitor || t("visitorView.unknown")}`}</Card.Header>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
                     <p>{complaint.description}</p>
                   </blockquote>
                 </Card.Body>
                 <Card.Footer>
-                  {t("visitorView.reportedBy")}:{" "}
-                  {complaint.reported_by || t("visitorView.unknown")} |{" "}
-                  {t("visitorView.createdAt")}:{" "}
-                  {complaint.created_at || t("visitorView.unknown")}
+                  {t("visitors.view.reporter")}:{" "}
+                  {complaint.reported_by || t("visitors.view.unknown")} |{" "}
+                  {t("visitors.view.complainedAt")}:{" "}
+                  {format(complaint.created_at, "dd/MM/yyyy HH:mm") ||
+                    t("visitors.view.unknown")}
                 </Card.Footer>
               </Card>
             ))
           ) : (
-            <p>{t("visitorView.noComplaints")}</p>
+            <p>{t("visitors.view.noComplaints")}</p>
           )}
         </div>
       )}

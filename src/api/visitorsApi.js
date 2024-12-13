@@ -40,3 +40,24 @@ export const fetchVisitorComplaints = async (id) => {
   const response = await apiClient.get(`/visitors/${id}/complaints`);
   return response.data;
 };
+
+export const fetchInfoByDoc = async (data) => {
+  const response = await apiClient.post(`/visitors/get/by-doc-number`, {
+    ...data,
+  });
+  return response.data;
+};
+
+export const startVisit = async (id) => {
+  try {
+    const response = await apiClient.get(`/visitors/${id}/start-visit`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const endVisit = async (id) => {
+  const response = await apiClient.get(`/visitors/${id}/end-visit`);
+  return response.data;
+};

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import CoreModal from "react-bootstrap/Modal";
+import { useTranslation } from "react-i18next";
 
 const Modal = ({
   btnText,
@@ -15,6 +16,7 @@ const Modal = ({
   hideBtn = false,
 }) => {
   const [show, setShow] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setShow(defaultShow);
@@ -56,10 +58,10 @@ const Modal = ({
         <CoreModal.Body>{children}</CoreModal.Body>
         <CoreModal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("webcam.close")}
           </Button>
           <Button variant="primary" onClick={handleConfirm}>
-            Confirm
+            {t("webcam.confirm")}
           </Button>
         </CoreModal.Footer>
       </CoreModal>

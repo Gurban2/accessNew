@@ -17,7 +17,6 @@
     "delete": "Delete",
     "view": "View"
   },
-
   "navigation": {
     "dashboard": "Dashboard",
     "officesDepartments": "Offices & Departments",
@@ -31,21 +30,27 @@
     "all": "All",
     "report": "Complaint"
   },
-
   "breadcrumbs": {
     "dashboard": "Dashboard",
     "users": "Users",
     "addUser": "Add User",
+    "editUser": "İstifadəçini Redaktə Et",
+    "deleteUser": "İstifadəçini Sil",
+    "offices": "Offices",
+    "addOffice": "Add Office",
+    "editOffice": "Ofisi Redaktə Et",
+    "deleteOffice": "Ofisi Sil",
+    "departments": "Departments",
+    "addDepartment": "Add Department",
+    "editDepartment": "Şöbəni Redaktə Et",
+    "deleteDepartment": "Şöbəni Sil",
     "visitors": "Visitors",
     "addVisitor": "Add Visitor",
     "editVisitor": "Edit Visitor",
-    "visitorComplaint": "Visitor Complaint",
-    "offices": "Offices",
-    "addOffice": "Add Office",
-    "departments": "Departments",
-    "addDepartment": "Add Department"
+    "deleteVisitor": "Ziyarətçini Sil",
+    "showVisitor": "Ziyarətçi Məlumatları",
+    "visitorComplaint": "Visitor Complaint"
   },
-
   "dashboard": {
     "sections": {
       "visitors": {
@@ -91,69 +96,67 @@
       "openFullList": "Open Full List"
     }
   },
-
   "user": {
     "all": {
-      "title": "Users",
-      "add": "Add User",
-      "searchPlaceholder": "Search user",
-      "name": "Name",
-      "office": "Office",
-      "department": "Department",
-      "phone": "Phone",
-      "email": "Email",
-      "role": "Role",
-      "actions": "Actions",
-      "edit": "Edit",
-      "delete": "Delete",
-      "deleteConfirm": "Are you sure you want to delete this User?",
-      "deleteSuccess": "User deleted successfully.",
-      "deleteError": "Failed to delete User."
+      "title": "İstifadəçilər",
+      "add": "İstifadəçi Əlavə Et",
+      "searchPlaceholder": "İstifadəçi axtar",
+      "name": "Ad",
+      "office": "Ofis",
+      "department": "Şöbə",
+      "phone": "Telefon",
+      "email": "E-poçt",
+      "role": "Rol",
+      "actions": "Əməliyyatlar",
+      "edit": "Redaktə Et",
+      "delete": "Sil",
+      "deleteConfirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
+      "deleteSuccess": "İstifadəçi uğurla silindi.",
+      "deleteError": "İstifadəçini silmək alınmadı."
     },
     "add": {
-      "title": "Add User",
-      "name": "Name",
-      "username": "Username",
-      "email": "Email",
-      "phone": "Phone",
-      "role": "Role",
-      "department": "Department",
-      "office": "Office",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "submitting": "Submitting...",
-      "submit": "Submit",
-      "success": "User successfully added!",
-      "error": "Error occurred while adding user.",
-      "roleSelect": "Select Role",
-      "departmentSelect": "Select Department",
-      "officeSelect": "Select Office"
+      "title": "İstifadəçi Əlavə Et",
+      "name": "Ad",
+      "username": "İstifadəçi adı",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "role": "Rol",
+      "department": "Şöbə",
+      "office": "Ofis",
+      "password": "Şifrə",
+      "confirmPassword": "Şifrəni Təsdiq Et",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+      "success": "İstifadəçi uğurla əlavə olundu!",
+      "error": "İstifadəçi əlavə edilərkən xəta baş verdi.",
+      "roleSelect": "Rol seçin",
+      "departmentSelect": "Şöbə seçin",
+      "officeSelect": "Ofis seçin"
     },
     "edit": {
-      "title": "Edit User",
-      "name": "Name",
-      "username": "Username",
-      "email": "Email",
-      "phone": "Phone",
-      "role": "Role",
-      "department": "Department",
-      "office": "Office",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "active": "Active",
-      "submitting": "Submitting...",
-      "submit": "Submit",
-      "success": "User successfully updated!",
-      "error": "Error occurred while updating user."
+      "title": "İstifadəçini Redaktə Et",
+      "name": "Ad",
+      "username": "İstifadəçi adı",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "role": "Rol",
+      "department": "Şöbə",
+      "office": "Ofis",
+      "password": "Şifrə",
+      "confirmPassword": "Şifrəni Təsdiq Et",
+      "active": "Aktiv",
+      "submitting": "Göndərilir...",
+      "submit": "Göndər",
+      "success": "İstifadəçi uğurla yeniləndi!",
+      "error": "İstifadəçi yenilənərkən xəta baş verdi."
     },
     "delete": {
-      "confirm": "Are you sure you want to delete this user?",
-      "success": "User successfully deleted!",
-      "error": "Error occurred while deleting user."
+      "confirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
+      "success": "İstifadəçi uğurla silindi!",
+      "error": "İstifadəçi silinərkən xəta baş verdi."
     }
   },
-
-  "visitors": {
+  "visitor": {
     "all": {
       "title": "All Visitors",
       "searchPlaceholder": "Search visitor...",
@@ -222,7 +225,6 @@
       "itemDescription": "Item Description",
       "visitTime": "Visit Time"
     },
-
     "complaint": {
       "title": "Visitor Complaint",
       "success": "Complaint successfully added!",
@@ -232,7 +234,6 @@
       "description": "Description"
     }
   },
-
   "office": {
     "add": {
       "title": "Add Office",
@@ -271,7 +272,6 @@
       "error": "Error occurred while updating office."
     }
   },
-
   "departments": {
     "add": {
       "title": "Add Department",
@@ -313,37 +313,43 @@
       "error": "Error occurred while updating department."
     }
   },
-
   "login": {
     "welcome": "Welcome to our application!",
+    "loginWithEmail": "Enter with Email or Username",
     "email": "Enter your email",
     "password": "Enter your password",
-    "forgotPassword": "Forgot Password?",
-    "submit": "Login",
-    "loggingIn": "Logging in...",
-    "resetPassword": {
-      "title": "Reset Password",
-      "emailPlaceholder": "Enter your email to receive a reset link",
-      "newPassword": "New Password",
-      "confirmPassword": "Confirm New Password",
-      "resetButton": "Reset Password",
-      "success": "Password reset successfully!"
-    },
+    "keepMeLoggedIn": "Keep Me Logged In",
+    "forgotPasswordLink": "Forgot Password !",
     "loginButton": "Login",
-    "resetPasswordButton": "Reset Password",
-    "sendResetLinkButton": "Send Reset Link",
-    "passwordsDoNotMatch": "Passwords do not match.",
-    "pleaseEnterEmailAndPassword": "Please enter both email and password.",
-    "pleaseEnterEmailAddress": "Please enter an email address.",
-    "pleaseCheckYourEmail": "Please check your email for the reset link.",
-    "passwordResetSuccess": "Password reset successfully!",
-    "invalidEmailOrPassword": "Invalid email or password. Please try again.",
-    "emailAlreadyInUse": "This email is already in use.",
-    "emailNotFound": "Email address not found.",
-    "checkYourEmailForResetLink": "Please check your email for the reset link.",
+    "loggingIn": "Logging in...",
+    "forgotPassword": {
+      "forgotPassword": "Forgot Password?",
+      "enterEmailForReset": "Enter your email to reset password",
+      "sendResetLinkButton": "Send Reset Link",
+      "email": "Enter your email"
+    },
+    "reset": {
+      "title": "Reset Password",
+      "enterResetTokenAndNewPassword": "Enter your email to receive a reset link",
+      "email": "Enter your email",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm New Password",
+      "resetPasswordButton": "Reset Password"
+    },
+    "toast": {
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "pleaseEnterEmailAndPassword": "Please enter both email and password.",
+      "pleaseEnterEmailAddress": "Please enter an email address.",
+      "pleaseCheckYourEmail": "Please check your email for the reset link.",
+      "passwordResetSuccess": "Password reset successfully!",
+      "invalidEmailOrPassword": "Invalid email or password. Please try again.",
+      "emailAlreadyInUse": "This email is already in use.",
+      "emailNotFound": "Email address not found.",
+      "checkYourEmailForResetLink": "Please check your email for the reset link."
+    },
     "backToLogin": "Back"
+    
   },
-
   "error": {
     "forbidden": {
       "title": "403",
@@ -358,21 +364,27 @@
       "goHome": "Go to Home"
     }
   },
-
+  "webcam": {
+    "capturePhoto": "Capture Photo",
+    "reset": "Reset",
+    "close": "Close",
+    "confirm": "Confirm"
+  },
   "validations": {
     "required": {
       "officeName": "Office name is required.",
       "address": "Address is required.",
       "phone": "Phone number is required.",
       "departmentName": "Department name is required.",
-      "officeSelection": "Office selection is required.",
+      "office": "Office selection is required.",
       "name": "Name is required.",
       "username": "Username is required.",
       "email": "Email is required.",
       "role": "Role is required.",
       "department": "Department is required.",
       "password": "Password is required.",
-      "passwordConfirmation": "Password confirmation is required."
+      "passwordConfirmation": "Password confirmation is required.",
+      "doc_id": "Doc ID is required."
     },
     "minLength": {
       "officeName": "Office name must be at least 3 characters.",
@@ -381,7 +393,7 @@
       "name": "Name must be at least 3 characters.",
       "username": "Username must be at least 3 characters.",
       "password": "Password must be at least 8 characters.",
-      "fin": "Fin must be at least 3 characters."
+      "doc_id": "Doc ID must be at least 5 characters."
     },
     "pattern": {
       "phone": "Phone must contain only digits.",
@@ -391,6 +403,7 @@
       "password": "Passwords must match."
     }
   },
-
-  "noDataFound": "No data found"
+  "noDataFound": "No Data Found",
+  "noComplaintsFound": "No Complaints Found",
+  "loading": "Loading..."
 }

@@ -8,10 +8,10 @@ import Avatar from "../../../modules/Avatar";
 import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
 import { useDeleteVisitor, useFetchVisitors } from "../../../hooks/useVisitors";
-import Search from "../../../modules/Search";
 import Pager from "../../../modules/Pager";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Search from "../../../modules/Search";
 
 const VisitorsAll = () => {
   const navigate = useNavigate();
@@ -48,9 +48,9 @@ const VisitorsAll = () => {
   };
 
   const headItems = [
-    "#",
     t("visitors.all.photo"),
     t("visitors.all.name"),
+    t("visitors.all.fin"),
     t("visitors.all.email"),
     t("visitors.all.phone"),
     t("visitors.all.actions"),
@@ -64,6 +64,7 @@ const VisitorsAll = () => {
       <div className="avatar-placeholder">N/A</div>
     ),
     name: visitor.name,
+    doc_id: visitor.doc_id,
     email: visitor.email || "N/A",
     phone: visitor.phone || "N/A",
   }));
@@ -80,7 +81,7 @@ const VisitorsAll = () => {
       <div className="head-wrapper">
         <Search
           path={AppPaths.visitors.all}
-          placeholder={t("visitorAll.searchPlaceholder")}
+          placeholder={t("visitors.all.searchPlaceholder")}
         />
 
         <Button type="button" variant="primary" className="add-btn">
@@ -97,7 +98,7 @@ const VisitorsAll = () => {
         actionItems={[
           {
             text: <FaEye />,
-            variant: "info",
+            variant: "primary",
             tooltip: t("visitors.all.view"),
             onClick: handleView,
           },

@@ -20,10 +20,10 @@ const LoginForm = ({
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>{t("login.enterEmail")}</Form.Label>
+        <Form.Label>{t("login.email")}</Form.Label>
         <Form.Control
           type="email"
-          placeholder={t("login.enterEmail")}
+          placeholder={t("login.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoFocus
@@ -31,11 +31,11 @@ const LoginForm = ({
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>{t("login.enterPassword")}</Form.Label>
+        <Form.Label>{t("login.password")}</Form.Label>
         <div className="password-input-container">
           <Form.Control
             type={passwordVisible ? "text" : "password"}
-            placeholder={t("login.enterPassword")}
+            placeholder={t("login.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -56,7 +56,7 @@ const LoginForm = ({
           onChange={(e) => setKeepLoggedIn(e.target.checked)}
         />
         <div className="forgot-password-link">
-          <a href="" onClick={() => setShowForgotPassword(true)}>
+          <a href="#" onClick={() => setShowForgotPassword(true)}>
             {t("login.forgotPasswordLink")}
           </a>
         </div>

@@ -1,31 +1,29 @@
 import { useState, useEffect } from "react";
-import { fetchNotifications } from "../api/notificationApi"; // Import the fetch function from your API
+import { fetchNotifications } from "../api/notificationApi";
 
 const useNotifications = () => {
-  const [notifications, setNotifications] = useState([]); // Initialize with an empty array
-  const [loading, setLoading] = useState(false); // Track loading state
-  const [error, setError] = useState(null); // Track error state
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Fetch notifications when the hook is first used
   useEffect(() => {
     const getNotifications = async () => {
       setLoading(true);
-      setError(null); // Reset error before fetching
+      setError(null);
       try {
-        const data = await fetchNotifications(); // Assuming this function fetches data
-        setNotifications(data); // Set notifications from the fetched data
+        const data = await fetchNotifications();
+        setNotifications(data);
       } catch (error) {
-        setError("Failed to fetch notifications."); // Set error message
-        setNotifications([]); // Ensure notifications is always an array
+        setError("Failed to fetch notifications.");
+        setNotifications([]);
       } finally {
-        setLoading(false); // Set loading to false after the fetch
+        setLoading(false);
       }
     };
 
-    getNotifications(); // Call the function to fetch notifications
-  }, []); // Empty dependency array means it only runs on mount
+    getNotifications();
+  }, []);
 
-  // Mark a notification as read
   const handleMarkAsRead = (id) => {
     setNotifications((prevNotifications) =>
       prevNotifications.map((notification) =>
@@ -34,12 +32,11 @@ const useNotifications = () => {
     );
   };
 
-  // Return the necessary data and methods from the hook
   return {
-    notifications, // The array of notifications
-    loading, // Loading state
-    error, // Error state
-    handleMarkAsRead, // Function to mark a notification as read
+    notifications,
+    loading,
+    error,
+    handleMarkAsRead,
   };
 };
 

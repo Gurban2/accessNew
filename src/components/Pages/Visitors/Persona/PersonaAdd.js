@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Alert, Button, Modal } from "react-bootstrap";
-import { Avatar } from "@mui/material";
 import DataTable from "../../../../modules/DataTable";
 import Search from "../../../../modules/Search";
 import VisitorBlockButton from "./VisitorBlockButton";
@@ -11,6 +10,7 @@ import {
 import { AppPaths } from "../../../../constants/appPaths";
 import { toast } from "react-toastify";
 import "./style.scss";
+import Avatar from "../../../../modules/Avatar";
 
 const PersonaAdd = () => {
   const { data, isLoading } = useFetchVisitors();
