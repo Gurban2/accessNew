@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import {
   useFetchVisitorComplaints,
-  useBlockVisitor,
   useFetchVisitorById,
   useStartVisit,
   useEndVisit,
@@ -19,6 +18,7 @@ import { toast } from "react-toastify";
 import LoadingForm from "../../../modules/Loading/Form";
 import ItemsTable from "./ItemsTable";
 import "./style.scss";
+import { FaTimesCircle } from "react-icons/fa";
 
 const VisitorsView = () => {
   const { t } = useTranslation();
@@ -36,8 +36,6 @@ const VisitorsView = () => {
   } = useFetchVisitorComplaints(id);
 
   const [description, setDescription] = useState("");
-  const { mutate: blockVisitor, isLoading: blockingLoading } =
-    useBlockVisitor();
 
   if (!visitor) {
     return <LoadingForm />;
@@ -88,7 +86,15 @@ const VisitorsView = () => {
         )}
       </div>
       <div className="visitor-view">
-        <div className="visitor-view-header">
+        {visitor.is_blocked && (
+          <div className="blocked-overlay">
+            <FaTimesCircle />
+            <span>{t("visitors.view.blocked")}</span>
+          </div>
+        )}
+        <div
+          className={`visitor-view-header ${visitor.is_blocked ? "blocked" : ""}`}
+        >
           <div className="visitor-view-photo">
             <Avatar size="128px" src={visitor.avatar} alt={visitor.name} />
           </div>
@@ -111,9 +117,8 @@ const VisitorsView = () => {
           </div>
           <div className="visitor-view-btns">
             <VisitorBlockButton
+              isBlocked={visitor.is_blocked}
               visitor={visitor}
-              blockVisitor={blockVisitor}
-              isLoading={blockingLoading}
             />
             <ReportModal
               description={description}

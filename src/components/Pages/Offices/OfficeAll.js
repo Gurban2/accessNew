@@ -64,7 +64,7 @@ const OfficeAll = () => {
           path={AppPaths.offices.all}
           placeholder={t("office.all.searchPlaceholder")}
         />
-        <Button type="button" variant="primary" className="add-btn">
+        <Button type="button" variant="success" className="add-btn">
           <Link to={AppPaths.offices.add}>{t("office.all.add")}</Link>
         </Button>
       </div>

@@ -42,12 +42,10 @@ const ReportModal = ({
       btnText={<FaExclamationTriangle />}
       onConfirm={submitReport}
       title={t("visitors.view.report")}
-      btnProps={{ variant: "warning" }}
-      tooltip={t("visitors.view.report")}
+      btnProps={{ variant: "warning", tooltip: t("visitors.view.report") }}
     >
       <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label></Form.Label>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Control
             as="textarea"
             value={description}

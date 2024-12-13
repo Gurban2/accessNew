@@ -2,7 +2,7 @@ import React from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const ActionButton = ({
-  tooltip,
+  tooltip = "",
   variant,
   onClick,
   text,
@@ -10,7 +10,8 @@ const ActionButton = ({
 }) => {
   return (
     <OverlayTrigger
-      overlay={tooltip ? <Tooltip>{tooltip}</Tooltip> : null}
+      className="action-overlay"
+      overlay={tooltip ? <Tooltip>{tooltip}</Tooltip> : <></>}
       placement={placement}
     >
       <Button

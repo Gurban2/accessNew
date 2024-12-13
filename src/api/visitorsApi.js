@@ -31,6 +31,12 @@ export const blockVisitorApi = async (id) => {
   const response = await apiClient.post(`/persona-non-gratas/${id}`);
   return response.data;
 };
+
+export const unblockVisitorApi = async (id) => {
+  const response = await apiClient.delete(`/persona-non-gratas/${id}`);
+  return response.data;
+};
+
 export const fetchDocumentTypes = async () => {
   const response = await apiClient.get("/visitors/get/document-types");
   return response.data;

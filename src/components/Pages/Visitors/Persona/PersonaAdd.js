@@ -1,67 +1,26 @@
-import React, { useState } from "react";
-import { Alert, Button, Modal } from "react-bootstrap";
+import React from "react";
 import DataTable from "../../../../modules/DataTable";
 import Search from "../../../../modules/Search";
 import VisitorBlockButton from "./VisitorBlockButton";
-import {
-  useBlockVisitor,
-  useFetchVisitors,
-} from "../../../../hooks/useVisitors";
+import { useFetchVisitors } from "../../../../hooks/useVisitors";
 import { AppPaths } from "../../../../constants/appPaths";
-import { toast } from "react-toastify";
 import "./style.scss";
 import Avatar from "../../../../modules/Avatar";
+import { useTranslation } from "react-i18next";
 
 const PersonaAdd = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useFetchVisitors();
   const visitors = data?.data?.filter((visitor) => !visitor.is_blocked) || [];
-  const { mutate: blockVisitor, isLoading: blockingLoading } =
-    useBlockVisitor();
-
-  const [error, setError] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedVisitor, setSelectedVisitor] = useState(null);
-  const [reason, setReason] = useState("");
-
-  const handleOpenModal = (visitor) => {
-    setSelectedVisitor(visitor);
-    setReason("");
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setReason("");
-    setError("");
-  };
-
-  const handleConfirmBlock = () => {
-    if (!reason.trim()) {
-      setError("Reason cannot be empty.");
-      return;
-    }
-
-    blockVisitor(
-      { id: selectedVisitor.id, reason },
-      {
-        onSuccess: () => {
-          toast.success("Visitor blocked successfully.");
-          handleCloseModal();
-        },
-        onError: (err) => setError(err.message),
-      },
-    );
-  };
 
   const headItems = [
-    "Photo",
-    "Doc_ID",
-    "Name",
-    "Email",
-    "Address",
-    "Phone",
-    "isBlocked",
-    "Actions",
+    t("persona.add.photo"),
+    t("persona.add.doc_id"),
+    t("persona.add.name"),
+    t("persona.add.email"),
+    t("persona.add.address"),
+    t("persona.add.phone"),
+    t("persona.add.actions"),
   ];
 
   const items = visitors.map((visitor) => ({
@@ -72,54 +31,23 @@ const PersonaAdd = () => {
     email: visitor.email,
     address: visitor.address,
     phone: visitor.phone,
-    is_blocked: visitor.is_blocked ? "Yes" : "No",
-    action: (
-      <VisitorBlockButton visitor={visitor} openReasonModal={handleOpenModal} />
-    ),
+    action: <VisitorBlockButton visitor={visitor} />,
   }));
 
   return (
-    <div className="persona-add-container">
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Search
-        path={AppPaths.persona.add}
-        placeholder="Search visitor"
-        text="Search Visitor"
-        // onSearch={handleSearchChange}
-      />
+    <div className="user-container">
+      <div className="head-wrapper">
+        <Search
+          path={AppPaths.persona.add}
+          placeholder={t("persona.add.search_placeholder")}
+        />
+      </div>
       <DataTable
         withAction
         headItems={headItems}
         items={items}
         isLoading={isLoading}
       />
-      <Modal show={modalOpen} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Provide a Reason</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <textarea
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            placeholder="Enter reason for blocking"
-            className="form-control"
-            rows="4"
-          />
-          {error && <Alert variant="danger">{error}</Alert>}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancel
-          </Button>
-          <Button
-            variant="primary"
-            onClick={handleConfirmBlock}
-            disabled={blockingLoading}
-          >
-            {blockingLoading ? "Blocking..." : "Confirm"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };
