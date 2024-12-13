@@ -12,7 +12,7 @@ const NotFound = () => {
         <h1 className="display-1 text-danger">{t("error.notFound.title")}</h1>
         <h2 className="text-muted">{t("error.notFound.message")}</h2>
         <p>{t("error.notFound.description")}</p>
-        <Link to="/" className="btn btn-primary">
+        <Link to="/" className="btn-error btn-primary">
           {t("error.notFound.goHome")}
         </Link>
       </div>

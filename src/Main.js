@@ -30,6 +30,8 @@ import VisitorsView from "./components/Pages/Visitors/VisitorsView";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/Errors/404Error";
 
+import Profile from "./components/Pages/Profile/Profie";
+
 function Main() {
   const [isCollapsedSideBar, setIsCollapsedSideBar] = useState(false);
 
@@ -85,6 +87,8 @@ function Main() {
             <Route path={AppPaths.users.add} element={<UsersAdd />} />
             <Route path={AppPaths.users.all} element={<UsersAll />} />
             <Route path={AppPaths.users.edit} element={<UsersEdit />} />
+
+            <Route path={AppPaths.profile} element={<Profile />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
