@@ -20,6 +20,7 @@ const PersonaAll = () => {
   const personNonGrataVisitors = visitors.filter(
     (visitor) => visitor.is_blocked,
   );
+  console.log(personNonGrataVisitors);
 
   const handleEdit = (id, currentReason) => {
     setSelectedVisitorId(id);
@@ -38,7 +39,7 @@ const PersonaAll = () => {
     setReason("");
   };
 
-  const headItems = ["#", "Photo", "Fin", "Name", "Reason", "Actions"];
+  const headItems = ["Photo", "Fin", "Name", "Reason", "Actions"];
 
   const items = personNonGrataVisitors.map((visitor) => ({
     id: visitor.id,

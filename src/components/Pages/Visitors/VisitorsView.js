@@ -120,8 +120,6 @@ const VisitorsView = () => {
               setDescription={setDescription}
               id={visitor.id}
               onUpdateComplaints={refetchComplaints}
-              blockVisitor={blockVisitor}
-              isLoading={blockingLoading}
             />
           </div>
         </div>

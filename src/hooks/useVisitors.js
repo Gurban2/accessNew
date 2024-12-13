@@ -73,15 +73,16 @@ export const useBlockVisitor = () => {
 
       const visitors = queryClient.getQueryData(["visitors"]);
       if (visitors) {
-        queryClient.setQueryData(["visitors"], {
+        const updatedVisitors = {
           ...visitors,
           data: visitors.data.filter((visitor) => visitor.id !== id),
-        });
+        };
+        queryClient.setQueryData(["visitors"], updatedVisitors);
       }
     },
     onError: (error) => {
       console.error("Error blocking visitor:", error);
-      alert(`Failed to block visitor: ${error.message}`);
+      console.error(`Failed to block visitor: ${error.message}`);
     },
   });
 };
