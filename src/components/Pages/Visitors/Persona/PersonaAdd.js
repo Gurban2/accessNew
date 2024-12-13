@@ -34,13 +34,13 @@ const PersonaAdd = () => {
     setReason("");
     setError("");
   };
-  console.log(reason);
 
   const handleConfirmBlock = () => {
     if (!reason.trim()) {
       setError("Reason cannot be empty.");
       return;
     }
+
     blockVisitor(
       { id: selectedVisitor.id, reason },
       {
@@ -54,7 +54,6 @@ const PersonaAdd = () => {
   };
 
   const headItems = [
-    "ID",
     "Photo",
     "Doc_ID",
     "Name",

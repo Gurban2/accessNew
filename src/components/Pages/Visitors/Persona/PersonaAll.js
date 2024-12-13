@@ -39,7 +39,7 @@ const PersonaAll = () => {
     setReason("");
   };
 
-  const headItems = ["#", "Photo", "Fin", "Name", "Reason", "Actions"];
+  const headItems = ["Photo", "Fin", "Name", "Reason", "Actions"];
 
   const items = personNonGrataVisitors.map((visitor) => ({
     id: visitor.id,
