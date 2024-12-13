@@ -16,6 +16,16 @@ export const login = async (email, password, dispatch) => {
 
     if (token) {
       localStorage.setItem("token", token);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email,
+          phone: response.data.phone,
+          role: response.data.role,
+        }),
+      );
       dispatch(loginSuccess(response.data));
     }
 
@@ -30,6 +40,8 @@ export const login = async (email, password, dispatch) => {
 export const logout = async (dispatch) => {
   try {
     await apiClient.get(`/auth/logout`);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
     dispatch(logoutAction());
   } catch (error) {
     console.error("Logout error:", error);

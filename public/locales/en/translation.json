@@ -154,6 +154,18 @@
       "confirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
       "success": "İstifadəçi uğurla silindi!",
       "error": "İstifadəçi silinərkən xəta baş verdi."
+    },
+    "profile": {
+      "title": "Profile",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updatePassword": "Update Password",
+      "submitting": "Updating...",
+      "passwordUpdated": "Password updated successfully!",
+      "updateError": "Failed to update password, please try again."
     }
   },
   "visitor": {
@@ -348,7 +360,6 @@
       "checkYourEmailForResetLink": "Please check your email for the reset link."
     },
     "backToLogin": "Back"
-    
   },
   "error": {
     "forbidden": {
@@ -361,6 +372,12 @@
       "title": "404",
       "message": "Page Not Found",
       "description": "The page you are looking for does not exist.",
+      "goHome": "Go to Home"
+    },
+    "internalServer": {
+      "title": "500",
+      "message": "An unexpected error occurred. Please try again later.",
+      "description": "We apologize for the inconvenience. Our team has been notified, and we are working to resolve the issue as soon as possible.",
       "goHome": "Go to Home"
     }
   },
@@ -405,5 +422,7 @@
   },
   "noDataFound": "No Data Found",
   "noComplaintsFound": "No Complaints Found",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "allFields": "All Fields are Required",
+  "passwordNotMatch":"Passwords do not match."
 }

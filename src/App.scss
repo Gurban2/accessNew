@@ -246,3 +246,8 @@ textarea::placeholder {
   font-weight: bold;
   color: var(--text-color-secondary);
 }
+
+.profile-header-profile-link{
+  display: flex;
+  align-items: center;
+}

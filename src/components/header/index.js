@@ -8,7 +8,7 @@ import { isLoggedIn } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
 import { logout } from "../../api/authApi";
 import NotificationBell from "../Notifications/NotificationBell";
-
+import { FaUserCircle } from "react-icons/fa";
 import "./header.scss";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -17,8 +17,8 @@ const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
   useEffect(() => {
     const header = ref.current;
     const placeholder = document.createElement("div");
@@ -70,6 +70,14 @@ const Header = ({ isCollapsedSideBar }) => {
                 <LogoutButton onClick={handleLogout} />
               ) : (
                 <Link to={AppPaths.login}>{t("general.login")}</Link>
+              )}
+              {isLoggedIn() && (
+                <Link
+                  to={AppPaths.profile}
+                  className="profile-header-profile-link"
+                >
+                  <FaUserCircle size={28} color="#000" />
+                </Link>
               )}
             </Navbar.Text>
           </Navbar.Collapse>

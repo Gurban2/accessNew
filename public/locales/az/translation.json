@@ -158,6 +158,18 @@
       "confirm": "Bu istifadəçini silmək istədiyinizdən əminsiniz?",
       "success": "İstifadəçi uğurla silindi!",
       "error": "İstifadəçi silinərkən xəta baş verdi."
+    },
+    "profile": {
+      "title": "Profil",
+      "name": "Ad",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "newPassword": "Yeni Şifrə",
+      "confirmPassword": "Təsdiq Şifrəsi",
+      "updatePassword": "Şifrəni Yenilə",
+      "submitting": "Yenilənir...",
+      "passwordUpdated": "Şifrə uğurla yeniləndi!",
+      "updateError": "Şifrəni yeniləmək mümkün olmadı, zəhmət olmasa yenidən cəhd edin."
     }
   },
 
@@ -458,6 +470,12 @@
       "message": "Səhifə tapılmadı",
       "description": "Axtardığınız səhifə mövcud deyil.",
       "goHome": "Ana səhifəyə qayıt"
+    },
+    "internalServer": {
+      "title": "500",
+      "message": "Gözlənilməz bir səhv baş verdi. Zəhmət olmasa, bir az sonra yenidən cəhd edin.",
+      "description": "Narahatçılığa görə üzr istəyirik. Komandamız məlumatlandırılıb və biz problemi mümkün qədər tez həll etməyə çalışırıq.",
+      "goHome": "Ana səhifəyə qayıt"
     }
   },
 
@@ -516,5 +534,8 @@
 
   "noDataFound": "Məlumat tapılmadı",
   "noComplaintsFound": "Heç bir Şikayət tapilmadi",
-  "loading": "Yüklənir..."
+  "loading": "Yüklənir...",
+  "allFields": "Bütün sahələr tələb olunur.",
+  "passwordNotMatch":"Parollar uyğun gəlmir."
+
 }
