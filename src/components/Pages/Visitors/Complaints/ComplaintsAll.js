@@ -6,6 +6,7 @@ import { useFetchComplaints } from "../../../../hooks/useComplaints";
 import DataTable from "../../../../modules/DataTable";
 import Breadcrumb from "../../Breadcrumb";
 import { AppPaths } from "../../../../constants/appPaths";
+import LoadingTable from "../../../../modules/Loading/Table";
 
 const ComplaintsAll = () => {
   const { t } = useTranslation();
@@ -19,32 +20,28 @@ const ComplaintsAll = () => {
     navigate(`/visitors/view/${complaint.visitor_id}`);
   };
 
-  if (isLoading) return <p>{t("loading")}</p>;
-  if (!complaints?.length) return <p>{t("noComplaintsFound")}</p>;
+  if (isLoading) return <LoadingTable />;
 
   const headItems = [
-    t("#"),
-    t("visitorComplaint.photo"),
-    t("visitorComplaint.name"),
-    t("visitorComplaint.date"),
-    t("visitorComplaint.description"),
-    t("visitorComplaint.profile"),
+    t("complaints.all.name"),
+    t("complaints.all.date"),
+    t("complaints.all.description"),
+    t("complaints.all.actions"),
   ];
 
   const items = complaints?.map((complaint, index) => ({
     id: complaint.id,
-    avatar: complaint.avatar,
     name: complaint.visitor,
     date: new Date(complaint.created_at).toLocaleDateString(),
     description: complaint.description,
   }));
 
   return (
-    <div className="complaints-all-container">
+    <div className="user-container">
       <Breadcrumb
         paths={[
           { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-          { label: t("breadcrumbs.visitorComplaint") },
+          { label: t("breadcrumbs.complaints") },
         ]}
       />
       <DataTable

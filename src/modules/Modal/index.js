@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import CoreModal from "react-bootstrap/Modal";
 import { useTranslation } from "react-i18next";
+import ActionButton from "../ActionButton";
 
 const Modal = ({
   btnText,
@@ -40,9 +41,12 @@ const Modal = ({
   return (
     <>
       {!hideBtn && (
-        <Button variant="primary" onClick={handleShow} {...btnProps}>
-          {btnText}
-        </Button>
+        <ActionButton
+          variant="primary"
+          {...btnProps}
+          onClick={handleShow}
+          text={btnText}
+        />
       )}
 
       <CoreModal
@@ -59,7 +63,7 @@ const Modal = ({
         <CoreModal.Footer>
           <div className="w-100 d-flex align-items-center gap-2 justify-content-end">
             <Button variant="danger" onClick={handleClose}>
-              {t("general.close")}
+              {t("general.cancel")}
             </Button>
             <Button variant="success" onClick={handleConfirm}>
               {t("general.confirm")}

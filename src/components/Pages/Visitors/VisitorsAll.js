@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 import { AppPaths } from "../../../constants/appPaths";
-import Avatar from "../../../modules/Avatar";
 import DataTable from "../../../modules/DataTable";
 import Breadcrumb from "../Breadcrumb";
 import { useDeleteVisitor, useFetchVisitors } from "../../../hooks/useVisitors";
@@ -50,7 +49,6 @@ const VisitorsAll = () => {
   };
 
   const headItems = [
-    // t("visitors.all.photo"),
     t("visitors.all.name"),
     t("visitors.all.fin"),
     t("visitors.all.email"),
@@ -62,11 +60,6 @@ const VisitorsAll = () => {
 
   const items = visitors.map((visitor, index) => ({
     id: visitor.id,
-    // avatar: visitor.avatar ? (
-    //   <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />
-    // ) : (
-    //   <div className="avatar-placeholder">N/A</div>
-    // ),
     name: visitor.name,
     doc_id: visitor.doc_id,
     email: visitor.email || "N/A",
@@ -92,7 +85,7 @@ const VisitorsAll = () => {
           placeholder={t("visitors.all.searchPlaceholder")}
         />
 
-        <Button type="button" variant="primary" className="add-btn">
+        <Button type="button" variant="success" className="add-btn">
           <Link to={AppPaths.visitors.add}>{t("visitors.all.add")}</Link>
         </Button>
       </div>

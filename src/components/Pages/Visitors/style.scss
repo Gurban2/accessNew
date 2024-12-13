@@ -10,6 +10,14 @@
   flex-direction: column;
   box-shadow: none !important;
 
+  .blocked-overlay {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--danger-color) !important;
+    margin-bottom: 12px;
+  }
+
   &-header {
     background-color: var(--card-bg);
     display: flex;
@@ -19,6 +27,10 @@
     padding: 16px;
     border-radius: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    &.blocked {
+      border: 1px solid var(--danger-color) !important;
+    }
   }
 
   &-footer {
@@ -39,7 +51,7 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-color-secondary);
-      
+
       strong {
         font-weight: 600;
       }

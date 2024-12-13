@@ -15,7 +15,7 @@
     color: var(--white) !important;
   }
 
-  td {
+  td > div {
     padding: 10px 16px !important;
     vertical-align: middle !important;
     text-align: left !important;
@@ -45,6 +45,7 @@
 }
 
 .table-actions {
+  width: 200px;
   .action-buttons {
     display: flex !important;
     gap: 8px !important;

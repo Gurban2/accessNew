@@ -44,16 +44,14 @@ const DepartmentsAll = () => {
   const headItems = [
     t("department.all.name"),
     t("department.all.phone"),
-    t("department.all.address"),
     t("department.all.office"),
     t("department.all.actions"),
   ];
 
-  const items = departments?.map((department, index) => ({
+  const items = departments?.map((department) => ({
     id: department.id,
     departmentName: department.name,
     phone: department.phone,
-    address: department.address,
     office: department.office,
   }));
 
@@ -74,7 +72,7 @@ const DepartmentsAll = () => {
           placeholder={t("department.all.searchPlaceholder")}
         />
 
-        <Button type="button" variant="primary" className="add-btn">
+        <Button type="button" variant="success" className="add-btn">
           <Link to={AppPaths.departments.add}>{t("department.all.add")}</Link>
         </Button>
       </div>

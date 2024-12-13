@@ -1,61 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Modal from "../../../../modules/Modal";
-import { FaRegWindowClose } from "react-icons/fa";
+import { FaLock, FaLockOpen } from "react-icons/fa";
+import {
+  useBlockVisitor,
+  useUnBlockVisitor,
+} from "../../../../hooks/useVisitors";
 
-const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
+const VisitorBlockButton = ({ visitor, isBlocked = false }) => {
   const { t } = useTranslation();
-  const [showModal, setShowModal] = useState(false);
-  const [description, setDescription] = useState(""); // State for description
+  const { mutateAsync: blockVisitor, isPending: isBlockPending } =
+    useBlockVisitor();
+  const { mutateAsync: unblockVisitor, isPending: isUnblockPending } =
+    useUnBlockVisitor();
 
   if (!visitor) {
     return null;
   }
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setDescription("");
-  };
-
   const handleConfirmBlock = async () => {
-    if (!description.trim()) {
-      toast.error(t("visitorBlockModal.emptyDescriptionError"));
-      return;
-    }
-
     try {
-      console.log("Attempting to block visitor...");
-      await blockVisitor(visitor.id, description);
-      console.log("Visitor blocked successfully.");
-      toast.success(t("visitorBlockModal.success"));
+      await (isBlocked
+        ? unblockVisitor({ docId: visitor.doc_id, id: visitor.id })
+        : blockVisitor(visitor.id));
+
+      toast.success(
+        t(
+          isBlocked
+            ? "visitorBlockModal.unblockSuccess"
+            : "visitorBlockModal.success",
+        ),
+      );
     } catch (error) {
-      console.log("Error blocking visitor:", error.message);
-      toast.error(t("visitorBlockModal.error"));
-    } finally {
-      setShowModal(false);
+      toast.error(
+        t(
+          isBlocked
+            ? "visitorBlockModal.unblockError"
+            : "visitorBlockModal.error",
+        ),
+      );
     }
   };
 
   return (
     <>
       <Modal
-        btnText={<FaRegWindowClose />}
+        btnText={isBlocked ? <FaLockOpen /> : <FaLock />}
         title={t("visitorBlockModal.title")}
         onConfirm={handleConfirmBlock}
-        onCancel={handleCloseModal}
-        defaultShow={showModal}
         btnProps={{
-          variant: "danger",
-          disabled: isLoading,
+          variant: isBlocked ? "success" : "danger",
+          disabled: isBlockPending || isUnblockPending,
+          tooltip: isBlocked
+            ? t("visitorBlockModal.unblock")
+            : t("visitorBlockModal.block"),
         }}
       >
-        <h4 className="warning-text">{t("visitorBlockModal.description")}</h4>
+        <h4 className="warning-text">
+          {isBlocked
+            ? t("visitorBlockModal.unblockWarning")
+            : t("visitorBlockModal.blockWarning")}
+        </h4>
       </Modal>
     </>
   );

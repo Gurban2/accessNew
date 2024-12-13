@@ -11,6 +11,7 @@ import {
   fetchInfoByDoc,
   startVisit,
   endVisit,
+  unblockVisitorApi,
 } from "../api/visitorsApi";
 
 import useQueryParams from "./useQueryParams";
@@ -69,20 +70,28 @@ export const useBlockVisitor = () => {
     mutationFn: (id) => blockVisitorApi(id),
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
-      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
-
-      const visitors = queryClient.getQueryData(["visitors"]);
-      if (visitors) {
-        const updatedVisitors = {
-          ...visitors,
-          data: visitors.data.filter((visitor) => visitor.id !== id),
-        };
-        queryClient.setQueryData(["visitors"], updatedVisitors);
-      }
+      queryClient.invalidateQueries({ queryKey: ["visitor", id.toString()] });
     },
     onError: (error) => {
       console.error("Error blocking visitor:", error);
       console.error(`Failed to block visitor: ${error.message}`);
+    },
+  });
+};
+
+export const useUnBlockVisitor = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ docId }) => unblockVisitorApi(docId),
+    onSuccess: (_, { id }) => {
+      console.log({ id });
+      queryClient.invalidateQueries({ queryKey: ["visitors"] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id.toString()] });
+    },
+    onError: (error) => {
+      console.error("Error unblocking visitor:", error);
+      console.error(`Failed to unblock visitor: ${error.message}`);
     },
   });
 };
