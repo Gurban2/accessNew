@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ToggleButton, ButtonGroup } from "react-bootstrap";
+import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
-import VisitorConfirmationModal from "../Complaints/VisitorsModal/VisitorConfirmationModal";
+import Modal from "../../../../modules/Modal";
 
 const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
-  const [actionSuccess, setActionSuccess] = useState(false);
+  const [description, setDescription] = useState(""); // State for description
 
   if (!visitor) {
     return null;
@@ -19,15 +19,23 @@ const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setDescription("");
   };
 
   const handleConfirmBlock = async () => {
+    if (!description.trim()) {
+      toast.error(t("visitorBlockModal.emptyDescriptionError"));
+      return;
+    }
+
     try {
-      await blockVisitor(visitor.id);
-      toast.success(t("visitorView.success"));
-      setActionSuccess(true);
+      console.log("Attempting to block visitor...");
+      await blockVisitor(visitor.id, description);
+      console.log("Visitor blocked successfully.");
+      toast.success(t("visitorBlockModal.success"));
     } catch (error) {
-      toast.error(t("visitorView.reportError"));
+      console.log("Error blocking visitor:", error.message);
+      toast.error(t("visitorBlockModal.error"));
     } finally {
       setShowModal(false);
     }
@@ -35,40 +43,26 @@ const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
 
   return (
     <>
-      {!actionSuccess ? (
-        <ButtonGroup aria-label={t("visitorBlockActions")}>
-          <ToggleButton
-            type="button"
-            name="block-visitor"
-            variant={visitor.isBlocked ? "outline-danger" : "outline-success"}
-            onClick={handleOpenModal}
-            aria-pressed={visitor.isBlocked}
-            checked={visitor.isBlocked}
-            disabled={isLoading}
-          >
-            {visitor.isBlocked ? t("blocked") : t("block")}
-          </ToggleButton>
-        </ButtonGroup>
-      ) : (
-        <ButtonGroup aria-label={t("visitorBlockActions")}>
-          <ToggleButton
-            type="button"
-            variant="success"
-            disabled
-            aria-pressed={true}
-          >
-            {t("blocked")}
-          </ToggleButton>
-        </ButtonGroup>
-      )}
-
-      <VisitorConfirmationModal
-        show={showModal}
-        onClose={handleCloseModal}
+      <Modal
+        btnText={t("visitorBlockModal.confirm")}
+        title={t("visitorBlockModal.title")}
         onConfirm={handleConfirmBlock}
-        isBlocked={visitor.isBlocked}
-        isLoading={isLoading}
-      />
+        onCancel={handleCloseModal}
+        defaultShow={showModal}
+        hideBtn={false}
+      >
+        <Form>
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Label>{t("visitorBlockModal.descriptionLabel")}</Form.Label>
+            <Form.Control
+              as="textarea"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+            />
+          </Form.Group>
+        </Form>
+      </Modal>
     </>
   );
 };

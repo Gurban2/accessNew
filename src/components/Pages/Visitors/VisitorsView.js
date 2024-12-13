@@ -48,10 +48,6 @@ const VisitorsView = () => {
     return <div>{t("loading")}</div>;
   }
 
-  // const handleStartVisit = () => {
-  //   startVisit(true);
-  // };
-
   const complaintsData = complaints?.data || [];
 
   return (
@@ -98,8 +94,6 @@ const VisitorsView = () => {
               setDescription={setDescription}
               id={visitor.id}
               onUpdateComplaints={refetchComplaints}
-              blockVisitor={blockVisitor}
-              isLoading={blockingLoading}
             />
             {/* <Button onClick={handleStartVisit}>Start Visit</Button> */}
           </div>

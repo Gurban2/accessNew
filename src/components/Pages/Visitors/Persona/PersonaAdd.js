@@ -25,6 +25,7 @@ const PersonaAdd = () => {
 
   const handleOpenModal = (visitor) => {
     setSelectedVisitor(visitor);
+    setReason("");
     setModalOpen(true);
   };
 
@@ -39,6 +40,7 @@ const PersonaAdd = () => {
       setError("Reason cannot be empty.");
       return;
     }
+
     blockVisitor(
       { id: selectedVisitor.id, reason },
       {
@@ -52,7 +54,6 @@ const PersonaAdd = () => {
   };
 
   const headItems = [
-    "ID",
     "Photo",
     "Doc_ID",
     "Name",
@@ -77,8 +78,6 @@ const PersonaAdd = () => {
     ),
   }));
 
-  const handleSearchChange = (value) => {};
-
   return (
     <div className="persona-add-container">
       {error && <Alert variant="danger">{error}</Alert>}
@@ -86,7 +85,7 @@ const PersonaAdd = () => {
         path={AppPaths.persona.add}
         placeholder="Search visitor"
         text="Search Visitor"
-        onSearch={handleSearchChange}
+        // onSearch={handleSearchChange}
       />
       <DataTable
         withAction
