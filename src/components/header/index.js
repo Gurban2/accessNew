@@ -8,15 +8,15 @@ import { isLoggedIn } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
 import { logout } from "../../api/authApi";
 import NotificationBell from "../Notifications/NotificationBell";
-
+import { FaUserCircle } from "react-icons/fa";
 import "./header.scss";
 import { useDispatch } from "react-redux";
 
 const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
   useEffect(() => {
     const header = ref.current;
     const placeholder = document.createElement("div");
@@ -76,6 +76,11 @@ const Header = ({ isCollapsedSideBar }) => {
                 <Link to={AppPaths.login}>Login</Link>
               )}
               <NotificationBell />
+              {isLoggedIn() && (
+                <Link to={AppPaths.profile} className="profile-link">
+                  <FaUserCircle size={24} color="#000" />
+                </Link>
+              )}
             </Navbar.Text>
           </Navbar.Collapse>
 

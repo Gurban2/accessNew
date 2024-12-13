@@ -7,13 +7,11 @@ export const resetPassword = (
   password_confirmation,
 ) => {
   if (!email || !token || !password || !password_confirmation) {
-    throw new Error(
-      "All fields are required: reset token, new password, and confirmation.",
-    );
+    throw new Error("Bütün sahələr tələb olunur.");
   }
 
   if (password !== password_confirmation) {
-    throw new Error("Passwords do not match.");
+    throw new Error("Parollar uyğun gəlmir.");
   }
 
   return apiClient

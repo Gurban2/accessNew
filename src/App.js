@@ -20,6 +20,7 @@ import { isLoggedIn } from "./helpers/userHelpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import Forbidden from "./components/Pages/Errors/403Error";
+import InternalServer from "./components/Pages/Errors/500Error";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function App() {
               <Route path={AppPaths.login} element={<Login />} />
               <Route path="*" element={<PrivateRoute element={<Main />} />} />
               <Route path="/403" element={<Forbidden />} />
+              <Route path="/500" element={<InternalServer />} />
             </Routes>
           </Router>
         </Provider>

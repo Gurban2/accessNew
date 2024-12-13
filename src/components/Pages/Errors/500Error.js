@@ -3,21 +3,23 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./ErrorPage.scss";
 
-const Forbidden = () => {
+const InternalServer = () => {
   const { t } = useTranslation();
 
   return (
     <div className="error-container">
       <div className="error-content text-center">
-        <h1 className="display-1 text-warning">{t("error.forbidden.title")}</h1>
-        <h2 className="text-muted">{t("error.forbidden.message")}</h2>
-        <p>{t("error.forbidden.description")}</p>
+        <h1 className="display-1 text-danger">
+          {t("error.internalServer.title")}
+        </h1>
+        <h2 className="text-muted">{t("error.internalServer.message")}</h2>
+        <p>{t("error.internalServer.description")}</p>
         <Link to="/" className="btn-error btn-primary">
-          {t("error.forbidden.goHome")}
+          {t("error.internalServer.goHome")}
         </Link>
       </div>
     </div>
   );
 };
 
-export default Forbidden;
+export default InternalServer;

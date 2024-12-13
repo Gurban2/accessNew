@@ -38,4 +38,6 @@ export const AppPaths = {
     notfound: "/404",
     forbidden: "/403",
   },
+
+  profile: "/profile",
 };
