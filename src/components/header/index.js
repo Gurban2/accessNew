@@ -11,9 +11,11 @@ import NotificationBell from "../Notifications/NotificationBell";
 
 import "./header.scss";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const ref = React.createRef();
 const Header = ({ isCollapsedSideBar }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -61,21 +63,14 @@ const Header = ({ isCollapsedSideBar }) => {
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text
-              className="me-3"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "10px",
-                alignItems: "center",
-              }}
-            >
+            <Navbar.Text className="me-3 d-flex gap-4 flex-row">
+              <NotificationBell />
+
               {isLoggedIn() ? (
                 <LogoutButton onClick={handleLogout} />
               ) : (
-                <Link to={AppPaths.login}>Login</Link>
+                <Link to={AppPaths.login}>{t("general.login")}</Link>
               )}
-              <NotificationBell />
             </Navbar.Text>
           </Navbar.Collapse>
 

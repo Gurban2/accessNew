@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaEdit, FaEye, FaRegTrashAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 import { AppPaths } from "../../../constants/appPaths";
 import Avatar from "../../../modules/Avatar";
@@ -12,6 +13,7 @@ import Pager from "../../../modules/Pager";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Search from "../../../modules/Search";
+import CountUp from "../../../modules/CountUp";
 
 const VisitorsAll = () => {
   const navigate = useNavigate();
@@ -48,25 +50,31 @@ const VisitorsAll = () => {
   };
 
   const headItems = [
-    t("visitors.all.photo"),
+    // t("visitors.all.photo"),
     t("visitors.all.name"),
     t("visitors.all.fin"),
     t("visitors.all.email"),
     t("visitors.all.phone"),
+    t("visitors.all.visitTime"),
+    t("visitors.all.visitTimeCount"),
     t("visitors.all.actions"),
   ];
 
   const items = visitors.map((visitor, index) => ({
     id: visitor.id,
-    avatar: visitor.avatar ? (
-      <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />
-    ) : (
-      <div className="avatar-placeholder">N/A</div>
-    ),
+    // avatar: visitor.avatar ? (
+    //   <Avatar size="64px" src={visitor.avatar} alt={visitor.name} />
+    // ) : (
+    //   <div className="avatar-placeholder">N/A</div>
+    // ),
     name: visitor.name,
     doc_id: visitor.doc_id,
     email: visitor.email || "N/A",
     phone: visitor.phone || "N/A",
+    visit_time: format(new Date(visitor.visit_time * 1000), "dd MMM HH:mm"),
+    visit_time_count: (
+      <CountUp start={visitor.visit_start_date} end={visitor.visit_end_date} />
+    ),
   }));
 
   return (

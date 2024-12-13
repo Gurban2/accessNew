@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as LogoutIcon } from "../../assets/icons/dashboard/logout.svg";
 import "./style.scss";
+import { FaPowerOff } from "react-icons/fa";
 
 const LogoutButton = ({ onClick, text }) => {
   return (
@@ -10,7 +10,7 @@ const LogoutButton = ({ onClick, text }) => {
           {text}
         </span>
       )}
-      <LogoutIcon className="logout-icon" />
+      <FaPowerOff className="logout-icon" />
     </div>
   );
 };

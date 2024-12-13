@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonGroup, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Modal from "../../../../modules/Modal";
+import { FaRegWindowClose } from "react-icons/fa";
 
 const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
   const { t } = useTranslation();
@@ -44,24 +45,17 @@ const VisitorBlockButton = ({ visitor, blockVisitor, isLoading }) => {
   return (
     <>
       <Modal
-        btnText={t("visitorBlockModal.confirm")}
+        btnText={<FaRegWindowClose />}
         title={t("visitorBlockModal.title")}
         onConfirm={handleConfirmBlock}
         onCancel={handleCloseModal}
         defaultShow={showModal}
-        hideBtn={false}
+        btnProps={{
+          variant: "danger",
+          disabled: isLoading,
+        }}
       >
-        <Form>
-          <Form.Group className="mb-3" controlId="description">
-            <Form.Label>{t("visitorBlockModal.descriptionLabel")}</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-            />
-          </Form.Group>
-        </Form>
+        <h4 className="warning-text">{t("visitorBlockModal.description")}</h4>
       </Modal>
     </>
   );
