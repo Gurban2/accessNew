@@ -133,7 +133,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
             ))}
           </Nav>
           <LogoutButton
-            text={hideSidebar ? null : "Sign out"}
+            text={hideSidebar ? null : t("general.logout")}
             onClick={handleLogout}
           />
         </div>
