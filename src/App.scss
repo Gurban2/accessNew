@@ -2,7 +2,7 @@
 @import "/src/variables.scss";
 
 body {
-  font-family: Rubik, Helvetica, Arial, serif !important;
+  font-family: Poppins, Helvetica, Arial, serif !important;
   background-color: var(--background-color);
 }
 
@@ -33,6 +33,13 @@ a {
   text-decoration: none !important;
 }
 
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+}
+
 .btn-primary,
 .btn-danger,
 .btn-warning,
@@ -61,6 +68,15 @@ a {
 
   &:hover {
     background-color: var(--hover-color) !important;
+  }
+}
+
+.btn-warning {
+  background-color: var(--warning-color) !important;
+  border: 1px solid var(--warning-color) !important;
+
+  &:hover {
+    background-color: var(--warning-hover) !important;
   }
 }
 
