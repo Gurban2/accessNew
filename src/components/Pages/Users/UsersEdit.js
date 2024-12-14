@@ -1,6 +1,6 @@
 import { Formik, Form as FormikForm } from "formik";
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -82,8 +82,15 @@ const UsersEdit = () => {
         validationSchema={UserValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <FormikForm className="add-form">
+            <Form.Check
+              type="switch"
+              id="custom-switch"
+              label={t("user.edit.active")}
+              checked={values.active}
+              onChange={(e) => setFieldValue("active", e.target.checked)}
+            />
             <div className="form-wrapper">
               <FormField label={t("user.edit.name")} name="name" />
               <FormField label={t("user.edit.username")} name="username" />
@@ -123,23 +130,17 @@ const UsersEdit = () => {
                   })) || []
                 }
               />
-
-              <FormField
-                label={t("user.edit.office")}
-                name="office_id"
-                as="select"
-                options={
-                  offices.map((office) => ({
-                    value: office.id,
-                    label: office.name,
-                  })) || []
-                }
-              />
               <div className="form-row">
                 <FormField
-                  label={t("user.edit.active")}
-                  name="active"
-                  type="checkbox"
+                  label={t("user.edit.office")}
+                  name="office_id"
+                  as="select"
+                  options={
+                    offices.map((office) => ({
+                      value: office.id,
+                      label: office.name,
+                    })) || []
+                  }
                 />
               </div>
             </div>

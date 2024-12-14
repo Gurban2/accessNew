@@ -71,7 +71,7 @@ const UsersAll = () => {
           path={AppPaths.users.all}
           placeholder={t("user.all.searchPlaceholder")}
         />
-        <Button type="button" variant="primary" className="add-btn">
+        <Button type="button" variant="success" className="add-btn">
           <Link to={AppPaths.users.add}>{t("user.all.add")}</Link>
         </Button>
       </div>

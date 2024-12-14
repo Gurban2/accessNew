@@ -10,22 +10,25 @@ import { useFetchDepartments } from "../../hooks/useDepartments";
 import { useFetchVisitors } from "../../hooks/useVisitors";
 import { useFetchUsers } from "../../hooks/useUser";
 import LoadingTable from "../../modules/Loading/Table";
+import { isAdmin, isUser } from "../../helpers/userHelpers";
 
 const Dashboard = () => {
+  const enabled = isAdmin();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: officeData, isLoading: isOfficesLoading } = useFetchOffices();
+  const { data: officeData, isLoading: isOfficesLoading } =
+    useFetchOffices(enabled);
   const offices = officeData?.data || [];
 
   const { data: departmentsData, isLoading: isDepartmentsLoading } =
-    useFetchDepartments();
+    useFetchDepartments(enabled);
   const departments = departmentsData?.data || [];
 
   const { data: visitorsData, isLoading: isVisitorsLoading } =
     useFetchVisitors();
   const visitors = visitorsData?.data || [];
 
-  const { data: usersData, isLoading: isUsersLoading } = useFetchUsers();
+  const { data: usersData, isLoading: isUsersLoading } = useFetchUsers(enabled);
   const users = usersData?.data || [];
 
   if (
@@ -47,6 +50,7 @@ const Dashboard = () => {
   return (
     <Container fluid>
       <Section
+        enabled={isUser()}
         title={t("dashboard.sections.visitors.title")}
         data={sortedVisitors}
         fields={["doc_id", "name", "phone", "email"]}
@@ -61,6 +65,7 @@ const Dashboard = () => {
       />
 
       <Section
+        enabled={enabled}
         title={t("dashboard.sections.offices.title")}
         data={sortedOffices}
         fields={["name", "address", "phone"]}
@@ -74,6 +79,7 @@ const Dashboard = () => {
       />
 
       <Section
+        enabled={enabled}
         title={t("dashboard.sections.departments.title")}
         data={sortedDepartments}
         fields={["name", "phone", "office"]}
@@ -87,6 +93,7 @@ const Dashboard = () => {
       />
 
       <Section
+        enabled={enabled}
         title={t("dashboard.sections.users.title")}
         data={sortedUsers}
         fields={["name", "email", "role", "office", "department"]}
@@ -111,8 +118,13 @@ const Section = ({
   fields,
   noDataMessage,
   onViewAll,
+  enabled,
 }) => {
   const { t } = useTranslation();
+
+  if (!enabled) {
+    return <></>;
+  }
 
   const items = data.map((item) => ({
     ...fields.reduce((acc, field) => {
@@ -125,7 +137,7 @@ const Section = ({
     <div className="dashboard-section">
       <div className="section-header">
         <h4>{title}</h4>
-        <Button onClick={onViewAll}>
+        <Button variant="success" onClick={onViewAll}>
           {t("dashboard.actions.openFullList")}
         </Button>
       </div>

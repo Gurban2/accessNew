@@ -16,7 +16,6 @@ const ForgotPasswordForm = ({
         <Form.Label>{t("login.forgot.email")}</Form.Label>
         <Form.Control
           type="email"
-          placeholder={t("login.forgot.email")}
           value={forgotPasswordEmail}
           onChange={(e) => setForgotPasswordEmail(e.target.value)}
         />

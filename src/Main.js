@@ -31,18 +31,26 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/Pages/Errors/404Error";
 
 import Profile from "./components/Pages/Profile/Profie";
+import { isAdmin } from "@helpers/userHelpers";
 
 function Main() {
   const [isCollapsedSideBar, setIsCollapsedSideBar] = useState(false);
 
   return (
     <div className="app">
-      <Sidebar
-        isCollapsed={isCollapsedSideBar}
-        onToggleCollapse={setIsCollapsedSideBar}
-      />
-      <div className={`main ${isCollapsedSideBar ? "main--full" : ""}`}>
-        <Header isCollapsedSideBar={isCollapsedSideBar} />
+      {isAdmin() && (
+        <Sidebar
+          isCollapsed={isCollapsedSideBar}
+          onToggleCollapse={setIsCollapsedSideBar}
+        />
+      )}
+      <div
+        className={`main ${isCollapsedSideBar ? "main--partial" : ""} ${isAdmin() ? "" : "main--full"}`}
+      >
+        <Header
+          isCollapsedSideBar={isCollapsedSideBar}
+          isSidebarHidden={!isAdmin()}
+        />
         <div className="content">
           <Routes>
             <Route path={AppPaths.dashboard} element={<Dashboard />} />
@@ -76,17 +84,29 @@ function Main() {
             <Route path={AppPaths.visitors.view} element={<VisitorsView />} />
             <Route
               path={AppPaths.visitors.complaint}
-              element={<ComplaintsAll />}
+              element={<ProtectedRoute element={<ComplaintsAll />} />}
             />
             <Route
               path={AppPaths.persona.add}
               element={<ProtectedRoute element={<PersonaAdd />} />}
             />
-            <Route path={AppPaths.persona.all} element={<PersonaAll />} />
+            <Route
+              path={AppPaths.persona.all}
+              element={<ProtectedRoute element={<PersonaAll />} />}
+            />
 
-            <Route path={AppPaths.users.add} element={<UsersAdd />} />
-            <Route path={AppPaths.users.all} element={<UsersAll />} />
-            <Route path={AppPaths.users.edit} element={<UsersEdit />} />
+            <Route
+              path={AppPaths.users.add}
+              element={<ProtectedRoute element={<UsersAdd />} />}
+            />
+            <Route
+              path={AppPaths.users.all}
+              element={<ProtectedRoute element={<UsersAll />} />}
+            />
+            <Route
+              path={AppPaths.users.edit}
+              element={<ProtectedRoute element={<UsersEdit />} />}
+            />
 
             <Route path={AppPaths.profile} element={<Profile />} />
 

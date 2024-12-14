@@ -42,12 +42,8 @@ export const VisitorValidationSchema = (t) =>
     doc_id: Yup.string()
       .min(3, t("validations.minLength.doc_id"))
       .required(t("validations.required.doc_id")),
-    email: Yup.string()
-      .email(t("validations.pattern.email"))
-      .required(t("validations.required.email")),
-    address: Yup.string()
-      .min(5, t("validations.minLength.address"))
-      .required(t("validations.required.address")),
+    email: Yup.string().email(t("validations.pattern.email")).optional(),
+    address: Yup.string().min(5, t("validations.minLength.address")).optional(),
   });
 
 export const UserValidationSchema = (t) =>

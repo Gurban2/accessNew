@@ -13,9 +13,9 @@ const NotificationBell = () => {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const handleNotificationClick = (id) => {
-    const updatedNotifications = notifications.map((notification) =>
-      notification.id === id ? { ...notification, read: true } : notification,
-    );
+    // const updatedNotifications = notifications.map((notification) =>
+    //   notification.id === id ? { ...notification, read: true } : notification,
+    // );
   };
 
   return (
