@@ -423,8 +423,8 @@
 
   "login": {
     "welcome": "Tətbiqimizə xoş gəlmisiniz!",
-    "loginWithEmail": "E-poçt ilə daxil olun",
-    "email": "E-poçt ünvanını daxil edin",
+    "loginWithEmail": "E-poçt və ya İstifadəçi Adı ilə daxil olun",
+    "email": "E-poçt və ya İstifadəçi Adını daxil edin",
     "password": "Şifrəni daxil edin",
     "keepMeLoggedIn": "Məni daxil olmuş vəziyyətdə saxla",
     "forgotPasswordLink": "Şifrəni unutdunuz?",
