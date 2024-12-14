@@ -97,9 +97,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
-  console.log({ showForgotPassword });
-
   return (
     <div
       className="login-container"
