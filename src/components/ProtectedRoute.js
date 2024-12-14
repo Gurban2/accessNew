@@ -7,12 +7,12 @@ const ProtectedRoute = ({ element, permissionGroup }) => {
   const { user } = useSelector((state) => state.auth);
 
   if (
-    permissionGroup?.includes(user.role.toLowerCase()) ||
-    user.role.toLowerCase() === "admin"
+    permissionGroup?.includes(user?.role?.toLowerCase()) ||
+    user?.role?.toLowerCase() === "admin"
   ) {
     return element;
   }
-  return <Navigate to={AppPaths.dashboard} />;
+  return <Navigate to={AppPaths.errors.forbidden} />;
 };
 
 export default ProtectedRoute;

@@ -30,10 +30,10 @@ const ReportModal = ({
       };
       await mutateAsync(newReportData);
       onUpdateComplaints();
-      toast.success(t("visitors.view.success"));
+      toast.success(t("visitors.view.successReport"));
     } catch (error) {
       console.error(error);
-      toast.error(t("visitors.view.reportError"));
+      toast.error(t("visitors.view.errorReport"));
     }
   };
 
@@ -47,6 +47,7 @@ const ReportModal = ({
       <Form>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Control
+            autoFocus
             as="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

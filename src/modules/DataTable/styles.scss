@@ -7,12 +7,17 @@
   width: 100% !important;
   border-collapse: collapse !important;
 
+  &-item {
+    white-space: nowrap !important;
+  }
+
   th.table-header {
     background-color: var(--primary-hover) !important;
     text-align: left !important;
     padding: 12px 16px !important;
     font-weight: var(--font-weight-medium) !important;
     color: var(--white) !important;
+    white-space: nowrap !important;
   }
 
   td > div {

@@ -10,12 +10,13 @@ import {
 
 import useQueryParams from "./useQueryParams";
 
-export const useFetchDepartments = () => {
+export const useFetchDepartments = (enabled) => {
   const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
     queryKey: ["departments", queryParamsKey],
     queryFn: () => fetchDepartments(queryParams),
+    enabled,
   });
 
   return query;

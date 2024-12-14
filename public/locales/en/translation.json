@@ -34,7 +34,7 @@
     "dashboard": "Dashboard",
     "users": "Users",
     "addUser": "Add User",
-    "editUser": "İstifadəçini Redaktə Et",
+    "editUser": "Profile",
     "deleteUser": "İstifadəçini Sil",
     "offices": "Offices",
     "addOffice": "Add Office",
@@ -424,5 +424,5 @@
   "noComplaintsFound": "No Complaints Found",
   "loading": "Loading...",
   "allFields": "All Fields are Required",
-  "passwordNotMatch":"Passwords do not match."
+  "passwordNotMatch": "Passwords do not match."
 }

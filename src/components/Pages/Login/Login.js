@@ -15,6 +15,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm";
 import ResetPasswordForm from "./ResetPasswordForm";
 
 import "./style.scss";
+import { Button } from "react-bootstrap";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -108,15 +109,14 @@ const Login = () => {
       <div className="login-card">
         <div className="login-form">
           {(showForgotPassword || token) && (
-            <div className="back-button">
+            <Button
+              variant="link"
+              className="back-button"
+              onClick={() => setShowForgotPassword(false)}
+            >
               <FaArrowLeft />
-              <a
-                href={AppPaths.forgotPassword}
-                onClick={() => setShowForgotPassword(false)}
-              >
-                {t("login.backToLogin")}
-              </a>
-            </div>
+              {t("login.backToLogin")}
+            </Button>
           )}
           <div className="form-content">
             <div className="form-header">

@@ -13,6 +13,7 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Search from "../../../modules/Search";
 import CountUp from "../../../modules/CountUp";
+import { isAdmin } from "@helpers/userHelpers";
 
 const VisitorsAll = () => {
   const navigate = useNavigate();
@@ -70,6 +71,30 @@ const VisitorsAll = () => {
     ),
   }));
 
+  const actionItems = [
+    {
+      text: <FaEye />,
+      variant: "primary",
+      tooltip: t("visitors.all.view"),
+      onClick: handleView,
+    },
+    {
+      text: <FaEdit />,
+      variant: "warning",
+      tooltip: t("visitors.all.edit"),
+      onClick: handleEdit,
+    },
+  ];
+
+  if (isAdmin()) {
+    actionItems.push({
+      text: <FaRegTrashAlt />,
+      variant: "danger",
+      tooltip: t("visitors.all.delete"),
+      onClick: handleDelete,
+    });
+  }
+
   return (
     <div className="user-container">
       <Breadcrumb
@@ -96,26 +121,7 @@ const VisitorsAll = () => {
         withAction
         headItems={headItems}
         items={items}
-        actionItems={[
-          {
-            text: <FaEye />,
-            variant: "primary",
-            tooltip: t("visitors.all.view"),
-            onClick: handleView,
-          },
-          {
-            text: <FaEdit />,
-            variant: "warning",
-            tooltip: t("visitors.all.edit"),
-            onClick: handleEdit,
-          },
-          {
-            text: <FaRegTrashAlt />,
-            variant: "danger",
-            tooltip: t("visitors.all.delete"),
-            onClick: handleDelete,
-          },
-        ]}
+        actionItems={actionItems}
       />
 
       <Pager

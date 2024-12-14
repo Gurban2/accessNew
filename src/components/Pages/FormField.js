@@ -1,5 +1,6 @@
 import { Field, ErrorMessage } from "formik";
-import React from "react";
+import React, { useState } from "react";
+import UserSuggestions from "../../modules/UserSuggestions";
 
 const FormField = ({
   label = "",
@@ -10,9 +11,23 @@ const FormField = ({
   options = [],
   emptyValue,
   fieldProps = {},
+  withSuggestions = false,
+  suggestionSettings = {},
 }) => {
+  const [show, setShow] = useState(false);
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShow(false);
+    }, 200);
+  };
+
   return (
     <div className="form-group">
+      {withSuggestions && (
+        <UserSuggestions {...suggestionSettings} show={show} />
+      )}
+
       <label htmlFor={name}>{label}</label>
       {as === "select" ? (
         <Field
@@ -35,6 +50,8 @@ const FormField = ({
         </Field>
       ) : (
         <Field
+          onFocus={() => setShow(true)}
+          onBlur={handleBlur}
           {...fieldProps}
           type={type}
           id={name}
