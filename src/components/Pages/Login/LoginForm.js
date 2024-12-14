@@ -22,7 +22,7 @@ const LoginForm = ({
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>{t("login.email")}</Form.Label>
         <Form.Control
-          type="email"
+          type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoFocus

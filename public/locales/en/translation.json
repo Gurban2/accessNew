@@ -328,7 +328,7 @@
   "login": {
     "welcome": "Welcome to our application!",
     "loginWithEmail": "Enter with Email or Username",
-    "email": "Enter your email",
+    "email": "Enter your Email or Username",
     "password": "Enter your password",
     "keepMeLoggedIn": "Keep Me Logged In",
     "forgotPasswordLink": "Forgot Password !",
