@@ -8,7 +8,7 @@ import UsersEdit from "./components/Pages/Users/UsersEdit";
 
 import Dashboard from "./components/dashboard/dashboard";
 import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
+import Header from "./components/header";
 
 import OfficesAdd from "./components/Pages/Offices/OfficeAdd";
 import OfficesAll from "./components/Pages/Offices/OfficeAll";
