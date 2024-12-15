@@ -7,6 +7,7 @@ import {
   useBlockVisitor,
   useUnBlockVisitor,
 } from "../../../../hooks/useVisitors";
+import { isAdmin } from "../../../../helpers/userHelpers";
 
 const VisitorBlockButton = ({ visitor, isBlocked = false }) => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const VisitorBlockButton = ({ visitor, isBlocked = false }) => {
   const { mutateAsync: unblockVisitor, isPending: isUnblockPending } =
     useUnBlockVisitor();
 
-  if (!visitor) {
+  if (!visitor || !isAdmin()) {
     return null;
   }
 

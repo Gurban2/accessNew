@@ -15,7 +15,7 @@
 
     a {
       text-decoration: none;
-      color: var(--primary-color);
+      color: var(--link-hover) !important;
       transition: color 0.3s;
       text-decoration: none;
       color: #8f9091;
@@ -25,7 +25,7 @@
         cursor: pointer;
 
         text-decoration: none;
-        color: var(--text-color);
+        color: var(--link-color) !important;
       }
     }
 

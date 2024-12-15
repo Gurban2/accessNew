@@ -36,17 +36,18 @@ const PersonaAll = () => {
 
   return (
     <div className="user-container">
-      <Search
-        path={AppPaths.persona.all}
-        placeholder={t("visitors.all.searchPlaceholder")}
-      />
       <Breadcrumb
         paths={[
           { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
           { label: t("breadcrumbs.personaAll") },
         ]}
       />
-      <div className="head-wrapper justify-content-end">
+
+      <div className="head-wrapper">
+        <Search
+          path={AppPaths.persona.all}
+          placeholder={t("visitors.all.searchPlaceholder")}
+        />
         <Button type="button" variant="success">
           <Link to={AppPaths.persona.add}>{t("persona.all.add")}</Link>
         </Button>

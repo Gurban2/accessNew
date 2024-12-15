@@ -13,18 +13,17 @@ import { VisitorValidationSchema } from "../InputValidation";
 import {
   useAddVisitor,
   useFetchDocumentTypes,
-  useInfoByDoc,
 } from "../../../hooks/useVisitors";
 import LoadingForm from "../../../modules/Loading/Form";
 import FormField from "../FormField";
 import "./style.scss";
 import ItemsTable from "./ItemsTable";
+import { isReception } from "../../../helpers/userHelpers";
 
 const VisitorsAdd = () => {
   const { t } = useTranslation();
 
   const { mutateAsync } = useAddVisitor();
-  const { mutateAsync: fetchInfoData } = useInfoByDoc();
   const { data: documentTypesData, isLoading: isLoadingDocumentTypes } =
     useFetchDocumentTypes();
   const documentTypes = documentTypesData?.data;
@@ -66,15 +65,14 @@ const VisitorsAdd = () => {
     setItems(data);
   };
 
-  const handleSearchByDoc = async (e, setFieldValue, docType) => {
-    console.log({ value: e.target.value });
-    if (e.target.value.length > 2) {
-      const infoData = await fetchInfoData({
-        doc_number: e.target.value,
-        doc_type: docType,
-      });
-      console.log({ infoData });
-    }
+  const handleSuggestionSelect = (item, values, setValues) => {
+    setValues({
+      ...values,
+      name: item.name || "",
+      phone: item.phone || "",
+      email: item.email || "",
+      address: item.address || "",
+    });
   };
 
   return (
@@ -83,7 +81,7 @@ const VisitorsAdd = () => {
         paths={[
           { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
           { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
-          { label: t("breadcrumbs.addVisitor"), to: AppPaths.visitors.add },
+          { label: t("breadcrumbs.addVisitor") },
         ]}
       />
       <hr className="navigation-underline" />
@@ -102,20 +100,26 @@ const VisitorsAdd = () => {
         validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting, resetForm, values }) => (
+        {({ setValues, isSubmitting, resetForm, values, setFieldValue }) => (
           <FormikForm className="add-form">
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={3} controlId="photo">
-                <Capture
-                  photo={values.photo}
-                  onConfirm={(imageSrc) =>
-                    handleCapture(imageSrc, setFieldValue)
-                  }
-                  btnText={t("visitors.add.photo")}
-                />
-                <ErrorMessage name="photo" component="div" className="error" />
-              </Form.Group>
-            </Row>
+            {isReception() && (
+              <Row className="mb-3">
+                <Form.Group as={Col} xs={12} md={3} controlId="photo">
+                  <Capture
+                    photo={values.photo}
+                    onConfirm={(imageSrc) =>
+                      handleCapture(imageSrc, setFieldValue)
+                    }
+                    btnText={t("visitors.add.photo")}
+                  />
+                  <ErrorMessage
+                    name="photo"
+                    component="div"
+                    className="error"
+                  />
+                </Form.Group>
+              </Row>
+            )}
             <div className="form-wrapper">
               <FormField
                 label={t("visitors.add.docType")}
@@ -131,19 +135,22 @@ const VisitorsAdd = () => {
                 name="doc_id"
                 type="text"
                 className="form-control"
-                fieldProps={{
-                  onChange: (e) => {
-                    handleSearchByDoc(e, setFieldValue, values.doc_type);
-                    setFieldValue("doc_id", e.target.value.toUpperCase());
-                  },
+                withSuggestions
+                suggestionSettings={{
+                  docType: values.doc_type,
+                  docId: values.doc_id,
+                  onSelect: (item) =>
+                    handleSuggestionSelect(item, values, setValues),
                 }}
               />
+
               <FormField
                 label={t("visitors.add.name")}
                 name="name"
                 type="text"
                 className="form-control"
               />
+
               <FormField
                 label={t("visitors.add.phone")}
                 name="phone"
@@ -164,16 +171,22 @@ const VisitorsAdd = () => {
                 className="form-control"
               />
 
-              <FormField
-                label={t("visitors.add.visitTime")}
-                name="visit_time"
-                type="datetime-local"
-                className="form-control"
-              />
+              {!isReception() && (
+                <div className="form-row  visit-time-input">
+                  <FormField
+                    label={t("visitors.add.visitTime")}
+                    name="visit_time"
+                    type="datetime-local"
+                    className="form-control"
+                  />
+                </div>
+              )}
             </div>
-            <ItemsTable initialItems={[]} onItemsUpdate={handleItemsUpdate} />
+            {isReception() && (
+              <ItemsTable initialItems={[]} onItemsUpdate={handleItemsUpdate} />
+            )}
             <div className="form-footer">
-              <Button variant="primary" type="submit" disabled={isSubmitting}>
+              <Button variant="success" type="submit" disabled={isSubmitting}>
                 {isSubmitting
                   ? t("visitors.add.submitting")
                   : t("visitors.add.submit")}

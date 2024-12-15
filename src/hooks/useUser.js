@@ -11,12 +11,13 @@ import {
 
 import useQueryParams from "./useQueryParams";
 
-export const useFetchUsers = () => {
+export const useFetchUsers = (enabled) => {
   const [queryParams, queryParamsKey] = useQueryParams();
 
   const query = useQuery({
     queryKey: ["users", queryParamsKey],
     queryFn: () => fetchUsers(queryParams),
+    enabled,
   });
 
   return query;

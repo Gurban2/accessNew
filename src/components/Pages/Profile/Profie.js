@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
@@ -15,6 +15,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
   const { email, name, phone } = JSON.parse(localStorage.getItem("userData"));
   const token = localStorage.getItem("token");
 
@@ -86,13 +87,15 @@ const Profile = () => {
                 <FormField
                   label={t("user.profile.confirmPassword")}
                   name="password_confirmation"
-                  type={passwordVisible ? "text" : "password"}
+                  type={passwordConfirmVisible ? "text" : "password"}
                 />
                 <div
                   className="profile-password-toggle-icon"
-                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  onClick={() =>
+                    setPasswordConfirmVisible(!passwordConfirmVisible)
+                  }
                 >
-                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                  {passwordConfirmVisible ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
             </div>

@@ -19,6 +19,7 @@ import LoadingForm from "../../../modules/Loading/Form";
 import ItemsTable from "./ItemsTable";
 import "./style.scss";
 import { FaTimesCircle } from "react-icons/fa";
+import { isAdmin, isReception } from "../../../helpers/userHelpers";
 
 const VisitorsView = () => {
   const { t } = useTranslation();
@@ -73,16 +74,19 @@ const VisitorsView = () => {
             { label: t("breadcrumbs.showVisitor") },
           ]}
         />
-
-        {!visitor.visit_start_date && (
-          <Button onClick={handleStartVisit}>
-            {t("visitors.view.startVisit")}
-          </Button>
-        )}
-        {visitor.visit_start_date && !visitor.visit_end_date && (
-          <Button variant="danger" onClick={handleEndVisit}>
-            {t("visitors.view.endVisit")}
-          </Button>
+        {isReception() && (
+          <>
+            {!visitor.visit_start_date && (
+              <Button onClick={handleStartVisit}>
+                {t("visitors.view.startVisit")}
+              </Button>
+            )}
+            {visitor.visit_start_date && !visitor.visit_end_date && (
+              <Button variant="danger" onClick={handleEndVisit}>
+                {t("visitors.view.endVisit")}
+              </Button>
+            )}
+          </>
         )}
       </div>
       <div className="visitor-view">
@@ -129,17 +133,19 @@ const VisitorsView = () => {
           </div>
         </div>
 
-        <div className="visitor-view-footer">
-          <div>
-            <h4>{t("visitors.view.items")}</h4>
-            <ItemsTable canAdd={false} initialItems={visitor.items} />
-          </div>
+        {isAdmin() && (
+          <div className="visitor-view-footer">
+            <div>
+              <h4>{t("visitors.view.items")}</h4>
+              <ItemsTable canAdd={false} initialItems={visitor.items} />
+            </div>
 
-          <ComplaintsList
-            complaints={complaintsData}
-            complaintsLoading={complaintsLoading}
-          />
-        </div>
+            <ComplaintsList
+              complaints={complaintsData}
+              complaintsLoading={complaintsLoading}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

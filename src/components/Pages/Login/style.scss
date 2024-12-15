@@ -45,8 +45,7 @@ $text-color-dark: #343a40;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
-      margin-bottom: 20px;
+      gap: 16px;
       width: 100%;
 
       .form-lang {
@@ -58,7 +57,6 @@ $text-color-dark: #343a40;
 
       h4.form-subtitle {
         font-size: 1.5rem;
-        margin-bottom: 10px;
         text-align: center;
         font-weight: 400;
         line-height: 1.2;
@@ -67,7 +65,6 @@ $text-color-dark: #343a40;
 
       h1.form-title {
         font-size: 1rem;
-        margin-bottom: 20px;
         text-align: center;
         color: #828d99 !important;
         font-weight: 600;
@@ -114,11 +111,10 @@ $text-color-dark: #343a40;
     cursor: pointer;
     font-size: 1rem;
     color: $primary-color;
-    margin-bottom: 10px;
     text-decoration: none;
 
     svg {
-      margin-right: 5px;
+      margin-right: 8px;
       color: $primary-color;
     }
 

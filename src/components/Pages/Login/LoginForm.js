@@ -54,9 +54,9 @@ const LoginForm = ({
           onChange={(e) => setKeepLoggedIn(e.target.checked)}
         />
         <div className="forgot-password-link">
-          <a href="#" onClick={() => setShowForgotPassword(true)}>
+          <Button variant="link" onClick={() => setShowForgotPassword(true)}>
             {t("login.forgotPasswordLink")}
-          </a>
+          </Button>
         </div>
       </Form.Group>
 

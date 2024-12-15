@@ -9,7 +9,7 @@ const Forbidden = () => {
   return (
     <div className="error-container">
       <div className="error-content text-center">
-        <h1 className="display-1 text-warning">{t("error.forbidden.title")}</h1>
+        <h1 className="display-1 text-danger">{t("error.forbidden.title")}</h1>
         <h2 className="text-muted">{t("error.forbidden.message")}</h2>
         <p>{t("error.forbidden.description")}</p>
         <Link to="/" className="btn-error btn-primary">

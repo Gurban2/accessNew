@@ -21,6 +21,7 @@ import FormField from "../FormField";
 import Capture from "../../../modules/Capture";
 import { format } from "date-fns";
 import ItemsTable from "./ItemsTable";
+import { isReception } from "@helpers/userHelpers";
 
 const VisitorsEdit = () => {
   const { t } = useTranslation();
@@ -73,6 +74,16 @@ const VisitorsEdit = () => {
   const handleItemsUpdate = (data) => {
     setItems(data);
   };
+
+  const handleSuggestionSelect = (item, values, setValues) => {
+    setValues({
+      ...values,
+      name: item.name || "",
+      phone: item.phone || "",
+      email: item.email || "",
+      address: item.address || "",
+    });
+  };
   return (
     <div className="user-container">
       <Breadcrumb
@@ -101,20 +112,26 @@ const VisitorsEdit = () => {
         validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting, errors, values }) => (
+        {({ setFieldValue, isSubmitting, setValues, values }) => (
           <FormikForm className="add-form">
-            <Row className="mb-3">
-              <Form.Group as={Col} xs={12} md={3} controlId="photo">
-                <Capture
-                  photo={values.avatar}
-                  onConfirm={(imageSrc) =>
-                    handleCapture(imageSrc, setFieldValue)
-                  }
-                  btnText={t("visitors.edit.addPhoto")}
-                />
-                <ErrorMessage name="avatar" component="div" className="error" />
-              </Form.Group>
-            </Row>
+            {isReception() && (
+              <Row className="mb-3">
+                <Form.Group as={Col} xs={12} md={3} controlId="photo">
+                  <Capture
+                    photo={values.avatar}
+                    onConfirm={(imageSrc) =>
+                      handleCapture(imageSrc, setFieldValue)
+                    }
+                    btnText={t("visitors.edit.addPhoto")}
+                  />
+                  <ErrorMessage
+                    name="avatar"
+                    component="div"
+                    className="error"
+                  />
+                </Form.Group>
+              </Row>
+            )}
             <div className="form-wrapper">
               <FormField
                 label={t("visitors.add.docType")}
@@ -130,6 +147,13 @@ const VisitorsEdit = () => {
                 name="doc_id"
                 type="text"
                 className="form-control"
+                withSuggestions
+                suggestionSettings={{
+                  docType: values.doc_type,
+                  docId: values.doc_id,
+                  onSelect: (item) =>
+                    handleSuggestionSelect(item, values, setValues),
+                }}
               />
               <FormField
                 label={t("visitors.edit.name")}
@@ -157,17 +181,21 @@ const VisitorsEdit = () => {
                 className="form-control"
               />
 
-              <FormField
-                label={t("visitors.edit.visitTime")}
-                name="visit_time"
-                type="datetime-local"
-                className="form-control"
-              />
+              {!isReception() && (
+                <FormField
+                  label={t("visitors.edit.visitTime")}
+                  name="visit_time"
+                  type="datetime-local"
+                  className="form-control"
+                />
+              )}
             </div>
-            <ItemsTable
-              initialItems={visitor?.items}
-              onItemsUpdate={handleItemsUpdate}
-            />
+            {isReception() && (
+              <ItemsTable
+                initialItems={visitor?.items}
+                onItemsUpdate={handleItemsUpdate}
+              />
+            )}
             <div className="form-footer">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting

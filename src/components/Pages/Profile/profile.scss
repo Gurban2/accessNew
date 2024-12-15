@@ -1,10 +1,9 @@
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 60px;
-}
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 60px;
 
-.profile-header {
+  .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,41 +15,39 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--lighten-form-background);
     width: 100%;
+  }
 
-}
-
-.profile-info {
+  .profile-info {
     margin-bottom: 30px;
     text-align: center;
-}
+  }
 
-.profile-info p {
+  .profile-info p {
     margin: 5px 0;
     font-size: 1rem;
     color: var(--text-color-secondary);
-}
+  }
 
-.profile-info p strong {
+  .profile-info p strong {
     font-weight: bold;
-}
+  }
 
-.profile-formik-form {
+  .profile-formik-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 60px;
+  }
 
-}
-
-.profile-form {
+  .profile-form {
     background-color: var(--form-background);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--lighten-form-background);
     width: 100%;
-}
-.profile-password-input-container {
+  }
+  .profile-password-input-container {
     position: relative;
   }
   .profile-password-toggle-icon {
@@ -61,32 +58,32 @@
     cursor: pointer;
   }
 
-.form-wrapper {
+  .form-wrapper {
     display: flex;
     flex-direction: wrap;
     gap: 20px;
     margin-bottom: 20px;
     justify-content: center;
-}
+  }
 
-.form-group {
+  .form-group {
     flex: 0 0 calc(50% - 10px);
-}
+  }
 
-
-.form-footer {
+  .form-footer {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
-}
+  }
 
-.form-footer button {
+  .form-footer button {
     width: 50%;
-}
+  }
 
-.btn-primary {
+  .btn-primary {
     padding: 12px 20px;
     font-size: 1rem;
     font-weight: 600;
+  }
 }

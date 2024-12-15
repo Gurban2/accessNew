@@ -36,10 +36,10 @@ const AddUser = () => {
     try {
       await addUser(values);
       resetForm();
-      toast.success("User Successfully Added!");
+      toast.success(t("user.add.success"));
       navigate(AppPaths.users.all);
     } catch (error) {
-      toast.error("Failed to add User");
+      toast.error(t("user.add.error"));
     } finally {
       setSubmitting(false);
     }
