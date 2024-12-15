@@ -39,3 +39,13 @@ export const updateComplaint = async (id, complaint) => {
     throw new Error("Unable to update the complaint at the moment.");
   }
 };
+
+export const deleteComplaint = async (id) => {
+  try {
+    const response = await apiClient.delete(`/complaints/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting complaint with ID ${id}:`, error);
+    throw new Error("Unable to delete the complaint at the moment.");
+  }
+};

@@ -64,6 +64,12 @@ const AddUser = () => {
     return <LoadingForm />;
   }
 
+  const handlePasswordGenerate = (setFieldValue) => {
+    const newPassword = generatePassword();
+    setFieldValue("password", newPassword);
+    setFieldValue("password_confirmation", newPassword);
+  };
+
   return (
     <div className="user-container">
       <Breadcrumb
@@ -79,7 +85,7 @@ const AddUser = () => {
         validationSchema={UserValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form className="add-form">
             <div className="form-wrapper">
               <FormField label={t("user.add.name")} name="name" />
@@ -90,12 +96,21 @@ const AddUser = () => {
 
               <FormField label={t("user.add.phone")} name="phone" />
 
-              <FormField label={t("user.add.password")} name="password" />
+              <div className="pass-wrapper">
+                <FormField label={t("user.add.password")} name="password" />
 
-              <FormField
-                label={t("user.add.confirmPassword")}
-                name="password_confirmation"
-              />
+                <FormField
+                  label={t("user.add.confirmPassword")}
+                  name="password_confirmation"
+                />
+
+                <Button
+                  variant="success"
+                  onClick={() => handlePasswordGenerate(setFieldValue)}
+                >
+                  {t("user.add.generatePassword")}
+                </Button>
+              </div>
 
               <FormField
                 label={t("user.add.department")}

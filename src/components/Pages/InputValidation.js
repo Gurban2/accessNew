@@ -21,10 +21,6 @@ export const DepartmentValidationSchema = (t) =>
       .trim()
       .min(3, t("validations.minLength.departmentName"))
       .required(t("validations.required.departmentName")),
-    address: Yup.string()
-      .trim()
-      .min(5, t("validations.minLength.address"))
-      .required(t("validations.required.address")),
     phone: Yup.string()
       .matches(/^\d+$/, t("validations.pattern.phone"))
       .required(t("validations.required.phone")),
