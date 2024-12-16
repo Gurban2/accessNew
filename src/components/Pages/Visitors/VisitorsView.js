@@ -10,7 +10,7 @@ import {
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./Complaints/VisitorsModal/ReportModal";
-import ComplaintsList from "./Complaints/ComplaintsList";
+
 import VisitorBlockButton from "./Persona/VisitorBlockButton";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -140,9 +140,9 @@ const VisitorsView = () => {
               <h4>{t("visitors.view.items")}</h4>
               <ItemsTable canAdd={false} initialItems={visitor.items} />
             </div>
-            <h4 onClick={handleNavigateToComplaints}>
-              {t("visitors.view.viewComplaints")}
-            </h4>
+            <button variant="danger" onClick={handleNavigateToComplaints}>
+              {t("visitors.view.complaints")}
+            </button>
           </div>
         )}
       </div>

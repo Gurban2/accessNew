@@ -9,15 +9,11 @@ import { useDeleteComplaint } from "@hooks/useComplaints";
 import { toast } from "react-toastify";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const ComplaintsList = ({ complaints, complaintsLoading, onToggle }) => {
+const ComplaintsList = ({ complaints, complaintsLoading }) => {
   const { t } = useTranslation();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const { mutateAsync: deleteComplaint } = useDeleteComplaint();
+  const [isExpanded] = useState(true); // Лист всегда открыт
 
-  const toggleExpand = () => {
-    setIsExpanded((prev) => !prev);
-    if (onToggle) onToggle(!isExpanded); // Вызов внешнего обработчика
-  };
+  const { mutateAsync: deleteComplaint } = useDeleteComplaint();
 
   const handleDelete = async (complaint) => {
     try {
@@ -31,11 +27,7 @@ const ComplaintsList = ({ complaints, complaintsLoading, onToggle }) => {
 
   return (
     <div className="visitor-complaints">
-      <h5
-        className={`complaints-list-title ${isExpanded ? "expanded" : ""}`}
-        onClick={toggleExpand}
-        style={{ cursor: "pointer" }}
-      >
+      <h5 className={`complaints-list-title ${isExpanded ? "expanded" : ""}`}>
         {t("visitors.view.complaints")}
       </h5>
 
