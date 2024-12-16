@@ -25,6 +25,7 @@ import VisitorAdd from "./components/Pages/Visitors/VisitorsAdd";
 import VisitorAll from "./components/Pages/Visitors/VisitorsAll";
 import VisitorEdit from "./components/Pages/Visitors/VisitorsEdit";
 import ComplaintsAll from "./components/Pages/Visitors/Complaints/ComplaintsAll";
+import ComplaintsPage from "./components/Pages/Visitors/Complaints/ComplaintsPage";
 import VisitorsView from "./components/Pages/Visitors/VisitorsView";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -85,6 +86,10 @@ function Main() {
             <Route
               path={AppPaths.visitors.complaint}
               element={<ProtectedRoute element={<ComplaintsAll />} />}
+            />
+            <Route
+              path={AppPaths.visitors.complaintspage}
+              element={<ComplaintsPage />}
             />
             <Route
               path={AppPaths.persona.add}

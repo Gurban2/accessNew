@@ -91,7 +91,6 @@ export const useUnBlockVisitor = () => {
   return useMutation({
     mutationFn: ({ docId }) => unblockVisitorApi(docId),
     onSuccess: (_, { id }) => {
-      console.log({ id });
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
       queryClient.invalidateQueries({ queryKey: ["visitor", id.toString()] });
     },
