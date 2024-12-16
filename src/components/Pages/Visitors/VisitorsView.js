@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   useFetchVisitorComplaints,
   useFetchVisitorById,
   useStartVisit,
   useEndVisit,
 } from "../../../hooks/useVisitors";
-import { AppPaths } from "../../../constants/appPaths";
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./Complaints/VisitorsModal/ReportModal";
@@ -20,10 +19,12 @@ import ItemsTable from "./ItemsTable";
 import "./style.scss";
 import { FaTimesCircle } from "react-icons/fa";
 import { isAdmin, isReception } from "../../../helpers/userHelpers";
+import { AppPaths } from "../../../constants/appPaths";
 
 const VisitorsView = () => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data: visitorData } = useFetchVisitorById(id);
   const { mutateAsync: startVisit } = useStartVisit();
@@ -47,7 +48,7 @@ const VisitorsView = () => {
       await startVisit(visitor.id);
       toast.success(t("visitors.view.startVisitSuccess"));
     } catch (error) {
-      console.log("Error starting visit:", error);
+      console.error("Error starting visit:", error);
       toast.error(t("visitors.view.startVisitError"));
     }
   };
@@ -57,12 +58,14 @@ const VisitorsView = () => {
       await endVisit(visitor.id);
       toast.success(t("visitors.view.endVisitSuccess"));
     } catch (error) {
-      console.log("Error ending visit:", error);
+      console.error("Error ending visit:", error);
       toast.error(t("visitors.view.endVisitError"));
     }
   };
 
-  const complaintsData = complaints?.data || [];
+  const handleNavigateToComplaints = ({ id }) => {
+    navigate(`/visitors/complaints/${visitor.id}`);
+  };
 
   return (
     <div className="user-container">
@@ -76,12 +79,11 @@ const VisitorsView = () => {
         />
         {isReception() && (
           <>
-            {!visitor.visit_start_date && (
+            {!visitor.visit_start_date ? (
               <Button onClick={handleStartVisit}>
                 {t("visitors.view.startVisit")}
               </Button>
-            )}
-            {visitor.visit_start_date && !visitor.visit_end_date && (
+            ) : (
               <Button variant="danger" onClick={handleEndVisit}>
                 {t("visitors.view.endVisit")}
               </Button>
@@ -132,18 +134,15 @@ const VisitorsView = () => {
             />
           </div>
         </div>
-
         {isAdmin() && (
           <div className="visitor-view-footer">
             <div>
               <h4>{t("visitors.view.items")}</h4>
               <ItemsTable canAdd={false} initialItems={visitor.items} />
             </div>
-
-            <ComplaintsList
-              complaints={complaintsData}
-              complaintsLoading={complaintsLoading}
-            />
+            <h4 onClick={handleNavigateToComplaints}>
+              {t("visitors.view.viewComplaints")}
+            </h4>
           </div>
         )}
       </div>

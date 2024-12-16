@@ -27,6 +27,7 @@ export const AppPaths = {
     complaint: "/visitors/report",
     edit: "/visitors/edit/:id",
     view: "/visitors/view/:id",
+    complaintspage: "/visitors/complaints/:id",
   },
 
   persona: {
