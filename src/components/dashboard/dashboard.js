@@ -49,6 +49,14 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
+      <div className="w-100 d-flex mb-4 justify-content-end">
+        <Button
+          variant="success"
+          onClick={() => navigate(AppPaths.visitors.add)}
+        >
+          {t("dashboard.actions.addVisitor")}
+        </Button>
+      </div>
       <Section
         enabled={isUser()}
         title={t("dashboard.sections.visitors.title")}

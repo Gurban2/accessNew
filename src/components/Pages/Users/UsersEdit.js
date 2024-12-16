@@ -49,11 +49,15 @@ const UsersEdit = () => {
     }
   };
 
-  const password = generatePassword();
-
   if (isLoading || isLoadingOffices || isLoadingDepartments || isLoadingRoles) {
     return <LoadingForm />;
   }
+
+  const handlePasswordGenerate = (setFieldValue) => {
+    const newPassword = generatePassword();
+    setFieldValue("password", newPassword);
+    setFieldValue("password_confirmation", newPassword);
+  };
 
   return (
     <div className="user-container">
@@ -72,8 +76,8 @@ const UsersEdit = () => {
           username: user.username,
           email: user.email,
           phone: user.phone,
-          password: password,
-          password_confirmation: password,
+          password: "",
+          password_confirmation: "",
           role_id: user.role_id,
           office_id: user.office_id,
           department_id: user.department_id,
@@ -96,17 +100,21 @@ const UsersEdit = () => {
               <FormField label={t("user.edit.username")} name="username" />
               <FormField label={t("user.edit.email")} name="email" />
               <FormField label={t("user.edit.phone")} name="phone" />
-              <FormField
-                label={t("user.edit.password")}
-                name="password"
-                type="text"
-              />
+              <div className="pass-wrapper">
+                <FormField label={t("user.add.password")} name="password" />
 
-              <FormField
-                label={t("user.edit.confirmPassword")}
-                name="password_confirmation"
-                type="text"
-              />
+                <FormField
+                  label={t("user.add.confirmPassword")}
+                  name="password_confirmation"
+                />
+
+                <Button
+                  variant="success"
+                  onClick={() => handlePasswordGenerate(setFieldValue)}
+                >
+                  {t("user.add.generatePassword")}
+                </Button>
+              </div>
               <FormField
                 label={t("user.edit.role")}
                 name="role_id"

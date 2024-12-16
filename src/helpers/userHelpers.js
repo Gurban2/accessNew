@@ -5,15 +5,15 @@ export const isLoggedIn = () => {
 
 export const isUser = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
-  return userData && userData.role === "user";
+  return Boolean(userData && userData.role === "user");
 };
 
 export const isAdmin = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
-  return userData && userData.role === "admin";
+  return Boolean(userData && userData.role === "admin");
 };
 
 export const isReception = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
-  return userData && userData.role === "reception";
+  return Boolean(userData && userData.role === "reception");
 };

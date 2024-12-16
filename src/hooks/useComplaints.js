@@ -4,6 +4,7 @@ import {
   fetchComplaint,
   addComplaint,
   updateComplaint,
+  deleteComplaint,
 } from "../api/complaintsApi";
 
 export const useFetchComplaints = () => {
@@ -36,6 +37,16 @@ export const useUpdateComplaint = () => {
   return useMutation({
     mutationFn: ({ id, data, avatar, name }) =>
       updateComplaint(id, data, avatar, name),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["complaints"] }),
+  });
+};
+
+export const useDeleteComplaint = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteComplaint,
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["complaints"] }),
   });

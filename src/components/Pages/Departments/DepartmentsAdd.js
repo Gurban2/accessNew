@@ -55,7 +55,6 @@ const DepartmentsAdd = () => {
       <Formik
         initialValues={{
           name: "",
-          address: "",
           phone: "",
           office_id: "",
         }}
@@ -79,11 +78,6 @@ const DepartmentsAdd = () => {
                   value: office.id,
                   label: office.name,
                 }))}
-              />
-              <FormField
-                label={t("department.add.address")}
-                name="address"
-                className="form-control"
               />
               <FormField
                 label={t("department.add.phone")}

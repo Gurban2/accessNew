@@ -66,7 +66,7 @@ a {
   }
 }
 
-.btn-link{
+.btn-link {
   text-decoration: none !important;
 }
 
@@ -201,6 +201,15 @@ textarea::placeholder {
       cursor: pointer;
       color: var(--font-color) !important;
     }
+
+    .pass-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
   }
   .add-btn {
     height: 40px;
@@ -259,7 +268,7 @@ textarea::placeholder {
 }
 
 .warning-text {
-  color: var(--warning-color);
+  color: var(--text-color-secondary);
   font-size: var(--font-size-base);
 }
 
