@@ -74,11 +74,12 @@ const VisitorsView = () => {
         />
         {isReception() && (
           <>
-            {!visitor.visit_start_date ? (
+            {!visitor.visit_start_date && (
               <Button onClick={handleStartVisit}>
                 {t("visitors.view.startVisit")}
               </Button>
-            ) : (
+            )}
+            {visitor.visit_start_date && !visitor.visit_end_date && (
               <Button variant="danger" onClick={handleEndVisit}>
                 {t("visitors.view.endVisit")}
               </Button>
