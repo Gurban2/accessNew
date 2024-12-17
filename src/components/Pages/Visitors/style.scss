@@ -35,6 +35,9 @@
 
   &-footer {
     margin-top: 20px;
+    .view-cursor {
+      cursor: pointer;
+    }
   }
   &-info {
     border-right: 0.5px solid var(--border-color) !important;
