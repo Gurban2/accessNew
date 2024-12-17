@@ -182,9 +182,7 @@ const VisitorsAdd = () => {
                 </div>
               )}
             </div>
-            {isReception() && (
-              <ItemsTable initialItems={[]} onItemsUpdate={handleItemsUpdate} />
-            )}
+            <ItemsTable initialItems={[]} onItemsUpdate={handleItemsUpdate} />
             <div className="form-footer">
               <Button variant="success" type="submit" disabled={isSubmitting}>
                 {isSubmitting

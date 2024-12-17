@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   useFetchVisitorComplaints,
   useFetchVisitorById,
@@ -10,7 +10,6 @@ import {
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./Complaints/VisitorsModal/ReportModal";
-import ComplaintsList from "./Complaints/ComplaintsList";
 import VisitorBlockButton from "./Persona/VisitorBlockButton";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -31,11 +30,7 @@ const VisitorsView = () => {
   const { mutateAsync: endVisit } = useEndVisit();
 
   const visitor = visitorData?.data;
-  const {
-    data: complaints,
-    refetch: refetchComplaints,
-    isLoading: complaintsLoading,
-  } = useFetchVisitorComplaints(id);
+  const { refetch: refetchComplaints } = useFetchVisitorComplaints(id);
 
   const [description, setDescription] = useState("");
 
