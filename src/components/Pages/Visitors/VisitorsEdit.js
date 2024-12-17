@@ -190,12 +190,10 @@ const VisitorsEdit = () => {
                 />
               )}
             </div>
-            {isReception() && (
-              <ItemsTable
-                initialItems={visitor?.items}
-                onItemsUpdate={handleItemsUpdate}
-              />
-            )}
+            <ItemsTable
+              initialItems={visitor?.items}
+              onItemsUpdate={handleItemsUpdate}
+            />
             <div className="form-footer">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting

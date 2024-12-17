@@ -16,10 +16,7 @@ export const addVisitor = async (visitor) => {
 };
 
 export const updateVisitor = async (id, visitor) => {
-  const response = await apiClient.put(
-    `/visitors/${id}`,
-    JSON.stringify(visitor),
-  );
+  const response = await apiClient.put(`/visitors/${id}`, visitor);
   return response.data;
 };
 

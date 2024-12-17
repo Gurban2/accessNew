@@ -96,7 +96,8 @@
       }
     },
     "actions": {
-      "openFullList": "Tam Siyahını Aç"
+      "openFullList": "Tam Siyahını Aç",
+      "addVisitor": "Ziyarətçi Əlavə Et"
     }
   },
 
@@ -135,7 +136,8 @@
       "error": "İstifadəçi əlavə edilərkən xəta baş verdi.",
       "roleSelect": "Rol seçin",
       "departmentSelect": "Şöbə seçin",
-      "officeSelect": "Ofis seçin"
+      "officeSelect": "Ofis seçin",
+      "generatePassword": "Şifrə yarat"
     },
     "edit": {
       "title": "İstifadəçini Redaktə Et",
@@ -221,6 +223,7 @@
       "photo": "Şəkil",
       "docType": "Sənəd Növü",
       "doc_id": "Fin",
+      "fin": "Fin",
       "phone": "Telefon",
       "email": "E-poçt",
       "submit": "Göndər",
@@ -405,7 +408,9 @@
       "deleteError": "Şikayət silmək alınmadı.",
       "complainedAt": "Şikayət Tarixi",
       "description": "Təsvir",
-      "emptyDescriptionError": "Zəhmət olmasa, şikayətinizə təsvir əlavə edin."
+      "emptyDescriptionError": "Zəhmət olmasa, şikayətinizə təsvir əlavə edin.",
+      "complaintDeleted": "Şikayət uğurla silindi.",
+      "complaintDeleteError": "Şikayət silinərkən xəta baş verdi."
     },
     "add": {
       "title": "Şikayət Et",

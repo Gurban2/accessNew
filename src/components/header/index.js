@@ -3,10 +3,10 @@ import { Navbar, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AppPaths } from "../../constants/appPaths";
-import { isUser } from "../../helpers/userHelpers";
+// import { isUser } from "../../helpers/userHelpers";
 import LogoutButton from "../LogoutButton";
 import { logout } from "../../api/authApi";
-import NotificationBell from "../Notifications/NotificationBell";
+// import NotificationBell from "../Notifications/NotificationBell";
 import { FaUserCircle } from "react-icons/fa";
 import "./header.scss";
 import { useDispatch } from "react-redux";
@@ -61,7 +61,7 @@ const Header = ({ isCollapsedSideBar, isSidebarHidden }) => {
 
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="d-flex gap-4 flex-row">
-              {!isUser() && <NotificationBell />}
+              {/* {!isUser() && <NotificationBell />} */}
               <Link
                 to={AppPaths.profile}
                 className="profile-header-profile-link"

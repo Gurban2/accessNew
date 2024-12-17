@@ -55,10 +55,16 @@ export const useUpdateVisitor = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data) => updateVisitor(data.id, data.visitor),
+    mutationFn: (data) =>
+      updateVisitor(data.id, {
+        ...data.visitor,
+        visit_time: data.visit_time.replace("T", " "),
+      }),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
-      queryClient.invalidateQueries({ queryKey: ["visitor", variables.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["visitor", variables?.id?.toString()],
+      });
     },
   });
 };
