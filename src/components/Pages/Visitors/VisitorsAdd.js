@@ -43,7 +43,9 @@ const VisitorsAdd = () => {
           avatar: values.photo,
           items,
           visiting_now: values.visiting_now ? 1 : 0,
-          visit_time: format(new Date(values.visit_time), "yyyy-MM-dd HH:mm"),
+          visit_time: values?.visit_time
+            ? format(new Date(values.visit_time), "yyyy-MM-dd HH:mm")
+            : null,
         },
       ],
     };
@@ -95,12 +97,19 @@ const VisitorsAdd = () => {
           photo: "",
           doc_type: "id",
           visit_time: "",
-          visiting_now: false,
+          visiting_now: isReception() ? 1 : 0,
         }}
         validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ setValues, isSubmitting, resetForm, values, setFieldValue }) => (
+        {({
+          setValues,
+          isSubmitting,
+          resetForm,
+          values,
+          setFieldValue,
+          errors,
+        }) => (
           <FormikForm className="add-form">
             {isReception() && (
               <Row className="mb-3">

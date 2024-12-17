@@ -129,17 +129,19 @@ const VisitorsView = () => {
             />
           </div>
         </div>
-        {isAdmin() && (
-          <div className="visitor-view-footer">
+        <div className="visitor-view-footer">
+          {visitor.items.length > 0 && (
             <div className="view-cursor">
               <h4>{t("visitors.view.items")}</h4>
               <ItemsTable canAdd={false} initialItems={visitor.items} />
             </div>
+          )}
+          {isAdmin() && (
             <h4 className="view-cursor" onClick={handleNavigateToComplaints}>
               {t("visitors.view.complaints")}
             </h4>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

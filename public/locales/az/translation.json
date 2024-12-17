@@ -13,7 +13,8 @@
     "logout": "Çıxış",
     "cancel": "İmtina",
     "close": "Bağla",
-    "confirm": "Təsdiq et"
+    "confirm": "Təsdiq et",
+    "delete": "Sil"
   },
 
   "navigation": {

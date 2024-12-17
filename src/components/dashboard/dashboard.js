@@ -10,7 +10,7 @@ import { useFetchDepartments } from "../../hooks/useDepartments";
 import { useFetchVisitors } from "../../hooks/useVisitors";
 import { useFetchUsers } from "../../hooks/useUser";
 import LoadingTable from "../../modules/Loading/Table";
-import { isAdmin, isUser } from "../../helpers/userHelpers";
+import { isAdmin } from "../../helpers/userHelpers";
 
 const Dashboard = () => {
   const enabled = isAdmin();
@@ -58,7 +58,6 @@ const Dashboard = () => {
         </Button>
       </div>
       <Section
-        enabled={isUser()}
         title={t("dashboard.sections.visitors.title")}
         data={sortedVisitors}
         fields={["doc_id", "name", "phone", "email"]}
@@ -126,7 +125,7 @@ const Section = ({
   fields,
   noDataMessage,
   onViewAll,
-  enabled,
+  enabled = true,
 }) => {
   const { t } = useTranslation();
 
