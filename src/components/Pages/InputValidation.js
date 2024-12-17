@@ -63,11 +63,12 @@ export const UserValidationSchema = (t) =>
     role_id: Yup.string().required(t("validations.required.role")),
     office_id: Yup.string().required(t("validations.required.office")),
     department_id: Yup.string().required(t("validations.required.department")),
-    password: Yup.string()
-      .min(8, t("validations.minLength.password"))
-      .required(t("validations.required.password")),
-    password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password"), null], t("validations.match.password"))
-      .required(t("validations.required.passwordConfirmation")),
+    password: Yup.string().min(8, t("validations.minLength.password")),
+    // .required(t("validations.required.password")),
+    password_confirmation: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      t("validations.match.password"),
+    ),
+    // .required(t("validations.required.passwordConfirmation")),
     active: Yup.boolean(),
   });
