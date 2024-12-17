@@ -131,12 +131,12 @@ const VisitorsView = () => {
         </div>
         {isAdmin() && (
           <div className="visitor-view-footer">
-            <div>
+            <div className="view-cursor">
               <h4>{t("visitors.view.items")}</h4>
               <ItemsTable canAdd={false} initialItems={visitor.items} />
             </div>
-            <h4 onClick={handleNavigateToComplaints}>
-              {t("visitors.view.viewComplaints")}
+            <h4 className="view-cursor" onClick={handleNavigateToComplaints}>
+              {t("visitors.view.complaints")}
             </h4>
           </div>
         )}

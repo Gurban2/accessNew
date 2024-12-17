@@ -409,8 +409,17 @@
       "complainedAt": "Şikayət Tarixi",
       "description": "Təsvir",
       "emptyDescriptionError": "Zəhmət olmasa, şikayətinizə təsvir əlavə edin.",
-      "complaintDeleted": "Şikayət uğurla silindi.",
-      "complaintDeleteError": "Şikayət silinərkən xəta baş verdi."
+      "status": "Status",
+      "resolved": "Həll Edildi",
+      "pending": "Gözləmədədir",
+      "actionsColumn": "Əməliyyatlar Sütunu",
+      "resolutionDate": "Həll Tarixi",
+      "filterByStatus": "Statusa görə filter et",
+      "noResults": "Şikayətlər tapılmadı.",
+      "createComplaint": "Yeni Şikayət Yarat",
+      "viewDetails": "Şikayət Təfərrüatları",
+      "reportedBy": "Şikayət edən",
+      "report": "Şikayət Hesabatı"
     },
     "add": {
       "title": "Şikayət Et",

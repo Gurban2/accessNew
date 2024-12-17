@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchVisitorComplaints } from "../../../../hooks/useVisitors";
-// import Avatar from "../../../../modules/Avatar";
+import Avatar from "../../../../modules/Avatar";
 import ComplaintsList from "./ComplaintsList";
 import { AppPaths } from "../../../../constants/appPaths";
 import { useTranslation } from "react-i18next";
+import Breadcrumb from "../../Breadcrumb";
 
 import "./style.scss";
 
@@ -19,16 +20,21 @@ const ComplaintsPage = (handleToggleComplaints) => {
   } = useFetchVisitorComplaints(id);
 
   const complaintsData = complaints?.data || [];
-  console.log(complaints);
 
   return (
     <div className="complaints-container">
-      paths=
-      {[
-        { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
-        { label: t("breadcrumbs.visitors"), to: AppPaths.visitors.all },
-        { label: t("breadcrumbs.viewComplaints") },
-      ]}
+      <Breadcrumb
+        paths={[
+          { label: t("breadcrumbs.dashboard"), to: AppPaths.dashboard },
+          {
+            label: t("breadcrumbs.visitors"),
+            to: `${AppPaths.visitors.view.replace("/:id", "")}/${id}`,
+          },
+          {
+            label: t("breadcrumbs.showVisitor"),
+          },
+        ]}
+      />
       <ComplaintsList
         complaints={complaintsData}
         complaintsLoading={complaintsLoading}
