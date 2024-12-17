@@ -45,8 +45,9 @@ export const useUpdateUser = () => {
 
   return useMutation({
     mutationFn: (data) => updateUser(data.id, data.user),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["user", variables.id] });
     },
   });
 };
