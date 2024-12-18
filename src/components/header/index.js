@@ -56,7 +56,7 @@ const Header = ({ isCollapsedSideBar, isSidebarHidden }) => {
     >
       <Navbar className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href={AppPaths.dashboard}>Access Store</Navbar.Brand>
+          <Navbar.Brand href={AppPaths.dashboard}>Access Control</Navbar.Brand>
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
