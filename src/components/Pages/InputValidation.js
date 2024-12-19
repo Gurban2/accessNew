@@ -34,12 +34,13 @@ export const VisitorValidationSchema = (t) =>
       .required(t("validations.required.name")),
     phone: Yup.string()
       .matches(/^\d+$/, t("validations.pattern.phone"))
-      .required(t("validations.required.phone")),
+      .optional(),
     doc_id: Yup.string()
       .min(3, t("validations.minLength.doc_id"))
       .required(t("validations.required.doc_id")),
     email: Yup.string().email(t("validations.pattern.email")).optional(),
-    address: Yup.string().min(5, t("validations.minLength.address")).optional(),
+    address: Yup.string().optional(),
+    photo: Yup.string().required(t("validations.required.photo")),
   });
 
 export const UserValidationSchema = (t) =>
@@ -59,11 +60,12 @@ export const UserValidationSchema = (t) =>
     role_id: Yup.string().required(t("validations.required.role")),
     office_id: Yup.string().required(t("validations.required.office")),
     department_id: Yup.string().required(t("validations.required.department")),
-    password: Yup.string()
-      .min(8, t("validations.minLength.password"))
-      .required(t("validations.required.password")),
-    password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password"), null], t("validations.match.password"))
-      .required(t("validations.required.passwordConfirmation")),
+    password: Yup.string().min(8, t("validations.minLength.password")),
+    // .required(t("validations.required.password")),
+    password_confirmation: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      t("validations.match.password"),
+    ),
+    // .required(t("validations.required.passwordConfirmation")),
     active: Yup.boolean(),
   });

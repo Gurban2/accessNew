@@ -133,7 +133,7 @@ export const useStartVisit = () => {
     mutationFn: startVisit,
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
-      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id.toString()] });
     },
   });
 };
@@ -146,7 +146,7 @@ export const useEndVisit = () => {
     mutationFn: endVisit,
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ["visitors"] });
-      queryClient.invalidateQueries({ queryKey: ["visitor", id] });
+      queryClient.invalidateQueries({ queryKey: ["visitor", id.toString()] });
     },
   });
 };

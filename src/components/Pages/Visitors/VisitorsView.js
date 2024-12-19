@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   useFetchVisitorComplaints,
   useFetchVisitorById,
@@ -10,7 +10,6 @@ import {
 import Breadcrumb from "../Breadcrumb";
 import Avatar from "../../../modules/Avatar";
 import ReportModal from "./Complaints/VisitorsModal/ReportModal";
-
 import VisitorBlockButton from "./Persona/VisitorBlockButton";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -31,11 +30,7 @@ const VisitorsView = () => {
   const { mutateAsync: endVisit } = useEndVisit();
 
   const visitor = visitorData?.data;
-  const {
-    data: complaints,
-    refetch: refetchComplaints,
-    isLoading: complaintsLoading,
-  } = useFetchVisitorComplaints(id);
+  const { refetch: refetchComplaints } = useFetchVisitorComplaints(id);
 
   const [description, setDescription] = useState("");
 
@@ -79,11 +74,12 @@ const VisitorsView = () => {
         />
         {isReception() && (
           <>
-            {!visitor.visit_start_date ? (
+            {!visitor.visit_start_date && (
               <Button onClick={handleStartVisit}>
                 {t("visitors.view.startVisit")}
               </Button>
-            ) : (
+            )}
+            {visitor.visit_start_date && !visitor.visit_end_date && (
               <Button variant="danger" onClick={handleEndVisit}>
                 {t("visitors.view.endVisit")}
               </Button>
@@ -134,17 +130,19 @@ const VisitorsView = () => {
             />
           </div>
         </div>
-        {isAdmin() && (
-          <div className="visitor-view-footer">
-            <div>
+        <div className="visitor-view-footer">
+          {visitor.items.length > 0 && (
+            <div className="view-cursor">
               <h4>{t("visitors.view.items")}</h4>
               <ItemsTable canAdd={false} initialItems={visitor.items} />
             </div>
-            <button variant="danger" onClick={handleNavigateToComplaints}>
+          )}
+          {isAdmin() && (
+            <h4 className="view-cursor" onClick={handleNavigateToComplaints}>
               {t("visitors.view.complaints")}
-            </button>
-          </div>
-        )}
+            </h4>
+          )}
+        </div>
       </div>
     </div>
   );

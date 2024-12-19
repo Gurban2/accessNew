@@ -35,7 +35,7 @@ const ItemsTable = ({
   const initialHeadItems = [t("general.name"), t("general.description")];
 
   const headItems = canAdd
-    ? initialHeadItems.concat(t("actions"))
+    ? initialHeadItems.concat(t("general.actions"))
     : initialHeadItems;
 
   return (
@@ -76,7 +76,7 @@ const ItemsTable = ({
                   {
                     text: <FaRegTrashAlt />,
                     variant: "danger",
-                    tooltip: t("delete"),
+                    tooltip: t("general.delete"),
                     onClick: handleRemoveItem,
                   },
                 ]

@@ -11,11 +11,8 @@ import "./style.scss";
 const ComplaintsPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const {
-    data: complaints,
-    refetch: refetchComplaints,
-    isLoading: complaintsLoading,
-  } = useFetchVisitorComplaints(id);
+  const { data: complaints, isLoading: complaintsLoading } =
+    useFetchVisitorComplaints(id);
 
   const complaintsData = complaints?.data || [];
 

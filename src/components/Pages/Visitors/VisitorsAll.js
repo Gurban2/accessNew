@@ -65,6 +65,7 @@ const VisitorsAll = () => {
     doc_id: visitor.doc_id,
     email: visitor.email || "N/A",
     phone: visitor.phone || "N/A",
+
     visit_time: format(new Date(visitor.visit_time * 1000), "dd MMM HH:mm"),
     visit_time_count: (
       <CountUp start={visitor.visit_start_date} end={visitor.visit_end_date} />

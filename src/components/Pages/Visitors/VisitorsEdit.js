@@ -49,7 +49,6 @@ const VisitorsEdit = () => {
       await mutateAsync({
         id: visitor.id,
         visitor: { ...values, items },
-        visiting_now: values.visiting_now ? 1 : 0,
         visit_time: formattedVisitTime,
       });
       dispatch(editVisitor({ id: visitor.id, data: values }));
@@ -101,8 +100,8 @@ const VisitorsEdit = () => {
           doc_id: visitor.doc_id,
           name: visitor.name,
           phone: visitor.phone,
-          email: visitor.email,
-          address: visitor.address,
+          email: visitor.email || "",
+          address: visitor.address || "",
           visit_time: format(
             new Date(visitor.visit_time * 1000),
             "yyyy-MM-dd HH:mm",
@@ -112,7 +111,7 @@ const VisitorsEdit = () => {
         validationSchema={VisitorValidationSchema(t)}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting, setValues, values }) => (
+        {({ setFieldValue, isSubmitting, setValues, values, errors }) => (
           <FormikForm className="add-form">
             {isReception() && (
               <Row className="mb-3">
@@ -190,12 +189,10 @@ const VisitorsEdit = () => {
                 />
               )}
             </div>
-            {isReception() && (
-              <ItemsTable
-                initialItems={visitor?.items}
-                onItemsUpdate={handleItemsUpdate}
-              />
-            )}
+            <ItemsTable
+              initialItems={visitor?.items}
+              onItemsUpdate={handleItemsUpdate}
+            />
             <div className="form-footer">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting

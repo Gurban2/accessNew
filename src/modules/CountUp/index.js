@@ -9,18 +9,20 @@ const CountUp = ({ start, end }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const diff = (end ? new Date(end * 1000) : new Date()) - startDate;
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const hours = Math.floor(minutes / 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      const diff = Math.max(
+        0,
+        (end ? new Date(end * 1000) : new Date()) - startDate,
+      );
+
+      const hours = Math.floor(diff / (1000 * 60 * 60)); // Часы
+      const minutes = Math.floor((diff / (1000 * 60)) % 60); // Минуты
+      const seconds = Math.floor((diff / 1000) % 60); // Секунды
 
       const time = `${hours < 10 ? `0${hours}` : hours}:${
         minutes < 10 ? `0${minutes}` : minutes
       }:${seconds < 10 ? `0${seconds}` : seconds}`;
 
-      setCount((prev) => {
-        return time;
-      });
+      setCount(time);
     }, 1000);
 
     return () => clearInterval(interval);
